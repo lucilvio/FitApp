@@ -154,12 +154,6 @@ CU-U 29 - Listar mensagens excluídas
 
 
 
-2.Modelagem
-
-2.1.Diagrama de casos de uso 
-
- 
-Diagrama 1 – Administrador
 
 
 
