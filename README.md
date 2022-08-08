@@ -168,80 +168,82 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
 1. Administrador
 
-    CU-G 01 - Logar no Sistema: Administrador faz login no Sistema;
-        Ator Primário: Administrador;
-        Pré-condições: Administrador estar cadastrado para utilização do Sistema;
-        Fluxo Principal:
+    1. CU-G 01 - Logar no Sistema: Administrador faz login no Sistema;
+        * Ator Primário: Administrador;
+        * Pré-condições: Administrador estar cadastrado para utilização do Sistema;
+        * Fluxo Principal:
             1. O Administrador requisita acessar o Sistema;
             1. O Sistema apresenta a tela de login para que sejam inseridos o e-mail e a senha do Administrador;
             1. O Administrador fornece os dados;
             1. O Sistema faz a validação dos dados inseridos e, se forem válidos, lo-ga o Administrador no Sistema;
-        Fluxo Alternativo: 
+        * Fluxo Alternativo: 
             1. O Administrador requisita acessar o Sistema através do Facebook – CU-G 02;
             1. O Administrador requisita acessar o Sistema através do Google – CU-G 03;
-        Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
-        Pós-condições: O Administrador efetuou o login;
+        * Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
+        * Pós-condições: O Administrador efetuou o login;
 
-    CU-G 05 – Logout do Sistema: Administrador sai do Sistema;
-    Ator Primário: Administrador;
-    Pré-condições: Administrador estar logado no Sistema;
-    Fluxo Principal:
-    1.	O Administrador requisita “sair”;
-    2.	O Sistema faz o logout do Administrador;
-    3.	O Administrador é direcionado para a página home do site;
-    Pós-condições: O Administrador efetuou o Logout;
-
-
-    •	CU-A 01 – Listar Assinantes: O Administrador verifica a lista de Assinantes cadastrados no Sistema; 
-    Ator Primário: Administrador;
-    Pré-condições: Administrador estar logado no Sistema;
-    Fluxo Principal:
-    1.	O Administrador requisita verificar no Sistema a lista de Assinantes cadastrados;
-    2.	O Sistema apresenta a lista de Assinantes cadastrados;
-    3.	O Sistema apresenta campo para listar Assinante pelo nome CU-A 02;
-    4.	O Sistema apresenta a opção de ver dados cadastrais do Assinante CU-A 03;
-    Fluxo Alternativo: 
-    1.	O Administrador informa o nome do Assinante no campo de pesquisa CU-A 02;
-    2.	O Sistema apresenta a lista de Assinantes cadastrados pelo nome in-formado;
-    3.	O Sistema apresenta a opção de ver dados cadastrais da lista de Assi-nantes cadastrados pelo nome informado CU-A 03;
-    Pós-condições: O Administrador visualizou a lista de Assinantes cadastra-dos;
+    1. CU-G 05 – Logout do Sistema: Administrador sai do Sistema;
+        * Ator Primário: Administrador;
+        * Pré-condições: Administrador estar logado no Sistema;
+        * Fluxo Principal:
+            1. O Administrador requisita “sair”;
+            1. O Sistema faz o logout do Administrador;
+            1. O Administrador é direcionado para a página home do site;
+        * Pós-condições: O Administrador efetuou o Logout;
 
 
-    •	CU-A 03 – Ver dados cadastrais do Assinante: O Administrador verifica os dados cadastrais do Assinante;
-    Ator Primário: Administrador;
-    Pré-condições: 
-    1.	O Administrador estar logado no Sistema;
-    2.	O Administrador listar Assinantes cadastrados no Sistema CU-A 01;
-    Fluxo Principal:
-    1.	O Administrador requisita verificar no Sistema os dados cadastrais do Assinante;
-    2.	O Sistema apresenta os dados do Assinante (nome, e-mail e status) e dados do plano do Assinante (plano, valor, início e fim do plano);
-    3.	O Sistema apresenta a opção de bloquear ou desbloquear Assinante CU-A 04;
-    Pós-condições: O Administrador visualizou os dados do Assinante;
+    1. CU-A 01 – Listar Assinantes: O Administrador verifica a lista de Assinantes cadastrados no Sistema; 
+        * Ator Primário: Administrador;
+        * Pré-condições: Administrador estar logado no Sistema;
+        * Fluxo Principal:
+            1. O Administrador requisita verificar no Sistema a lista de Assinantes cadastrados;
+            1. O Sistema apresenta a lista de Assinantes cadastrados;
+            1. O Sistema apresenta campo para listar Assinante pelo nome CU-A 02;
+            1. O Sistema apresenta a opção de ver dados cadastrais do Assinante CU-A 03;
+        * Fluxo Alternativo: 
+            1. O Administrador informa o nome do Assinante no campo de pesquisa CU-A 02;
+            1. O Sistema apresenta a lista de Assinantes cadastrados pelo nome in-formado;
+            1. O Sistema apresenta a opção de ver dados cadastrais da lista de Assi-nantes cadastrados pelo nome informado CU-A 03;
+        * Pós-condições: O Administrador visualizou a lista de Assinantes cadastra-dos;
 
-    •	CU-A 04 – Bloquear e Desbloquear Assinante: O Administrador bloqueia ou desbloqueia Assinante;
-    Ator Primário: Administrador;
-    Pré-condições: 
-    1.	O Administrador estar logado no Sistema;
-    2.	O Administrador listar Assinantes cadastrados no Sistema CU-A 01;
-    3.	O Administrador ver dados cadastrais do Assinante CU-A 03;
-    Fluxo Principal: O Administrador requisita bloquear ou desbloquear Assi-nante;
-    Pós-condições: O Administrador bloqueou ou desbloqueou Assinante;
 
-    •	CU-A 05 – Listar Nutricionistas: O Administrador verifica a lista de Nutricio-nistas cadastrados no Sistema;
-    Ator Primário: Administrador;
-    Pré-condições: Administrador estar logado no Sistema;
-    Fluxo Principal:
-    1.	O Administrador requisita verificar no Sistema a lista de Nutricionistas cadastrados;
-    2.	O Sistema apresenta a lista de Nutricionistas cadastrados;
-    3.	O Sistema apresenta campo listar Nutricionista pelo nome CU-A 06;
-    4.	O Sistema apresenta a opção de bloquear ou desbloquear Nutricionis-ta CU-A 07;
-    5.	O Sistema apresenta a opção de cadastrar Nutricionista CU-A 08;
-    Fluxo Alternativo: 
-    1.	O Administrador informa o nome do Nutricionista no campo de pesqui-sa CU-A 06;
-    2.	O Sistema apresenta a lista de Nutricionistas cadastrados pelo nome informado;
-    3.	O Sistema apresenta a opção de bloquear ou desbloquear Nutricionis-ta CU-A 07;
-    4.	O Sistema apresenta a opção de cadastrar Nutricionista CU-A 08;
-    Pós-condições: O Administrador visualizou a lista de Nutricionistas cadas-trados;
+    1. CU-A 03 – Ver dados cadastrais do Assinante: O Administrador verifica os dados cadastrais do Assinante;
+        * Ator Primário: Administrador;
+        * Pré-condições: 
+            1. O Administrador estar logado no Sistema;
+            1. O Administrador listar Assinantes cadastrados no Sistema CU-A 01;
+        * Fluxo Principal:
+            1. O Administrador requisita verificar no Sistema os dados cadastrais do Assinante;
+            1. O Sistema apresenta os dados do Assinante (nome, e-mail e status) e dados do plano do Assinante (plano, valor, início e fim do plano);
+            1. O Sistema apresenta a opção de bloquear ou desbloquear Assinante CU-A 04;
+        * Pós-condições: O Administrador visualizou os dados do Assinante;
+
+
+    1. CU-A 04 – Bloquear e Desbloquear Assinante: O Administrador bloqueia ou desbloqueia Assinante;
+        * Ator Primário: Administrador;
+        * Pré-condições: 
+            1. O Administrador estar logado no Sistema;
+            1. O Administrador listar Assinantes cadastrados no Sistema CU-A 01;
+            1. O Administrador ver dados cadastrais do Assinante CU-A 03;
+        * Fluxo Principal: O Administrador requisita bloquear ou desbloquear Assi-nante;
+        * Pós-condições: O Administrador bloqueou ou desbloqueou Assinante;
+
+
+    1. CU-A 05 – Listar Nutricionistas: O Administrador verifica a lista de Nutricio-nistas cadastrados no Sistema;
+        * Ator Primário: Administrador;
+        * Pré-condições: Administrador estar logado no Sistema;
+        * Fluxo Principal:
+            1.	O Administrador requisita verificar no Sistema a lista de Nutricionistas cadastrados;
+            2.	O Sistema apresenta a lista de Nutricionistas cadastrados;
+            3.	O Sistema apresenta campo listar Nutricionista pelo nome CU-A 06;
+            4.	O Sistema apresenta a opção de bloquear ou desbloquear Nutricionis-ta CU-A 07;
+            5.	O Sistema apresenta a opção de cadastrar Nutricionista CU-A 08;
+        * Fluxo Alternativo: 
+            1.	O Administrador informa o nome do Nutricionista no campo de pesqui-sa CU-A 06;
+            2.	O Sistema apresenta a lista de Nutricionistas cadastrados pelo nome informado;
+            3.	O Sistema apresenta a opção de bloquear ou desbloquear Nutricionis-ta CU-A 07;
+            4.	O Sistema apresenta a opção de cadastrar Nutricionista CU-A 08;
+        * Pós-condições: O Administrador visualizou a lista de Nutricionistas cadas-trados;
 
     •	CU-A 07 – Bloquear e Desbloquear Nutricionista: O Administrador bloqueia ou desbloqueia Nutricionista;
     Ator Primário: Administrador;
