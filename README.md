@@ -167,21 +167,22 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 ## Casos de Uso
 
 1. Administrador
-    CU-G 01 - Logar no Sistema: Administrador faz login no Sistema;
-    Ator Primário: Administrador;
-    Pré-condições: Administrador estar cadastrado para utilização do Sistema;
-    Fluxo Principal:
-    1. O Administrador requisita acessar o Sistema;
-    1. O Sistema apresenta a tela de login para que sejam inseridos o e-mail e a senha do Administrador;
-    1. O Administrador fornece os dados;
-    1. O Sistema faz a validação dos dados inseridos e, se forem válidos, lo-ga o Administrador no Sistema;
-    Fluxo Alternativo: 
-    1. O Administrador requisita acessar o Sistema através do Facebook – CU-G 02;
-    1. O Administrador requisita acessar o Sistema através do Google – CU-G 03;
-    Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
-    Pós-condições: O Administrador efetuou o login;
 
-    •	CU-G 05 – Logout do Sistema: Administrador sai do Sistema;
+    CU-G 01 - Logar no Sistema: Administrador faz login no Sistema;
+        Ator Primário: Administrador;
+        Pré-condições: Administrador estar cadastrado para utilização do Sistema;
+        Fluxo Principal:
+            1. O Administrador requisita acessar o Sistema;
+            1. O Sistema apresenta a tela de login para que sejam inseridos o e-mail e a senha do Administrador;
+            1. O Administrador fornece os dados;
+            1. O Sistema faz a validação dos dados inseridos e, se forem válidos, lo-ga o Administrador no Sistema;
+        Fluxo Alternativo: 
+            1. O Administrador requisita acessar o Sistema através do Facebook – CU-G 02;
+            1. O Administrador requisita acessar o Sistema através do Google – CU-G 03;
+        Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
+        Pós-condições: O Administrador efetuou o login;
+
+    CU-G 05 – Logout do Sistema: Administrador sai do Sistema;
     Ator Primário: Administrador;
     Pré-condições: Administrador estar logado no Sistema;
     Fluxo Principal:
