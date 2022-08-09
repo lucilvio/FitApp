@@ -1436,12 +1436,13 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
 
 ## Diagrama de Estado
+   1. Geral 
    ![diagrama de estado](Diagramas/diagrama-de-estado.png)
    1. Administrador
    ![diagrama de estado Administrador](Diagramas/diagrama-de-estado-Administrador.png)
    1. Assinante
    ![diagrama de estado Assiante](Diagramas/diagrama-de-estado-Assinante.png)
-   2. Nutricionista e Personal Trainer
+   1. Nutricionista e Personal Trainer
    ![diagrama de estado Nutri e Personal](Diagramas/diagrama-de-estado-Nutri-e-Personal.png)
 ## Diagrama de Classes
 ![diagrama de classes](Diagramas/diagrama-de-classes.png)
