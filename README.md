@@ -1415,16 +1415,16 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-U 24;
         * Pós-condições: O Assinante listou mensagens enviadas;
 
-        1. CU-U 29 – Listar Mensagens Excluídas: O Assinante lista mensagens ex-cluídas;
-            * Ator Primário: Assinante;
-            * Pré-condições:
-                1.	O Assinante estar logado no Sistema;
-                2.	O Assinante listar mensagem na caixa de entrada;
-            * Fluxo Principal:
-                1.	O Assinante requisita listar mensagens excluídas;
-                2.	O Sistema apresenta a lista de mensagens excluídas;
-                3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-U 24;
-            * Pós-condições: O Assinante listou mensagens excluídas;
+    1. CU-U 29 – Listar Mensagens Excluídas: O Assinante lista mensagens ex-cluídas;
+        * Ator Primário: Assinante;
+        * Pré-condições:
+            1.	O Assinante estar logado no Sistema;
+            2.	O Assinante listar mensagem na caixa de entrada;
+        * Fluxo Principal:
+            1.	O Assinante requisita listar mensagens excluídas;
+            2.	O Sistema apresenta a lista de mensagens excluídas;
+            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-U 24;
+        * Pós-condições: O Assinante listou mensagens excluídas;
 
 
 
