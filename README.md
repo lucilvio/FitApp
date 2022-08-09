@@ -152,10 +152,16 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 ## Diagrama de casos de uso 
 
 1. Administrador
-    !()
+    ![casos de uso - Administrador](Diagramas/Diagrama-casos-de-uso-administrador.png)
+
 1. Nutricionista
-1. Personal Trainer
-1. Assinante
+   ![casos de uso - Nutricionista](Diagramas/diagrama-caso-de-uso-nutricionista.png)
+
+2. Personal Trainer
+   ![casos de uso - Personal Trainer](Diagramas/diagrama-de-caso-de-uso-personal-trainer.png)
+
+3. Assinante
+   ![casos de uso - Assiante](Diagramas/Diagrama-casos-de-uso-assinante.png)
 
 
 ## Atores 
@@ -1430,10 +1436,15 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
 
 ## Diagrama de Estado
-
-
+   ![diagrama de estado](Diagramas/diagrama-de-estado.png)
+   1. Administrador
+   ![diagrama de estado Administrador](Diagramas/diagrama-de-estado-Administrador.png)
+   1. Assinante
+   ![diagrama de estado Assiante](Diagramas/diagrama-de-estado-Assinante.png)
+   2. Nutricionista e Personal Trainer
+   ![diagrama de estado Nutri e Personal](Diagramas/diagrama-de-estado-Nutri-e-Personal.png)
 ## Diagrama de Classes
-
+![diagrama de classes](Diagramas/diagrama-de-classes.png)
 
 ## Arquitetura de software 
 
@@ -1466,9 +1477,12 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 1. Diagrama de Arquitetura
 
     * C4 Model – Modelo de diagramação de Arquitetura de Software que abrange níveis diferentes de detalhe. 
-    * Diagrama de Contexto
-    * Diagrama de Container
-    * Diagrama de Componente
+      1. Diagrama de Contexto
+    ![diagrama de contexto](Diagramas/c4Diagrama-de-contexto.png)
+      2. Diagrama de Container
+    ![diagrama de container](Diagramas/c4Diagrama-de-container.png)
+      3. Diagrama de Componente
+    ![diagrama de componente](Diagramas/c4Diagrama-de-componente.png)
 
 
 
