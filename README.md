@@ -7,6 +7,9 @@ Independentemente do gênero, idade e condição socioeconómica, a melhoria ou 
 É importante lembrar que ser saudável não significa apenas à ausência de doenças, mas também, a um bem-estar geral. Neste sentido, aliar uma alimentação saudável à prática de exercício físico nos ajuda a promover por mais tempo a saúde e bem-estar.
 No entanto, com a correria dos dias de hoje, a desculpa da falta de tempo passa sempre a atividade física para segundo plano. Sem contar com o stress diário que nos leva a buscar saídas rápidas e erradas, em relação a alimentação.
 Com isso, seguir um estilo de vida saudável tornou-se um dos maiores desafios da vida moderna. Por isso, a existência de uma ferramenta que consiste em planos de treino e alimentação totalmente personalizados, facilita e motiva a melhorar a qualidade de vida e bem-estar.
+A figura a seguir, apresenta o método Lean Canvas para descrever o contexto e detalhes da ferramenta de forma prática e objetiva.
+
+![lean Canvas](imagens/lean-canvas.png)
 
 
 ## Público alvo
@@ -1478,12 +1481,37 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 1. Diagrama de Arquitetura
 
     * C4 Model – Modelo de diagramação de Arquitetura de Software que abrange níveis diferentes de detalhe. 
+  As figuras a seguir apresentam os três primeiros níveis do C4 Model com os detalhes da aplicação.
       1. Diagrama de Contexto
     ![diagrama de contexto](Diagramas/c4Diagrama-de-contexto.png)
-      2. Diagrama de Container
+      1. Diagrama de Container
     ![diagrama de container](Diagramas/c4Diagrama-de-container.png)
-      3. Diagrama de Componente
+      1. Diagrama de Componente
     ![diagrama de componente](Diagramas/c4Diagrama-de-componente.png)
+
+1. Arquitetura da informação 
+   
+    A estrutura do web site foi feita de forma simples, para que a navegação seja intuitiva e prática.  Desta forma, possui barra de navegação em todo o web site, que disponibiliza links para acessar as páginas com as seguintes seções:
+    * Sobre Nós
+    * Assinatura
+    * Contato
+    * Trabalhe Conosco
+    * Entrar
+    * Registra-se
+
+    A figura abaixo representa as funcionalidades ao iniciar a navegação do web site até o momento que é realizado o login.
+
+    ![diagrama hierarquico](imagens/diagrama-hierarquico.png)
+
+    Após a realização do login, os usuários são direcionados para a página inici-al do aplicativo, que apresenta menu de navegação diferente dependendo do tipo de usuário logado. 
+    
+    Os diagramas hierárquicos apresentados abaixo, representam as funcionalidades do sistema para cada usuário após realizar o login.
+
+    ![diagrama hierarquico adm](imagens/diagrama-hierarquico-administrador.png)
+
+    ![diagrama hierarquico assinante](imagens/diagrama-hierarquico-assinante.png)
+
+    ![diagrama hierarquico nutri e personal](imagens/diagrama-hierarquico-nutri-personal.png)
 
 
 
