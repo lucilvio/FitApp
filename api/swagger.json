@@ -1,0 +1,19 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "FitApp",
+        "description": "Serviço que visa ajudar ajudar todas as pessoas que querem adotar um estilo de vida mais saudável com a união de bons hábitos alimenta-res e à prática de exercícios físicos.",
+        "contact": {
+            "name": "Vanessa Dias",
+            "url": "https://github.com/VanessaPDias",
+            "email": "vanessapdias@outlook.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Api de teste"
+        }
+    ]
+}
