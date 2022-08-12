@@ -9,7 +9,7 @@ No entanto, com a correria dos dias de hoje, a desculpa da falta de tempo passa 
 Com isso, seguir um estilo de vida saudável tornou-se um dos maiores desafios da vida moderna. Por isso, a existência de uma ferramenta que consiste em planos de treino e alimentação totalmente personalizados, facilita e motiva a melhorar a qualidade de vida e bem-estar.
 A figura a seguir, apresenta o método Lean Canvas para descrever o contexto e detalhes da ferramenta de forma prática e objetiva.
 
-![lean Canvas](imagens/lean-canvas.png)
+![lean Canvas](documentacao/imagens/lean-canvas.png)
 
 
 ## Público alvo
@@ -155,16 +155,16 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 ## Diagrama de casos de uso 
 
 1. Administrador
-    ![casos de uso - Administrador](Diagramas/Diagrama-casos-de-uso-administrador.png)
+    ![casos de uso - Administrador](documentacao/imagens/Diagrama-casos-de-uso-administrador.png)
 
 1. Nutricionista
-   ![casos de uso - Nutricionista](Diagramas/diagrama-caso-de-uso-nutricionista.png)
+   ![casos de uso - Nutricionista](documentacao/imagens/diagrama-caso-de-uso-nutricionista.png)
 
 2. Personal Trainer
-   ![casos de uso - Personal Trainer](Diagramas/diagrama-de-caso-de-uso-personal-trainer.png)
+   ![casos de uso - Personal Trainer](documentacao/imagens/diagrama-de-caso-de-uso-personal-trainer.png)
 
 3. Assinante
-   ![casos de uso - Assiante](Diagramas/Diagrama-casos-de-uso-assinante.png)
+   ![casos de uso - Assiante](documentacao/imagens/Diagrama-casos-de-uso-assinante.png)
 
 
 ## Atores 
@@ -1440,15 +1440,16 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
 ## Diagrama de Estado
    1. Geral 
-   ![diagrama de estado](Diagramas/diagrama-de-estado.png)
+   ![diagrama de estados web site](documentacao/imagens/fluxo-do-usuario.png)
    1. Administrador
-   ![diagrama de estado Administrador](Diagramas/diagrama-de-estado-Administrador.png)
+   ![Tela inicial da aplicação para o Administrador](documentacao/imagens/tela-inicial-administrador.png)
    1. Assinante
-   ![diagrama de estado Assiante](Diagramas/diagrama-de-estado-Assinante.png)
+   ![Tela inicial da aplicação para o Assiante](documentacao/imagens/tela-inicial-assinante.png)
    1. Nutricionista e Personal Trainer
-   ![diagrama de estado Nutri e Personal](Diagramas/diagrama-de-estado-Nutri-e-Personal.png)
+   ![Tela inicial da aplicação para o Nutricionista](documentacao/imagens/tela-inicial-nutricionista.png)
+   ![Tela inicial da aplicação para o Personal Trainer](documentacao/imagens/tela-inicial-personalTrainer.png)
 ## Diagrama de Classes
-![diagrama de classes](Diagramas/diagrama-de-classes.png)
+![diagrama de classes](documentacao/imagens/diagrama-de-classes.png)
 
 ## Arquitetura de software 
 
@@ -1483,11 +1484,11 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
     * C4 Model – Modelo de diagramação de Arquitetura de Software que abrange níveis diferentes de detalhe. 
   As figuras a seguir apresentam os três primeiros níveis do C4 Model com os detalhes da aplicação.
       1. Diagrama de Contexto
-    ![diagrama de contexto](Diagramas/c4Diagrama-de-contexto.png)
+    ![diagrama de contexto](documentacao/imagens/c4Diagrama-de-contexto.png)
       1. Diagrama de Container
-    ![diagrama de container](Diagramas/c4Diagrama-de-container.png)
+    ![diagrama de container](documentacao/imagens/c4Diagrama-de-container.png)
       1. Diagrama de Componente
-    ![diagrama de componente](Diagramas/c4Diagrama-de-componente.png)
+    ![diagrama de componente](documentacao/imagens/c4Diagrama-de-componente.png)
 
 1. Arquitetura da informação 
    
@@ -1501,17 +1502,17 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
     A figura abaixo representa as funcionalidades ao iniciar a navegação do web site até o momento que é realizado o login.
 
-    ![diagrama hierarquico](imagens/diagrama-hierarquico.png)
+    ![diagrama hierarquico](documentacao/imagens/diagrama-hierarquico.png)
 
     Após a realização do login, os usuários são direcionados para a página inici-al do aplicativo, que apresenta menu de navegação diferente dependendo do tipo de usuário logado. 
     
     Os diagramas hierárquicos apresentados abaixo, representam as funcionalidades do sistema para cada usuário após realizar o login.
 
-    ![diagrama hierarquico adm](imagens/diagrama-hierarquico-administrador.png)
+    ![diagrama hierarquico adm](documentacao/imagens/diagrama-hierarquico-administrador.png)
 
-    ![diagrama hierarquico assinante](imagens/diagrama-hierarquico-assinante.png)
+    ![diagrama hierarquico assinante](documentacao/imagens/diagrama-hierarquico-assinante.png)
 
-    ![diagrama hierarquico nutri e personal](imagens/diagrama-hierarquico-nutri-personal.png)
+    ![diagrama hierarquico nutri e personal](documentacao/imagens/diagrama-hierarquico-nutri-personal.png)
 
 
 
