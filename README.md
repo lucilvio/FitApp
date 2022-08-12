@@ -1451,28 +1451,28 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
    
 
    1. Administrador
-   A figura abaixo apresenta a tela inicial da aplicação para o Administrador. O administrador tem acesso as funcionalidades que permitem a gestão dos assinan-tes, nutricionistas, Personal Trainers e planos.
+        A figura abaixo apresenta a tela inicial da aplicação para o Administrador. O administrador tem acesso as funcionalidades que permitem a gestão dos assinan-tes, nutricionistas, Personal Trainers e planos.
 
-   ![Tela inicial da aplicação para o Administrador](documentacao/imagens/tela-inicial-administrador.png)
+        ![Tela inicial da aplicação para o Administrador](documentacao/imagens/tela-inicial-administrador.png)
 
    
 
    1. Assinante
-   A próxima figura apresenta a tela inicial da aplicação para o Assinante. O as-sinante tem acesso as funcionalidades que permitem verificar suas dietas, seus treinos, gerir dados pessoais, relatórios e mensagens.
+        A próxima figura apresenta a tela inicial da aplicação para o Assinante. O as-sinante tem acesso as funcionalidades que permitem verificar suas dietas, seus treinos, gerir dados pessoais, relatórios e mensagens.
 
-   ![Tela inicial da aplicação para o Assiante](documentacao/imagens/tela-inicial-assinante.png)
+        ![Tela inicial da aplicação para o Assiante](documentacao/imagens/tela-inicial-assinante.png)
 
    1. Nutricionista
-   A figura a seguir, apresenta a tela inicial da aplicação para o Nutricionista. O Nutricionista tem acesso as funcionalidades que permitem gerir pacientes e dietas, e mensagens.
+        A figura a seguir, apresenta a tela inicial da aplicação para o Nutricionista. O Nutricionista tem acesso as funcionalidades que permitem gerir pacientes e dietas, e mensagens.
 
-   ![Tela inicial da aplicação para o Nutricionista](documentacao/imagens/tela-inicial-nutricionista.png)
+        ![Tela inicial da aplicação para o Nutricionista](documentacao/imagens/tela-inicial-nutricionista.png)
    
    1. Personal Trainer
-   E por último, a próxima figura apresenta a tela inicial da aplicação para o Per-sonal Trainer. O Personal Trainer tem acesso as funcionalidades que permitem gerir alunos e treinos, e mensagens.
+        E por último, a próxima figura apresenta a tela inicial da aplicação para o Per-sonal Trainer. O Personal Trainer tem acesso as funcionalidades que permitem gerir alunos e treinos, e mensagens.
 
-   ![Tela inicial da aplicação para o Personal Trainer](documentacao/imagens/tela-inicial-personalTrainer.png)
+         ![Tela inicial da aplicação para o Personal Trainer](documentacao/imagens/tela-inicial-personalTrainer.png)
 
-   
+
 ## Diagrama de Classes
 ![diagrama de classes](documentacao/imagens/diagrama-de-classes.png)
 
