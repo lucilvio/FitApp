@@ -1441,9 +1441,8 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 ## Diagrama de Estado
     Projeto foi divido em web site e aplicação. O web site é responsável pela apresentação do produto até o momento do login. Após o login, o usuario é direcionado para a aplicação, onde inicia o uso das funcionalidades do sistema.
     A figura abaixo representa o fluxo do usuário no web site até a realização do login.
-
-    ![diagrama de estados web site](documentacao/imagens/fluxo-do-usuario.png)
-
+   ![diagrama de estado web site](documentacao/imagens/fluxo-do-usuario.png)
+   
    A navegação após o login será apresentada a seguir, com a interface da página inicial da aplicação para cada tipo de usuário.
    
 
