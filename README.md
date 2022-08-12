@@ -1439,30 +1439,40 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
 
 ## Diagrama de Estado
-    Projeto foi divido em web site e aplicação. O web site é responsável pela apresentação do produto até o momento do login. Após o login, o usuario é direcionado para a aplicação, onde inicia o uso das funcionalidades do sistema.
+    Projeto foi divido em web site e aplicação. O web site é responsável pela apresentação do produto até o momento do login.
+    Após o login, o usuario é direcionado para a aplicação, onde inicia o uso das funcionalidades do sistema.
     A figura abaixo representa o fluxo do usuário no web site até a realização do login.
    ![diagrama de estado web site](documentacao/imagens/fluxo-do-usuario.png)
    
    A navegação após o login será apresentada a seguir, com a interface da página inicial da aplicação para cada tipo de usuário.
+   A aplicação é dividia em duas partes principais, um menu localizado a es-querda e a área principal ocupando o espaço restante ao lado direito do menu. Na área principal, no canto superior esquerdo, está disponível a informação de navegação do usuário. Já no canto superior direito, é apresentado a foto do usuário logado que dá acesso a um menu flutuante com opções do seu perfil e sair da aplicação
+
+
    
 
    1. Administrador
-   A figura abaixo apresenta a tela inicial da aplicação para o Administrador. Nela está disponível um menu vertical de navegação a esquerda, com as funcionalidades do sistema. A apresentação de cada funcionalidade é feita a direita da tela. Na parte superior esquerda da tela está disponível o ícone da funcionalidade clicada, para facilitar a localização e a direita o ícone para acessar as funcionalidades do perfil e logout.
+   A figura abaixo apresenta a tela inicial da aplicação para o Administrador. O administrador tem acesso as funcionalidades que permitem a gestão dos assinan-tes, nutricionistas, Personal Trainers e planos.
 
    ![Tela inicial da aplicação para o Administrador](documentacao/imagens/tela-inicial-administrador.png)
 
    
 
    1. Assinante
-   A próxima figura apresenta a tela inicial da aplicação para o Assinante. Além do menu vertical a esquerda, que apresenta as funcionalidades do sistema, também é possível ter acesso rápido e facil as informações disponíveis no dashboard a direta da tela. A apresentação de cada funcionalidade também é feita à direita da tela. Na parte superior esquerda da tela está disponível o ícone da funcionalidade clicada, para facilitar a localização e a direita o ícone para acessar as funcionalidades do perfil e logout.
+   A próxima figura apresenta a tela inicial da aplicação para o Assinante. O as-sinante tem acesso as funcionalidades que permitem verificar suas dietas, seus treinos, gerir dados pessoais, relatórios e mensagens.
 
    ![Tela inicial da aplicação para o Assiante](documentacao/imagens/tela-inicial-assinante.png)
 
-   1. Nutricionista e Personal Trainer
-   A seguir, serão apresentadas as telas iniciais da aplicação para o Nutricionista e Personal Trainer. As funcionalidades são as mesmas para ambos os usuários, o que muda é a nomenclatura de alguns termos, por exemplo, paciente e aluno. A tela apresenta um menu vertical de navegação a esquerda, com as funcionalidades do sistema e a apresentação de cada funcionalidade é feita à direita da tela. Na parte superior esquerda da tela está disponível o ícone da funcionalidade clicada, para facilitar a localização e a direita o ícone para acessar as funcionalidades do perfil e logout.
+   1. Nutricionista
+   A figura a seguir, apresenta a tela inicial da aplicação para o Nutricionista. O Nutricionista tem acesso as funcionalidades que permitem gerir pacientes e dietas, e mensagens.
 
    ![Tela inicial da aplicação para o Nutricionista](documentacao/imagens/tela-inicial-nutricionista.png)
+   
+   1. Personal Trainer
+   E por último, a próxima figura apresenta a tela inicial da aplicação para o Per-sonal Trainer. O Personal Trainer tem acesso as funcionalidades que permitem gerir alunos e treinos, e mensagens.
+
    ![Tela inicial da aplicação para o Personal Trainer](documentacao/imagens/tela-inicial-personalTrainer.png)
+
+   
 ## Diagrama de Classes
 ![diagrama de classes](documentacao/imagens/diagrama-de-classes.png)
 
