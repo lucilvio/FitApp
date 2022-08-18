@@ -17,6 +17,22 @@ app.listen(port, () => {
 
 //middlewares
 app.use(express.json());
+
+// app.use((req, res, next) => {
+
+//     if (req.url == "/login") {
+//         next();
+//         return;
+//     }
+    
+//     if (!req.body.chave) {
+//         res.status(401).send("Não autorizado");
+//         return;
+//     }
+
+//     next();
+// });
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 module.exports.app = app;

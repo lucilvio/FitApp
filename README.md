@@ -1474,6 +1474,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
 
 ## Diagrama de Classes
+Veja abaixo a representação do diagrama de classes da aplicação com as classes e as relações existentes entre elas.
 ![diagrama de classes](documentacao/imagens/diagrama-de-classes.png)
 
 ## Arquitetura de software 
@@ -1529,7 +1530,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
 
     ![diagrama hierarquico](documentacao/imagens/diagrama-hierarquico.png)
 
-    Após a realização do login, os usuários são direcionados para a página inici-al do aplicativo, que apresenta menu de navegação diferente dependendo do tipo de usuário logado. 
+    Após a realização do login, os usuários são direcionados para a página inicial do aplicativo, que apresenta menu de navegação diferente dependendo do tipo de usuário logado. 
     
     Os diagramas hierárquicos apresentados abaixo, representam as funcionalidades do sistema para cada usuário após realizar o login.
 

@@ -15,5 +15,62 @@
             "url": "http://localhost:3000"
             
         }
-    ]
+    ],
+    "paths": {
+        "/usuarios": {
+            "post": {
+                "summary": "Cadastro de usuário",
+                "description": "Essa rota será responsável por cadastrar um novo usuário",
+                "tags": [
+                    "Usuarios"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "user": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "name": "João Cardoso",
+                                        "email": "jcardoso@email.com",
+                                        "senha": "123Jc56"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Erros de validação de regras de negocio"
+                    },
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+
+    }    
 }
