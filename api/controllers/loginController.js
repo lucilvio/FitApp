@@ -1,4 +1,4 @@
-const base = require('../dados.js');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
 const jwt = require('jsonwebtoken');
 
 
@@ -6,9 +6,19 @@ function login(req, res) {
     const login = req.body.email;
     const senha = req.body.senha;
 
-    const usuarioEncontrado = base.dados.usuarios.find(usuario => usuario.login == login && usuario.senha == senha);
+    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(login);
 
     if (!usuarioEncontrado) {
+        res.status(400).send("login ou senha incorreto");
+        return;
+    }
+
+    if(usuarioEncontrado.bloqueado == true) {
+        res.status(400).send("login ou senha incorreto");
+        return;
+    }
+
+    if(usuarioEncontrado.senha !== senha) {
         res.status(400).send("login ou senha incorreto");
         return;
     }
@@ -18,5 +28,7 @@ function login(req, res) {
 
 }
 
+module.exports = {
+    login: login
+}
 
-exports.login = login;

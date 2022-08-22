@@ -13,4 +13,6 @@ function abrirConexao () {
     return conexao;
 }
 
-exports.abrirConexao = abrirConexao;
+module.exports = {
+    abrirConexao: abrirConexao
+}

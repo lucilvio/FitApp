@@ -21,4 +21,6 @@ const dados = {
         
 }
 
-exports.dados = dados;
+module.exports = {
+    dados: dados
+}
