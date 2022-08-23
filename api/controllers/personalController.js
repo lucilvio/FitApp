@@ -66,7 +66,7 @@ function buscarPersonal(req, res) {
 
 }
 
-function alterarDadosPersonal(req, res) {
+function alterarStatusPersonal(req, res) {
     const id = req.params.id;
     const personal = repositorioDePersonal.buscarPersonalPorId(id);
 
@@ -83,5 +83,5 @@ function alterarDadosPersonal(req, res) {
 module.exports = {
     cadastrarPersonal: cadastrarPersonal,
     buscarPersonal: buscarPersonal,
-    alterarDadosPersonal: alterarDadosPersonal
+    alterarStatusPersonal: alterarStatusPersonal
 }

@@ -68,7 +68,7 @@ function buscarNutricionistas(req, res) {
 
 }
 
-function alterarDadosNutricionista(req, res) {
+function alterarStatusNutricionista(req, res) {
     const id = req.params.id;
     const nutricionista = repositorioDeNutricionistas.buscarNutriPorId(id);
 
@@ -88,7 +88,7 @@ function alterarDadosNutricionista(req, res) {
 module.exports = {
     cadastrarNutricionista: cadastrarNutricionista,
     buscarNutricionistas: buscarNutricionistas,
-    alterarDadosNutricionista: alterarDadosNutricionista
+    alterarStatusNutricionista: alterarStatusNutricionista
 }
 
 
