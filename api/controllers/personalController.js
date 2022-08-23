@@ -1,10 +1,9 @@
-
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
-const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas.js');
+const repositorioDePersonal = require('../repositorios/repositorioDePersonal.js');
 const crypto = require('crypto');
 
 
-function cadastrarNutricionista(req, res) {
+function cadastrarPersonal(req, res) {
 
     let novoUsuario = {
         id: crypto.randomUUID(),
@@ -12,7 +11,7 @@ function cadastrarNutricionista(req, res) {
         login: req.body.email,
         senha: "123456",
         bloqueado: true,
-        perfil: 'nutricionista',
+        perfil: 'personal trainer',
         mensagens: []
     }
 
@@ -21,13 +20,13 @@ function cadastrarNutricionista(req, res) {
         return;
     }
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorEmail(req.body.email);
 
-    if (!nutriEncontrado) {
+    if (!personalEncontrado) {
 
         repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
 
-        let novoNutricionista = {
+        let novoPersonal = {
             id: crypto.randomUUID(),
             usuario: novoUsuario,
             nome: req.body.nome,
@@ -36,7 +35,7 @@ function cadastrarNutricionista(req, res) {
             registroProfissional: req.body.registroProfissional
         }
 
-        repositorioDeNutricionistas.salvarDadosDoNutri(novoNutricionista);
+        repositorioDePersonal.salvarDadosDoPersonal(novoPersonal);
 
         res.send();
 
@@ -46,31 +45,25 @@ function cadastrarNutricionista(req, res) {
 
 }
 
-function buscarNutricionistas(req, res) {
+function buscarPersonal(req, res) {
     const nome = req.query.nome;
-    let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(nome);
+    let personalTrainers = repositorioDePersonal.buscarPersonalPorFiltro(nome);
 
-   
-    res.send(nutricionistas.map(function (nutri) {
+    res.send(personalTrainers.map(function (personal) {
         return {
-            id: nutri.id,
-            nome: nutri.nome,
-            email: nutri.email,
-            telefone: nutri.telefone,
-            registro: nutri.registro,
-            status: nutri.usuario.bloqueado
+            id: personal.id,
+            nome: personal.nome,
+            email: personal.email,
+            telefone: personal.telefone,
+            registro: personal.registro,
+            status: personal.usuario.bloqueado
         }
     }));
 
 
 }
 
-
-
 module.exports = {
-    cadastrarNutricionista: cadastrarNutricionista,
-    buscarNutricionistas: buscarNutricionistas
+    cadastrarPersonal: cadastrarPersonal,
+    buscarPersonal: buscarPersonal
 }
-
-
-

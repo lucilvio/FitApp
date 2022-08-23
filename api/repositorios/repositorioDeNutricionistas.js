@@ -1,18 +1,18 @@
 const base = require('../dados.js');
 
 function buscarNutricionistaPorEmail(email) {
-    return base.dados.nutricionistas.find(nutri => nutri.email.toLowerCase() == email.toLowerCase());
+    return base.dados.personalTrainers.find(nutri => nutri.email.toLowerCase() == email.toLowerCase());
 }
 
 function salvarDadosDoNutri(novoNutricionista) {
-    base.dados.nutricionistas.push(novoNutricionista);
+    base.dados.personalTrainers.push(novoNutricionista);
 }
 
 function buscarNutricionistasPorFiltro(nome) {
     if(!nome) {
-        return base.dados.nutricionistas;
+        return base.dados.personalTrainers;
     } else {
-        return base.dados.nutricionistas.find(nutri => nutri.nome.toLowerCase() == nome.toLowerCase());
+        return base.dados.personalTrainers.filter(nutri => nutri.nome.toLowerCase() == nome.toLowerCase());
         
     }
 }
