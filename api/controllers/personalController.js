@@ -37,7 +37,10 @@ function cadastrarPersonal(req, res) {
 
         repositorioDePersonal.salvarDadosDoPersonal(novoPersonal);
 
-        res.send();
+        res.send({
+            idUsuario: novoUsuario.id,
+            id: novoPersonal.id
+        });
 
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
@@ -63,7 +66,22 @@ function buscarPersonal(req, res) {
 
 }
 
+function alterarDadosPersonal(req, res) {
+    const id = req.params.id;
+    const personal = repositorioDePersonal.buscarPersonalPorId(id);
+
+    if (!personal) {
+        res.status(404).send({ erro: "Não encontrado" })
+    }
+
+    const novoStatus = req.body.bloqueado;
+    personal.usuario.bloqueado = novoStatus;
+
+    res.send(personal)
+}
+
 module.exports = {
     cadastrarPersonal: cadastrarPersonal,
-    buscarPersonal: buscarPersonal
+    buscarPersonal: buscarPersonal,
+    alterarDadosPersonal: alterarDadosPersonal
 }

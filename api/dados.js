@@ -13,6 +13,8 @@ const dados = {
         }
     ],
 
+    nutricionistas: [],
+
     personalTrainers: [],
 
     assinantes: []

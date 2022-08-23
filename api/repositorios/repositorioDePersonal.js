@@ -9,17 +9,22 @@ function salvarDadosDoPersonal(novoPersonal) {
 }
 
 function buscarPersonalPorFiltro(nome) {
-    if(!nome) {
+    if (!nome) {
         return base.dados.personalTrainers;
     } else {
         return base.dados.personalTrainers.filter(personal => personal.nome.toLowerCase() == nome.toLowerCase());
-        
+
     }
+}
+
+function buscarPersonalPorId(id) {
+    return base.dados.personalTrainers.find(personal => personal.id == id);
 }
 
 module.exports = {
     buscarPersonalPorEmail: buscarPersonalPorEmail,
     salvarDadosDoPersonal: salvarDadosDoPersonal,
-   buscarPersonalPorFiltro: buscarPersonalPorFiltro,
-    
+    buscarPersonalPorFiltro: buscarPersonalPorFiltro,
+    buscarPersonalPorId: buscarPersonalPorId
+
 };

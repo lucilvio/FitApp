@@ -38,7 +38,10 @@ function cadastrarNutricionista(req, res) {
 
         repositorioDeNutricionistas.salvarDadosDoNutri(novoNutricionista);
 
-        res.send();
+        res.send({
+            IdUsuario: novoUsuario.id,
+            id: novoNutricionista.id
+        });
 
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
@@ -50,7 +53,7 @@ function buscarNutricionistas(req, res) {
     const nome = req.query.nome;
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(nome);
 
-   
+
     res.send(nutricionistas.map(function (nutri) {
         return {
             id: nutri.id,
@@ -65,11 +68,27 @@ function buscarNutricionistas(req, res) {
 
 }
 
+function alterarDadosNutricionista(req, res) {
+    const id = req.params.id;
+    const nutricionista = repositorioDeNutricionistas.buscarNutriPorId(id);
+
+    if (!nutricionista) {
+        res.status(404).send({ erro: "Não encontrado" })
+    }
+
+    const novoStatus = req.body.bloqueado;
+    nutricionista.usuario.bloqueado = novoStatus;
+
+    res.send(nutricionista)
+
+}
+
 
 
 module.exports = {
     cadastrarNutricionista: cadastrarNutricionista,
-    buscarNutricionistas: buscarNutricionistas
+    buscarNutricionistas: buscarNutricionistas,
+    alterarDadosNutricionista: alterarDadosNutricionista
 }
 
 
