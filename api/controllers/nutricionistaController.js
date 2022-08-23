@@ -1,6 +1,6 @@
 
-const base = require('../dados.js');
-
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
+const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas.js');
 const crypto = require('crypto');
 
 
@@ -9,7 +9,7 @@ function cadastrarNutricionista(req, res) {
     let novoUsuario = {
         id: crypto.randomUUID(),
         nome: req.body.nome,
-        login: req.body.login,
+        login: req.body.email,
         senha: "123456",
         bloqueado: true,
         perfil: 'nutricionista',
@@ -21,48 +21,51 @@ function cadastrarNutricionista(req, res) {
         return;
     }
 
-    if (base.dados.usuarios.find(usuario => usuario.login == novoUsuario.login)) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
+
+    if (!nutriEncontrado) {
+
+        repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
+
+        let novoNutricionista = {
+            id: crypto.randomUUID(),
+            usuario: novoUsuario,
+            nome: req.body.nome,
+            email: req.body.email,
+            telefone: req.body.telefone,
+            registroProfissional: req.body.registroProfissional
+        }
+
+        repositorioDeNutricionistas.salvarDadosDoNutri(novoNutricionista);
+
+        res.send();
+
+    } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
-        return;
     }
-
-    let novoNutricionista = {
-        id: crypto.randomUUID(),
-        usuario: novoUsuario,
-        nome: req.body.nome,
-        login: req.body.login,
-        telefone: req.body.telefone,
-        registroProfissional: req.body.registroProfissional
-    }
-
-
-
-    base.dados.usuarios.push(novoUsuario);
-    base.dados.nutricionistas.push(novoNutricionista);
-
-
-    res.send(base.dados.nutricionistas);
 
 }
 
 function buscarNutricionistas(req, res) {
     const nome = req.query.nome;
-    const nutricionistas = base.dados.nutricionistas;
+    let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(nome);
 
-    if(!nome) {
-        res.send(base.dados.nutricionistas);
+    if (!nutricionistas) {
+        nutricionistas = [];
     }
 
-    const nutriEcontrada = nutricionistas.find(nutricionista => nutricionista.nome == nome);
+    res.send(nutricionistas.map(function (nutri) {
+        return {
+            id: nutri.id,
+            nome: nutri.nome,
+            email: nutri.email,
+            telefone: nutri.telefone,
+            registro: nutri.registro,
+            status: nutri.usuario.bloqueado
+        }
+    }));
 
-    if(!nutriEcontrada) {
-        res.status(400).send({ erro: "Não encontrado"});
-        return;
-    }
 
-    res.send(nutriEcontrada);
-
-   
 }
 
 
