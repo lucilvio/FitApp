@@ -1,6 +1,9 @@
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
 const repositorioDePersonal = require('../repositorios/repositorioDePersonal.js');
+const servicoDeEmail = require('../servicos/servicoDeEmail.js');
+const servicoDeMensagens = require('../servicos/servicoDeMensagens.js');
 const crypto = require('crypto');
+const geradorDeSenha = require('generate-password');
 
 
 function cadastrarPersonal(req, res) {
@@ -9,7 +12,10 @@ function cadastrarPersonal(req, res) {
         id: crypto.randomUUID(),
         nome: req.body.nome,
         login: req.body.email,
-        senha: "123456",
+        senha: geradorDeSenha.generate({
+            length: 10,
+            numbers: true
+        }),
         bloqueado: true,
         perfil: 'personal trainer',
         mensagens: []
@@ -36,6 +42,8 @@ function cadastrarPersonal(req, res) {
         }
 
         repositorioDePersonal.salvarDadosDoPersonal(novoPersonal);
+
+        servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoUsuario.senha));
 
         res.send({
             idUsuario: novoUsuario.id,
