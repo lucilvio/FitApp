@@ -36,24 +36,26 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
     * CU-A 04 - Bloquear e desbloquear Assinante
     * CU-A 05 - Listar Nutricionistas
     * CU-A 06 - Listar Nutricionistas por nome
-    * CU-A 07 - Bloquear e Desbloquear Nutricionista
-    * CU-A 08 - Cadastrar Nutricionista
-    * CU-A 09 - Listar Personal Trainers
-    * CU-A 10 - Listar Personal Trainers por nome
-    * CU-A 11 - Bloquear e Desbloquear Personal Trainers
-    * CU-A 12 - Cadastrar Personal Trainers
-    * CU-A 13 - Listar Planos
-    * CU-A 14 - Listar planos pelo nome
-    * CU-A 15 - Ver dados do plano
-    * CU-A 16 - Salvar alterações dos dados do plano
-    * CU-A 17 - Cadastrar plano
-    * CU-A 18 - Listar mensagens na caixa de entrada
-    * CU-A 19 - Ver conteúdo da mensagem 
-    * CU-A 20 - Responder mensagem
-    * CU-A 21 - Excluir mensagem 
-    * CU-A 22 - Escrever mensagem
-    * CU-A 23 - Listar mensagens enviadas
-    * CU-A 24 - Listar mensagens excluídas
+    * CU-A 07 - Ver dados do Nutricionista
+    * CU-A 08 - Salvar alterações dos dados do Nutricionista
+    * CU-A 09 - Cadastrar Nutricionista
+    * CU-A 10 - Listar Personal Trainers
+    * CU-A 11 - Listar Personal Trainers por nome
+    * CU-A 12 - Ver dados do Personal Trainer
+    * CU-A 13 - Salvar alterações dos dados do Personal Trainers
+    * CU-A 14 - Cadastrar Personal Trainers
+    * CU-A 15 - Listar Planos
+    * CU-A 16 - Listar planos pelo nome
+    * CU-A 17 - Ver dados do plano
+    * CU-A 18 - Salvar alterações dos dados do plano
+    * CU-A 19 - Cadastrar plano
+    * CU-A 20 - Listar mensagens na caixa de entrada
+    * CU-A 21 - Ver conteúdo da mensagem 
+    * CU-A 22 - Responder mensagem
+    * CU-A 23 - Excluir mensagem 
+    * CU-A 24 - Escrever mensagem
+    * CU-A 25 - Listar mensagens enviadas
+    * CU-A 26 - Listar mensagens excluídas
 
 1. Nutricionista
 
@@ -92,57 +94,58 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
     * CU-P 04 - Listar Alunos
     * CU-P 05 - Listar Alunos por nome
     * CU-P 06 - Ver dados do Aluno
-    * CU-P 07 - Ver histórico de treinos
-    * CU-P 08 - Ver detalhes do treino
-    * CU-P 09 - Salvar alterações no treino
-    * CU-P 10 - Criar Treino
-    * CU-P 11 - Ver Histórico de medidas do Aluno
-    * CU-P 12 - Ver histórico de peso do Aluno
-    * CU-P 13 - Ver histórico de medida do Pescoço do Aluno
-    * CU-P 14 - Ver histórico de medida da cintura do Aluno
-    * CU-P 15 - Ver histórico quadril do Aluno
-    * CU-P 16 - Ver histórico de IMC do Aluno
-    * CU-P 17 - Gerar PDF do histórico de medidas do Aluno
-    * CU-P 18 - Listar mensagens na caixa de entrada
-    * CU-P 19 - Escrever mensagem
-    * CU-P 19 - Ver conteúdo da mensagem 
-    * CU-P 20 - Responder mensagem
-    * CU-P 21 - Excluir mensagem 
-    * CU-P 22 - Escrever mensagem
-    * CU-P 23 - Listar mensagens enviadas
-    * CU-P 24 - Listar mensagens excluídas
+    * CU-P 07 - Ver Detalhes do treinos
+    * CU-P 08 - Incluir exercicio no treino
+    * CU-P 09 - Editar exercicio no treino
+    * CU-P 10 - Excluir exercicio do treino
+    * CU-P 11 - Salvar alterações no treino
+    * CU-P 12 - Criar Treino
+    * CU-P 13 - Ver Histórico de medidas do Aluno
+    * CU-P 14 - Ver histórico de peso do Aluno
+    * CU-P 15 - Ver histórico de medida do Pescoço do Aluno
+    * CU-P 16 - Ver histórico de medida da cintura do Aluno
+    * CU-P 17 - Ver histórico quadril do Aluno
+    * CU-P 18 - Ver histórico de IMC do Aluno
+    * CU-P 19 - Gerar PDF do histórico de medidas do Aluno
+    * CU-P 20 - Listar mensagens na caixa de entrada
+    * CU-P 21 - Ver conteúdo da mensagem 
+    * CU-P 22 - Responder mensagem
+    * CU-P 23 - Excluir mensagem 
+    * CU-P 24 - Escrever mensagem
+    * CU-P 25 - Listar mensagens enviadas
+    * CU-P 26 - Listar mensagens excluídas
 
 1. Assinante
 
-    * CU-U 01 - Ver perfil
-    * CU-U 02 - Salvar alterações do perfil
-    * CU-U 03 - Alterar Senha
-    * CU-U 04 - Ver Plano
-    * CU-U 05 - Cancelar plano
-    * CU-U 06 – Alterar Plano
-    * CU-U 07 - Ver Nutricionista
-    * CU-U 08 - Ver Personal Trainer
-    * CU-U 09 - Listar Dietas
-    * CU-U 10 - Listar Dietas por nome
-    * CU-U 11 - Ver detalhes da Dieta
-    * CU-U 12 - Listar Treinos
-    * CU-U 13 - Listar Treinos por Nome
-    * CU-U 14 - Ver detalhe do treino
-    * CU-U 15 - Salvar medidas
-    * CU-U 16 - Ver histórico de Medidas
-    * CU-U 17 - Ver histórico de peso
-    * CU-U 18 - Ver histórico de medida do Pescoço
-    * CU-U 19 - Ver histórico de medida da cintura
-    * CU-U 20 - Ver histórico quadril
-    * CU-U 21 - Ver histórico de IMC
-    * CU-U 22 - Gerar PDF do histórico de medidas
-    * CU-U 23 - Listar mensagens na caixa de entrada
-    * CU-U 24 - Ver conteúdo da mensagem 
-    * CU-U 25 - Responder mensagem
-    * CU-U 26 - Excluir mensagem 
-    * CU-U 27 - Escrever mensagem
-    * CU-U 28 - Listar mensagens enviadas
-    * CU-U 29 - Listar mensagens excluídas
+    * CU-AS 01 - Ver perfil
+    * CU-AS 02 - Salvar alterações do perfil
+    * CU-AS 03 - Alterar Senha
+    * CU-AS 04 - Ver Plano
+    * CU-AS 05 - Cancelar plano
+    * CU-AS 06 – Alterar Plano
+    * CU-AS 07 - Ver Nutricionista
+    * CU-AS 08 - Ver Personal Trainer
+    * CU-AS 09 - Listar Dietas
+    * CU-AS 10 - Listar Dietas por nome
+    * CU-AS 11 - Ver detalhes da Dieta
+    * CU-AS 12 - Listar Treinos
+    * CU-AS 13 - Listar Treinos por Nome
+    * CU-AS 14 - Ver detalhe do treino
+    * CU-AS 15 - Salvar medidas
+    * CU-AS 16 - Ver histórico de Medidas
+    * CU-AS 17 - Ver histórico de peso
+    * CU-AS 18 - Ver histórico de medida do Pescoço
+    * CU-AS 19 - Ver histórico de medida da cintura
+    * CU-AS 20 - Ver histórico quadril
+    * CU-AS 21 - Ver histórico de IMC
+    * CU-AS 22 - Gerar PDF do histórico de medidas
+    * CU-AS 23 - Listar mensagens na caixa de entrada
+    * CU-AS 24 - Ver conteúdo da mensagem 
+    * CU-AS 25 - Responder mensagem
+    * CU-AS 26 - Excluir mensagem 
+    * CU-AS 27 - Escrever mensagem
+    * CU-AS 28 - Listar mensagens enviadas
+    * CU-AS 29 - Listar mensagens excluídas
 
 
 ## Requisitos Não Funcionais
@@ -246,26 +249,46 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             1.	O Administrador requisita verificar no Sistema a lista de Nutricionistas cadastrados;
             2.	O Sistema apresenta a lista de Nutricionistas cadastrados;
             3.	O Sistema apresenta campo listar Nutricionista pelo nome CU-A 06;
-            4.	O Sistema apresenta a opção de bloquear ou desbloquear Nutricionista CU-A 07;
-            5.	O Sistema apresenta a opção de cadastrar Nutricionista CU-A 08;
+            4.	O Sistema apresenta a opção de ver os dados cadastrais do Nutricionista CU-A 07;
+            5.  O Sistema apresenta a opção de alterar dados do Nutricionista CU-A 08;
+            6.  O Sistema apresenta a opção de cadastrar Nutricionista CU-A 09;
         * Fluxo Alternativo: 
             1.	O Administrador informa o nome do Nutricionista no campo de pesquisa CU-A 06;
             2.	O Sistema apresenta a lista de Nutricionistas cadastrados pelo nome informado;
             3.	O Sistema apresenta a opção de bloquear ou desbloquear Nutricionista CU-A 07;
-            4.	O Sistema apresenta a opção de cadastrar Nutricionista CU-A 08;
+            4.	O Sistema apresenta a opção de alterar dados do Nutricionista CU-A 08;
+            5.  O Sistema apresenta a opção de cadastrar Nutricionista CU-A 09;  
         * Pós-condições: O Administrador visualizou a lista de Nutricionistas cadastrados;
 
     
-    1. CU-A 07 – Bloquear e Desbloquear Nutricionista: O Administrador bloqueia ou desbloqueia Nutricionista;
+    1. CU-A 07 – Ver dados do Nutricionista: O Administrador verifica os dados cadastrais do Nutricionista;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
             2.	O Administrador listar Nutricionistas cadastrados no Sistema CU-A 05;
-        * Fluxo Principal: O Administrador requisita bloquear ou desbloquear Nutricionista;
-        * Pós-condições: O Administrador bloqueou ou desbloqueou Nutricionista
+        * Fluxo Principal: 
+            1. O Administrador requisita verificar no Sistema os dados cadastrais do Nutricionista;
+            2. O Sistema apresenta os dados do Nutricionista (nome, e-mail, tele-fone, registro profissional e status);
+            3. O Sistema apresenta a opção de alterar dados do Nutricionista CU-A 08;
+        * Pós-condições: O Administrador visualizou os dados do Nutricionista;
 
+    2. CU-A 08 – Salvar alterações dos dados do Nutricionista: O Administrador altera dados do Nutricionista;
+        * Ator Primário: Administrador;
+        * Pré-condições: 
+            1.	O Administrador estar logado no Sistema;
+            2.	O Administrador listar Nutricionistas cadastrados no Sistema CU-A 05;
+            3.  O administrador ver dados cadastrais do Nutricionista CU-A 07;
+        * Fluxo Principal:
+            1.  O Administrador requisita alterar dados cadastrais do Nutricionista;
+            2.  O Sistema apresenta a tela de cadastro;
+            3.  O Administrador fornece os dados solicitados (nome, e-mail, telefone, registro profissional e status) do Nutricionista e requisita salvar os dados;
+            4.  O Sistema faz a validação dos dados inseridos e, se forem válidos, altera os dados;
 
-    1. CU-A 08 – Cadastrar Nutricionista: O Administrador cadastra Nutricionista;
+        * Fluxo de exceção:
+            1.	Caso os dados não sejam válidos, o Sistema apresenta uma mensa-gem de erro;
+        * Pós-condições: O Administrador alterou os dados cadastrais do Nutricionista;
+
+    3. CU-A 09 – Cadastrar Nutricionista: O Administrador cadastra Nutricionista;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
@@ -281,37 +304,56 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador cadastrou Nutricionista;
 
 
-    1. CU-A 09 – Listar Personal Trainers: O Administrador verifica a lista de Personal Trainers cadastrados no Sistema
+    4. CU-A 10 – Listar Personal Trainers: O Administrador verifica a lista de Personal Trainers cadastrados no Sistema
         * Ator Primário: Administrador;
         * Pré-condições: Administrador estar logado no Sistema;
         * Fluxo Principal:
             1.	O Administrador requisita verificar no Sistema a lista de Personal Trainers cadastrados;
             2.	O Sistema apresenta a lista de Personal Trainers cadastrados;
-            3.	O Sistema apresenta campo para listar Personal Trainer pelo nome CU-A 10; 
-            4.	O Sistema apresenta a opção de bloquear ou desbloquear Personal Trainer CU-A 11;
-            5.	O Sistema apresenta a opção de cadastrar Personal Trainer CU-A 12;
+            3.	O Sistema apresenta campo para listar Personal Trainer pelo nome CU-A 11; 
+            4.	O Sistema apresenta a opção de ver dados cadastrais do Personal Trainer CU-A 12;
+            5.	O Sistema apresenta a opção de alterar os dados cadastrais do Personal Trainer CU-A 13;
+            6.  O Sistema apresenta a opção de cadastrar Personal Trainer CU-A 14;
         * Fluxo Alternativo: 
-            1.	O Administrador informa o nome do Personal Trainer no campo de pesquisa CU-A 10;
+            1.	O Administrador informa o nome do Personal Trainer no campo de pesquisa CU-A 11;
             2.	O Sistema apresenta a lista de Personal Trainers cadastrados pelo nome informado;
-            3.	O Sistema apresenta a opção de bloquear ou desbloquear Personal Trainer CU-A 11;
-            4.	O Sistema apresenta a opção de cadastrar Personal Trainer CU-A 12;
+            3.	O Sistema apresenta a opção de ver dados cadastrais do Personal Trainer CU-A 12;
+            4.	O Sistema apresenta a opção de alterar os dados cadastrais do Personal Trainer CU-A 13;
+            5.  O Sistema apresenta a opção de cadastrar Personal Trainer CU-A 14;;
         * Pós-condições: O Administrador visualizou a lista de Personal Trainers cadastrados;
 
 
-    1. CU-A 11 – Bloquear e Desbloquear Personal Trainer: O Administrador bloqueia ou desbloqueia Personal Trainer;
+    5. CU-A 12 – Ver dados do Personal Trainer: O Administrador verifica os dados cadastrais do Personal Trainer;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
-            2.	O Administrador listar Personal Trainers cadastrados no Sistema CU-A 09;
-        * Fluxo Principal: O Administrador requisita bloquear ou desbloquear Personal Trainer;
-        * Pós-condições: O Administrador bloqueou ou desbloqueou Personal Trainer;
+            2.	O Administrador listar Personal Trainers cadastrados no Sistema CU-A 10;
+        * Fluxo Principal:
+             1. O Administrador requisita verificar no Sistema os dados cadastrais do Personal Trainer;
+             2. O Sistema apresenta os dados do Personal Trainer (nome, e-mail, telefone, registro profissional e status);
+             3. O Sistema apresenta a opção de alterar dados do Personal Trainer CU-A 13;
+        * Pós-condições: O Administrador visualizou os dados do Personal Trainer;
+
+    6. CU-A 13 - Salvar alterações dos dados do Personal Trainer: O Administrador altera os dados do Personal Trainer;
+        * Ator Primário: Administrador;
+        * Pré-condições:
+            1.  O Administrador estar logado no Sistema;
+            2.  O Administrador listar Personal Trainers cadastrados no Sistema CU-A 10;
+            3.  O Administrador ver dados cadastrais do Personal Trainer CU-A 12;
+        * Fluxo Principal:
+            1.  O Administrador requisita alterar dados cadastrais do Personal Trainer;
+            2.  O Sistema apresenta a tela de cadastro;
+            3.  O Administrador fornece os dados solicitados (nome, e-mail, telefone, registro profissional e status) do Personal Trainer e requisita salvar os dados;
+            4.  O Sistema faz a validação dos dados inseridos e, se forem válidos, al-tera os dados;
+        * Fluxo de exceção:Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
+        * Pós-condições: O Administrador alterou os dados do Personal Trainer;  
 
 
-    1. CU-A 12 – Cadastrar Personal Trainer: O Administrador cadastra Personal Trainer;
+    7. CU-A 14 – Cadastrar Personal Trainer: O Administrador cadastra Personal Trainer;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
-            2.	O Administrador listar Personal Trainer cadastrados no Sistema CU-A 09;
+            2.	O Administrador listar Personal Trainer cadastrados no Sistema CU-A 10;
         * Fluxo Principal:
             1.	O Administrador requisita cadastrar Personal Trainer;
             2.	O Sistema apresenta a tela de cadastro;
@@ -323,41 +365,43 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador cadastrou Personal Trainer;
 
 
-    1. CU-A 13 – Listar Planos: O Administrador verifica a lista de planos cadastrados;
+    8. CU-A 15 – Listar Planos: O Administrador verifica a lista de planos cadastrados;
         * Ator Primário: Administrador;
         * Pré-condições: O Administrador estar logado no Sistema;
         * Fluxo Principal: 
-            1.	O Administrador requisita verificar no Sistema a lista de mensagens da caixa de entrada;
-            2.	O Sistema apresenta a lista mensagens da caixa de entrada; 
-            3.	O Sistema apresenta campo para listar planos pelo nome CU-A 14;
-            4.	O Sistema apresenta a opção de ver dados do plano CU-A 15;
-            5.	O Sistema apresenta a opção de cadastrar plano CU-A 17;
+            1.	O AAdministrador requisita verificar no Sistema a lista de Planos cadastrados;
+            2.	O Sistema apresenta a lista de Planos cadastrados;
+            3.	O Sistema apresenta campo para listar planos pelo nome CU-A 16;
+            4.	O Sistema apresenta a opção de ver dados do plano CU-A 17;
+            5.	O Sistema apresenta a opção de alterar os dados do plano CU-A 18;
+            6.  O Sistema apresenta a opção de cadastrar plano CU-A 19;
         * Fluxo Alternativo: 
-            1.	O Administrador informa o nome do plano no campo de pesquisa CU-A 14;
-            2.	O Sistema apresenta a lista de planos cadastrados pelo nome informa-do;
-            3.	O Sistema apresenta a opção de ver dados cadastrais da lista de planos cadastrados pelo nome informado CU-A 15;
-            4.	O Sistema apresenta a opção de cadastrar plano CU-A 17;
+            1.	O Administrador informa o nome do plano no campo de pesquisa CU-A 16;
+            2.	O Sistema apresenta a lista de planos cadastrados pelo nome informado;
+            3.	O Sistema apresenta a opção de ver dados cadastrais da lista de planos cadastrados pelo nome informado CU-A 17;
+            4.  O Sistema apresenta a opção de alterar os dados do plano CU-A 18;
+            4.	O Sistema apresenta a opção de cadastrar plano CU-A 19;
         * Pós-condições: O Administrador visualizou a lista de planos cadastrados;
 
 
-    1. CU-A 15 – Ver dados do Plano: O Administrador verifica os dados cadastrais do plano;
+    9.  CU-A 17 – Ver dados do Plano: O Administrador verifica os dados cadastrais do plano;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
-            2.	O Administrador listar planos cadastrados no Sistema CU-A 13;
+            2.	O Administrador listar planos cadastrados no Sistema CU-A 15;
         * Fluxo Principal:
             1.	O Administrador requisita verificar no Sistema os dados cadastrais do plano;
             2.	O Sistema apresenta os dados do plano (plano, valor, status e descrição);
-            3.	O Sistema apresenta a opção de alterar dados do plano CU-A 16;
+            3.	O Sistema apresenta a opção de alterar dados do plano CU-A 18;
         * Pós-condições: O Administrador visualizou os dados do plano;
 
 
-    1. CU-A 16 – Salvar alterações dos dados do Plano: O Administrador altera dados do plano;
+    10. CU-A 18 – Salvar alterações dos dados do Plano: O Administrador altera dados do plano;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
-            2.	O Administrador listar planos cadastrados no Sistema CU-A 13;
-            3.	O Administrador ver dados cadastrais do plano CU-A 15;
+            2.	O Administrador listar planos cadastrados no Sistema CU-A 15;
+            3.	O Administrador ver dados cadastrais do plano CU-A 17;
         * Fluxo Principal:
             1.	O Administrador requisita alterar dados cadastrais do plano;
             2.	O Sistema apresenta a tela de cadastro;
@@ -367,11 +411,11 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador alterou os dados do plano;
 
 
-    1. CU-A 17 – Cadastrar Plano: O Administrador cadastra plano;
+    11. CU-A 19 – Cadastrar Plano: O Administrador cadastra plano;
         * Ator Primário: Administrador;
         * Pré-condições: 
             1.	O Administrador estar logado no Sistema;
-            2.	O Administrador listar planos cadastrados no Sistema CU-A 13;
+            2.	O Administrador listar planos cadastrados no Sistema CU-A 15;
         * Fluxo Principal:
             1.	O Administrador requisita cadastrar plano;
             2.	O Sistema apresenta a tela de cadastro;
@@ -381,22 +425,22 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador cadastrou plano;
 
 
-    1. CU-A 18 – Listar mensagens na Caixa de Entrada: O Administrador lista as mensagens da caixa de entrada;
+    12. CU-A 20 – Listar mensagens na Caixa de Entrada: O Administrador lista as mensagens da caixa de entrada;
         * Ator Primário: Administrador;
         * Pré-condições: O Administrador estar logado no Sistema;
         * Fluxo Principal:
             1.	O Administrador requisita verificar no Sistema a lista de mensagens;
             2.	O Sistema apresenta a lista de mensagens da caixa de entrada;
-            3.	O Sistema apresenta a opção de ver conteúdo da mensagem CU-A 19;
-            4.	O Sistema apresenta a opção de responder mensagem CU-A 20;
-            5.	O Sistema apresenta a opção de excluir mensagem CU-A 21;
-            6.	O Sistema apresenta a opção de escrever mensagem CU-A 22;
-            7.	O Sistema apresenta a opção de listar mensagens enviadas CU-A 23;
-            8.	O Sistema apresenta a opção de listar mensagens excluídas CU-A 24;
+            3.	O Sistema apresenta a opção de ver conteúdo da mensagem CU-A 21;
+            4.	O Sistema apresenta a opção de responder mensagem CU-A 22;
+            5.	O Sistema apresenta a opção de excluir mensagem CU-A 23;
+            6.	O Sistema apresenta a opção de escrever mensagem CU-A 24;
+            7.	O Sistema apresenta a opção de listar mensagens enviadas CU-A 25;
+            8.	O Sistema apresenta a opção de listar mensagens excluídas CU-A 26;
         * Pós-condições: O Administrador visualizou as mensagens da caixa de entrada;
 
 
-    1. CU-A 19 – Ver conteúdo da mensagem: O Administrador visualiza o conteúdo da mensagem;
+    13. CU-A 21 – Ver conteúdo da mensagem: O Administrador visualiza o conteúdo da mensagem;
         * Ator Primário: Administrador;
         * Pré-condições:
             1.	O Administrador estar logado no Sistema;
@@ -404,12 +448,12 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Administrador requisita verificar o conteúdo da mensagem;
             2.	O Sistema apresenta tela com o conteúdo da mensagem;
-            3.	O Sistema apresenta a opção de responder mensagem CU-A 20; 
-            4.	O Sistema apresenta a opção de excluir mensagem CU-A 21;
+            3.	O Sistema apresenta a opção de responder mensagem CU-A 22; 
+            4.	O Sistema apresenta a opção de excluir mensagem CU-A 23;
         * Pós-condições: O Administrador visualizou as mensagens da caixa de entrada;
 
 
-    1. CU-A 20 – Responder mensagem: O Administrador responde à mensagem;
+    14. CU-A 22 – Responder mensagem: O Administrador responde à mensagem;
         * Ator Primário: Administrador;
         * Ator Secundário:
             1.	Nutricionista;
@@ -430,7 +474,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador respondeu uma mensagem;
 
 
-    1. CU-A 21 – Excluir mensagem: O Administrador exclui mensagem;
+    15. CU-A 23 – Excluir mensagem: O Administrador exclui mensagem;
         * Ator Primário: Administrador;
         * Pré-condições:
             1.	O Administrador estar logado no Sistema;
@@ -448,7 +492,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador excluiu mensagem;
 
 
-    1. CU-A 22 – Escrever mensagem: O Administrador escreve mensagem;
+    16. CU-A 24 – Escrever mensagem: O Administrador escreve mensagem;
         * Ator Primário: Administrador;
         * Ator Secundário:
             1.	Nutricionista;
@@ -468,7 +512,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Pós-condições: O Administrador enviou mensagem;
 
 
-    1. CU-A 23 – Listar Mensagens Enviadas: O Administrador lista mensagens enviadas;
+    17. CU-A 25 – Listar Mensagens Enviadas: O Administrador lista mensagens enviadas;
         * Ator Primário: Administrador;
         * Pré-condições:
             1.	O Administrador estar logado no Sistema;
@@ -476,11 +520,11 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Administrador requisita listar mensagens enviadas;
             2.	O Sistema apresenta a lista de mensagens enviadas;
-            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-A 19;
+            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-A 21;
         * Pós-condições: O Administrador listou mensagens enviadas;
 
 
-    1. CU-A 24 – Listar Mensagens Excluídas: O Administrador lista mensagens excluídas;
+    18. CU-A 26 – Listar Mensagens Excluídas: O Administrador lista mensagens excluídas;
         * Ator Primário: Administrador;
         * Pré-condições:
             1.	O Administrador estar logado no Sistema;
@@ -488,10 +532,10 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Administrador requisita listar mensagens excluídas;
             2.	O Sistema apresenta a lista de mensagens excluídas;
-            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-A 19;
+            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-A 21;
         * Pós-condições: O Administrador listou mensagens excluídas;
 
-1. Nutricionista
+2. Nutricionista
 
     1. CU-G 01 - Logar no Sistema: Nutricionista faz login no Sistema;
         * Ator Primário: Nutricionista;
@@ -507,7 +551,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista efetuou o login;
 
-    1. CU-G 04 – Redefinir Senha: Nutricionista redefini a senha de acesso ao Sistema;
+    2. CU-G 04 – Redefinir Senha: Nutricionista redefini a senha de acesso ao Sistema;
         * Ator Primário: Nutricionista;
         * Pré-condições: Nutricionista estar cadastrado para utilização do Sistema e não estar bloqueado;
         * Fluxo Principal:
@@ -518,7 +562,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             5.	Após definir a nova senha, o Nutricionista é direcionado para a tela de login – CU-G 01
         * Pós-condições: O Nutricionista redefiniu a senha;
 
-    1. CU-G 05 – Logout do Sistema: Nutricionista sai do Sistema;
+    3. CU-G 05 – Logout do Sistema: Nutricionista sai do Sistema;
         * Ator Primário: Nutricionista;
         * Pré-condições: Nutricionista estar logado no Sistema;
         * Fluxo Principal:
@@ -527,7 +571,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Nutricionista é direcionado para a página home do site;
         * Pós-condições: O Nutricionista efetuou o Logout;
 
-    1. CU-N 01 – Ver Perfil: Nutricionista ver perfil;
+    4. CU-N 01 – Ver Perfil: Nutricionista ver perfil;
         * Ator Primário: Nutricionista;
         * Pré-condições: Nutricionista estar logado no Sistema;
         * Fluxo Principal:
@@ -537,7 +581,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema apresenta a opção de alterar a senha CU-N 03;
         * Pós-condições: O Nutricionista verificou o perfil;
 
-    1. CU-N 02 – Salvar alterações dos dados do Perfil: O Nutricionista altera dados do perfil;
+    5. CU-N 02 – Salvar alterações dos dados do Perfil: O Nutricionista altera dados do perfil;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -549,7 +593,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista alterou os dados do perfil;
 
-    1. CU-N 03 – Alterar Senha: O Nutricionista altera a senha de acesso ao Sistema;
+    6. CU-N 03 – Alterar Senha: O Nutricionista altera a senha de acesso ao Sistema;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
         1.	O Nutricionista estar logado no Sistema;
@@ -561,7 +605,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista alterou a senha de acesso ao Sistema;
 
-    1. CU-N 04 – Listar Pacientes: O Nutricionista verifica a lista de Pacientes; 
+    7. CU-N 04 – Listar Pacientes: O Nutricionista verifica a lista de Pacientes; 
         * Ator Primário: Nutricionista;
         * Pré-condições: Nutricionista estar logado no Sistema;
         * Fluxo Principal:
@@ -575,7 +619,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção de ver dados do Paciente da lista de Pacientes cadastrados pelo nome informado CU-N 06;
         * Pós-condições: O Nutricionista visualizou a lista de Pacientes;
 
-    1. CU-N 06 – Ver dados do Paciente: O Nutricionista verifica os dados do Paciente;
+    8. CU-N 06 – Ver dados do Paciente: O Nutricionista verifica os dados do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -585,7 +629,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             2.	O Sistema apresenta os dados do Paciente (nome, objetivo, idade, altura, peso, medida do pescoço, medida da cintura, medida do quadril e IMC), ver histórico de dietas CU-N 07, ver detalhes da dieta CU-N 08, criar dieta CU-N 10 e ver histórico de medidas do Paciente CU-N 11;
         * Pós-condições: O Nutricionista visualizou os dados do Paciente;
 
-    1. CU-N 07 – Ver detalhes da dieta: O Nutricionista verifica o histórico de die-tas do Paciente;
+    9. CU-N 07 – Ver detalhes da dieta: O Nutricionista verifica o histórico de die-tas do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -603,7 +647,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             2.	O Sistema apresenta os detalhes da dieta;
         * Pós-condições: O Nutricionista visualizou detalhes da dieta do Paciente;
 
-    1. CU-N 08 – Incluir item na dieta: O Nutricionista inclui item na dieta atual do Paciente;
+    10. CU-N 08 – Incluir item na dieta: O Nutricionista inclui item na dieta atual do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -617,7 +661,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista incluiu item na dieta atual do Paciente;
 
-    1. CU-N 09 – Editar item na dieta: O Nutricionista edita item na dieta atual do Paciente;
+    11. CU-N 09 – Editar item na dieta: O Nutricionista edita item na dieta atual do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -630,7 +674,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista editou item na dieta atual do Paciente;
 
-    1. CU-N 10 – Excluir item na dieta: O Nutricionista exclui item na dieta atual do Paciente;
+    12. CU-N 10 – Excluir item na dieta: O Nutricionista exclui item na dieta atual do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -643,7 +687,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Nutricionista requisita salvar os dados alterados CU-N 11;
         * Pós-condições: O Nutricionista excluiu item na dieta atual do Paciente;
 
-    1. CU-N 11 – Salvar alterações na dieta: O Nutricionista salva alterações na dieta atual do Paciente;
+    13. CU-N 11 – Salvar alterações na dieta: O Nutricionista salva alterações na dieta atual do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -656,7 +700,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista salvou alterações na dieta atual do Paciente;
 
-    1. CU-N 12 – Criar Dieta: O Nutricionista cria dieta;
+    14. CU-N 12 – Criar Dieta: O Nutricionista cria dieta;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -676,7 +720,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção de salvar alterações na dieta CU-N 11;
         * Pós-condições: O Nutricionista criou dieta;
 
-    1. CU-N 13 – Ver histórico de medidas do Paciente: O Nutricionista verifica o histórico de medidas do Paciente;
+    15. CU-N 13 – Ver histórico de medidas do Paciente: O Nutricionista verifica o histórico de medidas do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -693,7 +737,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Nutricionista requisita ver histórico de medidas do IMC do Paciente CU-N 18;
         * Pós-condições: O Nutricionista visualizou o histórico de medidas do Pacien-te;
 
-    1. CU-N 19 – Gerar PDF do histórico de medidas do Paciente: O Nutricionista gera arquivo PDF com histórico de medidas do Paciente;
+    16. CU-N 19 – Gerar PDF do histórico de medidas do Paciente: O Nutricionista gera arquivo PDF com histórico de medidas do Paciente;
         * Ator Primário: Nutricionista;
         * Pré-condições: 
             1.	O Nutricionista estar logado no Sistema;
@@ -705,7 +749,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             2.	O Sistema gera arquivo em PDF com histórico de medidas do Pacien-te;
         * Pós-condições: O Nutricionista gerou arquivo PDF com histórico de medidas do Paciente;
 
-    1. CU-N 20 – Listar mensagens na Caixa de Entrada: O Nutricionista lista as mensagens da caixa de entrada;
+    17. CU-N 20 – Listar mensagens na Caixa de Entrada: O Nutricionista lista as mensagens da caixa de entrada;
         * Ator Primário: Nutricionista;
         * Pré-condições: O Nutricionista estar logado no Sistema;
         * Fluxo Principal:
@@ -719,7 +763,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             8.	O Sistema apresenta a opção de listar mensagens excluídas CU-N 26;
         * Pós-condições: O Nutricionista visualizou as mensagens da caixa de entra-da;
 
-    1. CU-N 21 – Ver conteúdo da mensagem: O Nutricionista visualiza o conteúdo da mensagem;
+    18. CU-N 21 – Ver conteúdo da mensagem: O Nutricionista visualiza o conteúdo da mensagem;
         * Ator Primário: Nutricionista;
         * Pré-condições:
             1.	O Nutricionista estar logado no Sistema;
@@ -731,7 +775,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema apresenta a opção de excluir mensagem CU-N 22;
         * Pós-condições: O Nutricionista visualizou as mensagens da caixa de entrada;
 
-    1. CU-N 22 – Responder mensagem: O Nutricionista responde à mensagem;
+    19. CU-N 22 – Responder mensagem: O Nutricionista responde à mensagem;
         * Ator Primário: Nutricionista;
         * Ator Secundário:
             1.	Administrador;
@@ -751,7 +795,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista respondeu uma mensagem;
 
-    1. CU-N 23 – Excluir mensagem: O Nutricionista exclui mensagem;
+    20. CU-N 23 – Excluir mensagem: O Nutricionista exclui mensagem;
         * Ator Primário: Nutricionista;
         * Pré-condições:
             1.	O Nutricionista estar logado no Sistema;
@@ -768,7 +812,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema fecha a tela de ver conteúdo da mensagem
         * Pós-condições: O Nutricionista excluiu mensagem;
 
-    1. CU-N 24 – Escrever mensagem: O Nutricionista escreve mensagem;
+    21. CU-N 24 – Escrever mensagem: O Nutricionista escreve mensagem;
         * Ator Primário: Nutricionista;
         * Ator Secundário:
             1.	Administrador;
@@ -787,7 +831,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Nutricionista enviou mensagem;
 
-    1. CU-N 25 – Listar Mensagens Enviadas: O Nutricionista lista mensagens enviadas;
+    22. CU-N 25 – Listar Mensagens Enviadas: O Nutricionista lista mensagens enviadas;
         * Ator Primário: Nutricionista;
         * Pré-condições:
             1.	O Nutricionista estar logado no Sistema;
@@ -798,7 +842,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-N 21;
         * Pós-condições: O Nutricionista listou mensagens enviadas;
 
-    1. CU-N 26 – Listar Mensagens Excluídas: O Nutricionista lista mensagens excluídas;
+    23. CU-N 26 – Listar Mensagens Excluídas: O Nutricionista lista mensagens excluídas;
         * Ator Primário: Nutricionista;
         * Pré-condições:
             1.	O Nutricionista estar logado no Sistema;
@@ -809,7 +853,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-N 21;
         * Pós-condições: O Nutricionista listou mensagens excluídas;
 
-1. Personal Trainer
+3. Personal Trainer
 
     1. CU-G 01 - Logar no Sistema: Personal Trainer faz login no Sistema;
         * Ator Primário: Personal Trainer;
@@ -825,7 +869,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Personal Trainer efetuou o login;
 
-    1. CU-G 04 – Redefinir Senha: Personal Trainer redefini a senha de acesso ao Sistema;
+    2. CU-G 04 – Redefinir Senha: Personal Trainer redefini a senha de acesso ao Sistema;
         * Ator Primário: Personal Trainer;
         * Pré-condições: Personal Trainer estar cadastrado para utilização do Sistema e não estar bloqueado;
         * Fluxo Principal:
@@ -836,7 +880,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             5.	Após definir a nova senha, o Personal Trainer é direcionado para a tela de login – CU-G 01
         * Pós-condições: O Personal Trainer redefiniu a senha;
 
-    1. CU-G 05 – Logout do Sistema: Personal Trainer sai do Sistema;
+    3. CU-G 05 – Logout do Sistema: Personal Trainer sai do Sistema;
         * Ator Primário: Personal Trainer;
         * Pré-condições: Personal Trainer estar logado no Sistema;
         * Fluxo Principal:
@@ -845,7 +889,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Personal Trainer é direcionado para a página home do site;
         * Pós-condições: O Personal Trainer efetuou o Logout;
 
-    1. CU-P 01 – Ver Perfil: Personal Trainer ver perfil;
+    4. CU-P 01 – Ver Perfil: Personal Trainer ver perfil;
         * Ator Primário: Personal Trainer;
         * Pré-condições: Personal Trainer estar logado no Sistema;
         * Fluxo Principal:
@@ -855,7 +899,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema apresenta a opção de alterar a senha CU-P 03;
         * Pós-condições: O Personal Trainer verificou o perfil;
 
-    1. CU-P 02 – Salvar alterações dos dados do Perfil: O Personal Trainer altera dados do perfil;
+    5. CU-P 02 – Salvar alterações dos dados do Perfil: O Personal Trainer altera dados do perfil;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -867,7 +911,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Personal Trainer alterou os dados do perfil;
 
-    1. CU-P 03 – Alterar Senha: O Personal Trainer altera a senha de acesso ao Sistema;
+    6. CU-P 03 – Alterar Senha: O Personal Trainer altera a senha de acesso ao Sistema;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -879,7 +923,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Personal Trainer alterou a senha de acesso ao Sistema;
 
-    1. CU-P 04 – Listar Alunos: O Personal Trainer verifica a lista de Alunos; 
+    7. CU-P 04 – Listar Alunos: O Personal Trainer verifica a lista de Alunos; 
         * Ator Primário: Personal Trainer;
         * Pré-condições: Personal Trainer estar logado no Sistema;
         * Fluxo Principal:
@@ -893,7 +937,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção de ver dados do Aluno da lista de Alunos cadastrados pelo nome informado CU-P 06;
         * Pós-condições: O Personal Trainer visualizou a lista de Alunos;
 
-    1. CU-P 06 – Ver dados do Aluno: O Personal Trainer verifica os dados do Aluno;
+    8. CU-P 06 – Ver dados do Aluno: O Personal Trainer verifica os dados do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -903,7 +947,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             2.	O Sistema apresenta os dados do Aluno (nome, objetivo, idade, altura, peso, medida do pescoço, medida da cintura, medida do quadril e IMC), ver histórico de treinos CU-P 07, ver detalhes do treino CU-P 08, criar treino CU-P 10 e ver histórico de medidas do Aluno CU-P 11;
         * Pós-condições: O Personal Trainer visualizou os dados do Aluno;
 
-    1. CU-P 07 – Ver detalhes do treino: O Personal Trainer verifica o histórico de treinos do Aluno;
+    9. CU-P 07 – Ver detalhes do treino: O Personal Trainer verifica o histórico de treinos do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -912,16 +956,16 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Personal Trainer requisita ver detalhes no treino atual do Aluno;
             2.	O Sistema apresenta os detalhes do treino atual do Aluno;
-            3.	O Sistema apresenta opção de incluir item no treino atual do Aluno CU-P 08;
-            4.	O Sistema apresenta opção de editar item existente no treino atual do Aluno CU-P 09;
-            5.	O Sistema apresenta opção de excluir item no treino atual do Aluno CU-P 10;
+            3.	O Sistema apresenta opção de incluir exercício no treino atual do Aluno CU-P 08;
+            4.	O Sistema apresenta opção de editar exercício  existente no treino atual do Aluno CU-P 09;
+            5.	O Sistema apresenta opção de excluir exercício  no treino atual do Aluno CU-P 10;
             6.	O Sistema apresenta a opção de salvar alterações no treino atual do Aluno CU-P 11
         * Fluxo Alternativo:
             1.	O Personal Trainer requisita ver detalhes do treino no histórico de treinos do Aluno apresentado pelo Sistema;
             2.	O Sistema apresenta os detalhes do treino;
         * Pós-condições: O Personal Trainer visualizou detalhes do treino do Aluno;
 
-    1. CU-P 08 – Incluir item no treino: O Personal Trainer inclui item no treino atual do Aluno;
+    10. CU-P 08 – Incluir exercício no treino: O Personal Trainer inclui exercício  no treino atual do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -929,13 +973,13 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Personal Trainer ver dados do Aluno CU-P 06;
             4.	O Personal Trainer ver detalhes do treino atual do Aluno CU-P 07;
         * Fluxo Principal:
-            1.	O Personal Trainer requisita incluir item no treino atual do Aluno;
-            2.	O Sistema apresenta caixa de texto para a descrição do item;
-            3.	O Personal Trainer fornece a descrição do item e requisita salvar os dados alterados CU-P 11;
+            1.	O Personal Trainer requisita incluir exercício  no treino atual do Aluno;
+            2.	O Sistema apresenta caixa de texto para a descrição do exercício;
+            3.	O Personal Trainer fornece a descrição do exercício e requisita salvar os dados alterados CU-P 11;
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
-        * Pós-condições: O Personal Trainer incluiu item no treino atual do Aluno;
+        * Pós-condições: O Personal Trainer incluiu exercício no treino atual do Aluno;
 
-    1. CU-P 09 – Editar item no treino: O Personal Trainer edita item no treino atual do Aluno;
+    11. CU-P 09 – Editar exercício no treino: O Personal Trainer edita exercício no treino atual do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -943,12 +987,12 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Personal Trainer ver dados do Aluno CU-P 06;
             4.	O Personal Trainer ver detalhes do treino atual do Aluno CU-P 07;
         * Fluxo Principal:
-            1.	O Personal Trainer requisita no item do treino atual do Aluno para edi-tar a descrição;
-            2.	O Personal Trainer fornece a descrição do item e requisita salvar os dados alterados CU-P 11;
+            1.	O Personal Trainer requisita no exercício do treino atual do Aluno para editar a descrição;
+            2.	O Personal Trainer fornece a descrição do exercício e requisita salvar os dados alterados CU-P 11;
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
-        * Pós-condições: O Personal Trainer editou item no treino atual do Aluno;
+        * Pós-condições: O Personal Trainer editou exercício no treino atual do Aluno;
 
-    1. CU-P 10 – Excluir item no treino: O Personal Trainer exclui item no treino atual do Aluno;
+    12. CU-P 10 – Excluir exercício no treino: O Personal Trainer exclui item no treino atual do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -956,12 +1000,12 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Personal Trainer ver dados do Aluno CU-P 06;
             4.	O Personal Trainer ver detalhes do treino atual do Aluno CU-P 07;
         * Fluxo Principal:
-            1.	O Personal Trainer requisita excluir item do treino atual do Aluno;
-            2.	O Sistema exclui o item;
+            1.	O Personal Trainer requisita excluir exercício do treino atual do Aluno;
+            2.	O Sistema exclui o exercício;
             3.	O Personal Trainer requisita salvar os dados alterados CU-P 11;
-        * Pós-condições: O Personal Trainer excluiu item no treino atual do Aluno;
+        * Pós-condições: O Personal Trainer excluiu exercício no treino atual do Aluno;
 
-    1. CU-P 11 – Salvar alterações no treino: O Personal Trainer salva alterações no treino atual do Aluno;
+    13. CU-P 11 – Salvar alterações no treino: O Personal Trainer salva alterações no treino atual do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -974,7 +1018,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Personal Trainer salvou alterações no treino atual do Aluno;
 
-    1. CU-N 12 – Criar Treino: O Personal Trainer cria treino;
+    14. CU-P 12 – Criar Treino: O Personal Trainer cria treino;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -984,17 +1028,17 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             1.	O Personal Trainer requisita criar treino;
             2.	O Sistema apresenta a tela de cadastro de treino;
             3.	O Personal Trainer fornece os dados solicitados (nome do treino, data de início e fim, objetivo);
-            4.	O Sistema apresenta a opção de incluir item no treino CU-P 08;
-            5.	O Sistema apresenta a opção de editar item no treino CU-P 09;
-            6.	O Sistema apresenta a opção de excluir item no treino CU-P 10;
+            4.	O Sistema apresenta a opção de incluir exercício no treino CU-P 08;
+            5.	O Sistema apresenta a opção de editar exercício no treino CU-P 09;
+            6.	O Sistema apresenta a opção de excluir exercício no treino CU-P 10;
             7.	O Sistema apresenta a opção de salvar alterações no treino CU-P 11;
         * Fluxo de Alternativo: 
-            1.	O Sistema apresenta a opção de editar item no treino CU-P 09;
-            2.	O Sistema apresenta a opção de excluir item no treino CU-P 10;
+            1.	O Sistema apresenta a opção de editar exercício no treino CU-P 09;
+            2.	O Sistema apresenta a opção de excluir exercício no treino CU-P 10;
             3.	O Sistema apresenta a opção de salvar alterações no treino CU-P 11;
         * Pós-condições: O Personal Trainer criou treino;
 
-    1. CU-P 13 – Ver histórico de medidas do Aluno: O Personal Trainer verifica o histórico de medidas do Aluno;
+    15. CU-P 13 – Ver histórico de medidas do Aluno: O Personal Trainer verifica o histórico de medidas do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -1011,7 +1055,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Personal Trainer requisita ver histórico de medidas do IMC do Aluno CU-P 18;
         * Pós-condições: O Personal Trainer visualizou o histórico de medidas do Aluno;
 
-    1. CU-P 19 – Gerar PDF do histórico de medidas do Aluno: O Personal Trainer gera arquivo PDF com histórico de medidas do Aluno;
+    16. CU-P 19 – Gerar PDF do histórico de medidas do Aluno: O Personal Trainer gera arquivo PDF com histórico de medidas do Aluno;
         * Ator Primário: Personal Trainer;
         * Pré-condições: 
             1.	O Personal Trainer estar logado no Sistema;
@@ -1023,7 +1067,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             2.	O Sistema gera arquivo em PDF com histórico de medidas do Aluno;
         * Pós-condições: O Personal Trainer gerou arquivo PDF com histórico de medidas do Aluno;
 
-    1. CU-P 20 – Listar mensagens na Caixa de Entrada: O Personal Trainer lista as mensagens da caixa de entrada;
+    17. CU-P 20 – Listar mensagens na Caixa de Entrada: O Personal Trainer lista as mensagens da caixa de entrada;
         * Ator Primário: Personal Trainer;
         * Pré-condições: O Personal Trainer estar logado no Sistema;
         * Fluxo Principal:
@@ -1037,7 +1081,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             8.	O Sistema apresenta a opção de listar mensagens excluídas CU-P 26;
         * Pós-condições: O Personal Trainer visualizou as mensagens da caixa de entrada;
 
-    1. CU-P 21 – Ver conteúdo da mensagem: O Personal Trainer visualiza o con-teúdo da mensagem;
+    18. CU-P 21 – Ver conteúdo da mensagem: O Personal Trainer visualiza o con-teúdo da mensagem;
         * Ator Primário: Personal Trainer;
         * Pré-condições:
             1.	O Personal Trainer estar logado no Sistema;
@@ -1049,7 +1093,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema apresenta a opção de excluir mensagem CU-P 22;
         * Pós-condições: O Personal Trainer visualizou as mensagens da caixa de entrada;
 
-    1. CU-P 22 – Responder mensagem: O Personal Trainer responde à mensagem;
+    19. CU-P 22 – Responder mensagem: O Personal Trainer responde à mensagem;
         * Ator Primário: Personal Trainer;
         * Ator Secundário:
             1.	Administrador;
@@ -1069,7 +1113,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Personal Trainer respondeu uma mensagem;
 
-    1. CU-P 23 – Excluir mensagem: O Personal Trainer exclui mensagem;
+    20. CU-P 23 – Excluir mensagem: O Personal Trainer exclui mensagem;
         * Ator Primário: Personal Trainer;
         * Pré-condições:
             1.	O Personal Trainer estar logado no Sistema;
@@ -1086,7 +1130,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema fecha a tela de ver conteúdo da mensagem
         * Pós-condições: O Personal Trainer excluiu mensagem;
 
-    1. CU-P 24 – Escrever mensagem: O Personal Trainer escreve mensagem;
+    21. CU-P 24 – Escrever mensagem: O Personal Trainer escreve mensagem;
         * Ator Primário: Personal Trainer;
         * Ator Secundário:
             1.	Administrador;
@@ -1105,7 +1149,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * 0Pós-condições: O Personal Trainer enviou mensagem;
 
-    1. CU-P 25 – Listar Mensagens Enviadas: O Personal Trainer lista mensagens enviadas;
+    22. CU-P 25 – Listar Mensagens Enviadas: O Personal Trainer lista mensagens enviadas;
         * Ator Primário: Personal Trainer;
         * Pré-condições:
             1.	O Personal Trainer estar logado no Sistema;
@@ -1116,7 +1160,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-P 21;
         * Pós-condições: O Personal Trainer listou mensagens enviadas;
 
-    1. CU-P 26 – Listar Mensagens Excluídas: O Personal Trainer lista mensa-gens excluídas;
+    23. CU-P 26 – Listar Mensagens Excluídas: O Personal Trainer lista mensa-gens excluídas;
         * Ator Primário: Personal Trainer;
         * Pré-condições:
             1.	O Personal Trainer estar logado no Sistema;
@@ -1127,7 +1171,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-P 21;
         * Pós-condições: O Personal Trainer listou mensagens excluídas;
 
-1. Assinante
+4. Assinante
 
     1. CU-G 01 - Logar no Sistema: Assinante faz login no Sistema;
         * Ator Primário: Assinante;
@@ -1143,7 +1187,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de Exceção: Caso a senha ou login estejam incorretos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Assinante efetuou o login;
 
-    1. CU-G 04 – Redefinir Senha: Assinante redefini a senha de acesso ao Sistema;
+    2. CU-G 04 – Redefinir Senha: Assinante redefini a senha de acesso ao Sistema;
         * Ator Primário: Assinante;
         * Pré-condições: Assinante estar cadastrado para utilização do Sistema e não estar bloqueado;
         * Fluxo Principal:
@@ -1154,7 +1198,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             5.	Após definir a nova senha, o Assinante é direcionado para a tela de login – CU-G 01
         * Pós-condições: O Assinante redefiniu a senha;
 
-    1. CU-G 05 – Logout do Sistema: Assinante sai do Sistema;
+    3. CU-G 05 – Logout do Sistema: Assinante sai do Sistema;
         * Ator Primário: Assinante;
         * Pré-condições: Assinante estar logado no Sistema;
         * Fluxo Principal:
@@ -1163,7 +1207,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             3.	O Assinante é direcionado para a página home do site;
         * Pós-condições: O Assinante efetuou o Logout;
 
-    1. CU-G 06 – Registrar novo Assinante: O Assinante registra-se no sistema;
+    4. CU-G 06 – Registrar novo Assinante: O Assinante registra-se no sistema;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1. O Assinante estar no site;
@@ -1181,33 +1225,33 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             2.	Caso já exista cadastro para o e-mail informado, o Sistema apresenta mensagem de erro;
         * Pós-condições: O Assinante registrou-se no Sistema;
 
-    1. CU-U 01 – Ver Perfil: Assinante ver perfil;
+    5. CU-AS 01 – Ver Perfil: Assinante ver perfil;
         * Ator Primário: Assinante;
         * Pré-condições: Assinante estar logado no Sistema;
         * Fluxo Principal:
             1.	O Assinante requisita ver perfil;
             2.	O Sistema apresente a tela de perfil do Assinante;
-            3.	O Sistema apresenta a opção de salvar alterações do perfil CU-U 02;
-            4.	O Sistema apresenta a opção de alterar a senha CU-U 03;
+            3.	O Sistema apresenta a opção de salvar alterações do perfil CU-AS 02;
+            4.	O Sistema apresenta a opção de alterar a senha CU-AS 03;
         * Pós-condições: O Assinante verificou o perfil;
 
-    1. CU-U 02 – Salvar alterações dos dados do Perfil: O Assinante altera dados do perfil;
+    6. CU-AS 02 – Salvar alterações dos dados do Perfil: O Assinante altera dados do perfil;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
-            2.	O Assinante ver perfil CU-U 01;
+            2.	O Assinante ver perfil CU-AS 01;
         * Fluxo Principal:
             1.	O Assinante fornece os dados a serem alterados (nome, data de nascimento, sexo, altura);
             2.	O Assinante requisita salvar as alterações;
-            3.	O Sistema faz a validação dos dados inseridos e, se forem válidos, altera-os;
+            3.	O Sistema faz a validação dos dados inseridos e, se forem válidos, altera os;
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Assinante alterou os dados do perfil;
 
-    1. CU-U 03 – Alterar Senha: O Assinante altera a senha de acesso ao Sistema;
+    7. CU-AS 03 – Alterar Senha: O Assinante altera a senha de acesso ao Sistema;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
-            2.	O Assinante ver perfil CU-U 01;
+            2.	O Assinante ver perfil CU-AS 01;
         * Fluxo Principal:
             1.	O Assinante fornece a senha atual e a nova senha;
             2.	O Assinante requisita alterar senha;
@@ -1215,88 +1259,88 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Assinante alterou a senha de acesso ao Sistema;
 
-    1. CU-U 04 – Ver Plano: O Assinante verifica os dados do plano;
+    8. CU-AS 04 – Ver Plano: O Assinante verifica os dados do plano;
     * Ator Primário: Assinante;
     * Pré-condições: 
         1.	O Assinante estar logado no Sistema;
-        2.	O Assinante ver perfil CU-U 01;
+        2.	O Assinante ver perfil CU-AS 01;
     * Fluxo Principal:
         1.	O Assinante requisita verificar os dados do plano;
         2.	O Sistema apresenta os dados do plano (plano, valor, início e fim);
-        3.	O Sistema apresenta a opção de cancelar plano CU-U 05 e a opção de alterar plano CU-U 06;
+        3.	O Sistema apresenta a opção de cancelar plano CU-AS 05 e a opção de alterar plano CU-AS 06;
     * Pós-condições: O Assinante visualizou os dados do plano;
     
-    1. CU-U 05 – Cancelar Plano: O Assinante cancela o plano;
+    1. CU-AS 05 – Cancelar Plano: O Assinante cancela o plano;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
-            2.	O Assinante ver perfil CU-U 01;
-            3.	O Assinante ver dados do Plano CU-U 04;
+            2.	O Assinante ver perfil CU-AS 01;
+            3.	O Assinante ver dados do Plano CU-AS 04;
         * Fluxo Principal:
             1.	O Assinante requisita cancelar plano;
             2.	O Sistema bloqueia e faz logout do Assinante;
         * Pós-condições: O Assinante cancelou o plano;
 
-    1. CU-U 06 – Alterar Plano: O Assinante Altera o plano;
+    2. CU-AS 06 – Alterar Plano: O Assinante Altera o plano;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
-            2.	O Assinante ver perfil CU-U 01;
-            3.	O Assinante ver dados do Plano CU-U 04;
+            2.	O Assinante ver perfil CU-AS 01;
+            3.	O Assinante ver dados do Plano CU-AS 04;
         * Fluxo Principal:
             1.	O Assinante requisita alterar plano;
             2.	O Sistema altera o plano do Assinante;
         * Pós-condições: O Assinante alterou o plano;
 
-    1. CU-U 07 – Ver Nutricionista: O Assinante verifica os dados do seu Nutricionista;
+    3. CU-AS 07 – Ver Nutricionista: O Assinante verifica os dados do seu Nutricionista;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
-            2.	O Assinante ver perfil CU-U 01;
+            2.	O Assinante ver perfil CU-AS 01;
         * Fluxo Principal:
             1.	O Assinante requisita verificar os dados do seu Nutricionista;
             2.	O Sistema apresenta os dados do Nutricionista (nome e descrição);
         * Pós-condições: O Assinante visualizou os dados do seu Nutricionista;
 
-    1. CU-U 08 – Ver Personal Trainer: O Assinante verifica os dados do seu Personal Trainer;
+    4. CU-AS 08 – Ver Personal Trainer: O Assinante verifica os dados do seu Personal Trainer;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema; 
-            2.	O Assinante ver perfil CU-U 01;
+            2.	O Assinante ver perfil CU-AS 01;
         * Fluxo Principal:
             1.	O Assinante requisita verificar os dados do seu Personal Trainer;
             2.	O Sistema apresenta os dados do Personal Trainer (nome e descrição);
         * Pós-condições: O Assinante visualizou os dados do seu Personal Trainer;
 
-    1. CU-U 09 – Listar Dietas: O Assinante verifica a lista de Dietas; 
+    5. CU-AS 09 – Listar Dietas: O Assinante verifica a lista de Dietas; 
         * Ator Primário: Assinante;
         * Pré-condições: Assinante estar logado no Sistema;
         * Fluxo Principal:
             1.	O Assinante requisita verificar lista de dietas;
             2.	O Sistema apresenta a lista de dietas; 
-            3.	O Sistema apresenta campo para listar dieta pelo nome CU-U 10;
-            4.	O Sistema apresenta a opção de ver detalhe da dieta CU-U 11;
+            3.	O Sistema apresenta campo para listar dieta pelo nome CU-AS 10;
+            4.	O Sistema apresenta a opção de ver detalhe da dieta CU-AS 11;
         * Fluxo Alternativo: 
-            1.	O Nutricionista informa o nome da dieta no campo de pesquisa CU-U 10;
+            1.	O Nutricionista informa o nome da dieta no campo de pesquisa CU-AS 10;
             2.	O Sistema apresenta a lista de dietas pelo nome informado;
-            3.	O Sistema apresenta a opção de ver detalhe da dieta da lista de dietas cadastradas pelo nome informado CU-U 11;
+            3.	O Sistema apresenta a opção de ver detalhe da dieta da lista de dietas cadastradas pelo nome informado CU-AS 11;
         * Pós-condições: O Assinante visualizou a lista de dietas;
 
-    1. CU-U 12 – Listar Treinos: O Assinante verifica a lista de Treinos; 
+    6. CU-AS 12 – Listar Treinos: O Assinante verifica a lista de Treinos; 
         * Ator Primário: Assinante;
         * Pré-condições: Assinante estar logado no Sistema;
         * Fluxo Principal:
             1.	O Assinante requisita verificar lista de treinos;
             2.	O Sistema apresenta a lista de treinos; 
-            3.	O Sistema apresenta campo para listar treino pelo nome CU-U 13;
-            4.	O Sistema apresenta a opção de ver detalhe do treino CU-U 14;
+            3.	O Sistema apresenta campo para listar treino pelo nome CU-AS 13;
+            4.	O Sistema apresenta a opção de ver detalhe do treino CU-AS 14;
         * Fluxo Alternativo: 
-            1.	O Assinante informa o nome do treino no campo de pesquisa CU-U 13;
+            1.	O Assinante informa o nome do treino no campo de pesquisa CU-AS 13;
             2.	O Sistema apresenta a lista de treinos pelo nome informado;
-            3.	O Sistema apresenta a opção de ver detalhe do treino da lista de trei-nos cadastrados pelo nome informado CU-U 14;
+            3.	O Sistema apresenta a opção de ver detalhe do treino da lista de trei-nos cadastrados pelo nome informado CU-AS 14;
         * Pós-condições: O Assinante visualizou a lista de treinos;
 
-    1. CU-U 15 – Salvar Medidas: O Assinante salva medidas; 
+    7. CU-AS 15 – Salvar Medidas: O Assinante salva medidas; 
         * Ator Primário: Assinante;
         * Pré-condições: Assinante estar logado no Sistema;
         * Fluxo Principal:
@@ -1307,46 +1351,46 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Assinante visualizou a lista de dietas;
 
-    1. CU-U 16 – Ver histórico de medidas: O Assinante verifica o histórico de medidas;
+    8. CU-AS 16 – Ver histórico de medidas: O Assinante verifica o histórico de medidas;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
         * Fluxo Principal:
             1.	O Assinante requisita ver histórico de medidas;
-            2.	O Sistema apresenta o gráfico com histórico de medidas de peso CU-U 17;
-            3.	O Sistema apresenta a opção de gerar arquivo PDF com histórico de medidas CU-U 22;
+            2.	O Sistema apresenta o gráfico com histórico de medidas de peso CU-AS 17;
+            3.	O Sistema apresenta a opção de gerar arquivo PDF com histórico de medidas CU-AS 22;
         * Fluxo Alternativo:
-            1.	O Assinante requisita ver histórico de medidas do pescoço CU-U 18;
-            2.	O Assinante requisita ver histórico de medidas da cintura CU-U 19;
-            3.	O Assinante requisita ver histórico de medidas do quadril CU-U 20;
-            4.	O Assinante requisita ver histórico de medidas do IMC CU-U 21;
+            1.	O Assinante requisita ver histórico de medidas do pescoço CU-AS 18;
+            2.	O Assinante requisita ver histórico de medidas da cintura CU-AS 19;
+            3.	O Assinante requisita ver histórico de medidas do quadril CU-AS 20;
+            4.	O Assinante requisita ver histórico de medidas do IMC CU-AS 21;
         * Pós-condições: O Assinante visualizou o histórico de medidas;
 
-    1. CU-U 22 – Gerar PDF do histórico de medidas: O Assinante gera arquivo PDF com histórico de medidas;
+    9. CU-AS 22 – Gerar PDF do histórico de medidas: O Assinante gera arquivo PDF com histórico de medidas;
         * Ator Primário: Assinante;
         * Pré-condições: 
             1.	O Assinante estar logado no Sistema;
-            2.	O Assinante ver histórico de medidas CU-U 16;
+            2.	O Assinante ver histórico de medidas CU-AS 16;
         * Fluxo Principal:
             1.	O Assinante requisita gerar arquivo PDF com histórico de medidas;
             2.	O Sistema gera arquivo em PDF com histórico de medidas;
         * Pós-condições: O Assinante gerou arquivo PDF com histórico de medidas;
 
-    1. CU-U 23 – Listar mensagens na Caixa de Entrada: O Assinante lista as mensagens da caixa de entrada;
+    10. CU-AS 23 – Listar mensagens na Caixa de Entrada: O Assinante lista as mensagens da caixa de entrada;
         * Ator Primário: Assinante;
         * Pré-condições: O Assinante estar logado no Sistema;
         * Fluxo Principal:
             1.	O Assinante requisita verificar a lista de mensagens;
             2.	O Sistema apresenta a lista de mensagens da caixa de entrada;
-            3.	O Sistema apresenta a opção de ver conteúdo da mensagem CU-U 24;
-            4.	O Sistema apresenta a opção de responder mensagem CU- 25;
-            5.	O Sistema apresenta a opção de excluir mensagem CU-U 26;
-            6.	O Sistema apresenta a opção de escrever mensagem CU-U 27;
-            7.	O Sistema apresenta a opção de listar mensagens enviadas CU-U 28;
-            8.	O Sistema apresenta a opção de listar mensagens excluídas CU-U 29;
+            3.	O Sistema apresenta a opção de ver conteúdo da mensagem CU-AS 24;
+            4.	O Sistema apresenta a opção de responder mensagem CU-AS 25;
+            5.	O Sistema apresenta a opção de excluir mensagem CU-AS 26;
+            6.	O Sistema apresenta a opção de escrever mensagem CU-AS 27;
+            7.	O Sistema apresenta a opção de listar mensagens enviadas CU-AS 28;
+            8.	O Sistema apresenta a opção de listar mensagens excluídas CU-AS 29;
         * Pós-condições: O Assinante visualizou as mensagens da caixa de entrada;
 
-    1. CU-U 24 – Ver conteúdo da mensagem: O Assinante visualiza o conteúdo da mensagem;
+    11. CU-AS 24 – Ver conteúdo da mensagem: O Assinante visualiza o conteúdo da mensagem;
         * Ator Primário: Assinante;
         * Pré-condições:
             1.	O Assinante estar logado no Sistema;
@@ -1354,11 +1398,11 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Assinante requisita verificar o conteúdo da mensagem;
             2.	O Sistema apresenta tela com o conteúdo da mensagem;
-            3.	O Sistema apresenta a opção de responder mensagem CU-U 25; 
-            4.	O Sistema apresenta a opção de excluir mensagem CU-U 26;
+            3.	O Sistema apresenta a opção de responder mensagem CU-AS 25; 
+            4.	O Sistema apresenta a opção de excluir mensagem CU-AS 26;
         * Pós-condições: O Assinante visualizou as mensagens da caixa de entrada;
 
-    1. CU-U 25 – Responder mensagem: O Assinante responde à mensagem;
+    12. CU-AS 25 – Responder mensagem: O Assinante responde à mensagem;
         * Ator Primário: Assinante;
         * Ator Secundário:
             1.	Administrador;
@@ -1378,7 +1422,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Assinante respondeu uma mensagem;
 
-    1. CU-U 26 – Excluir mensagem: O Assinante exclui mensagem;
+    13. CU-AS 26 – Excluir mensagem: O Assinante exclui mensagem;
         * Ator Primário: Assinante;
         * Pré-condições:
             1.	O Assinante estar logado no Sistema;
@@ -1395,7 +1439,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             4.	O Sistema fecha a tela de ver conteúdo da mensagem
         * Pós-condições: O Assinante excluiu mensagem;
 
-    1. CU-U 27 – Escrever mensagem: O Assinante escreve mensagem;
+    14. CU-AS 27 – Escrever mensagem: O Assinante escreve mensagem;
         * Ator Primário: Assinante;
         * Ator Secundário:
             1.	Administrador;
@@ -1414,7 +1458,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo de exceção: Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
         * Pós-condições: O Assinante enviou mensagem;
 
-    1. CU-U 28 – Listar Mensagens Enviadas: O Assinante lista mensagens enviadas;
+    15. CU-AS 28 – Listar Mensagens Enviadas: O Assinante lista mensagens enviadas;
         * Ator Primário: Assinante;
         * Pré-condições:
             1.	O Assinante estar logado no Sistema;
@@ -1422,10 +1466,10 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Assinante requisita listar mensagens enviadas;
             2.	O Sistema apresenta a lista de mensagens enviadas;
-            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-U 24;
+            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-AS 24;
         * Pós-condições: O Assinante listou mensagens enviadas;
 
-    1. CU-U 29 – Listar Mensagens Excluídas: O Assinante lista mensagens excluídas;
+    16. CU-AS 29 – Listar Mensagens Excluídas: O Assinante lista mensagens excluídas;
         * Ator Primário: Assinante;
         * Pré-condições:
             1.	O Assinante estar logado no Sistema;
@@ -1433,7 +1477,7 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
         * Fluxo Principal:
             1.	O Assinante requisita listar mensagens excluídas;
             2.	O Sistema apresenta a lista de mensagens excluídas;
-            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-U 24;
+            3.	O Sistema apresenta a opção e ver conteúdo da mensagem CU-AS 24;
         * Pós-condições: O Assinante listou mensagens excluídas;
 
 

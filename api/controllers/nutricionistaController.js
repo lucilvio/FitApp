@@ -76,7 +76,7 @@ function buscarNutricionistas(req, res) {
 
 
 }
-
+//alterardadosnutricionista
 function alterarStatusNutricionista(req, res) {
     const id = req.params.id;
     const nutricionista = repositorioDeNutricionistas.buscarNutriPorId(id);

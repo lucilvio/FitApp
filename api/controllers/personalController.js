@@ -79,7 +79,8 @@ function alterarStatusPersonal(req, res) {
     const personal = repositorioDePersonal.buscarPersonalPorId(id);
 
     if (!personal) {
-        res.status(404).send({ erro: "Não encontrado" })
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
     }
 
     const novoStatus = req.body.bloqueado;

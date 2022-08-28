@@ -15,3 +15,4 @@ servidor.app.get('/personal', personalController.buscarPersonal);
 servidor.app.patch('/personal/:id', personalController.alterarStatusPersonal);
 servidor.app.post('/plano', planoController.cadastrarPlano);
 servidor.app.get('/plano', planoController.buscarPlanos);
+servidor.app.patch('/plano/:id', planoController.alterarPlano);

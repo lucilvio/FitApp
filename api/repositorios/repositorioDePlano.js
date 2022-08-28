@@ -4,6 +4,10 @@ function salvarDadosDoPlano(novoPlano) {
     base.dados.planos.push(novoPlano);
 }
 
+function buscarPlanosPorNome(nome) {
+    return base.dados.planos.find(plano => plano.nome.toLowerCase() == nome.toLowerCase());
+}
+
 function buscarPlanosPorFiltro(nome) {
     if(!nome) {
         return base.dados.planos;
@@ -13,7 +17,13 @@ function buscarPlanosPorFiltro(nome) {
     }
 }
 
+function buscarPlanoPorId(id) {
+    return base.dados.planos.find(plano => plano.id == id);
+}
+
 module.exports = {
     salvarDadosDoPlano: salvarDadosDoPlano,
-    buscarPlanosPorFiltro: buscarPlanosPorFiltro
+    buscarPlanosPorNome: buscarPlanosPorNome,
+    buscarPlanosPorFiltro: buscarPlanosPorFiltro,
+    buscarPlanoPorId: buscarPlanoPorId
 }
