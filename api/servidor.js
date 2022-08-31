@@ -32,6 +32,11 @@ app.use((req, res, next) => {
         return;
     }
 
+    if(req.url == "/assinante" && req.method == "POST"){
+        next();
+        return;
+    }
+
     if (!req.headers.authorization) {
         res.status(401).send("Não autorizado");
         return;

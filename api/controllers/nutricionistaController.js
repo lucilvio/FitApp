@@ -70,8 +70,7 @@ function cadastrarNutricionista(req, res) {
 }
 
 function buscarNutricionistas(req, res) {
-    const nome = req.query.nome;
-    let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(nome);
+    let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
 
 
     res.send(nutricionistas.map(function (nutri) {

@@ -55,7 +55,7 @@ function buscarPlanos(req, res) {
 }
 
 function buscarPlanoPorId(req, res) {
-    let planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
+    let planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.id);
 
     if(!planoEncontrado) {
         res.status(404).send({ erro: "Não encontrado"});

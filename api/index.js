@@ -20,3 +20,5 @@ servidor.app.get('/plano', planoController.buscarPlanos);
 servidor.app.get('/plano/:id', planoController.buscarPlanoPorId);
 servidor.app.patch('/plano/:id', planoController.alterarPlano);
 servidor.app.post('/assinante', assinanteController.cadastrarAssinante);
+servidor.app.get('/assinante', assinanteController.buscarAssinantes);
+servidor.app.patch('/assinante/:id', assinanteController.alterarStatusDoAssinante);

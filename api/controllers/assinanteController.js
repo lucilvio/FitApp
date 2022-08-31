@@ -1,6 +1,9 @@
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes.js');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
 const crypto = require('crypto');
+const geradorDeSenha = require('generate-password');
+const servicoDeEmail = require('../servicos/servicoDeEmail.js');
+const servicoDeMensagens = require('../servicos/servicoDeMensagens.js');
 
 function cadastrarAssinante(req, res) {
     if (!req.body.nome) {
@@ -43,17 +46,18 @@ function cadastrarAssinante(req, res) {
     if (!assinanteEncontrado) {
 
         repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
-        //falta o restante dos dados
+
         let novoAssinante = {
             id: crypto.randomUUID(),
             usuario: novoUsuario,
             nome: req.body.nome,
             email: req.body.email,
             assinatura: {
-                id: "",
-                idPlano: "",
-                validaAte: "",
-            }
+                id: crypto.randomUUID(),
+                idPlano: req.body.idPlano,
+            },
+            nutricionista: req.body.idNutri,
+            personal: req.body.idPersonal
 
         }
 
@@ -70,11 +74,40 @@ function cadastrarAssinante(req, res) {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
     }
 
+}
 
+function buscarAssinantes(req, res) {
+    const assinantes = repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
 
+    res.send(assinantes.map(function (assinante) {
+        return {
+            id: assinante.id,
+            nome: assinante.nome,
+            email: assinante.email,
+            status: assinante.usuario.bloqueado,
+            idPlano: assinante.assinatura.idPlano
+        }
+    }));
 
+}
+
+function alterarStatusDoAssinante(req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.id);
+
+    if (!assinanteEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    const novoStatus = req.body.bloqueado;
+
+    assinanteEncontrado.usuario.bloqueado = novoStatus;
+
+    res.send(assinanteEncontrado.usuario.bloqueado)
 }
 
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
+    buscarAssinantes: buscarAssinantes,
+    alterarStatusDoAssinante: alterarStatusDoAssinante,
 }
