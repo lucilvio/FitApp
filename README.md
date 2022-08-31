@@ -1219,7 +1219,8 @@ Essa ferramenta irá ajudar todas as pessoas, a partir dos 16 anos, que querem a
             5.	O Assinante fornece os dados solicitados (nome, e-mail e senha) e re-quisita cadastrar;
             6.	O Sistema faz a validação dos dados inseridos e, se forem válidos, apresenta a página para realizar pagamento;
             7.	O Assinante fornece os dados solicitados (nome do portador do cartão, número do cartão, vencimento do cartão, código de segurança do cartão e código postal), indica concordar com os termos de uso e requisita confirmar a operação;
-            8.	O sistema faz a validação dos dados inseridos e, se forem válidos, apresenta a página de login CU-G 01;
+            8.  O sistema faz a validação dos dados inseridos e, se forem válidos, envia e-mail para o Assinante informando login e senha de acesso;
+            9.  O sistema direciona o assinante para a página de login - CU-G 01;
         * Fluxo de exceção:
             1.	Caso os dados não sejam válidos, o Sistema apresenta uma mensagem de erro;
             2.	Caso já exista cadastro para o e-mail informado, o Sistema apresenta mensagem de erro;

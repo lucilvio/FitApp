@@ -7,6 +7,22 @@ const geradorDeSenha = require('generate-password');
 
 
 function cadastrarPersonal(req, res) {
+    if(!req.body.nome) {
+        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem o nome"});
+        return;
+    }
+    if(!req.body.email) {
+        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem e-mail"});
+        return;
+    }
+    if(!req.body.telefone) {
+        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem telefone"});
+        return;
+    }
+    if(!req.body.registroProfissional) {
+        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem o Registro Profissional"});
+        return;
+    }
 
     let novoUsuario = {
         id: crypto.randomUUID(),
@@ -19,11 +35,6 @@ function cadastrarPersonal(req, res) {
         bloqueado: true,
         perfil: 'personal trainer',
         mensagens: []
-    }
-
-    if (!novoUsuario.login) {
-        res.status(400).send({ erro: "Não é possível cadastrar usuário sem email" });
-        return;
     }
 
     const personalEncontrado = repositorioDePersonal.buscarPersonalPorEmail(req.body.email);
@@ -74,23 +85,67 @@ function buscarPersonal(req, res) {
 
 }
 
-function alterarStatusPersonal(req, res) {
-    const id = req.params.id;
-    const personal = repositorioDePersonal.buscarPersonalPorId(id);
+function buscarPersonalPorId(req, res) {
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
 
-    if (!personal) {
+    if (!personalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    const novoStatus = req.body.bloqueado;
-    personal.usuario.bloqueado = novoStatus;
+    res.send({
+        nome: personalEncontrado.nome,
+        email: personalEncontrado.email,
+        telefone: personalEncontrado.telefone,
+        registro: personalEncontrado.registroProfissional,
+        status: personalEncontrado.usuario.bloqueado
+    });
+}
 
-    res.send(personal)
+function alterarDadosDoPersonal(req, res) {
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    const novoNome = req.body.nome;
+    const novoEmail = req.body.email;
+    const novoTelefone = req.body.telefone;
+    const novoRegistro = req.body.registroProfissional;
+    const novoStatus = req.body.bloqueado;
+
+    if (novoNome != undefined && novoNome != null && novoNome != "") {
+        personalEncontrado.nome = novoNome;
+        personalEncontrado.usuario.nome = novoNome;
+    }
+
+    if(novoEmail != undefined && novoEmail != null && novoEmail != "" ) {
+        personalEncontrado.email = novoEmail;
+        personalEncontrado.usuario.login = novoEmail;
+    }
+
+    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != "") {
+        personalEncontrado.telefone = novoTelefone;
+    } 
+
+    if(novoRegistro != undefined && novoRegistro != null && novoRegistro != "") {
+        personalEncontrado.registroProfissional = novoRegistro;
+    }
+
+    if (typeof (novoStatus) == 'boolean') {
+        personalEncontrado.bloqueado = novoStatus;
+        personalEncontrado.usuario.bloqueado = novoStatus;
+    }
+
+
+    res.send(personalEncontrado);
 }
 
 module.exports = {
     cadastrarPersonal: cadastrarPersonal,
     buscarPersonal: buscarPersonal,
-    alterarStatusPersonal: alterarStatusPersonal
+    buscarPersonalPorId: buscarPersonalPorId,
+    alterarStatusPersonal: alterarDadosDoPersonal
 }

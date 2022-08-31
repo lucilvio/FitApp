@@ -1,4 +1,4 @@
-const repositorioDePlano = require('../repositorios/repositorioDePlano.js');
+const repositorioDePlanos = require('../repositorios/repositorioDePlanos.js');
 const crypto = require('crypto');
 
 function cadastrarPlano(req, res) {
@@ -17,7 +17,7 @@ function cadastrarPlano(req, res) {
         return;
     }
 
-    const planoEncontrado = repositorioDePlano.buscarPlanosPorNome(req.body.nome);
+    const planoEncontrado = repositorioDePlanos.buscarPlanosPorNome(req.body.nome);
 
     if (planoEncontrado) {
         res.status(400).send({ erro: "Esse plano já foi cadastrado" });
@@ -33,15 +33,14 @@ function cadastrarPlano(req, res) {
         descricao: req.body.descricao
     }
 
-    repositorioDePlano.salvarDadosDoPlano(novoPlano);
+    repositorioDePlanos.salvarDadosDoPlano(novoPlano);
     res.send({ idPlano: novoPlano.id });
 
 
 }
 
 function buscarPlanos(req, res) {
-    const nome = req.query.nome;
-    let planos = repositorioDePlano.buscarPlanosPorFiltro(nome);
+    let planos = repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
 
     res.send(planos.map(function (plano) {
         return {
@@ -55,33 +54,47 @@ function buscarPlanos(req, res) {
     }))
 }
 
+function buscarPlanoPorId(req, res) {
+    let planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
+
+    if(!planoEncontrado) {
+        res.status(404).send({ erro: "Não encontrado"});
+        return;
+    }
+
+    res.send({
+        idPlano: planoEncontrado.id,
+        nome: planoEncontrado.nome
+    })
+}
+
 function alterarPlano(req, res) {
-    const planoEncontrado = repositorioDePlano.buscarPlanoPorId(req.params.id);
+    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.id);
 
     if (!planoEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    const planoNome = req.body.nome;
-    const planoValor = req.body.valor;
-    const planoBloqueado = req.body.bloqueado;
-    const planoDescricao = req.body.descricao;
+    const novoNome = req.body.nome;
+    const novoValor = req.body.valor;
+    const novoStatus = req.body.bloqueado;
+    const novaDescricao = req.body.descricao;
 
-    if (planoNome != undefined && planoNome != null && planoNome != "") {
-        planoEncontrado.nome = planoNome;
+    if (novoNome != undefined && novoNome != null && novoNome != "") {
+        planoEncontrado.nome = novoNome;
     }
 
-    if(planoValor != undefined && planoValor != null && planoValor != "" && planoValor >= 0) {
-        planoEncontrado.valor = planoValor;
+    if(novoValor != undefined && novoValor != null && novoValor != "" && novoValor >= 0) {
+        planoEncontrado.valor = novoValor;
     }
 
-    if (typeof (planoBloqueado) == 'boolean') {
-        planoEncontrado.bloqueado = planoBloqueado;
+    if (typeof (novoStatus) == 'boolean') {
+        planoEncontrado.bloqueado = novoStatus;
     }
 
-    if(planoDescricao != undefined && planoDescricao != null && planoDescricao != "") {
-        planoEncontrado.descricao = planoDescricao;
+    if(novaDescricao != undefined && novaDescricao != null && novaDescricao != "") {
+        planoEncontrado.descricao = novaDescricao;
     } 
 
     res.send(planoEncontrado);
@@ -91,5 +104,6 @@ function alterarPlano(req, res) {
 module.exports = {
     cadastrarPlano: cadastrarPlano,
     buscarPlanos: buscarPlanos,
+    buscarPlanoPorId: buscarPlanoPorId,
     alterarPlano: alterarPlano
 }

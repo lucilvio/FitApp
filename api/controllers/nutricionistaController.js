@@ -9,6 +9,22 @@ const geradorDeSenha = require('generate-password');
 
 
 function cadastrarNutricionista(req, res) {
+    if(!req.body.nome) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o nome"});
+        return;
+    }
+    if(!req.body.email) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem e-mail"});
+        return;
+    }
+    if(!req.body.telefone) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem telefone"});
+        return;
+    }
+    if(!req.body.registroProfissional) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o Registro Profissional"});
+        return;
+    }
 
     let novoUsuario = {
         id: crypto.randomUUID(),
@@ -21,11 +37,6 @@ function cadastrarNutricionista(req, res) {
         bloqueado: true,
         perfil: 'nutricionista',
         mensagens: []
-    }
-
-    if (!novoUsuario.login) {
-        res.status(400).send({ erro: "Não é possível cadastrar usuário sem email" });
-        return;
     }
 
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
@@ -76,19 +87,63 @@ function buscarNutricionistas(req, res) {
 
 
 }
-//alterardadosnutricionista
-function alterarStatusNutricionista(req, res) {
-    const id = req.params.id;
-    const nutricionista = repositorioDeNutricionistas.buscarNutriPorId(id);
 
-    if (!nutricionista) {
-        res.status(404).send({ erro: "Não encontrado" })
+function buscarNutriPorId(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
     }
 
-    const novoStatus = req.body.bloqueado;
-    nutricionista.usuario.bloqueado = novoStatus;
+    res.send({
+        nome: nutriEncontrado.nome,
+        email: nutriEncontrado.email,
+        telefone: nutriEncontrado.telefone,
+        registro: nutriEncontrado.registroProfissional,
+        status: nutriEncontrado.usuario.bloqueado
+    });
+}
 
-    res.send(nutricionista)
+function alterarDadosDoNutricionista(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    const novoNome = req.body.nome;
+    const novoEmail = req.body.email;
+    const novoTelefone = req.body.telefone;
+    const novoRegistro = req.body.registroProfissional;
+    const novoStatus = req.body.bloqueado;
+
+    if (novoNome != undefined && novoNome != null && novoNome != "") {
+        nutriEncontrado.nome = novoNome;
+        nutriEncontrado.usuario.nome = novoNome;
+    }
+
+    if(novoEmail != undefined && novoEmail != null && novoEmail != "" ) {
+        nutriEncontrado.email = novoEmail;
+        nutriEncontrado.usuario.login = novoEmail;
+    }
+
+    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != "") {
+        nutriEncontrado.telefone = novoTelefone;
+    } 
+
+    if(novoRegistro != undefined && novoRegistro != null && novoRegistro != "") {
+        nutriEncontrado.registroProfissional = novoRegistro;
+    }
+
+    if (typeof (novoStatus) == 'boolean') {
+        nutriEncontrado.bloqueado = novoStatus;
+        nutriEncontrado.usuario.bloqueado = novoStatus;
+    }
+
+
+    res.send(nutriEncontrado);
 
 }
 
@@ -97,7 +152,8 @@ function alterarStatusNutricionista(req, res) {
 module.exports = {
     cadastrarNutricionista: cadastrarNutricionista,
     buscarNutricionistas: buscarNutricionistas,
-    alterarStatusNutricionista: alterarStatusNutricionista
+    buscarNutriPorId: buscarNutriPorId,
+    alterarDadosDoNutricionista: alterarDadosDoNutricionista
 }
 
 
