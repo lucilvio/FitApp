@@ -23,8 +23,8 @@ function login(req, res) {
         return;
     }
 
-    var token = jwt.sign({ usuarioId: usuarioEncontrado.id, nome: usuarioEncontrado.nome, perfil: usuarioEncontrado.perfil }, 'shhhhh', { expiresIn: 60 * 60 });
-    res.send({token});
+    var token = jwt.sign({ idUsuario: usuarioEncontrado.id, nome: usuarioEncontrado.nome, perfil: usuarioEncontrado.perfil }, 'shhhhh', { expiresIn: 60 * 60 });
+    res.send({idUsuario: usuarioEncontrado.id, token});
 
 }
 

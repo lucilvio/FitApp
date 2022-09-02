@@ -9,7 +9,12 @@ function salvarDadosDoUsuario(novoUsuario) {
     base.dados.usuarios.push(novoUsuario);
 }
 
+function buscarUsuarioPorId(id) {
+    return base.dados.usuarios.find(usuario => usuario.id == id);
+}
+
 module.exports = {
     buscarUsuarioPorLogin: buscarUsuarioPorLogin,
-    salvarDadosDoUsuario: salvarDadosDoUsuario
+    salvarDadosDoUsuario: salvarDadosDoUsuario,
+    buscarUsuarioPorId: buscarUsuarioPorId
 };

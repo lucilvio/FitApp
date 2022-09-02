@@ -5,6 +5,7 @@ const nutricionistaController = require('./controllers/nutricionistaController')
 const personalController = require('./controllers/personalController');
 const planoController = require('./controllers/planoController');
 const assinanteController = require('./controllers/assinanteController');
+const mensagemController = require('./controllers/mensagemController');
 
 
 servidor.app.post('/login', loginController.login);
@@ -22,3 +23,7 @@ servidor.app.patch('/plano/:id', planoController.alterarPlano);
 servidor.app.post('/assinante', assinanteController.cadastrarAssinante);
 servidor.app.get('/assinante', assinanteController.buscarAssinantes);
 servidor.app.patch('/assinante/:id', assinanteController.alterarStatusDoAssinante);
+servidor.app.post('/mensagem', mensagemController.enviarMensagem);
+servidor.app.get('/mensagem', mensagemController.buscarMensagensPorFiltro);
+servidor.app.get('/mensagem/:idMensagem', mensagemController.buscarMensagemPorId);
+servidor.app.patch('/mensagem/:idMensagem', mensagemController.excluirMensagem);
