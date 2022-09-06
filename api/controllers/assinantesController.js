@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const geradorDeSenha = require('generate-password');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
-const model = require('../model/perfis');
+
 
 function cadastrarAssinante(req, res) {
     if (!req.body.nome) {
