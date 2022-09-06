@@ -1,5 +1,4 @@
 const servidor = require('./servidor');
-
 const loginController = require('./controllers/loginController');
 const nutricionistaController = require('./controllers/nutricionistaController');
 const personalController = require('./controllers/personalController');

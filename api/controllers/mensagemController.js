@@ -1,6 +1,6 @@
-const base = require('../dados.js');
-const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
-const repositorioDeMensagem = require('../repositorios/repositorioDeMensagens.js');
+const base = require('../dados');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
+const repositorioDeMensagem = require('../repositorios/repositorioDeMensagens');
 const crypto = require('crypto');
 
 function enviarMensagem(req, res) {

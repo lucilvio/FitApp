@@ -1,4 +1,4 @@
-const base = require('../dados.js');
+const base = require('../dados');
 
 function salvarDadosDoPlano(novoPlano) {
     base.dados.planos.push(novoPlano);

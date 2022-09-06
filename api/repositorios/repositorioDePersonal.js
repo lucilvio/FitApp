@@ -1,4 +1,4 @@
-const base = require('../dados.js');
+const base = require('../dados');
 
 function buscarPersonalPorEmail(email) {
     return base.dados.personalTrainers.find(personal => personal.email.toLowerCase() == email.toLowerCase());

@@ -1,10 +1,10 @@
-const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes.js');
-const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
+const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const crypto = require('crypto');
 const geradorDeSenha = require('generate-password');
-const servicoDeEmail = require('../servicos/servicoDeEmail.js');
-const servicoDeMensagens = require('../servicos/servicoDeMensagens.js');
-const model = require('../model/perfis.js');
+const servicoDeEmail = require('../servicos/servicoDeEmail');
+const servicoDeMensagens = require('../servicos/servicoDeMensagens');
+const model = require('../model/perfis');
 
 function cadastrarAssinante(req, res) {
     if (!req.body.nome) {

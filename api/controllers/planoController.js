@@ -1,4 +1,4 @@
-const repositorioDePlanos = require('../repositorios/repositorioDePlanos.js');
+const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const crypto = require('crypto');
 
 function cadastrarPlano(req, res) {

@@ -1,8 +1,8 @@
 
-const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
-const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas.js');
-const servicoDeEmail = require('../servicos/servicoDeEmail.js');
-const servicoDeMensagens = require('../servicos/servicoDeMensagens.js');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
+const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
+const servicoDeEmail = require('../servicos/servicoDeEmail');
+const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const crypto = require('crypto');
 const geradorDeSenha = require('generate-password');
 

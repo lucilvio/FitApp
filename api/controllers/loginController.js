@@ -1,4 +1,4 @@
-const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const jwt = require('jsonwebtoken');
 
 

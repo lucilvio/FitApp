@@ -1,4 +1,4 @@
-const base = require('../dados.js');
+const base = require('../dados');
 
 function buscarUsuarioPorLogin(login) {
     return base.dados.usuarios.find(usuario => usuario.login.toLowerCase() == login.toLowerCase());

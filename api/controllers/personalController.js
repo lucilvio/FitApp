@@ -1,7 +1,7 @@
-const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios.js');
-const repositorioDePersonal = require('../repositorios/repositorioDePersonal.js');
-const servicoDeEmail = require('../servicos/servicoDeEmail.js');
-const servicoDeMensagens = require('../servicos/servicoDeMensagens.js');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
+const repositorioDePersonal = require('../repositorios/repositorioDePersonal');
+const servicoDeEmail = require('../servicos/servicoDeEmail');
+const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const crypto = require('crypto');
 const geradorDeSenha = require('generate-password');
 
