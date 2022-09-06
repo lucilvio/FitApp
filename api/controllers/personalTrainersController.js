@@ -68,8 +68,7 @@ function cadastrarPersonal(req, res) {
 }
 
 function buscarPersonal(req, res) {
-    const nome = req.query.nome;
-    let personalTrainers = repositorioDePersonal.buscarPersonalPorFiltro(nome);
+    let personalTrainers = repositorioDePersonal.buscarPersonalPorFiltro(req.query.nome);
 
     res.send(personalTrainers.map(function (personal) {
         return {

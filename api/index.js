@@ -1,5 +1,6 @@
 const servidor = require('./servidor');
 const loginController = require('./controllers/loginController');
+const usuariosController = require('./controllers/usuariosController');
 const nutricionistasController = require('./controllers/nutricionistasController');
 const personalTrainersController = require('./controllers/personalTrainersController');
 const planosController = require('./controllers/planosController');
@@ -12,6 +13,7 @@ const model = require('./model/perfis');
 
 
 servidor.app.post('/login', loginController.login);
+servidor.app.patch('/usuario', usuariosController.redefinirSenha);
 servidor.app.post('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.cadastrarNutricionista);
 servidor.app.get('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
 servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);

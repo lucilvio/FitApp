@@ -7,6 +7,15 @@ function gerarMensagemDeBoasVindas(nome, senha) {
     Equipe FitApp`
 }
 
+function gerarMensagemComNovaSenha(nome, senha) {
+    return `Olá ${nome},<br>
+    Esta é a sua nova senha de acesso ao FitApp: ${senha}<br><br>
+    <button type="button">Entrar</button> <br><br>
+    Atenciosamente, <br> 
+    Equipe FitApp`
+}
+
 module.exports = {
-    gerarMensagemDeBoasVindas: gerarMensagemDeBoasVindas
+    gerarMensagemDeBoasVindas: gerarMensagemDeBoasVindas,
+    gerarMensagemComNovaSenha:gerarMensagemComNovaSenha
 }
