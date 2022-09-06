@@ -108,11 +108,40 @@ function excluirMensagem(req, res) {
 
 }
 
+function responderMensagem(req, res) {
+    if (!req.params.idMensagem) {
+        res.status(400).send({ erro: "Não é possível responder mensagem sem o id da mensagem" });
+        return;
+    }
+
+    let mensagem = repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
+    if (!mensagem) {
+        res.status(404).send({ erro: "Mensagem não encontrada" });
+    }
+
+    let novaMensagem = {
+        id: crypto.randomUUID(),
+        remetente: mensagem.destinatario,
+        destinatario: mensagem.remetente,
+        data: new Date(),
+        assunto: mensagem.assunto,
+        texto: req.body.texto,
+        excluida: false,
+    }
+
+    base.dados.mensagens.push(novaMensagem);
+
+    res.send(novaMensagem);
+
+
+}
+
 
 
 module.exports = {
     enviarMensagem: enviarMensagem,
     buscarMensagensPorFiltro: buscarMensagensPorFiltro,
     buscarMensagemPorId: buscarMensagemPorId,
-    excluirMensagem: excluirMensagem
+    excluirMensagem: excluirMensagem,
+    responderMensagem: responderMensagem
 }

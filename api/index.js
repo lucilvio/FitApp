@@ -27,3 +27,4 @@ servidor.app.post('/mensagem', mensagemController.enviarMensagem);
 servidor.app.get('/mensagem', mensagemController.buscarMensagensPorFiltro);
 servidor.app.get('/mensagem/:idMensagem', mensagemController.buscarMensagemPorId);
 servidor.app.patch('/mensagem/:idMensagem', mensagemController.excluirMensagem);
+servidor.app.post('/mensagem/:idMensagem', mensagemController.responderMensagem);
