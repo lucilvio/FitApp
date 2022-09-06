@@ -147,5 +147,5 @@ module.exports = {
     cadastrarPersonal: cadastrarPersonal,
     buscarPersonal: buscarPersonal,
     buscarPersonalPorId: buscarPersonalPorId,
-    alterarStatusPersonal: alterarDadosDoPersonal
+    alterarDadosDoPersonal: alterarDadosDoPersonal
 }
