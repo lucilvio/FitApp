@@ -177,9 +177,27 @@ function alterarDadosDoPerfil(req, res) {
     res.send(nutriEncontrado.usuario);
 }
 
-// function alterarSenha(req, res) {
+function alterarSenha(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
-// }
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+
+    const novaSenha = req.body.senha;
+
+    if(novaSenha != undefined && novaSenha != null && novaSenha != '') {
+        nutriEncontrado.usuario.senha = novaSenha;
+    }
+
+    res.send(nutriEncontrado.usuario)
+}
 
 // function alterarTextoSobreMim(req, res) {
 
@@ -192,8 +210,8 @@ module.exports = {
     buscarNutricionistas: buscarNutricionistas,
     buscarNutriPorId: buscarNutriPorId,
     alterarDadosDoNutricionista: alterarDadosDoNutricionista,
-    alterarDadosDoPerfil: alterarDadosDoPerfil
+    alterarDadosDoPerfil: alterarDadosDoPerfil,
+    alterarSenha: alterarSenha,
 }
-
 
 
