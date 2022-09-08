@@ -18,6 +18,9 @@ servidor.app.post('/nutricionista', autorizacao.autorizar(model.perfil.administr
 servidor.app.get('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
 servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
 servidor.app.patch('/nutricionista/:id', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.alterarDadosDoNutricionista);
+servidor.app.patch('/nutricionista/:id/perfil', nutricionistasController.alterarDadosDoPerfil);
+//servidor.app.patch('/nutricionista/:id/senha', nutricionistasController.alterarSenha);
+//servidor.app.patch('/nutricionista/:id/sobreMim', nutricionistasController.alterarTextoSobreMim);
 servidor.app.post('/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.cadastrarPersonal);
 servidor.app.get('/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.buscarPersonal);
 servidor.app.patch('/personal/:id', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.alterarDadosDoPersonal);

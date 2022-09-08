@@ -38,8 +38,7 @@ function cadastrarAssinante(req, res) {
             numbers: true
         }),
         bloqueado: false,
-        perfil: 'assinante',
-        mensagens: []
+        perfil: 'assinante'
     }
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssianantePorEmail(req.body.email);

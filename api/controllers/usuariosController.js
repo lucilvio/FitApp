@@ -29,6 +29,7 @@ function redefinirSenha(req, res) {
 
 }
 
+
 module.exports = {
     redefinirSenha: redefinirSenha,
 }

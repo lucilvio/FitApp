@@ -33,8 +33,7 @@ function cadastrarPersonal(req, res) {
             numbers: true
         }),
         bloqueado: true,
-        perfil: 'personal trainer',
-        mensagens: []
+        perfil: 'personal trainer'
     }
 
     const personalEncontrado = repositorioDePersonal.buscarPersonalPorEmail(req.body.email);

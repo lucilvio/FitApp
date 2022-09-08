@@ -8,8 +8,7 @@ const dados = {
             login: 'admin@fitapp.com',
             senha: 'admin123',
             bloqueado: false,
-            perfil: 'administrador',
-            mensagens: []
+            perfil: 'administrador'
         }
     ],
 

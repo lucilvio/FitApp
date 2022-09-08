@@ -34,9 +34,8 @@ function cadastrarNutricionista(req, res) {
             length: 10,
             numbers: true
         }),
-        bloqueado: true,
-        perfil: 'nutricionista',
-        mensagens: []
+        bloqueado: false,
+        perfil: 'nutricionista'
     }
 
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
@@ -51,7 +50,8 @@ function cadastrarNutricionista(req, res) {
             nome: req.body.nome,
             email: req.body.email,
             telefone: req.body.telefone,
-            registroProfissional: req.body.registroProfissional
+            registroProfissional: req.body.registroProfissional,
+            imagem: ''
         }
 
         repositorioDeNutricionistas.salvarDadosDoNutri(novoNutricionista);
@@ -60,7 +60,8 @@ function cadastrarNutricionista(req, res) {
 
         res.send({
             IdUsuario: novoUsuario.id,
-            id: novoNutricionista.id
+            id: novoNutricionista.id,
+            senha: novoUsuario.senha
         });
 
     } else {
@@ -146,13 +147,52 @@ function alterarDadosDoNutricionista(req, res) {
 
 }
 
+function alterarDadosDoPerfil(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+
+
+
+    const novaImagem = req.body.imagem;
+    const novoTelefone = req.body.telefone;
+
+    if (novaImagem != undefined && novaImagem != null && novaImagem != "") {
+        nutriEncontrado.imagem = novaImagem;
+        nutriEncontrado.usuario.imagem = novaImagem;
+    }
+
+    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != '') {
+        nutriEncontrado.telefone = novoTelefone;
+        nutriEncontrado.usuario.telefone = novoTelefone;
+    }
+
+    res.send(nutriEncontrado.usuario);
+}
+
+// function alterarSenha(req, res) {
+
+// }
+
+// function alterarTextoSobreMim(req, res) {
+
+// }
+
 
 
 module.exports = {
     cadastrarNutricionista: cadastrarNutricionista,
     buscarNutricionistas: buscarNutricionistas,
     buscarNutriPorId: buscarNutriPorId,
-    alterarDadosDoNutricionista: alterarDadosDoNutricionista
+    alterarDadosDoNutricionista: alterarDadosDoNutricionista,
+    alterarDadosDoPerfil: alterarDadosDoPerfil
 }
 
 
