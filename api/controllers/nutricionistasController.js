@@ -215,6 +215,32 @@ function alterarTextoSobreMim(req, res) {
     res.send(nutriEncontrado)
 }
 
+function buscarPacientes(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+
+    const pacientes = repositorioDeNutricionistas.buscarPacientesPorFiltro(req.query.nome, req.params.id);
+
+    res.send(pacientes.map(function (paciente) {
+        return {
+            id: paciente.id,
+            nome: paciente.nome,
+            objetivo: '',
+            dieta: '',
+            periodo: ''
+        }
+    }));
+}
+
 
 
 module.exports = {
@@ -225,6 +251,7 @@ module.exports = {
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarTextoSobreMim: alterarTextoSobreMim,
+    buscarPacientes: buscarPacientes,
 }
 
 

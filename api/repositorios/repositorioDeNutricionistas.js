@@ -22,6 +22,14 @@ function buscarNutriPorId(id) {
     return base.dados.nutricionistas.find(nutri => nutri.id == id);
 }
 
+function buscarPacientesPorFiltro(nome, idNutri) {
+    if(!nome) {
+        return base.dados.assinantes.filter(assinante => assinante.nutricionista == idNutri);
+    } else {
+        return base.dados.assinantes.filter(assinante => assinante.nutricionista == idNutri && assinante.nome.toLowerCase() == nome.toLowerCase());
+    }
+}
+
 
 
 module.exports = {
@@ -29,6 +37,7 @@ module.exports = {
     salvarDadosDoNutri: salvarDadosDoNutri,
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,
     buscarNutriPorId: buscarNutriPorId,
+    buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
     
 
 };

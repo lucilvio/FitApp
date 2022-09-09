@@ -57,7 +57,9 @@ function cadastrarAssinante(req, res) {
                 idPlano: req.body.idPlano,
             },
             nutricionista: req.body.idNutri,
-            personal: req.body.idPersonal
+            personal: req.body.idPersonal,
+            dietas: [],
+            treinos: []
 
         }
 
