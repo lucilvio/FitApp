@@ -35,7 +35,8 @@ function cadastrarNutricionista(req, res) {
             numbers: true
         }),
         bloqueado: false,
-        perfil: 'nutricionista'
+        perfil: 'nutricionista',
+        imagem: ''
     }
 
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
@@ -51,7 +52,7 @@ function cadastrarNutricionista(req, res) {
             email: req.body.email,
             telefone: req.body.telefone,
             registroProfissional: req.body.registroProfissional,
-            imagem: ''
+            sobreMim: ''
         }
 
         repositorioDeNutricionistas.salvarDadosDoNutri(novoNutricionista);
@@ -166,15 +167,13 @@ function alterarDadosDoPerfil(req, res) {
 
     if (novaImagem != undefined && novaImagem != null && novaImagem != "") {
         nutriEncontrado.imagem = novaImagem;
-        nutriEncontrado.usuario.imagem = novaImagem;
     }
 
     if(novoTelefone != undefined && novoTelefone != null && novoTelefone != '') {
         nutriEncontrado.telefone = novoTelefone;
-        nutriEncontrado.usuario.telefone = novoTelefone;
     }
 
-    res.send(nutriEncontrado.usuario);
+    res.send(nutriEncontrado);
 }
 
 function alterarSenha(req, res) {
@@ -199,9 +198,22 @@ function alterarSenha(req, res) {
     res.send(nutriEncontrado.usuario)
 }
 
-// function alterarTextoSobreMim(req, res) {
+function alterarTextoSobreMim(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
-// }
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+    nutriEncontrado.sobreMim = req.body.texto;;
+
+    res.send(nutriEncontrado)
+}
 
 
 
@@ -212,6 +224,7 @@ module.exports = {
     alterarDadosDoNutricionista: alterarDadosDoNutricionista,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
+    alterarTextoSobreMim: alterarTextoSobreMim,
 }
 
 
