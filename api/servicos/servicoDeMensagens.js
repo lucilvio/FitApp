@@ -15,7 +15,17 @@ function gerarMensagemComNovaSenha(nome, senha) {
     Equipe FitApp`
 }
 
+function gerarNotificacaoNovoAssinante(nomeDestinatario, nomeAssinante) {
+    return `Olá ${nomeDestinatario},<br>
+    Um novo Assinante foi atribuído a você:<br>
+    Nome: ${nomeAssinante}<br><br>
+    Atenciosamente, <br> 
+    Equipe FitApp`
+}
+
+
 module.exports = {
     gerarMensagemDeBoasVindas: gerarMensagemDeBoasVindas,
-    gerarMensagemComNovaSenha:gerarMensagemComNovaSenha
+    gerarMensagemComNovaSenha:gerarMensagemComNovaSenha,
+    gerarNotificacaoNovoAssinante: gerarNotificacaoNovoAssinante,
 }

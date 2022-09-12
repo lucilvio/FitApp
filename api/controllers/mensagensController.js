@@ -1,6 +1,8 @@
 const base = require('../dados');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeMensagem = require('../repositorios/repositorioDeMensagens');
+const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
+const repositorioDePersonal = require('../repositorios/repositorioDePersonal');
 const crypto = require('crypto');
 
 function enviarMensagem(req, res) {
@@ -36,16 +38,17 @@ function enviarMensagem(req, res) {
         return;
     }
 
-    base.dados.mensagens.push(novaMensagem);
+    repositorioDeMensagem.salvarMensagem(novaMensagem);
 
-    res.send(base.dados.mensagens)
+    res.send(novaMensagem)
 
 }
 
 function buscarMensagensPorFiltro(req, res) {
 
     if (!req.query.destinatario && !req.query.remetente) {
-        res.status(400).send({ erro: "Não é possível buscar mensagem sem destinatario ou remetente" })
+        res.status(400).send({ erro: "Não é possível buscar mensagem sem destinatario ou remetente" });
+        return;
     }
 
     let mensagens;
@@ -133,6 +136,18 @@ function responderMensagem(req, res) {
 
     res.send(novaMensagem);
 
+
+}
+
+function enviarNotificacaoNovoAssinante(idNutri, idPersonal) {
+    const nutricionista = repositorioDeNutricionistas.buscarNutriPorId(idNutri);
+    const personal = repositorioDePersonal.buscarPersonalPorId(idPersonal);
+
+    const destinatarios = [nutricionista.email, personal.email];
+
+    destinatarios.forEach(destinatario)
+
+   
 
 }
 

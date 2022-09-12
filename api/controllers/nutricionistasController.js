@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const geradorDeSenha = require('generate-password');
 
 
-
+// O Administrador cadastra um Nutricionista
 function cadastrarNutricionista(req, res) {
     if(!req.body.nome) {
         res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o nome"});
@@ -71,6 +71,7 @@ function cadastrarNutricionista(req, res) {
 
 }
 
+// o Administrador faz buscar por Nutricionistas - todos ou por nome
 function buscarNutricionistas(req, res) {
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
     
@@ -106,6 +107,7 @@ function buscarNutriPorId(req, res) {
     });
 }
 
+// O Administrador altera os dados cadastrais do Nutricionista
 function alterarDadosDoNutricionista(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
@@ -148,6 +150,7 @@ function alterarDadosDoNutricionista(req, res) {
 
 }
 
+// O Nutricionista altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
     if (!nutriEncontrado) {
@@ -176,6 +179,7 @@ function alterarDadosDoPerfil(req, res) {
     res.send(nutriEncontrado);
 }
 
+// O nutricionista altera a senha
 function alterarSenha(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
@@ -198,6 +202,7 @@ function alterarSenha(req, res) {
     res.send(nutriEncontrado.usuario)
 }
 
+// O Nutricionista altera texto "sobre mim"
 function alterarTextoSobreMim(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
@@ -215,16 +220,12 @@ function alterarTextoSobreMim(req, res) {
     res.send(nutriEncontrado)
 }
 
+// O nutricionista busca seus pacientes
 function buscarPacientes(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
-        return;
-    }
-
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
-        res.status(401).send({ erro: "Não autorizado"});
         return;
     }
 

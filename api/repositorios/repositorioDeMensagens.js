@@ -1,5 +1,9 @@
 const base = require('../dados');
 
+function salvarMensagem(novaMensagem) {
+    base.dados.mensagens.push(novaMensagem);
+}
+
 function buscarMensagensPorDestinatario(destinatario, excluida) {
     if(!excluida) {
         excluida = "false";
@@ -23,5 +27,6 @@ function buscarMensagemPorId(idMensagem) {
 module.exports = {
     buscarMensagensPorDestinatario: buscarMensagensPorDestinatario,
     buscarMensagensPorRemetente: buscarMensagensPorRemetente,
-    buscarMensagemPorId: buscarMensagemPorId
+    buscarMensagemPorId: buscarMensagemPorId,
+    salvarMensagem: salvarMensagem,
 }
