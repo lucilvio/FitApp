@@ -1,13 +1,12 @@
-const { spec } = require('pactum');
 
-require('./fazerLogin');
-require('./cadastrarNutricionista');
-require('./cadastrarPersonal');
-require('./cadastrarPlano');
-require('./cadastrarAssinante');
-require('./buscarNutricionistas');
-require('./buscarPersonal');
-require('./buscarPlanos');
-require('./buscarAssinantes');
+require('./casosDeTeste/geral/fazerLogin');
+require('./casosDeTeste/administrador/cadastrarNutricionista');
+require('./casosDeTeste/administrador/alterarDadosDoPersonal');
+require('./casosDeTeste/administrador/cadastrarPlano');
+require('./casosDeTeste/geral/cadastrarAssinante');
+require('./casosDeTeste/administrador/buscarNutricionistas');
+require('./casosDeTeste/administrador/buscarPersonal');
+require('./casosDeTeste/administrador/buscarPlanos');
+require('./casosDeTeste/administrador/buscarAssinantes');
 
 

@@ -33,7 +33,7 @@ servidor.app.patch('/personal/:id', autorizacao.autorizar(model.perfil.administr
 //Plano
 servidor.app.post('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);
 servidor.app.get('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.buscarPlanos);
-servidor.app.patch('/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarPlano);
+servidor.app.patch('/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarDadosDoPlano);
 servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
 
 //Assinante

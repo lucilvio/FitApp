@@ -1,14 +1,9 @@
 const { spec } = require('pactum');
+const usuario = require('../../funcoes/usuario');
 const crypto = require('crypto');
 
 it('CU-A 19 - deve cadastrar Plano', async () => {
-    const token = await spec()
-        .post('http://localhost:3000/login')
-        .withJson({
-            "email": "admin@fitapp.com",
-            "senha": "admin123"
-        })
-        .returns("token")
+    const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     await spec()
         .post('http://localhost:3000/plano')

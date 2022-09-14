@@ -68,7 +68,7 @@ function buscarPlanoPorId(req, res) {
     })
 }
 
-function alterarPlano(req, res) {
+function alterarDadosDoPlano(req, res) {
     const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.id);
 
     if (!planoEncontrado) {
@@ -105,5 +105,5 @@ module.exports = {
     cadastrarPlano: cadastrarPlano,
     buscarPlanos: buscarPlanos,
     buscarPlanoPorId: buscarPlanoPorId,
-    alterarPlano: alterarPlano
+    alterarDadosDoPlano: alterarDadosDoPlano
 }
