@@ -1,7 +1,6 @@
 const { spec } = require('pactum');
-const crypto = require('crypto');
 
-it('CU-A 19 - deve cadastrar Plano', async () => {
+it('CU-A 10 - deve listar Personal Trainers', async () => {
     const token = await spec()
         .post('http://localhost:3000/login')
         .withJson({
@@ -11,12 +10,7 @@ it('CU-A 19 - deve cadastrar Plano', async () => {
         .returns("token")
 
     await spec()
-        .post('http://localhost:3000/plano')
+        .get('http://localhost:3000/personal')
         .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": `Gratuito_${crypto.randomUUID()}`,
-            "valor": 0,
-            "descricao": "Experimente gratis por 15 dias"
-        })
         .expectStatus(200);
-})
+});

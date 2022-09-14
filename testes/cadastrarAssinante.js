@@ -14,7 +14,7 @@ it('CU-G 06 - deve cadastrar Assinante', async () => {
         .post('http://localhost:3000/plano')
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
-            "nome": "Gratuito_" + crypto.randomUUID(),
+            "nome": `Gratuito_${crypto.randomUUID()}`,
             "valor": 0,
             "descricao": "Experimente gratis por 15 dias"
         })

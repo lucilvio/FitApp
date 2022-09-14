@@ -18,8 +18,8 @@ servidor.app.patch('/usuario', usuariosController.redefinirSenha);
 //Nutricionista
 servidor.app.post('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.cadastrarNutricionista);
 servidor.app.get('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
-servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
 servidor.app.patch('/nutricionista/:id', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.alterarDadosDoNutricionista);
+servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
 servidor.app.patch('/nutricionista/:id/perfil', nutricionistasController.alterarDadosDoPerfil);
 servidor.app.patch('/nutricionista/:id/senha', nutricionistasController.alterarSenha);
 servidor.app.patch('/nutricionista/:id/sobreMim', nutricionistasController.alterarTextoSobreMim);
@@ -33,12 +33,12 @@ servidor.app.patch('/personal/:id', autorizacao.autorizar(model.perfil.administr
 //Plano
 servidor.app.post('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);
 servidor.app.get('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.buscarPlanos);
-servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
 servidor.app.patch('/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarPlano);
+servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
 
 //Assinante
 servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
-servidor.app.get('/assinante', assinantesController.buscarAssinantes);
+servidor.app.get('/assinante', autorizacao.autorizar(model.perfil.administrador), assinantesController.buscarAssinantes);
 servidor.app.patch('/assinante/:id', autorizacao.autorizar(model.perfil.administrador), assinantesController.alterarStatusDoAssinante);
 
 //Mensagem

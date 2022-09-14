@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const crypto = require('crypto');
 
 it('CU-A 14 - deve cadastrar Personal', async () => {
     const token = await spec()
@@ -14,7 +15,7 @@ it('CU-A 14 - deve cadastrar Personal', async () => {
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Bruno",
-            "email": "bruno@fitapp.com",
+            "email": `bruno_${crypto.randomUUID()}@fitapp.com`,
             "senha": "123456",
             "telefone": "55 555 55 55",
             "registroProfissional": "CRN 123"
