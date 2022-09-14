@@ -107,7 +107,7 @@ function cadastrarAssinante(req, res) {
 
         res.send({
             IdUsuario: novoUsuario.id,
-            id: novoAssinante.id
+            idAssinante: novoAssinante.id
         });
 
     } else {
@@ -122,7 +122,7 @@ function buscarAssinantes(req, res) {
 
     res.send(assinantes.map(function (assinante) {
         return {
-            id: assinante.id,
+            idAssinante: assinante.id,
             nome: assinante.nome,
             email: assinante.email,
             status: assinante.usuario.bloqueado,

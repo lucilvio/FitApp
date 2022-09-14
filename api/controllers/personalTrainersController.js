@@ -57,7 +57,7 @@ function cadastrarPersonal(req, res) {
 
         res.send({
             idUsuario: novoUsuario.id,
-            id: novoPersonal.id
+            idPersonal: novoPersonal.id
         });
 
     } else {
@@ -71,7 +71,7 @@ function buscarPersonal(req, res) {
 
     res.send(personalTrainers.map(function (personal) {
         return {
-            id: personal.id,
+            idPersonal: personal.id,
             nome: personal.nome,
             email: personal.email,
             telefone: personal.telefone,

@@ -61,7 +61,7 @@ function cadastrarNutricionista(req, res) {
 
         res.send({
             IdUsuario: novoUsuario.id,
-            id: novoNutricionista.id,
+            idNutri: novoNutricionista.id,
             senha: novoUsuario.senha
         });
 
@@ -78,7 +78,7 @@ function buscarNutricionistas(req, res) {
 
     res.send(nutricionistas.map(function (nutri) {
         return {
-            id: nutri.id,
+            idNutri: nutri.id,
             nome: nutri.nome,
             email: nutri.email,
             telefone: nutri.telefone,

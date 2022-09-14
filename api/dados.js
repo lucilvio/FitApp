@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const dados = {
     usuarios: [
         {
-            id: "crypto.randomUUID()",
+            id: "e7c17d74-f067-46ca-9734-1c232ba0ea18",
             nome: 'Administrador',
             login: 'admin@fitapp.com',
             senha: 'admin123',
