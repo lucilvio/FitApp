@@ -1,5 +1,6 @@
 //Geral
 require('./casosDeTeste/geral/fazerLogin');
+require('./casosDeTeste/geral/redefinirSenha');
 require('./casosDeTeste/geral/cadastrarAssinante');
 require('./casosDeTeste/geral/buscarNutriPorId');
 require('./casosDeTeste/geral/buscarPersonalPorId');

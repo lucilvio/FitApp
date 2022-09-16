@@ -32,7 +32,12 @@ app.use((req, res, next) => {
         return;
     }
 
-    if(req.url == "/assinante" && req.method == "POST"){
+    if(req.url == "/assinante" && req.method == "POST") {
+        next();
+        return;
+    }
+
+    if(req.url == "/usuario" && req.method == "PATCH") {
         next();
         return;
     }

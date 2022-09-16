@@ -24,7 +24,7 @@ function redefinirSenha(req, res) {
 
     servicoDeEmail.enviar(req.body.email, 'FitApp - Nova Senha', servicoDeMensagens.gerarMensagemComNovaSenha(usuarioEncontrado.nome, novaSenha));
 
-    res.send(usuarioEncontrado);
+    res.send();
 
 
 }

@@ -33,7 +33,7 @@ function cadastrarPersonal(req, res) {
             length: 10,
             numbers: true
         }),
-        bloqueado: true,
+        bloqueado: false,
         perfil: 'personal trainer'
     }
 
@@ -94,6 +94,7 @@ function buscarPersonalPorId(req, res) {
     }
 
     res.send({
+        idPersonal: personalEncontrado.id,
         nome: personalEncontrado.nome,
         email: personalEncontrado.email,
         telefone: personalEncontrado.telefone,

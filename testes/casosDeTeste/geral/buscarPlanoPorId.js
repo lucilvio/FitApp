@@ -6,10 +6,30 @@ const crypto = require('crypto');
 it('CU-A 17 - deve ver os dados do Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
-    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
+    const nome = `Gratuito_${crypto.randomUUID()}`;
+    const idPlano = await plano.cadastrarPlano(token, nome, 0, "Experimente gratis por 15 dias");
 
     await spec()
         .get(`http://localhost:3000/plano/${idPlano}`)
         .withHeaders("Authorization", "Bearer " + token)
+        .expectJson(
+            {
+                idPlano: idPlano,
+                nome: nome
+            }
+        )
         .expectStatus(200);
+});
+
+it('CU-A 17 - não encontra plano quando o Id não existe', async () => {
+    const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
+    
+    const nome = `Gratuito_${crypto.randomUUID()}`;
+    const idPlano = await plano.cadastrarPlano(token, nome, 0, "Experimente gratis por 15 dias");
+
+    await spec()
+        .get(`http://localhost:3000/plano/${crypto.randomUUID()}`)
+        .withHeaders("Authorization", "Bearer " + token)
+        .expectJson({ erro: "Não encontrado" })
+        .expectStatus(404);
 });

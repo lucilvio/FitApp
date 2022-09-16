@@ -99,6 +99,7 @@ function buscarNutriPorId(req, res) {
     }
 
     res.send({
+        idNutri: nutriEncontrado.id,
         nome: nutriEncontrado.nome,
         email: nutriEncontrado.email,
         telefone: nutriEncontrado.telefone,

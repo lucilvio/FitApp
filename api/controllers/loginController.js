@@ -9,17 +9,17 @@ function login(req, res) {
     const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(login);
 
     if (!usuarioEncontrado) {
-        res.status(400).send("login ou senha incorreto");
+        res.status(400).send({ erro: "login ou senha incorreto"});
         return;
     }
 
     if(usuarioEncontrado.bloqueado == true) {
-        res.status(400).send("login ou senha incorreto");
+        res.status(400).send({ erro: "login ou senha incorreto"});
         return;
     }
 
     if(usuarioEncontrado.senha !== senha) {
-        res.status(400).send("login ou senha incorreto");
+        res.status(400).send({ erro: "login ou senha incorreto"});
         return;
     }
 
