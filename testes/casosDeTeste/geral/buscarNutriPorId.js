@@ -1,32 +1,15 @@
 const { spec } = require('pactum');
+const usuario = require('../../funcoes/usuario');
+const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
 
-it('CU-A 04 - deve buscar Nutricionista por Id', async () => {
-    const token = await spec()
-        .post('http://localhost:3000/login')
-        .withJson({
-            "email": "admin@fitapp.com",
-            "senha": "admin123"
-        })
-        .returns("token");
-
-    const nutri = await spec()
-        .post('http://localhost:3000/nutricionista')
-        .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": "Ana",
-            "email": `ana_${crypto.randomUUID()}@fitapp.com`,
-            "senha": "123456",
-            "telefone": "55 5555555",
-            "registroProfissional": "CRN 123"
-        })
-        .returns("idNutri");
+it('CU-A 07 - deve ver os dados do Nutricionista', async () => {
+    const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
+    
+    const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
     await spec()
-        .patch(`http://localhost:3000/assinante/${assinante}`)
+        .get(`http://localhost:3000/nutricionista/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "bloqueado": true
-        })
         .expectStatus(200);
 });

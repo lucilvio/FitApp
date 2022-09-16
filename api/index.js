@@ -19,6 +19,7 @@ servidor.app.patch('/usuario', usuariosController.redefinirSenha);
 servidor.app.post('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.cadastrarNutricionista);
 servidor.app.get('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
 servidor.app.patch('/nutricionista/:id', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.alterarDadosDoNutricionista);
+
 servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
 servidor.app.patch('/nutricionista/:id/perfil', nutricionistasController.alterarDadosDoPerfil);
 servidor.app.patch('/nutricionista/:id/senha', nutricionistasController.alterarSenha);
@@ -30,16 +31,21 @@ servidor.app.post('/personal', autorizacao.autorizar(model.perfil.administrador)
 servidor.app.get('/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.buscarPersonal);
 servidor.app.patch('/personal/:id', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.alterarDadosDoPersonal);
 
+servidor.app.get('/personal/:id', personalTrainersController.buscarPersonalPorId);
+
 //Plano
 servidor.app.post('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);
 servidor.app.get('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.buscarPlanos);
 servidor.app.patch('/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarDadosDoPlano);
+
 servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
 
 //Assinante
-servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
 servidor.app.get('/assinante', autorizacao.autorizar(model.perfil.administrador), assinantesController.buscarAssinantes);
 servidor.app.patch('/assinante/:id', autorizacao.autorizar(model.perfil.administrador), assinantesController.alterarStatusDoAssinante);
+
+servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
+
 
 //Mensagem
 servidor.app.post('/mensagem', mensagensController.enviarMensagem);

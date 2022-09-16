@@ -3,7 +3,7 @@ const usuario = require('../../funcoes/usuario');
 const personal = require('../../funcoes/personal');
 const crypto = require('crypto');
 
-it('CU-A 13 - deve altersr dados do Personal', async () => {
+it('CU-A 13 - deve alterar dados do Personal', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     const idPersonal = await personal.cadastrarPersonal(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "55 555 55 55", "CRN 123");

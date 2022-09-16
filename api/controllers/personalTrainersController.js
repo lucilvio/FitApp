@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const geradorDeSenha = require('generate-password');
 
 
+// O Administrador cadastra um Personal Trainer
 function cadastrarPersonal(req, res) {
     if(!req.body.nome) {
         res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem o nome"});
@@ -66,6 +67,7 @@ function cadastrarPersonal(req, res) {
 
 }
 
+// o Administrador busca por Personal Trainers - todos ou por nome
 function buscarPersonal(req, res) {
     let personalTrainers = repositorioDePersonal.buscarPersonalPorFiltro(req.query.nome);
 
@@ -100,6 +102,8 @@ function buscarPersonalPorId(req, res) {
     });
 }
 
+
+// O Administrador altera os dados cadastrais do Personal Trainer
 function alterarDadosDoPersonal(req, res) {
     const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
 
@@ -140,6 +144,8 @@ function alterarDadosDoPersonal(req, res) {
 
     res.send(personalEncontrado);
 }
+
+
 
 module.exports = {
     cadastrarPersonal: cadastrarPersonal,

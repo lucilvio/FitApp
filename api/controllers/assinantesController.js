@@ -148,6 +148,8 @@ function alterarStatusDoAssinante(req, res) {
     res.send(assinanteEncontrado.usuario.bloqueado)
 }
 
+
+
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
     buscarAssinantes: buscarAssinantes,

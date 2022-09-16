@@ -71,7 +71,7 @@ function cadastrarNutricionista(req, res) {
 
 }
 
-// o Administrador faz buscar por Nutricionistas - todos ou por nome
+// o Administrador busca por Nutricionistas - todos ou por nome
 function buscarNutricionistas(req, res) {
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
     
@@ -144,7 +144,6 @@ function alterarDadosDoNutricionista(req, res) {
         nutriEncontrado.bloqueado = novoStatus;
         nutriEncontrado.usuario.bloqueado = novoStatus;
     }
-
 
     res.send(nutriEncontrado);
 
