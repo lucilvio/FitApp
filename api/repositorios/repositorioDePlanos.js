@@ -18,7 +18,7 @@ function buscarPlanosPorFiltro(nome) {
 }
 
 function buscarPlanoPorId(id) {
-    return base.dados.planos.find(plano => plano.id == id);
+    return base.dados.planos.find(plano => plano.idPlano == id);
 }
 
 module.exports = {

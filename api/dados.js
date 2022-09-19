@@ -26,11 +26,27 @@ const dados = {
             senha: 'personal123',
             bloqueado: false,
             perfil: 'personal',
-            imagem:''
+            imagem: ''
+        },
+        {
+            idusuario: 'idUsuarioAssinante',
+            nome: 'Gui',
+            login: 'gui_111@fitapp.com',
+            senha: 'assinante123',
+            bloqueado: false,
+            perfil: 'assinante'
         }
     ],
 
-    planos: [],
+    planos: [
+        {
+            idPlano: 'idPlano',
+            nome: 'Plano Gratuito',
+            valor: 0,
+            bloqueado: false,
+            descricao: 'Informações sobre o Plano'
+        }
+    ],
 
     nutricionistas: [
         {
@@ -54,15 +70,15 @@ const dados = {
 
     personalTrainers: [
         {
-            idNutri: 'idPersonal',
-            usuario:  {
+            idPersonal: 'idPersonal',
+            usuario: {
                 idUsuario: "idUsuarioPersonal",
                 nome: 'Personal',
                 login: 'personal@fitapp.com',
                 senha: 'personal123',
                 bloqueado: false,
                 perfil: 'personal',
-                imagem:''
+                imagem: ''
             },
             nome: 'Personal',
             email: 'personal@fitapp.com',
@@ -72,7 +88,29 @@ const dados = {
         }
     ],
 
-    assinantes: [],
+    assinantes: [
+        {
+            idAssinante: 'idAssinante',
+            usuario: {
+                idusuario: 'idUsuarioAssinante',
+                nome: 'Gui',
+                login: 'gui_111@fitapp.com',
+                senha: 'assinante123',
+                bloqueado: false,
+                perfil: 'assinante'
+            },
+            nome: 'Gui',
+            email: 'gui_111@fitapp.com',
+            assinatura: {
+                idAssinatura: 'idAssinatura',
+                idPlano: 'idPlano',
+            },
+            nutricionista: 'idNutri',
+            personal: 'idPersonal',
+            dietas: [],
+            treinos: []
+        }
+    ],
 
     mensagens: []
 

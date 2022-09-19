@@ -60,8 +60,8 @@ function cadastrarNutricionista(req, res) {
         servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoUsuario.senha));
 
         res.send({
-            IdUsuario: novoUsuario.id,
-            idNutri: novoNutricionista.id,
+            IdUsuario: novoUsuario.idUsuario,
+            idNutri: novoNutricionista.idNutri,
         });
 
     } else {
@@ -233,7 +233,7 @@ function buscarPacientes(req, res) {
 
     res.send(pacientes.map(function (paciente) {
         return {
-            id: paciente.id,
+            idAssinante: paciente.idAssinante,
             nome: paciente.nome,
             objetivo: '',
             dieta: '',

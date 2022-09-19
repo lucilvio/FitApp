@@ -26,7 +26,7 @@ function cadastrarPlano(req, res) {
 
 
     let novoPlano = {
-        id: crypto.randomUUID(),
+        idPlano: crypto.randomUUID(),
         nome: req.body.nome,
         valor: req.body.valor,
         bloqueado: false,
@@ -34,7 +34,7 @@ function cadastrarPlano(req, res) {
     }
 
     repositorioDePlanos.salvarDadosDoPlano(novoPlano);
-    res.send({ idPlano: novoPlano.id });
+    res.send({ idPlano: novoPlano.idPlano });
 
 
 }
@@ -44,7 +44,7 @@ function buscarPlanos(req, res) {
 
     res.send(planos.map(function (plano) {
         return {
-            idPlano: plano.id,
+            idPlano: plano.idPlano,
             nome: plano.nome,
             valor: plano.valor,
             status: plano.bloqueado,

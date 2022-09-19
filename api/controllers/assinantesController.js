@@ -52,7 +52,7 @@ function cadastrarAssinante(req, res) {
 
 
     let novoUsuario = {
-        id: crypto.randomUUID(),
+        idusuario: crypto.randomUUID(),
         nome: req.body.nome,
         login: req.body.email,
         senha: geradorDeSenha.generate({
@@ -70,7 +70,7 @@ function cadastrarAssinante(req, res) {
         repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
 
         let novoAssinante = {
-            id: crypto.randomUUID(),
+            idAssinante: crypto.randomUUID(),
             usuario: novoUsuario,
             nome: req.body.nome,
             email: req.body.email,
@@ -106,8 +106,8 @@ function cadastrarAssinante(req, res) {
         })
 
         res.send({
-            IdUsuario: novoUsuario.id,
-            idAssinante: novoAssinante.id
+            IdUsuario: novoUsuario.IdUsuario,
+            idAssinante: novoAssinante.idAssinante
         });
 
     } else {

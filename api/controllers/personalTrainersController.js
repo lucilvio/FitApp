@@ -26,7 +26,7 @@ function cadastrarPersonal(req, res) {
     }
 
     let novoUsuario = {
-        id: crypto.randomUUID(),
+        idUsuario: crypto.randomUUID(),
         nome: req.body.nome,
         login: req.body.email,
         senha: geradorDeSenha.generate({
@@ -34,7 +34,8 @@ function cadastrarPersonal(req, res) {
             numbers: true
         }),
         bloqueado: false,
-        perfil: 'personal trainer'
+        perfil: 'personal trainer',
+        imagem: ''
     }
 
     const personalEncontrado = repositorioDePersonal.buscarPersonalPorEmail(req.body.email);
@@ -44,12 +45,13 @@ function cadastrarPersonal(req, res) {
         repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
 
         let novoPersonal = {
-            id: crypto.randomUUID(),
+            idPersonal: crypto.randomUUID(),
             usuario: novoUsuario,
             nome: req.body.nome,
             email: req.body.email,
             telefone: req.body.telefone,
-            registroProfissional: req.body.registroProfissional
+            registroProfissional: req.body.registroProfissional,
+            sobreMim: ''
         }
 
         repositorioDePersonal.salvarDadosDoPersonal(novoPersonal);
@@ -57,8 +59,8 @@ function cadastrarPersonal(req, res) {
         servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoUsuario.senha));
 
         res.send({
-            idUsuario: novoUsuario.id,
-            idPersonal: novoPersonal.id
+            idUsuario: novoUsuario.idUsuario,
+            idPersonal: novoPersonal.idPersonal
         });
 
     } else {
@@ -73,7 +75,7 @@ function buscarPersonal(req, res) {
 
     res.send(personalTrainers.map(function (personal) {
         return {
-            idPersonal: personal.id,
+            idPersonal: personal.idPersonal,
             nome: personal.nome,
             email: personal.email,
             telefone: personal.telefone,
@@ -94,12 +96,14 @@ function buscarPersonalPorId(req, res) {
     }
 
     res.send({
-        idPersonal: personalEncontrado.id,
+        idPersonal: personalEncontrado.idPersonal,
         nome: personalEncontrado.nome,
         email: personalEncontrado.email,
         telefone: personalEncontrado.telefone,
         registro: personalEncontrado.registroProfissional,
-        status: personalEncontrado.usuario.bloqueado
+        status: personalEncontrado.usuario.bloqueado,
+        imagem: personalEncontrado.usuario.imagem,
+        sobreMim: personalEncontrado.sobreMim
     });
 }
 

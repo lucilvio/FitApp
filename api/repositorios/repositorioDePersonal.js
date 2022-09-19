@@ -18,7 +18,7 @@ function buscarPersonalPorFiltro(nome) {
 }
 
 function buscarPersonalPorId(id) {
-    return base.dados.personalTrainers.find(personal => personal.id == id);
+    return base.dados.personalTrainers.find(personal => personal.idPersonal == id);
 }
 
 module.exports = {
