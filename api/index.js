@@ -23,7 +23,7 @@ servidor.app.patch('/nutricionista/:id', autorizacao.autorizar(model.perfil.admi
 servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
 servidor.app.patch('/nutricionista/:id/perfil', nutricionistasController.alterarDadosDoPerfil);
 servidor.app.patch('/nutricionista/:id/senha', nutricionistasController.alterarSenha);
-servidor.app.patch('/nutricionista/:id/sobreMim', nutricionistasController.alterarTextoSobreMim);
+servidor.app.patch('/nutricionista/:id/sobreMim', nutricionistasController.alterarInformacoesSobreMim);
 servidor.app.get('/nutricionista/:id/pacientes', nutricionistasController.buscarPacientes);
 
 //Personal Trainer

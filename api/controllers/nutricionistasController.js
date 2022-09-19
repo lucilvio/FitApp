@@ -27,7 +27,7 @@ function cadastrarNutricionista(req, res) {
     }
 
     let novoUsuario = {
-        id: crypto.randomUUID(),
+        idUsuario: crypto.randomUUID(),
         nome: req.body.nome,
         login: req.body.email,
         senha: geradorDeSenha.generate({
@@ -46,7 +46,7 @@ function cadastrarNutricionista(req, res) {
         repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
 
         let novoNutricionista = {
-            id: crypto.randomUUID(),
+            idNutri: crypto.randomUUID(),
             usuario: novoUsuario,
             nome: req.body.nome,
             email: req.body.email,
@@ -62,7 +62,6 @@ function cadastrarNutricionista(req, res) {
         res.send({
             IdUsuario: novoUsuario.id,
             idNutri: novoNutricionista.id,
-            senha: novoUsuario.senha
         });
 
     } else {
@@ -104,7 +103,9 @@ function buscarNutriPorId(req, res) {
         email: nutriEncontrado.email,
         telefone: nutriEncontrado.telefone,
         registro: nutriEncontrado.registroProfissional,
-        status: nutriEncontrado.usuario.bloqueado
+        status: nutriEncontrado.usuario.bloqueado,
+        imagem: nutriEncontrado.usuario.imagem,
+        sobreMim: nutriEncontrado.sobreMim
     });
 }
 
@@ -158,18 +159,17 @@ function alterarDadosDoPerfil(req, res) {
         return;
     }
 
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
         res.status(401).send({ erro: "Não autorizado"});
         return;
     }
-
 
 
     const novaImagem = req.body.imagem;
     const novoTelefone = req.body.telefone;
 
     if (novaImagem != undefined && novaImagem != null && novaImagem != "") {
-        nutriEncontrado.imagem = novaImagem;
+        nutriEncontrado.usuario.imagem = novaImagem;
     }
 
     if(novoTelefone != undefined && novoTelefone != null && novoTelefone != '') {
@@ -188,7 +188,7 @@ function alterarSenha(req, res) {
         return;
     }
 
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
         res.status(401).send({ erro: "Não autorizado"});
         return;
     }
@@ -202,8 +202,8 @@ function alterarSenha(req, res) {
     res.send(nutriEncontrado.usuario)
 }
 
-// O Nutricionista altera texto "sobre mim"
-function alterarTextoSobreMim(req, res) {
+// O Nutricionista altera informações "sobre mim"
+function alterarInformacoesSobreMim(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
 
     if (!nutriEncontrado) {
@@ -211,11 +211,11 @@ function alterarTextoSobreMim(req, res) {
         return;
     }
 
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.id) {
+    if(req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
         res.status(401).send({ erro: "Não autorizado"});
         return;
     }
-    nutriEncontrado.sobreMim = req.body.texto;;
+    nutriEncontrado.sobreMim = req.body.texto;
 
     res.send(nutriEncontrado)
 }
@@ -251,7 +251,7 @@ module.exports = {
     alterarDadosDoNutricionista: alterarDadosDoNutricionista,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
-    alterarTextoSobreMim: alterarTextoSobreMim,
+    alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarPacientes: buscarPacientes,
 }
 

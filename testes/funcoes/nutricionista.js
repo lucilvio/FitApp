@@ -11,6 +11,7 @@ async function cadastrarNutri(token, nome, email, telefone, registroProfissional
             "registroProfissional": registroProfissional
         })
         .returns("idNutri");
+       
 }
 
 module.exports = {

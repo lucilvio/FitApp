@@ -19,7 +19,7 @@ function buscarNutricionistasPorFiltro(nome) {
 }
 
 function buscarNutriPorId(id) {
-    return base.dados.nutricionistas.find(nutri => nutri.id == id);
+    return base.dados.nutricionistas.find(nutri => nutri.idNutri == id);
 }
 
 function buscarPacientesPorFiltro(nome, idNutri) {

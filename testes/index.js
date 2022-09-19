@@ -23,6 +23,9 @@ require('./casosDeTeste/administrador/alterarStatusDoAssinante');
 //Assinante
 
 //Nutricionista
+require('./casosDeTeste/nutricionista/alterarDadosDoPerfil');
+require('./casosDeTeste/nutricionista/alterarSenha');
+
 
 //Personal
 
