@@ -24,7 +24,8 @@ servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId
 servidor.app.patch('/nutricionista/:id/perfil', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDadosDoPerfil);
 servidor.app.patch('/nutricionista/:id/senha', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarSenha);
 servidor.app.patch('/nutricionista/:id/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim);
-servidor.app.get('/nutricionista/:id/pacientes', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
+servidor.app.get('/nutricionista/:id/paciente', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
+servidor.app.get('/nutricionista/:idNutri/paciente/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId);
 
 //Personal Trainer
 servidor.app.post('/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.cadastrarPersonal);

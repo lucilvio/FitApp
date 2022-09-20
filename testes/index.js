@@ -27,6 +27,7 @@ require('./casosDeTeste/nutricionista/alterarDadosDoPerfil');
 require('./casosDeTeste/nutricionista/alterarSenha');
 require('./casosDeTeste/nutricionista/alterarInformacoesSobreMim');
 require('./casosDeTeste/nutricionista/buscarPacientes');
+require('./casosDeTeste/nutricionista/buscarPacientePorId');
 
 
 //Personal

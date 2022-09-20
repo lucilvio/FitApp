@@ -74,14 +74,19 @@ function cadastrarAssinante(req, res) {
             usuario: novoUsuario,
             nome: req.body.nome,
             email: req.body.email,
+            dataNascimento: '',
+            sexo: '',
+            altura: '',
             assinatura: {
                 id: crypto.randomUUID(),
                 idPlano: req.body.idPlano,
             },
             nutricionista: req.body.idNutri,
             personal: req.body.idPersonal,
+            objetivo: '',
             dietas: [],
-            treinos: []
+            treinos: [],
+            medidas: []
 
         }
 

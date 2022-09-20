@@ -30,6 +30,10 @@ function buscarPacientesPorFiltro(nome, idNutri) {
     }
 }
 
+function buscarPacientePorId(id) {
+    return base.dados.assinantes.find(assinante => assinante.idAssinante == id);
+}
+
 
 
 module.exports = {
@@ -38,6 +42,6 @@ module.exports = {
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,
     buscarNutriPorId: buscarNutriPorId,
     buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
-    
+    buscarPacientePorId: buscarPacientePorId
 
 };

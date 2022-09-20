@@ -93,22 +93,28 @@ const dados = {
             idAssinante: 'idAssinante',
             usuario: {
                 idusuario: 'idUsuarioAssinante',
-                nome: 'Gui',
-                login: 'gui_111@fitapp.com',
+                nome: 'Assinante',
+                login: 'assinante@fitapp.com',
                 senha: 'assinante123',
                 bloqueado: false,
                 perfil: 'assinante'
             },
-            nome: 'Gui',
-            email: 'gui_111@fitapp.com',
+            nome: 'Assinante',
+            email: 'assinante@fitapp.com',
+            dataNascimento: '',
+            sexo: '',
+            altura: '',
             assinatura: {
                 idAssinatura: 'idAssinatura',
                 idPlano: 'idPlano',
             },
             nutricionista: 'idNutri',
             personal: 'idPersonal',
+            objetivo: '',
             dietas: [],
-            treinos: []
+            treinos: [],
+            medidas: []
+                
         }
     ],
 

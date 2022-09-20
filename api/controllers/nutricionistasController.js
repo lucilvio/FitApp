@@ -242,6 +242,28 @@ function buscarPacientes(req, res) {
     }));
 }
 
+//O Nutricionista ver dados do Paciente
+function buscarPacientePorId(req, res) {
+    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+
+    if (!pacienteEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    res.send({
+        nome: pacienteEncontrado.nome,
+        objetivo: pacienteEncontrado.objetivo,
+        dataNascimento: pacienteEncontrado.dataNascimento,
+        sexo: pacienteEncontrado.sexo,
+        altura: pacienteEncontrado.altura,
+        medidas: pacienteEncontrado.medidas,
+        dietas: pacienteEncontrado.dietas
+
+    });
+
+}
+
 
 
 module.exports = {
@@ -253,6 +275,7 @@ module.exports = {
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarPacientes: buscarPacientes,
+    buscarPacientePorId: buscarPacientePorId
 }
 
 
