@@ -77,7 +77,7 @@ function buscarNutricionistas(req, res) {
 
     res.send(nutricionistas.map(function (nutri) {
         return {
-            idNutri: nutri.id,
+            idNutri: nutri.idNutri,
             nome: nutri.nome,
             email: nutri.email,
             telefone: nutri.telefone,
@@ -98,7 +98,7 @@ function buscarNutriPorId(req, res) {
     }
 
     res.send({
-        idNutri: nutriEncontrado.id,
+        idNutri: nutriEncontrado.idNutri,
         nome: nutriEncontrado.nome,
         email: nutriEncontrado.email,
         telefone: nutriEncontrado.telefone,

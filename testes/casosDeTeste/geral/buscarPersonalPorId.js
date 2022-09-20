@@ -19,7 +19,9 @@ it('CU-A 12 - deve ver os dados do personal', async () => {
                 email: email,
                 telefone: "99999999",
                 registro: "BFUDbHJKd",
-                status: false
+                status: false,
+                imagem: "",
+                sobreMim: ""
 
             }
         )

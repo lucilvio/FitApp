@@ -19,7 +19,7 @@ function buscarAssinantePorFiltro(nome) {
 }
 
 function buscarAssinantePorId(id) {
-    return base.dados.assinantes.find(assinante => assinante.id == id);
+    return base.dados.assinantes.find(assinante => assinante.idAssinante == id);
 }
 
 module.exports = {

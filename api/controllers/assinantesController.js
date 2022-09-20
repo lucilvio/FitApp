@@ -122,7 +122,7 @@ function buscarAssinantes(req, res) {
 
     res.send(assinantes.map(function (assinante) {
         return {
-            idAssinante: assinante.id,
+            idAssinante: assinante.idAssinante,
             nome: assinante.nome,
             email: assinante.email,
             status: assinante.usuario.bloqueado,

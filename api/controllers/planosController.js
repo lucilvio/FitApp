@@ -63,7 +63,7 @@ function buscarPlanoPorId(req, res) {
     }
 
     res.send({
-        idPlano: planoEncontrado.id,
+        idPlano: planoEncontrado.idPlano,
         nome: planoEncontrado.nome
     })
 }
