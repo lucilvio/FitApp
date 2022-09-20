@@ -32,6 +32,10 @@ servidor.app.get('/personal', autorizacao.autorizar(model.perfil.administrador),
 servidor.app.patch('/personal/:id', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.alterarDadosDoPersonal);
 
 servidor.app.get('/personal/:id', personalTrainersController.buscarPersonalPorId);
+servidor.app.patch('/personal/:id/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);
+servidor.app.patch('/personal/:id/senha', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarSenha);
+servidor.app.patch('/personal/:id/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
+servidor.app.get('/personal/:id/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
 
 //Plano
 servidor.app.post('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);

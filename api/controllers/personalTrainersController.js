@@ -150,11 +150,106 @@ function alterarDadosDoPersonal(req, res) {
     res.send(personalEncontrado);
 }
 
+// O Personal altera dados do perfil
+function alterarDadosDoPerfil(req, res) {
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+
+
+    const novaImagem = req.body.imagem;
+    const novoTelefone = req.body.telefone;
+
+    if (novaImagem != undefined && novaImagem != null && novaImagem != "") {
+        personalEncontrado.usuario.imagem = novaImagem;
+    }
+
+    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != '') {
+        personalEncontrado.telefone = novoTelefone;
+    }
+
+    res.send(personalEncontrado);
+}
+
+// O Personal altera a senha
+function alterarSenha(req, res) {
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+
+    const novaSenha = req.body.senha;
+
+    if(novaSenha != undefined && novaSenha != null && novaSenha != '') {
+        personalEncontrado.usuario.senha = novaSenha;
+    }
+
+    res.send(personalEncontrado.usuario)
+}
+
+// O Personal altera informações "sobre mim"
+function alterarInformacoesSobreMim(req, res) {
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    if(req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado"});
+        return;
+    }
+    personalEncontrado.sobreMim = req.body.texto;
+
+    res.send(personalEncontrado)
+}
+
+// O Personal busca seus Alunos
+function buscarAlunos(req, res) {
+    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Não encontrado" });
+        return;
+    }
+
+    const alunos = repositorioDePersonal.buscarAlunosPorFiltro(req.query.nome, req.params.id);
+
+    res.send(alunos.map(function (aluno) {
+        return {
+            idAssinante: aluno.idAssinante,
+            nome: aluno.nome,
+            objetivo: '',
+            dieta: '',
+            periodo: ''
+        }
+    }));
+}
+
 
 
 module.exports = {
     cadastrarPersonal: cadastrarPersonal,
     buscarPersonal: buscarPersonal,
     buscarPersonalPorId: buscarPersonalPorId,
-    alterarDadosDoPersonal: alterarDadosDoPersonal
+    alterarDadosDoPersonal: alterarDadosDoPersonal,
+    alterarDadosDoPerfil: alterarDadosDoPerfil,
+    alterarSenha: alterarSenha,
+    alterarInformacoesSobreMim: alterarInformacoesSobreMim,
+    buscarAlunos : buscarAlunos
 }

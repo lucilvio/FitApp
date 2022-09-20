@@ -21,10 +21,19 @@ function buscarPersonalPorId(id) {
     return base.dados.personalTrainers.find(personal => personal.idPersonal == id);
 }
 
+function buscarAlunosPorFiltro(nome, idPersonal) {
+    if(!nome) {
+        return base.dados.assinantes.filter(assinante => assinante.personal == idPersonal);
+    } else {
+        return base.dados.assinantes.filter(assinante => assinante.personal == idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
+    }
+}
+
 module.exports = {
     buscarPersonalPorEmail: buscarPersonalPorEmail,
     salvarDadosDoPersonal: salvarDadosDoPersonal,
     buscarPersonalPorFiltro: buscarPersonalPorFiltro,
-    buscarPersonalPorId: buscarPersonalPorId
+    buscarPersonalPorId: buscarPersonalPorId,
+    buscarAlunosPorFiltro:  buscarAlunosPorFiltro,
 
 };

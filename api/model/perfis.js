@@ -2,7 +2,7 @@
 const perfil = {
     administrador : "administrador",
     nutricionista: "nutricionista",
-    personalTrainer: "Personal Trainer",
+    personalTrainer: "personalTrainer",
     assinante: "assinante"
 };
 

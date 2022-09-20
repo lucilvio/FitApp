@@ -30,5 +30,9 @@ require('./casosDeTeste/nutricionista/buscarPacientes');
 
 
 //Personal
+require('./casosDeTeste/personal/alterarDadosDoPerfil');
+require('./casosDeTeste/personal/alterarSenha');
+require('./casosDeTeste/personal/alterarInformacoesSobreMim');
+require('./casosDeTeste/personal/buscarAlunos');
 
 

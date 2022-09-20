@@ -25,7 +25,7 @@ const dados = {
             login: 'personal@fitapp.com',
             senha: 'personal123',
             bloqueado: false,
-            perfil: 'personal',
+            perfil: 'personalTrainer',
             imagem: ''
         },
         {
@@ -77,7 +77,7 @@ const dados = {
                 login: 'personal@fitapp.com',
                 senha: 'personal123',
                 bloqueado: false,
-                perfil: 'personal',
+                perfil: 'personalTrainer',
                 imagem: ''
             },
             nome: 'Personal',
