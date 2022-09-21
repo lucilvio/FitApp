@@ -1,12 +1,23 @@
 const base = require('../dados');
+const crypto = require('crypto');
 
 
 function buscarNutricionistaPorEmail(email) {
     return base.dados.nutricionistas.find(nutri => nutri.email.toLowerCase() == email.toLowerCase());
 }
 
-function salvarDadosDoNutri(novoNutricionista) {
+function criarNutricionista(usuario, telefone, registroProfissional) {
+    let novoNutricionista = {
+        idNutri: crypto.randomUUID(),
+        usuario: usuario,
+        nome: usuario.nome,
+        email: usuario.login,
+        telefone: telefone,
+        registroProfissional: registroProfissional,
+        sobreMim: ''
+    }
     base.dados.nutricionistas.push(novoNutricionista);
+    return novoNutricionista;
 }
 
 function buscarNutricionistasPorFiltro(nome) {
@@ -21,6 +32,58 @@ function buscarNutricionistasPorFiltro(nome) {
 function buscarNutriPorId(id) {
     return base.dados.nutricionistas.find(nutri => nutri.idNutri == id);
 }
+
+function salvarAlteracaoDeDados(nutricionista, nome, email, telefone, registroProfissional, status) {
+    if (nome != undefined && nome != null && nome != "") {
+        nutricionista.nome = nome;
+        nutricionista.usuario.nome = nome;
+    }
+
+    if(email != undefined && email != null && email != "" ) {
+        nutricionista.email = email;
+        nutricionista.usuario.login = email;
+    }
+
+    if(telefone != undefined && telefone != null && telefone != "") {
+        nutricionista.telefone = telefone;
+    } 
+
+    if(registroProfissional != undefined && registroProfissional != null && registroProfissional != "") {
+        nutricionista.registroProfissional = registroProfissional;
+    }
+
+    if (typeof (status) == 'boolean') {
+        nutricionista.bloqueado = status;
+        nutricionista.usuario.bloqueado = status;
+    }
+
+
+}
+
+function salvarAlteracaoDoPerfil(nutricionista, imagem, telefone) {
+
+    if (imagem != undefined && imagem != null && imagem != "") {
+        nutricionista.usuario.imagem = imagem;
+    }
+    
+    if(telefone != undefined && telefone != null && telefone != '') {
+        nutricionista.telefone = telefone;
+    }
+
+}
+
+function salvarNovaSenha(nutricionista, senha) {
+    
+    if(senha != undefined && senha != null && senha != '') {
+        nutricionista.usuario.senha = senha;
+    }
+}
+
+function salvarAlteraçõesSobreMim(nutricionista, texto) {
+    nutricionista.sobreMim = texto;
+}
+
+
 
 function buscarPacientesPorFiltro(nome, idNutri) {
     if(!nome) {
@@ -38,9 +101,13 @@ function buscarPacientePorId(id) {
 
 module.exports = {
     buscarNutricionistaPorEmail: buscarNutricionistaPorEmail,
-    salvarDadosDoNutri: salvarDadosDoNutri,
+    criarNutricionista: criarNutricionista,
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,
     buscarNutriPorId: buscarNutriPorId,
+    salvarAlteracaoDeDados: salvarAlteracaoDeDados,
+    salvarAlteracaoDoPerfil: salvarAlteracaoDoPerfil,
+    salvarNovaSenha: salvarNovaSenha,
+    salvarAlteraçõesSobreMim: salvarAlteraçõesSobreMim,
     buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
     buscarPacientePorId: buscarPacientePorId
 

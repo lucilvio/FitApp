@@ -25,42 +25,19 @@ function cadastrarPersonal(req, res) {
         return;
     }
 
-    let novoUsuario = {
-        idUsuario: crypto.randomUUID(),
-        nome: req.body.nome,
-        login: req.body.email,
-        senha: geradorDeSenha.generate({
-            length: 10,
-            numbers: true
-        }),
-        bloqueado: false,
-        perfil: 'personal trainer',
-        imagem: ''
-    }
-
     const personalEncontrado = repositorioDePersonal.buscarPersonalPorEmail(req.body.email);
 
     if (!personalEncontrado) {
 
-        repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
+        const novoUsuario = repositorioDeUsuarios.criarUsuario(req.body.nome, req.body.email, 'personalTrainer');
 
-        let novoPersonal = {
-            idPersonal: crypto.randomUUID(),
-            usuario: novoUsuario,
-            nome: req.body.nome,
-            email: req.body.email,
-            telefone: req.body.telefone,
-            registroProfissional: req.body.registroProfissional,
-            sobreMim: ''
-        }
+        const novoPersonalTrainer =  repositorioDePersonal.criarPersonal(novoUsuario, req.body.telefone, req.body.registroProfissional);
 
-        repositorioDePersonal.salvarDadosDoPersonal(novoPersonal);
-
-        servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoUsuario.senha));
+        servicoDeEmail.enviar(novoPersonalTrainer.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonalTrainer.nome, novoUsuario.senha));
 
         res.send({
-            idUsuario: novoUsuario.idUsuario,
-            idPersonal: novoPersonal.idPersonal
+            IdUsuario: novoUsuario.idUsuario,
+            idPersonal: novoPersonalTrainer.idPersonal,
         });
 
     } else {

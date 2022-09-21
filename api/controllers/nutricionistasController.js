@@ -3,8 +3,7 @@ const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
-const crypto = require('crypto');
-const geradorDeSenha = require('generate-password');
+
 
 
 // O Administrador cadastra um Nutricionista
@@ -26,36 +25,13 @@ function cadastrarNutricionista(req, res) {
         return;
     }
 
-    let novoUsuario = {
-        idUsuario: crypto.randomUUID(),
-        nome: req.body.nome,
-        login: req.body.email,
-        senha: geradorDeSenha.generate({
-            length: 10,
-            numbers: true
-        }),
-        bloqueado: false,
-        perfil: 'nutricionista',
-        imagem: ''
-    }
-
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
 
     if (!nutriEncontrado) {
 
-        repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
+        const novoUsuario = repositorioDeUsuarios.criarUsuario(req.body.nome, req.body.email, 'nutricionista');
 
-        let novoNutricionista = {
-            idNutri: crypto.randomUUID(),
-            usuario: novoUsuario,
-            nome: req.body.nome,
-            email: req.body.email,
-            telefone: req.body.telefone,
-            registroProfissional: req.body.registroProfissional,
-            sobreMim: ''
-        }
-
-        repositorioDeNutricionistas.salvarDadosDoNutri(novoNutricionista);
+        const novoNutricionista =  repositorioDeNutricionistas.criarNutricionista(novoUsuario, req.body.telefone, req.body.registroProfissional);
 
         servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoUsuario.senha));
 
@@ -118,42 +94,16 @@ function alterarDadosDoNutricionista(req, res) {
         return;
     }
 
-    const novoNome = req.body.nome;
-    const novoEmail = req.body.email;
-    const novoTelefone = req.body.telefone;
-    const novoRegistro = req.body.registroProfissional;
-    const novoStatus = req.body.bloqueado;
+   repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
 
-    if (novoNome != undefined && novoNome != null && novoNome != "") {
-        nutriEncontrado.nome = novoNome;
-        nutriEncontrado.usuario.nome = novoNome;
-    }
-
-    if(novoEmail != undefined && novoEmail != null && novoEmail != "" ) {
-        nutriEncontrado.email = novoEmail;
-        nutriEncontrado.usuario.login = novoEmail;
-    }
-
-    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != "") {
-        nutriEncontrado.telefone = novoTelefone;
-    } 
-
-    if(novoRegistro != undefined && novoRegistro != null && novoRegistro != "") {
-        nutriEncontrado.registroProfissional = novoRegistro;
-    }
-
-    if (typeof (novoStatus) == 'boolean') {
-        nutriEncontrado.bloqueado = novoStatus;
-        nutriEncontrado.usuario.bloqueado = novoStatus;
-    }
-
-    res.send(nutriEncontrado);
+    res.send();
 
 }
 
 // O Nutricionista altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
@@ -164,19 +114,9 @@ function alterarDadosDoPerfil(req, res) {
         return;
     }
 
+   repositorioDeNutricionistas.salvarAlteracaoDoPerfil(nutriEncontrado, req.body.imagem, req.body.telefone);
 
-    const novaImagem = req.body.imagem;
-    const novoTelefone = req.body.telefone;
-
-    if (novaImagem != undefined && novaImagem != null && novaImagem != "") {
-        nutriEncontrado.usuario.imagem = novaImagem;
-    }
-
-    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != '') {
-        nutriEncontrado.telefone = novoTelefone;
-    }
-
-    res.send(nutriEncontrado);
+    res.send();
 }
 
 // O nutricionista altera a senha
@@ -193,13 +133,11 @@ function alterarSenha(req, res) {
         return;
     }
 
-    const novaSenha = req.body.senha;
+    repositorioDeNutricionistas.salvarNovaSenha(nutriEncontrado, req.body.senha);
 
-    if(novaSenha != undefined && novaSenha != null && novaSenha != '') {
-        nutriEncontrado.usuario.senha = novaSenha;
-    }
 
-    res.send(nutriEncontrado.usuario)
+
+    res.send();
 }
 
 // O Nutricionista altera informações "sobre mim"
@@ -215,7 +153,9 @@ function alterarInformacoesSobreMim(req, res) {
         res.status(401).send({ erro: "Não autorizado"});
         return;
     }
-    nutriEncontrado.sobreMim = req.body.texto;
+
+    repositorioDeNutricionistas.salvarAlteraçõesSobreMim(nutriEncontrado, req.body.texto)
+    
 
     res.send(nutriEncontrado)
 }
@@ -264,6 +204,32 @@ function buscarPacientePorId(req, res) {
 
 }
 
+// O Nutricionista cria dieta
+function criarDieta(req, res) {
+    if(!req.body.dietaNome) {
+        res.status(400).send({ erro: "Não é possível criar dieta sem nome"});
+        return;
+    }
+
+    if(!req.body.dataInicio) {
+        res.status(400).send({ erro: "Não é possível criar dieta a data de inicio"});
+        return;
+    }
+
+    if(!req.body.dataFim) {
+        res.status(400).send({ erro: "Não é possível criar dieta sem a data do fim"});
+        return;
+    }
+
+    if(!req.body.objetivo) {
+        res.status(400).send({ erro: "Não é possível criar dieta sem o objetivo"});
+        return;
+    }
+
+
+
+}
+
 
 
 module.exports = {
@@ -275,7 +241,8 @@ module.exports = {
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarPacientes: buscarPacientes,
-    buscarPacientePorId: buscarPacientePorId
+    buscarPacientePorId: buscarPacientePorId,
+    criarDieta: criarDieta
 }
 
 

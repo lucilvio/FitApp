@@ -1,12 +1,38 @@
 const base = require('../dados');
+const crypto = require('crypto');
+
 
 function buscarAssianantePorEmail(email) {
     return base.dados.assinantes.find(assinante => assinante.email.toLowerCase() == email.toLowerCase());
 }
 
-function salvarDadosDoAssinante(novoAssinante) {
+function criarAssinante(usuario, idPlano, idNutri, idPersonal) {
+    let novoAssinante = {
+        idAssinante: crypto.randomUUID(),
+        usuario: usuario,
+        nome: usuario.nome,
+        email: usuario.login,
+        dataNascimento: '',
+        sexo: '',
+        altura: '',
+        assinatura: {
+            id: crypto.randomUUID(),
+            idPlano: idPlano,
+        },
+        nutricionista: idNutri,
+        personal: idPersonal,
+        objetivo: '',
+        dietas: [],
+        treinos: [],
+        medidas: []
+
+    }
+
     base.dados.assinantes.push(novoAssinante);
+    return novoAssinante;
+
 }
+
 
 
 function buscarAssinantePorFiltro(nome) {
@@ -15,7 +41,7 @@ function buscarAssinantePorFiltro(nome) {
     } else {
         return base.dados.assinantes.filter(assinante => assinante.nome.toLowerCase() == nome.toLowerCase());
 
-    } 
+    }
 }
 
 function buscarAssinantePorId(id) {
@@ -24,7 +50,7 @@ function buscarAssinantePorId(id) {
 
 module.exports = {
     buscarAssianantePorEmail: buscarAssianantePorEmail,
-    salvarDadosDoAssinante: salvarDadosDoAssinante,
+    criarAssinante: criarAssinante,
     buscarAssianantePorEmail: buscarAssianantePorEmail,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,

@@ -1,7 +1,22 @@
 const base = require('../dados');
+const crypto = require('crypto');
 
 function buscarPersonalPorEmail(email) {
     return base.dados.personalTrainers.find(personal => personal.email.toLowerCase() == email.toLowerCase());
+}
+
+function criarPersonal(usuario, telefone, registroProfissional) {
+    let novoPersonal = {
+        idPersonal: crypto.randomUUID(),
+        usuario: usuario,
+        nome: usuario.nome,
+        email: usuario.login,
+        telefone: telefone,
+        registroProfissional: registroProfissional,
+        sobreMim: ''
+    }
+    base.dados.personalTrainers.push(novoPersonal);
+    return novoPersonal;
 }
 
 function salvarDadosDoPersonal(novoPersonal) {
@@ -31,6 +46,7 @@ function buscarAlunosPorFiltro(nome, idPersonal) {
 
 module.exports = {
     buscarPersonalPorEmail: buscarPersonalPorEmail,
+    criarPersonal: criarPersonal,
     salvarDadosDoPersonal: salvarDadosDoPersonal,
     buscarPersonalPorFiltro: buscarPersonalPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,

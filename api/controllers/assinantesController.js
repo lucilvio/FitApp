@@ -67,30 +67,11 @@ function cadastrarAssinante(req, res) {
 
     if (!assinanteEncontrado) {
 
-        repositorioDeUsuarios.salvarDadosDoUsuario(novoUsuario);
+        const novoUsuario = repositorioDeUsuarios.criarUsuario(req.body.nome, req.body.email, 'assinante');
 
-        let novoAssinante = {
-            idAssinante: crypto.randomUUID(),
-            usuario: novoUsuario,
-            nome: req.body.nome,
-            email: req.body.email,
-            dataNascimento: '',
-            sexo: '',
-            altura: '',
-            assinatura: {
-                id: crypto.randomUUID(),
-                idPlano: req.body.idPlano,
-            },
-            nutricionista: req.body.idNutri,
-            personal: req.body.idPersonal,
-            objetivo: '',
-            dietas: [],
-            treinos: [],
-            medidas: []
+        const novoAssinante = repositorioDeAssinantes.criarAssinante(novoUsuario, req.body.idPlano, req.body.idNutri, req.body.idPersonal);
 
-        }
-
-        repositorioDeAssinantes.salvarDadosDoAssinante(novoAssinante);
+        
 
         servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoUsuario.senha));
 
