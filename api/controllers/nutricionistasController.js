@@ -8,20 +8,20 @@ const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 
 // O Administrador cadastra um Nutricionista
 function cadastrarNutricionista(req, res) {
-    if(!req.body.nome) {
-        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o nome"});
+    if (!req.body.nome) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o nome" });
         return;
     }
-    if(!req.body.email) {
-        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem e-mail"});
+    if (!req.body.email) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem e-mail" });
         return;
     }
-    if(!req.body.telefone) {
-        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem telefone"});
+    if (!req.body.telefone) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem telefone" });
         return;
     }
-    if(!req.body.registroProfissional) {
-        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o Registro Profissional"});
+    if (!req.body.registroProfissional) {
+        res.status(400).send({ erro: "Não é possível cadastrar Nutricionista sem o Registro Profissional" });
         return;
     }
 
@@ -31,7 +31,7 @@ function cadastrarNutricionista(req, res) {
 
         const novoUsuario = repositorioDeUsuarios.criarUsuario(req.body.nome, req.body.email, 'nutricionista');
 
-        const novoNutricionista =  repositorioDeNutricionistas.criarNutricionista(novoUsuario, req.body.telefone, req.body.registroProfissional);
+        const novoNutricionista = repositorioDeNutricionistas.criarNutricionista(novoUsuario, req.body.telefone, req.body.registroProfissional);
 
         servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoUsuario.senha));
 
@@ -49,7 +49,7 @@ function cadastrarNutricionista(req, res) {
 // o Administrador busca por Nutricionistas - todos ou por nome
 function buscarNutricionistas(req, res) {
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
-    
+
 
     res.send(nutricionistas.map(function (nutri) {
         return {
@@ -94,7 +94,7 @@ function alterarDadosDoNutricionista(req, res) {
         return;
     }
 
-   repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
+    repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
 
     res.send();
 
@@ -109,12 +109,12 @@ function alterarDadosDoPerfil(req, res) {
         return;
     }
 
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado"});
+    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado" });
         return;
     }
 
-   repositorioDeNutricionistas.salvarAlteracaoDoPerfil(nutriEncontrado, req.body.imagem, req.body.telefone);
+    repositorioDeNutricionistas.salvarAlteracaoDoPerfil(nutriEncontrado, req.body.imagem, req.body.telefone);
 
     res.send();
 }
@@ -128,8 +128,8 @@ function alterarSenha(req, res) {
         return;
     }
 
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado"});
+    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado" });
         return;
     }
 
@@ -149,13 +149,13 @@ function alterarInformacoesSobreMim(req, res) {
         return;
     }
 
-    if(req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado"});
+    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado" });
         return;
     }
 
     repositorioDeNutricionistas.salvarAlteraçõesSobreMim(nutriEncontrado, req.body.texto)
-    
+
 
     res.send(nutriEncontrado)
 }
@@ -206,24 +206,59 @@ function buscarPacientePorId(req, res) {
 
 // O Nutricionista cria dieta
 function criarDieta(req, res) {
-    if(!req.body.dietaNome) {
-        res.status(400).send({ erro: "Não é possível criar dieta sem nome"});
+    if (!req.body.dietaNome) {
+        res.status(400).send({ erro: "Não é possível criar dieta sem nome" });
         return;
     }
 
-    if(!req.body.dataInicio) {
-        res.status(400).send({ erro: "Não é possível criar dieta a data de inicio"});
+    if (!req.body.dataInicio) {
+        res.status(400).send({ erro: "Não é possível criar dieta a data de inicio" });
         return;
     }
 
-    if(!req.body.dataFim) {
-        res.status(400).send({ erro: "Não é possível criar dieta sem a data do fim"});
+    if (!req.body.dataFim) {
+        res.status(400).send({ erro: "Não é possível criar dieta sem a data do fim" });
         return;
     }
 
-    if(!req.body.objetivo) {
-        res.status(400).send({ erro: "Não é possível criar dieta sem o objetivo"});
+    if (!req.body.objetivo) {
+        res.status(400).send({ erro: "Não é possível criar dieta sem o objetivo" });
         return;
+    }
+
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
+
+    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+
+
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Nutricionista não encontrado" });
+        return;
+    }
+
+    if (!pacienteEncontrado) {
+        res.status(404).send({ erro: "Paciente não encontrado" });
+        return;
+    }
+
+    if(req.params.idNutri == pacienteEncontrado.nutricionista) {
+
+        const dieta = repositorioDeNutricionistas.salvarDieta(
+            pacienteEncontrado,
+            req.body.dietaNome,
+            req.body.dataInicio,
+            req.body.dataFim,
+            req.body.objetivo,
+            req.body.cafeDaManha,
+            req.body.lancheDaManha,
+            req.body.almoco,
+            req.body.lancheDaTarde,
+            req.body.jantar,
+            req.body.ceia
+        );
+        res.send(dieta);
+    } else {
+        res.status(400).send({ erro: "Não é possivel criar dieta "})
     }
 
 

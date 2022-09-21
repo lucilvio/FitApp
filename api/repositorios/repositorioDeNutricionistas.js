@@ -97,6 +97,25 @@ function buscarPacientePorId(id) {
     return base.dados.assinantes.find(assinante => assinante.idAssinante == id);
 }
 
+function salvarDieta(pacienteEncontrado, dietaNome, dataInicio, dataFim, objetivo, cafeDaManha, lancheDaManha, almoco, lancheDaTarde, jantar, ceia) {
+    let novaDieta = {
+        idDieta: crypto.randomUUID(),
+        dietaNome: dietaNome,
+        dataInicio: dataInicio,
+        dataFim: dataFim,
+        objetivo: objetivo,
+        cafeDaManha: cafeDaManha,
+        lancheDaManha: lancheDaManha,
+        almoco: almoco,
+        lancheDaTarde: lancheDaTarde,
+        jantar: jantar,
+        ceia: ceia
+    }
+
+    pacienteEncontrado.dietas.push(novaDieta);
+    return novaDieta;
+}
+
 
 
 module.exports = {
@@ -109,6 +128,7 @@ module.exports = {
     salvarNovaSenha: salvarNovaSenha,
     salvarAlteraçõesSobreMim: salvarAlteraçõesSobreMim,
     buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
-    buscarPacientePorId: buscarPacientePorId
+    buscarPacientePorId: buscarPacientePorId,
+    salvarDieta: salvarDieta,
 
 };
