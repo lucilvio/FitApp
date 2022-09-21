@@ -9,7 +9,7 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/${idNutri}`)
+        .patch(`http://localhost:3000/admin/nutricionista/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",

@@ -124,7 +124,7 @@ function alterarDadosDoPersonal(req, res) {
     }
 
 
-    res.send(personalEncontrado);
+    res.send();
 }
 
 // O Personal altera dados do perfil
@@ -152,7 +152,7 @@ function alterarDadosDoPerfil(req, res) {
         personalEncontrado.telefone = novoTelefone;
     }
 
-    res.send(personalEncontrado);
+    res.send();
 }
 
 // O Personal altera a senha
@@ -175,7 +175,7 @@ function alterarSenha(req, res) {
         personalEncontrado.usuario.senha = novaSenha;
     }
 
-    res.send(personalEncontrado.usuario)
+    res.send()
 }
 
 // O Personal altera informações "sobre mim"
@@ -193,7 +193,7 @@ function alterarInformacoesSobreMim(req, res) {
     }
     personalEncontrado.sobreMim = req.body.texto;
 
-    res.send(personalEncontrado)
+    res.send()
 }
 
 // O Personal busca seus Alunos

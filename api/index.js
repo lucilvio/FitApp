@@ -11,17 +11,39 @@ const model = require('./model/perfis');
 
 
 
-
+//Geral
 servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuario', usuariosController.redefinirSenha);
+servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
+servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
+servidor.app.get('/personal/:id', personalTrainersController.buscarPersonalPorId);
+servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
+servidor.app.post('/mensagem', mensagensController.enviarMensagem);
+servidor.app.get('/mensagem', mensagensController.buscarMensagensPorFiltro);
+servidor.app.get('/mensagem/:idMensagem', mensagensController.buscarMensagemPorId);
+servidor.app.patch('/mensagem/:idMensagem', mensagensController.excluirMensagem);
+servidor.app.post('/mensagem/:idMensagem', mensagensController.responderMensagem);
+
+
+//Administrador
+servidor.app.post('/admin/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.cadastrarNutricionista);
+servidor.app.get('/admin/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
+servidor.app.patch('/admin/nutricionista/:id', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.alterarDadosDoNutricionista);
+
+servidor.app.post('/admin/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.cadastrarPersonal);
+servidor.app.get('/admin/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.buscarPersonal);
+servidor.app.patch('/admin/personal/:id', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.alterarDadosDoPersonal);
+
+servidor.app.post('/admin/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);
+servidor.app.get('/admin/plano', autorizacao.autorizar(model.perfil.administrador), planosController.buscarPlanos);
+servidor.app.patch('/admin/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarDadosDoPlano);
+
+servidor.app.get('/admin/assinante', autorizacao.autorizar(model.perfil.administrador), assinantesController.buscarAssinantes);
+servidor.app.patch('/admin/assinante/:id', autorizacao.autorizar(model.perfil.administrador), assinantesController.alterarStatusDoAssinante);
+
 
 //Nutricionista
-servidor.app.post('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.cadastrarNutricionista);
-servidor.app.get('/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
-servidor.app.patch('/nutricionista/:id', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.alterarDadosDoNutricionista);
-
-servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
-servidor.app.patch('/nutricionista/:id/perfil', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDadosDoPerfil);
+servidor.app.patch('/nutricionista/perfil', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDadosDoPerfil);
 servidor.app.patch('/nutricionista/:id/senha', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarSenha);
 servidor.app.patch('/nutricionista/:id/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim);
 servidor.app.get('/nutricionista/:id/paciente', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
@@ -29,34 +51,17 @@ servidor.app.get('/nutricionista/:idNutri/paciente/:idAssinante', autorizacao.au
 servidor.app.post('/nutricionista/:idNutri/paciente/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta);
 
 //Personal Trainer
-servidor.app.post('/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.cadastrarPersonal);
-servidor.app.get('/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.buscarPersonal);
-servidor.app.patch('/personal/:id', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.alterarDadosDoPersonal);
-
-servidor.app.get('/personal/:id', personalTrainersController.buscarPersonalPorId);
 servidor.app.patch('/personal/:id/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);
 servidor.app.patch('/personal/:id/senha', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarSenha);
 servidor.app.patch('/personal/:id/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
 servidor.app.get('/personal/:id/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
 
-//Plano
-servidor.app.post('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);
-servidor.app.get('/plano', autorizacao.autorizar(model.perfil.administrador), planosController.buscarPlanos);
-servidor.app.patch('/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarDadosDoPlano);
 
-servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
+
+
 
 //Assinante
-servidor.app.get('/assinante', autorizacao.autorizar(model.perfil.administrador), assinantesController.buscarAssinantes);
-servidor.app.patch('/assinante/:id', autorizacao.autorizar(model.perfil.administrador), assinantesController.alterarStatusDoAssinante);
-
-servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
 
 
-//Mensagem
-servidor.app.post('/mensagem', mensagensController.enviarMensagem);
-servidor.app.get('/mensagem', mensagensController.buscarMensagensPorFiltro);
-servidor.app.get('/mensagem/:idMensagem', mensagensController.buscarMensagemPorId);
-servidor.app.patch('/mensagem/:idMensagem', mensagensController.excluirMensagem);
-servidor.app.post('/mensagem/:idMensagem', mensagensController.responderMensagem);
+
 

@@ -10,7 +10,7 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
     const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
 
     await spec()
-        .patch(`http://localhost:3000/plano/${idPlano}`)
+        .patch(`http://localhost:3000/admin/plano/${idPlano}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": `Gratuito_55`,

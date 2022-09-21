@@ -6,7 +6,7 @@ it('CU-A 14 - deve cadastrar Personal', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
     await spec()
-        .post('http://localhost:3000/personal')
+        .post('http://localhost:3000/admin/personal')
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Bruno",

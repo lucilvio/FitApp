@@ -6,7 +6,7 @@ it('CU-A 19 - deve cadastrar Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     await spec()
-        .post('http://localhost:3000/plano')
+        .post('http://localhost:3000/admin/plano')
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": `Gratuito_${crypto.randomUUID()}`,

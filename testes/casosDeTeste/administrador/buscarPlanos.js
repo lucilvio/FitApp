@@ -9,7 +9,7 @@ it('CU-A 15 - deve listar Planos', async () => {
     const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
 
     await spec()
-        .get('http://localhost:3000/plano')
+        .get('http://localhost:3000/admin/plano')
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {

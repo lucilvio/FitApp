@@ -19,7 +19,7 @@ it('CU-A 04 - deve alterar status do Assinante', async () => {
     
 
     await spec()
-        .patch(`http://localhost:3000/assinante/${idAssinante}`)
+        .patch(`http://localhost:3000/admin/assinante/${idAssinante}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "bloqueado": true,

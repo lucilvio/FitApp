@@ -102,15 +102,10 @@ function alterarDadosDoNutricionista(req, res) {
 
 // O Nutricionista altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.usuario.email);
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
-        return;
-    }
-
-    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado" });
         return;
     }
 

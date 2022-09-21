@@ -51,18 +51,6 @@ function cadastrarAssinante(req, res) {
     }
 
 
-    let novoUsuario = {
-        idusuario: crypto.randomUUID(),
-        nome: req.body.nome,
-        login: req.body.email,
-        senha: geradorDeSenha.generate({
-            length: 10,
-            numbers: true
-        }),
-        bloqueado: false,
-        perfil: 'assinante'
-    }
-
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssianantePorEmail(req.body.email);
 
     if (!assinanteEncontrado) {
@@ -131,7 +119,7 @@ function alterarStatusDoAssinante(req, res) {
 
     assinanteEncontrado.usuario.bloqueado = novoStatus;
 
-    res.send(assinanteEncontrado.usuario.bloqueado)
+    res.send();
 }
 
 

@@ -9,7 +9,7 @@ it('CU-A 13 - deve alterar dados do Personal', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "55 555 55 55", "CRN 123");
     
     await spec()
-        .patch(`http://localhost:3000/personal/${idPersonal}`)
+        .patch(`http://localhost:3000/admin/personal/${idPersonal}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Bruno",
