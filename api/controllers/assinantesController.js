@@ -5,7 +5,7 @@ const geradorDeSenha = require('generate-password');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
-const repositorioDePersonal = require('../repositorios/repositorioDePersonal');
+const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrainers');
 const repositorioDeMensagens = require('../repositorios/repositorioDeMensagens');
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 

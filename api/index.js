@@ -16,13 +16,13 @@ servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuario', usuariosController.redefinirSenha);
 servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
 servidor.app.get('/nutricionistas/:id', nutricionistasController.buscarNutriPorId);
-servidor.app.get('/personal/:id', personalTrainersController.buscarPersonalPorId);
-servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
+servidor.app.get('/personalTrainers/:id', personalTrainersController.buscarPersonalPorId);
+servidor.app.get('/planos/:id', planosController.buscarPlanoPorId);
 servidor.app.post('/mensagem', mensagensController.enviarMensagem);
 servidor.app.get('/mensagem', mensagensController.buscarMensagensPorFiltro);
-servidor.app.get('/mensagem/:idMensagem', mensagensController.buscarMensagemPorId);
-servidor.app.patch('/mensagem/:idMensagem', mensagensController.excluirMensagem);
-servidor.app.post('/mensagem/:idMensagem', mensagensController.responderMensagem);
+servidor.app.get('/mensagens/:idMensagem', mensagensController.buscarMensagemPorId);
+servidor.app.patch('/mensagens/:idMensagem', mensagensController.excluirMensagem);
+servidor.app.post('/mensagens/:idMensagem', mensagensController.responderMensagem);
 
 
 //Administrador
@@ -51,10 +51,10 @@ servidor.app.get('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(
 servidor.app.post('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta);
 
 //Personal Trainer
-servidor.app.patch('/personal/:id/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);
-servidor.app.patch('/personal/:id/senha', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarSenha);
-servidor.app.patch('/personal/:id/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
-servidor.app.get('/personal/:id/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
+servidor.app.patch('/personal/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);
+servidor.app.patch('/personal/senha', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarSenha);
+servidor.app.patch('/personal/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
+servidor.app.get('/personal/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
 
 
 

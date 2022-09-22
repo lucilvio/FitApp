@@ -2,7 +2,7 @@ const base = require('../dados');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeMensagem = require('../repositorios/repositorioDeMensagens');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
-const repositorioDePersonal = require('../repositorios/repositorioDePersonal');
+const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrainers');
 const crypto = require('crypto');
 
 function enviarMensagem(req, res) {

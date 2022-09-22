@@ -1,9 +1,7 @@
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
-const repositorioDePersonal = require('../repositorios/repositorioDePersonal');
+const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
-const crypto = require('crypto');
-const geradorDeSenha = require('generate-password');
 
 
 // O Administrador cadastra um Personal Trainer
@@ -25,13 +23,13 @@ function cadastrarPersonal(req, res) {
         return;
     }
 
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorEmail(req.body.email);
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.body.email);
 
     if (!personalEncontrado) {
 
         const novoUsuario = repositorioDeUsuarios.criarUsuario(req.body.nome, req.body.email, 'personalTrainer');
 
-        const novoPersonalTrainer =  repositorioDePersonal.criarPersonal(novoUsuario, req.body.telefone, req.body.registroProfissional);
+        const novoPersonalTrainer =  repositorioDePersonalTrainers.criarPersonal(novoUsuario, req.body.telefone, req.body.registroProfissional);
 
         servicoDeEmail.enviar(novoPersonalTrainer.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonalTrainer.nome, novoUsuario.senha));
 
@@ -48,7 +46,7 @@ function cadastrarPersonal(req, res) {
 
 // o Administrador busca por Personal Trainers - todos ou por nome
 function buscarPersonal(req, res) {
-    let personalTrainers = repositorioDePersonal.buscarPersonalPorFiltro(req.query.nome);
+    let personalTrainers = repositorioDePersonalTrainers.buscarPersonalPorFiltro(req.query.nome);
 
     res.send(personalTrainers.map(function (personal) {
         return {
@@ -65,7 +63,7 @@ function buscarPersonal(req, res) {
 }
 
 function buscarPersonalPorId(req, res) {
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.id);
 
     if (!personalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
@@ -87,125 +85,82 @@ function buscarPersonalPorId(req, res) {
 
 // O Administrador altera os dados cadastrais do Personal Trainer
 function alterarDadosDoPersonal(req, res) {
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.id);
 
     if (!personalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    const novoNome = req.body.nome;
-    const novoEmail = req.body.email;
-    const novoTelefone = req.body.telefone;
-    const novoRegistro = req.body.registroProfissional;
-    const novoStatus = req.body.bloqueado;
-
-    if (novoNome != undefined && novoNome != null && novoNome != "") {
-        personalEncontrado.nome = novoNome;
-        personalEncontrado.usuario.nome = novoNome;
-    }
-
-    if(novoEmail != undefined && novoEmail != null && novoEmail != "" ) {
-        personalEncontrado.email = novoEmail;
-        personalEncontrado.usuario.login = novoEmail;
-    }
-
-    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != "") {
-        personalEncontrado.telefone = novoTelefone;
-    } 
-
-    if(novoRegistro != undefined && novoRegistro != null && novoRegistro != "") {
-        personalEncontrado.registroProfissional = novoRegistro;
-    }
-
-    if (typeof (novoStatus) == 'boolean') {
-        personalEncontrado.bloqueado = novoStatus;
-        personalEncontrado.usuario.bloqueado = novoStatus;
-    }
-
+    repositorioDePersonalTrainers.salvarAlteracaoDeDados(personalEncontrado, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
 
     res.send();
+
 }
 
 // O Personal altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.usuario.email);
+
     if (!personalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    if(req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado"});
-        return;
-    }
-
-
-    const novaImagem = req.body.imagem;
-    const novoTelefone = req.body.telefone;
-
-    if (novaImagem != undefined && novaImagem != null && novaImagem != "") {
-        personalEncontrado.usuario.imagem = novaImagem;
-    }
-
-    if(novoTelefone != undefined && novoTelefone != null && novoTelefone != '') {
-        personalEncontrado.telefone = novoTelefone;
-    }
+    repositorioDePersonalTrainers.salvarAlteracaoDoPerfil(personalEncontrado, req.body.imagem, req.body.telefone);
 
     res.send();
 }
 
 // O Personal altera a senha
 function alterarSenha(req, res) {
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    const PersonalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.usuario.email);
 
-    if (!personalEncontrado) {
+    if (!PersonalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    if(req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado"});
+    if (req.usuario.idUsuario != PersonalEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado" });
         return;
     }
 
-    const novaSenha = req.body.senha;
+    repositorioDePersonalTrainers.salvarNovaSenha(PersonalEncontrado, req.body.senha);
 
-    if(novaSenha != undefined && novaSenha != null && novaSenha != '') {
-        personalEncontrado.usuario.senha = novaSenha;
-    }
-
-    res.send()
+    res.send();
 }
 
 // O Personal altera informações "sobre mim"
 function alterarInformacoesSobreMim(req, res) {
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.usuario.email);
 
     if (!personalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    if(req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: "Não autorizado"});
+    if (req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: "Não autorizado" });
         return;
     }
-    personalEncontrado.sobreMim = req.body.texto;
 
-    res.send()
+    repositorioDePersonalTrainers.salvarAlteraçõesSobreMim(personalEncontrado, req.body.texto)
+
+
+    res.send();
 }
 
 // O Personal busca seus Alunos
 function buscarAlunos(req, res) {
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.params.id);
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.usuario.email);
 
     if (!personalEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    const alunos = repositorioDePersonal.buscarAlunosPorFiltro(req.query.nome, req.params.id);
+    const alunos = repositorioDePersonalTrainers.buscarAlunosPorFiltro(req.query.nome, personalEncontrado.idPersonal);
 
     res.send(alunos.map(function (aluno) {
         return {

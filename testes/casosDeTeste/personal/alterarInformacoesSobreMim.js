@@ -5,7 +5,7 @@ it('CU-P 04 - O personal deve alterar as informacoes Sobre Mim', async () => {
     const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
 
     await spec()
-        .patch(`http://localhost:3000/personal/idPersonal/sobreMim`)
+        .patch(`http://localhost:3000/personal/sobreMim`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "texto": "Informações sobre o Personal",
@@ -14,7 +14,7 @@ it('CU-P 04 - O personal deve alterar as informacoes Sobre Mim', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/personal/idPersonal`)
+        .get(`http://localhost:3000/personalTrainers/idPersonal`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {

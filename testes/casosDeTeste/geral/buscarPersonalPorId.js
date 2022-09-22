@@ -10,7 +10,7 @@ it('CU-A 12 - deve ver os dados do personal', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "bruno", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/personal/${idPersonal}`)
+        .get(`http://localhost:3000/personalTrainers/${idPersonal}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson(
             {
@@ -35,7 +35,7 @@ it('CU-A 12 - não encontra Personal quando o Id não existe', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "bruno", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/personal/${crypto.randomUUID()}`)
+        .get(`http://localhost:3000/personalTrainers/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson({ erro: "Não encontrado" })
         .expectStatus(404);

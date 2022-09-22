@@ -10,7 +10,7 @@ it('CU-A 17 - deve ver os dados do Plano', async () => {
     const idPlano = await plano.cadastrarPlano(token, nome, 0, "Experimente gratis por 15 dias");
 
     await spec()
-        .get(`http://localhost:3000/plano/${idPlano}`)
+        .get(`http://localhost:3000/planos/${idPlano}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson(
             {
@@ -28,7 +28,7 @@ it('CU-A 17 - não encontra plano quando o Id não existe', async () => {
     const idPlano = await plano.cadastrarPlano(token, nome, 0, "Experimente gratis por 15 dias");
 
     await spec()
-        .get(`http://localhost:3000/plano/${crypto.randomUUID()}`)
+        .get(`http://localhost:3000/planos/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson({ erro: "Não encontrado" })
         .expectStatus(404);
