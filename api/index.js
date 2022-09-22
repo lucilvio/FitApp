@@ -15,7 +15,7 @@ const model = require('./model/perfis');
 servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuario', usuariosController.redefinirSenha);
 servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
-servidor.app.get('/nutricionista/:id', nutricionistasController.buscarNutriPorId);
+servidor.app.get('/nutricionistas/:id', nutricionistasController.buscarNutriPorId);
 servidor.app.get('/personal/:id', personalTrainersController.buscarPersonalPorId);
 servidor.app.get('/plano/:id', planosController.buscarPlanoPorId);
 servidor.app.post('/mensagem', mensagensController.enviarMensagem);
@@ -44,11 +44,11 @@ servidor.app.patch('/admin/assinante/:id', autorizacao.autorizar(model.perfil.ad
 
 //Nutricionista
 servidor.app.patch('/nutricionista/perfil', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDadosDoPerfil);
-servidor.app.patch('/nutricionista/:id/senha', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarSenha);
-servidor.app.patch('/nutricionista/:id/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim);
-servidor.app.get('/nutricionista/:id/paciente', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
-servidor.app.get('/nutricionista/:idNutri/paciente/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId);
-servidor.app.post('/nutricionista/:idNutri/paciente/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta);
+servidor.app.patch('/nutricionista/senha', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarSenha);
+servidor.app.patch('/nutricionista/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim);
+servidor.app.get('/nutricionista/pacientes', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
+servidor.app.get('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId);
+servidor.app.post('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta);
 
 //Personal Trainer
 servidor.app.patch('/personal/:id/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);

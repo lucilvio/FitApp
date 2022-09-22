@@ -14,7 +14,7 @@ it('CU-N 02 - O Nutricionista deve alterar os dados do perfil', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/idNutri`)
+        .get(`http://localhost:3000/nutricionistas/idNutri`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {

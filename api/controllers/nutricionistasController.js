@@ -116,7 +116,7 @@ function alterarDadosDoPerfil(req, res) {
 
 // O nutricionista altera a senha
 function alterarSenha(req, res) {
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.usuario.email);
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
@@ -130,14 +130,12 @@ function alterarSenha(req, res) {
 
     repositorioDeNutricionistas.salvarNovaSenha(nutriEncontrado, req.body.senha);
 
-
-
     res.send();
 }
 
 // O Nutricionista altera informações "sobre mim"
 function alterarInformacoesSobreMim(req, res) {
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.usuario.email);
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
@@ -152,19 +150,20 @@ function alterarInformacoesSobreMim(req, res) {
     repositorioDeNutricionistas.salvarAlteraçõesSobreMim(nutriEncontrado, req.body.texto)
 
 
-    res.send(nutriEncontrado)
+    res.send();
 }
 
 // O nutricionista busca seus pacientes
 function buscarPacientes(req, res) {
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.id);
+    
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.usuario.email);
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Não encontrado" });
         return;
     }
 
-    const pacientes = repositorioDeNutricionistas.buscarPacientesPorFiltro(req.query.nome, req.params.id);
+    const pacientes = repositorioDeNutricionistas.buscarPacientesPorFiltro(req.query.nome, nutriEncontrado.idNutri);
 
     res.send(pacientes.map(function (paciente) {
         return {
@@ -221,8 +220,7 @@ function criarDieta(req, res) {
         return;
     }
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
-
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.usuario.email);
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
 
@@ -236,7 +234,7 @@ function criarDieta(req, res) {
         return;
     }
 
-    if(req.params.idNutri == pacienteEncontrado.nutricionista) {
+    if(nutriEncontrado.idNutri == pacienteEncontrado.nutricionista) {
 
         const dieta = repositorioDeNutricionistas.salvarDieta(
             pacienteEncontrado,

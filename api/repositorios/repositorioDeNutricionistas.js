@@ -93,8 +93,8 @@ function buscarPacientesPorFiltro(nome, idNutri) {
     }
 }
 
-function buscarPacientePorId(id) {
-    return base.dados.assinantes.find(assinante => assinante.idAssinante == id);
+function buscarPacientePorId(idAssinante) {
+    return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
 }
 
 function salvarDieta(pacienteEncontrado, dietaNome, dataInicio, dataFim, objetivo, cafeDaManha, lancheDaManha, almoco, lancheDaTarde, jantar, ceia) {
