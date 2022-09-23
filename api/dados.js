@@ -111,10 +111,25 @@ const dados = {
             nutricionista: 'idNutri',
             personal: 'idPersonal',
             objetivo: '',
-            dietas: [],
+            dietas: [
+                {
+                    idDieta: 'idDieta',
+                    ativo: true,
+                    dietaNome: 'Dieta 1',
+                    dataInicio: '01/09/2022',
+                    dataFim: '30/09/2022',
+                    objetivo: 'Perda  de Peso',
+                    cafeDaManha: 'cafeDaManha',
+                    lancheDaManha: 'lancheDaManha',
+                    almoco: 'almoco',
+                    lancheDaTarde: 'lancheDaTarde',
+                    jantar: 'jantar',
+                    ceia: 'ceia'
+                }
+            ],
             treinos: [],
             medidas: []
-                
+
         }
     ],
 

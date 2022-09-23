@@ -254,7 +254,25 @@ function criarDieta(req, res) {
         res.status(400).send({ erro: "Não é possivel criar dieta "})
     }
 
+}
 
+function buscarDietaPorId(req, res) {
+    
+    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+
+    if (!pacienteEncontrado) {
+        res.status(404).send({ erro: "Paciente não encontrado" });
+        return;
+    }
+
+    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(pacienteEncontrado, req.params.idDieta);
+
+    if(!dietaEncontrada) {
+        res.status(404).send({ erro: "Dieta não encontrada"});
+        return;
+    }
+
+    res.send(dietaEncontrada);
 
 }
 
@@ -270,7 +288,8 @@ module.exports = {
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarPacientes: buscarPacientes,
     buscarPacientePorId: buscarPacientePorId,
-    criarDieta: criarDieta
+    criarDieta: criarDieta,
+    buscarDietaPorId: buscarDietaPorId
 }
 
 

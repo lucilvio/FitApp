@@ -49,6 +49,7 @@ servidor.app.patch('/nutricionista/sobreMim', autorizacao.autorizar(model.perfil
 servidor.app.get('/nutricionista/pacientes', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
 servidor.app.get('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId);
 servidor.app.post('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta);
+servidor.app.get('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarDietaPorId);
 
 //Personal Trainer
 servidor.app.patch('/personal/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);
