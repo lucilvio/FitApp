@@ -242,12 +242,8 @@ function criarDieta(req, res) {
             req.body.dataInicio,
             req.body.dataFim,
             req.body.objetivo,
-            req.body.cafeDaManha,
-            req.body.lancheDaManha,
-            req.body.almoco,
-            req.body.lancheDaTarde,
-            req.body.jantar,
-            req.body.ceia
+            req.body.itens
+            
         );
         res.send(dieta);
     } else {

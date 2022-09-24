@@ -14,7 +14,8 @@ async function cadastrarNutri(token, nome, email, telefone, registroProfissional
        
 }
 
-async function criarDieta(tokenNutri, dietaNome, dataInicio, dataFim, objetivo, cafeDaManha, lancheDaManha, almoco, lancheDaTarde, jantar, ceia ) {
+
+async function criarDieta(tokenNutri, dietaNome, dataInicio, dataFim, objetivo, itens) {
     return await spec()
     .post(`http://localhost:3000/nutricionista/pacientes/idAssinante`)
     .withHeaders("Authorization", "Bearer " + tokenNutri)
@@ -23,12 +24,7 @@ async function criarDieta(tokenNutri, dietaNome, dataInicio, dataFim, objetivo, 
         "dataInicio":dataInicio,
         "dataFim": dataFim,
         "objetivo": objetivo,
-        "cafeDaManha": cafeDaManha,
-        "lancheDaManha": lancheDaManha,
-        "almoco": almoco,
-        "lancheDaTarde": lancheDaTarde,
-        "jantar": jantar,
-        "ceia": ceia
+        "itens": itens
     })
     .returns("idDieta");
 

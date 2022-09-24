@@ -97,7 +97,7 @@ function buscarPacientePorId(idAssinante) {
     return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
 }
 
-function salvarDieta(pacienteEncontrado, dietaNome, dataInicio, dataFim, objetivo, cafeDaManha, lancheDaManha, almoco, lancheDaTarde, jantar, ceia) {
+function salvarDieta(pacienteEncontrado, dietaNome, dataInicio, dataFim, objetivo, itens) {
     let novaDieta = {
         idDieta: crypto.randomUUID(),
         ativo: true,
@@ -105,12 +105,7 @@ function salvarDieta(pacienteEncontrado, dietaNome, dataInicio, dataFim, objetiv
         dataInicio: dataInicio,
         dataFim: dataFim,
         objetivo: objetivo,
-        cafeDaManha: cafeDaManha,
-        lancheDaManha: lancheDaManha,
-        almoco: almoco,
-        lancheDaTarde: lancheDaTarde,
-        jantar: jantar,
-        ceia: ceia
+        itens: itens
     }
 
     pacienteEncontrado.dietas.push(novaDieta);

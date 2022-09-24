@@ -119,12 +119,7 @@ const dados = {
                     dataInicio: '01/09/2022',
                     dataFim: '30/09/2022',
                     objetivo: 'Perda  de Peso',
-                    cafeDaManha: 'cafeDaManha',
-                    lancheDaManha: 'lancheDaManha',
-                    almoco: 'almoco',
-                    lancheDaTarde: 'lancheDaTarde',
-                    jantar: 'jantar',
-                    ceia: 'ceia'
+                    itens: []
                 }
             ],
             treinos: [],

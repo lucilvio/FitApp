@@ -13,12 +13,7 @@ it('CU-N 13 - deve criar dieta', async () => {
             "dataInicio": "01/10/2022",
             "dataFim": "31/10/2022",
             "objetivo": "Perda de Peso",
-            "cafeDaManha": [],
-            "lancheDaManha": [],
-            "almoco": [],
-            "lancheDaTarde": [],
-            "jantar": [],
-            "ceia": []
+            "itens": [],
         })
         .expectStatus(200);
 

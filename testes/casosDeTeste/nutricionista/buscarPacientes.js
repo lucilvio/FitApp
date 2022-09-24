@@ -28,6 +28,4 @@ it('CU-N 05 - não deve listar os Pacientes para Personal', async () => {
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectStatus(401);
 
-
-
 });
