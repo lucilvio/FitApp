@@ -116,6 +116,15 @@ function buscarDietaPorId(pacienteEncontrado, idDieta) {
     return pacienteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
 }
 
+function salvarAlteracoesDaDieta(dietaEncontrada, dietaNome, dataInicio, dataFim, objetivo, itens) {
+   dietaEncontrada.dietaNome = dietaNome;
+   dietaEncontrada.dataInicio = dataInicio;
+   dietaEncontrada.dataFim = dataFim;
+   dietaEncontrada.objetivo = objetivo;
+   dietaEncontrada.itens = itens;
+
+}
+
 
 
 module.exports = {
@@ -131,5 +140,6 @@ module.exports = {
     buscarPacientePorId: buscarPacientePorId,
     salvarDieta: salvarDieta,
     buscarDietaPorId: buscarDietaPorId,
+    salvarAlteracoesDaDieta: salvarAlteracoesDaDieta,
 
 };

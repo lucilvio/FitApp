@@ -155,11 +155,11 @@ function alterarInformacoesSobreMim(req, res) {
 
 // O nutricionista busca seus pacientes
 function buscarPacientes(req, res) {
-    
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.usuario.email);
 
     if (!nutriEncontrado) {
-        res.status(404).send({ erro: "Não encontrado" });
+        res.status(404).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
@@ -234,7 +234,7 @@ function criarDieta(req, res) {
         return;
     }
 
-    if(nutriEncontrado.idNutri == pacienteEncontrado.nutricionista) {
+    if (nutriEncontrado.idNutri == pacienteEncontrado.nutricionista) {
 
         const dieta = repositorioDeNutricionistas.salvarDieta(
             pacienteEncontrado,
@@ -243,17 +243,17 @@ function criarDieta(req, res) {
             req.body.dataFim,
             req.body.objetivo,
             req.body.itens
-            
+
         );
         res.send(dieta);
     } else {
-        res.status(400).send({ erro: "Não é possivel criar dieta "})
+        res.status(400).send({ erro: "Não é possivel criar dieta " })
     }
 
 }
 
 function buscarDietaPorId(req, res) {
-    
+
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
@@ -263,13 +263,40 @@ function buscarDietaPorId(req, res) {
 
     const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(pacienteEncontrado, req.params.idDieta);
 
-    if(!dietaEncontrada) {
-        res.status(404).send({ erro: "Dieta não encontrada"});
+    if (!dietaEncontrada) {
+        res.status(404).send({ erro: "Dieta não encontrada" });
         return;
     }
 
     res.send(dietaEncontrada);
 
+}
+
+function editarDieta(req, res) {
+    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(pacienteEncontrado, req.params.idDieta);
+
+    if (!pacienteEncontrado) {
+        res.status(404).send({ erro: "Paciente não encontrado" });
+        return;
+    }
+
+    if (!dietaEncontrada) {
+        res.status(404).send({ erro: "Dieta não encontrada" });
+        return;
+    }
+
+
+    repositorioDeNutricionistas.salvarAlteracoesDaDieta(
+        dietaEncontrada,
+        req.body.dietaNome,
+        req.body.dataInicio,
+        req.body.dataFim,
+        req.body.objetivo,
+        req.body.itens
+    );
+
+    res.send(dietaEncontrada);
 }
 
 
@@ -285,7 +312,8 @@ module.exports = {
     buscarPacientes: buscarPacientes,
     buscarPacientePorId: buscarPacientePorId,
     criarDieta: criarDieta,
-    buscarDietaPorId: buscarDietaPorId
+    buscarDietaPorId: buscarDietaPorId,
+    editarDieta: editarDieta,
 }
 
 
