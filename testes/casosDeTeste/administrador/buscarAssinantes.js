@@ -18,7 +18,7 @@ it('CU-A 01 - deve listar assinantes', async () => {
     const idAssinante = await assinante.cadastrarAssinante("Guilherme", `Guilherme_${crypto.randomUUID()}@fitapp.com`, idPlano, idNutri, idPersonal);
 
     await spec()
-        .get('http://localhost:3000/admin/assinante')
+        .get('http://localhost:3000/admin/assinantes')
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {

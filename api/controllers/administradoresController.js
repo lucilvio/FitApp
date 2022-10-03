@@ -88,7 +88,7 @@ function cadastrarNutricionista(req, res) {
         servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoNutricionista.usuario.senha));
 
         res.send({
-            IdNutri: novoNutricionista.idNutri
+            idNutri: novoNutricionista.idNutri
         });
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
@@ -158,7 +158,7 @@ function cadastrarPersonal(req, res) {
         servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
 
         res.send({
-            idPersonal: novoPersonal.idNutri
+            idPersonal: novoPersonal.idPersonal
         });
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
@@ -171,7 +171,7 @@ function buscarPersonalTrainers(req, res) {
 
     res.send(personalTrainers.map(function (personal) {
         return {
-            idPersonal: personal.idNutri,
+            idPersonal: personal.idPersonal,
             nome: personal.nome,
             email: personal.email,
             telefone: personal.telefone,
@@ -231,6 +231,23 @@ function buscarAssinantes(req, res) {
 
 }
 
+function buscarAssinantePorId(req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
+
+    if (!assinanteEncontrado) {
+        res.status(404).send({ erro: "Assinante não encontrado" });
+        return;
+    }
+
+    res.send({
+        idAssinante: assinanteEncontrado.idAssinante,
+        nome: assinanteEncontrado.nome,
+        email: assinanteEncontrado.email,
+        bloqueado: assinanteEncontrado.usuario.bloqueado,
+        idPlano: assinanteEncontrado.assinatura.idPlano
+    });
+}
+
 // O Administrador altera o status do Assinante
 function alterarStatusDoAssinante(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
@@ -261,6 +278,7 @@ module.exports = {
     buscarPersonalPorId: buscarPersonalPorId,
     alterarDadosDoPersonal: alterarDadosDoPersonal,
     buscarAssinantes: buscarAssinantes,
+    buscarAssinantePorId: buscarAssinantePorId,
     alterarStatusDoAssinante: alterarStatusDoAssinante,
 
 }

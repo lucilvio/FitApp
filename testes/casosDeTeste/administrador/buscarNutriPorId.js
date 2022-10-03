@@ -10,19 +10,12 @@ it('CU-A 07 - deve ver os dados do Nutricionista', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/nutricionistas/${idNutri}`)
+        .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
-        .expectJson(
+        .expectJsonLike(
             {
                 idNutri: idNutri,
                 nome: "ana",
-                email: email,
-                telefone: "99999999",
-                registro: "BFUDbHJKd",
-                status: false,
-                imagem: "",
-                sobreMim: ""
-
             }
         )
         .expectStatus(200);
@@ -35,7 +28,7 @@ it('CU-A 07 - não encontra Nutricionista quando o Id não existe', async () => 
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/nutricionistas/${crypto.randomUUID()}`)
+        .get(`http://localhost:3000/admin/nutricionistas/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson({ erro: "Nutricionista não encontrado" })
         .expectStatus(404);

@@ -23,8 +23,9 @@ personalTeste.usuario.idUsuario = "idPersonal";
 personalTeste.usuario.senha = "personal123";
 
 const assinanteTeste = new Assinante('Assinante', 'assinante@fitapp.com', 'idPlano', 'idNutri', 'idPersonal');
-assinanteTeste.idUsuario = "idAssinante";
-assinanteTeste.senha = 'assinante123';
+assinanteTeste.idAssinante = "idAssinante"
+assinanteTeste.usuario.idUsuario = "idAssinante";
+assinanteTeste.usuario.senha = "assinante123";
 
 
 

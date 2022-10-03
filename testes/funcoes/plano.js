@@ -3,7 +3,7 @@ const { spec } = require('pactum');
 
 async function cadastrarPlano(token, nome, valor, descricao) {
     return await spec()
-        .post('http://localhost:3000/admin/plano')
+        .post('http://localhost:3000/admin/planos')
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,

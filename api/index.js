@@ -56,7 +56,8 @@ servidor.app.patch('/admin/personalTrainers/:idPersonal', autorizacao.autorizar(
 
 
 servidor.app.get('/admin/assinantes', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarAssinantes);
-servidor.app.patch('/admin/assinantes/:id', autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarStatusDoAssinante);
+servidor.app.get('/admin/assinantes/:idAssinante', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarAssinantePorId);
+servidor.app.patch('/admin/assinantes/:idAssinante', autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarStatusDoAssinante);
 
 
 //Nutricionista

@@ -10,7 +10,7 @@ it('CU-A 05 - deve listar Nutricionistas', async () => {
     
 
     await spec()
-        .get('http://localhost:3000/admin/nutricionista')
+        .get('http://localhost:3000/admin/nutricionistas')
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {

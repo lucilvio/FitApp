@@ -2,7 +2,7 @@ const { spec } = require('pactum');
 
 async function cadastrarPersonal(token, nome, email, telefone, registroProfissional) {
     return await spec()
-        .post('http://localhost:3000/admin/personal')
+        .post('http://localhost:3000/admin/personalTrainers')
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,

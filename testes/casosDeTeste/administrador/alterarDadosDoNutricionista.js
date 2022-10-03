@@ -9,7 +9,17 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
     await spec()
-        .patch(`http://localhost:3000/admin/nutricionista/${idNutri}`)
+        .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
+        .withHeaders("Authorization", "Bearer " + token)
+        .expectJsonLike(
+            {
+                idNutri: idNutri,
+            }
+        )
+        .expectStatus(200);
+
+    await spec()
+        .patch(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",
@@ -19,6 +29,17 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
             "bloqueado": true
         })
         .expectStatus(200);
+
+    await spec()
+        .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
+        .withHeaders("Authorization", "Bearer " + token)
+        .expectJsonLike(
+            {
+                idNutri: idNutri,
+                bloqueado: true
+            }
+        )
+        .expectStatus(200);
 })
 
 it('CU-A 08 - não deve alterar os dados quando não encontrar o Nutricionista', async () => {
@@ -27,7 +48,7 @@ it('CU-A 08 - não deve alterar os dados quando não encontrar o Nutricionista',
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
     await spec()
-        .patch(`http://localhost:3000/admin/nutricionista/id123`)
+        .patch(`http://localhost:3000/admin/nutricionistas/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",

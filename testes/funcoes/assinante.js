@@ -2,7 +2,7 @@ const { spec } = require('pactum');
 
 async function cadastrarAssinante(nome, email, idPlano, idNutri, idPersonal) {
     return await spec()
-    .post('http://localhost:3000/assinante')
+    .post('http://localhost:3000/assinantes')
     .withJson({
         "nome": nome,
         "email": email,

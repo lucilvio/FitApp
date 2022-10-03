@@ -69,7 +69,7 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
         })
     }
 
-    this.alterarStatus - function (novoStatus) {
+    this.alterarStatus = function (novoStatus) {
 
         if (!novoStatus) {
             throw { mensagem: "Não é possível alterar o status sem informação", interna: true };

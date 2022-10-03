@@ -13,14 +13,6 @@ it('CU-N 04 - O Nutricionista deve alterar as informacoes Sobre Mim', async () =
         })
         .expectStatus(200);
 
-    await spec()
-        .get(`http://localhost:3000/nutricionistas/idNutri`)
-        .withHeaders("Authorization", "Bearer " + tokenNutri)
-        .expectJsonLike(
-            {
-                "sobreMim": "Informações sobre a Nutri",
-            }
-        )
-        .expectStatus(200);
+   
 
 })

@@ -13,14 +13,6 @@ it('CU-P 04 - O personal deve alterar as informacoes Sobre Mim', async () => {
         })
         .expectStatus(200);
 
-    await spec()
-        .get(`http://localhost:3000/personalTrainers/idPersonal`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike(
-            {
-                "sobreMim": "Informações sobre o Personal",
-            }
-        )
-        .expectStatus(200);
+    
 
 })

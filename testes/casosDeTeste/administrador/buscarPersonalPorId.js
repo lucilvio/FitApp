@@ -10,19 +10,12 @@ it('CU-A 12 - deve ver os dados do personal', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "bruno", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/personalTrainers/${idPersonal}`)
+        .get(`http://localhost:3000/admin/personalTrainers/${idPersonal}`)
         .withHeaders("Authorization", "Bearer " + token)
-        .expectJson(
+        .expectJsonLike(
             {
                 idPersonal: idPersonal,
                 nome: "bruno",
-                email: email,
-                telefone: "99999999",
-                registro: "BFUDbHJKd",
-                status: false,
-                imagem: "",
-                sobreMim: ""
-
             }
         )
         .expectStatus(200);
@@ -35,8 +28,8 @@ it('CU-A 12 - não encontra Personal quando o Id não existe', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "bruno", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/personalTrainers/${crypto.randomUUID()}`)
+        .get(`http://localhost:3000/admin/personalTrainers/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
-        .expectJson({ erro: "Não encontrado" })
+        .expectJson({ erro: "Personal Trainer não encontrado" })
         .expectStatus(404);
 });

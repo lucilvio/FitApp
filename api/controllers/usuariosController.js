@@ -11,7 +11,7 @@ function redefinirSenha(req, res) {
 
     const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(req.body.email);
     if(!usuarioEncontrado || usuarioEncontrado.perfil == "administrador") {
-        res.status(404).send({ erro: "Não encontrado"});
+        res.status(404).send({ erro: "Usuário não encontrado"});
         return;
     }
 

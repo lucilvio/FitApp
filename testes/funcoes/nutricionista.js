@@ -2,7 +2,7 @@ const { spec } = require('pactum');
 
 async function cadastrarNutri(token, nome, email, telefone, registroProfissional) {
     return await spec()
-        .post('http://localhost:3000/admin/nutricionista')
+        .post('http://localhost:3000/admin/nutricionistas')
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,

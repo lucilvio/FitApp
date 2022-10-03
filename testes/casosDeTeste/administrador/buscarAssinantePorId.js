@@ -6,7 +6,7 @@ const usuario = require('../../funcoes/usuario');
 const plano = require('../../funcoes/plano');
 const assinante = require('../../funcoes/assinante');
 
-it('CU-G 06 - deve cadastrar Assinante', async () => {
+it('CU-A 03 - o Admin deve buscar os dados do Assinante por Id', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
@@ -14,21 +14,22 @@ it('CU-G 06 - deve cadastrar Assinante', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
     const idPersonal = await personal.cadastrarPersonal(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "55 555 55 55", "CRN 123");
-    
+
+    const idAssinante = await assinante.cadastrarAssinante("Guilherme", `gui_${crypto.randomUUID()}@fitapp.com`, idPlano, idNutri, idPersonal);
 
     await spec()
-        .post('http://localhost:3000/assinantes')
-        .withJson({
-            "nome": "Guilherme",
-            "email": `Guilherme_${crypto.randomUUID()}@fitapp.com`,
-            "idPlano": idPlano,
-            "idNutri": idNutri,
-            "idPersonal": idPersonal
-        })
+        .get(`http://localhost:3000/admin/assinantes/${idAssinante}`)
+        .withHeaders("Authorization", "Bearer " + token)
+        .expectJsonLike(
+            {
+                idAssinante: idAssinante,
+            }
+        )
         .expectStatus(200);
+
 });
 
-it('CU-G 06 - Não deve cadastrar Assinante com mesmo e-mail', async () => {
+it('CU-A 03 - não encontra Assinante quando o Id não existe', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
@@ -37,18 +38,12 @@ it('CU-G 06 - Não deve cadastrar Assinante com mesmo e-mail', async () => {
 
     const idPersonal = await personal.cadastrarPersonal(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "55 555 55 55", "CRN 123");
 
-    const email =  `Guilherme_${crypto.randomUUID()}@fitapp.com`
-    const idAssinante = await assinante.cadastrarAssinante("Guilherme", email, idPlano, idNutri, idPersonal);
-    
+    const idAssinante = await assinante.cadastrarAssinante("Guilherme", `gui_${crypto.randomUUID()}@fitapp.com`, idPlano, idNutri, idPersonal);
+
     await spec()
-        .post('http://localhost:3000/assinantes')
-        .withJson({
-            "nome": "Guilherme",
-            "email": email,
-            "idPlano": idPlano,
-            "idNutri": idNutri,
-            "idPersonal": idPersonal
-        })
-        .expectJson({ erro: "Esse e-mail já foi cadastrado" })
-        .expectStatus(400);
+        .get(`http://localhost:3000/admin/assinantes/idAssinante123`)
+        .withHeaders("Authorization", "Bearer " + token)
+        .expectJson({ erro: "Assinante não encontrado" })
+        .expectStatus(404);
+
 });

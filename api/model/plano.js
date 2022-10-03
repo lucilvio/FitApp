@@ -20,19 +20,19 @@ function Plano(nome, valor, descricao) {
 
     this.alterarDadosDoPlano = function (novoNome, novoValor, novaDescricao, novoStatus) {
         if (novoNome != undefined && novoNome != null && novoNome != "") {
-            planoEncontrado.nome = novoNome;
+            this.nome = novoNome;
         }
 
         if (novoValor != undefined && novoValor != null && novoValor != "" && novoValor >= 0) {
-            planoEncontrado.valor = novoValor;
+            this.valor = novoValor;
         }
 
         if (novaDescricao != undefined && novaDescricao != null && novaDescricao != "") {
-            planoEncontrado.descricao = novaDescricao;
+            this.descricao = novaDescricao;
         }
 
         if (typeof (novoStatus) == 'boolean') {
-            planoEncontrado.bloqueado = novoStatus;
+            this.bloqueado = novoStatus;
         }
     }
 }

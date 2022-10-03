@@ -9,7 +9,7 @@ it('CU-A 10 - deve listar Personal Trainers', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "55 555 55 55", "CRN 123");
 
     await spec()
-        .get('http://localhost:3000/admin/personal')
+        .get('http://localhost:3000/admin/personalTrainers')
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {
