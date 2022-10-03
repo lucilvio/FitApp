@@ -1,23 +1,36 @@
+const express = require('express');
 const servidor = require('./servidor');
+const autenticacaoMiddleware = require('./middlewares/autenticacaoMiddleware');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('./swagger.json');
+const tratamentoDeErrosMiddleware = require('./middlewares/tratamentoDeErrosMiddleware')
 const loginController = require('./controllers/loginController');
 const usuariosController = require('./controllers/usuariosController');
+const administradoresController = require('./controllers/administradoresController');
 const nutricionistasController = require('./controllers/nutricionistasController');
 const personalTrainersController = require('./controllers/personalTrainersController');
-const planosController = require('./controllers/planosController');
 const assinantesController = require('./controllers/assinantesController');
 const mensagensController = require('./controllers/mensagensController');
 const autorizacao = require('./seguranca/autorizacao');
 const model = require('./model/perfis');
 
+//middlewares
+servidor.app.use(express.json());
+
+servidor.app.use(autenticacaoMiddleware.autenticar);
+
+servidor.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 
 //Geral
 servidor.app.post('/login', loginController.login);
-servidor.app.patch('/usuario', usuariosController.redefinirSenha);
-servidor.app.post('/assinante', assinantesController.cadastrarAssinante);
-servidor.app.get('/nutricionistas/:id', nutricionistasController.buscarNutriPorId);
-servidor.app.get('/personalTrainers/:id', personalTrainersController.buscarPersonalPorId);
-servidor.app.get('/planos/:id', planosController.buscarPlanoPorId);
+servidor.app.patch('/usuarios', usuariosController.redefinirSenha);
+//buscarplanos
+//buscarNutri
+//buscarPersonal
+
+
+
 servidor.app.post('/mensagem', mensagensController.enviarMensagem);
 servidor.app.get('/mensagem', mensagensController.buscarMensagensPorFiltro);
 servidor.app.get('/mensagens/:idMensagem', mensagensController.buscarMensagemPorId);
@@ -26,20 +39,24 @@ servidor.app.post('/mensagens/:idMensagem', mensagensController.responderMensage
 
 
 //Administrador
-servidor.app.post('/admin/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.cadastrarNutricionista);
-servidor.app.get('/admin/nutricionista', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.buscarNutricionistas);
-servidor.app.patch('/admin/nutricionista/:id', autorizacao.autorizar(model.perfil.administrador), nutricionistasController.alterarDadosDoNutricionista);
+servidor.app.post('/admin/planos', autorizacao.autorizar(model.perfil.administrador), administradoresController.cadastrarPlano);
+servidor.app.get('/admin/planos', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarPlanos);
+servidor.app.get('/admin/planos/:idPlano', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarPlanoPorId);
+servidor.app.patch('/admin/planos/:idPlano', autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarDadosDoPlano);
 
-servidor.app.post('/admin/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.cadastrarPersonal);
-servidor.app.get('/admin/personal', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.buscarPersonal);
-servidor.app.patch('/admin/personal/:id', autorizacao.autorizar(model.perfil.administrador), personalTrainersController.alterarDadosDoPersonal);
+servidor.app.post('/admin/nutricionistas', autorizacao.autorizar(model.perfil.administrador), administradoresController.cadastrarNutricionista);
+servidor.app.get('/admin/nutricionistas', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarNutricionistas);
+servidor.app.get('/admin/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarNutriPorId);
+servidor.app.patch('/admin/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarDadosDoNutricionista);
 
-servidor.app.post('/admin/plano', autorizacao.autorizar(model.perfil.administrador), planosController.cadastrarPlano);
-servidor.app.get('/admin/plano', autorizacao.autorizar(model.perfil.administrador), planosController.buscarPlanos);
-servidor.app.patch('/admin/plano/:id', autorizacao.autorizar(model.perfil.administrador), planosController.alterarDadosDoPlano);
+servidor.app.post('/admin/personalTrainers', autorizacao.autorizar(model.perfil.administrador), administradoresController.cadastrarPersonal);
+servidor.app.get('/admin/personalTrainers', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarPersonalTrainers);
+servidor.app.get('/admin/personalTrainers/:idPersonal', administradoresController.buscarPersonalPorId);
+servidor.app.patch('/admin/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarDadosDoPersonal);
 
-servidor.app.get('/admin/assinante', autorizacao.autorizar(model.perfil.administrador), assinantesController.buscarAssinantes);
-servidor.app.patch('/admin/assinante/:id', autorizacao.autorizar(model.perfil.administrador), assinantesController.alterarStatusDoAssinante);
+
+servidor.app.get('/admin/assinantes', autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarAssinantes);
+servidor.app.patch('/admin/assinantes/:id', autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarStatusDoAssinante);
 
 
 //Nutricionista
@@ -58,12 +75,8 @@ servidor.app.patch('/personal/senha', autorizacao.autorizar(model.perfil.persona
 servidor.app.patch('/personal/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
 servidor.app.get('/personal/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
 
-
-
-
-
 //Assinante
+servidor.app.post('/assinantes', assinantesController.cadastrarAssinante);
 
 
-
-
+servidor.app.use(tratamentoDeErrosMiddleware.tratarErros);

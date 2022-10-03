@@ -25,3 +25,4 @@ it('CU-N 02 - O Nutricionista deve alterar os dados do perfil', async () => {
         .expectStatus(200);
 
 })
+

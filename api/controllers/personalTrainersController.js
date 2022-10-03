@@ -2,44 +2,41 @@ const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
+const Personal = require('../model/personalTrainer');
+const Usuario = require('../model/usuario');
 
 
 // O Administrador cadastra um Personal Trainer
 function cadastrarPersonal(req, res) {
-    if(!req.body.nome) {
-        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem o nome"});
-        return;
-    }
-    if(!req.body.email) {
-        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem e-mail"});
-        return;
-    }
-    if(!req.body.telefone) {
-        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem telefone"});
-        return;
-    }
-    if(!req.body.registroProfissional) {
-        res.status(400).send({ erro: "Não é possível cadastrar Personal Trainer sem o Registro Profissional"});
-        return;
-    }
 
-    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.body.email);
+    try {
+        const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.body.email);
 
-    if (!personalEncontrado) {
+        if (!personalEncontrado) {
 
-        const novoUsuario = repositorioDeUsuarios.criarUsuario(req.body.nome, req.body.email, 'personalTrainer');
+            const novoUsuario = new Usuario(req.body.nome, req.body.email, 'personalTrainer');
+            const novoPersonalTrainer = new Personal(novoUsuario, req.body.telefone, req.body.registroProfissional);
 
-        const novoPersonalTrainer =  repositorioDePersonalTrainers.criarPersonal(novoUsuario, req.body.telefone, req.body.registroProfissional);
+            repositorioDeUsuarios.criarUsuario(novoUsuario);
+            repositorioDePersonalTrainers.criarPersonal(novoPersonalTrainer);
 
-        servicoDeEmail.enviar(novoPersonalTrainer.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonalTrainer.nome, novoUsuario.senha));
+            servicoDeEmail.enviar(novoPersonalTrainer.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonalTrainer.nome, novoUsuario.senha));
 
-        res.send({
-            IdUsuario: novoUsuario.idUsuario,
-            idPersonal: novoPersonalTrainer.idPersonal,
-        });
+            res.send({
+                IdUsuario: novoUsuario.idUsuario
+            });
 
-    } else {
-        res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
+        } else {
+            res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
+        }
+    } catch (error) {
+        if (error.interna) {
+            res.status(400).send({ erro: error.mensagem });
+        }
+        else {
+            res.status(500).send({ erro: "Houve um erro interno, tente novamente mais tarde" });
+            console.log(error);
+        }
     }
 
 }
@@ -183,5 +180,5 @@ module.exports = {
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
-    buscarAlunos : buscarAlunos
+    buscarAlunos: buscarAlunos
 }

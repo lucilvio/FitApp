@@ -6,31 +6,9 @@ function buscarAssianantePorEmail(email) {
     return base.dados.assinantes.find(assinante => assinante.email.toLowerCase() == email.toLowerCase());
 }
 
-function criarAssinante(usuario, idPlano, idNutri, idPersonal) {
-    let novoAssinante = {
-        idAssinante: crypto.randomUUID(),
-        usuario: usuario,
-        nome: usuario.nome,
-        email: usuario.login,
-        dataNascimento: '',
-        sexo: '',
-        altura: '',
-        assinatura: {
-            id: crypto.randomUUID(),
-            idPlano: idPlano,
-        },
-        nutricionista: idNutri,
-        personal: idPersonal,
-        objetivo: '',
-        dietas: [],
-        treinos: [],
-        medidas: []
-
-    }
-
+function criarAssinante(novoAssinante) {
+    base.dados.usuarios.push(novoAssinante.usuario);
     base.dados.assinantes.push(novoAssinante);
-    return novoAssinante;
-
 }
 
 
@@ -44,8 +22,14 @@ function buscarAssinantePorFiltro(nome) {
     }
 }
 
-function buscarAssinantePorId(id) {
-    return base.dados.assinantes.find(assinante => assinante.idAssinante == id);
+function buscarAssinantePorId(idAssinante) {
+    return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
+}
+
+function salvarAlteracaoDeDados(assinante) {
+    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
+
+    assinanteEncontrado = assinante;
 }
 
 module.exports = {
@@ -54,4 +38,5 @@ module.exports = {
     buscarAssianantePorEmail: buscarAssianantePorEmail,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
+    salvarAlteracaoDeDados: salvarAlteracaoDeDados
 }

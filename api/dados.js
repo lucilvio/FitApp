@@ -1,137 +1,56 @@
-const crypto = require('crypto');
+const Usuario = require('./model/usuario');
+const Plano = require('./model/plano');
+const Nutricionista = require('./model/nutricionista');
+const Personal = require('./model/personalTrainer');
+const Assinante = require('./model/assinante');
+
+const usuarioAdmin = new Usuario('Administrador', 'admin@fitapp.com', 'administrador');
+usuarioAdmin.idUsuario = "e7c17d74-f067-46ca-9734-1c232ba0ea18";
+usuarioAdmin.senha = 'admin123';
+
+const planoTeste = new Plano('Gratuito', 0,  'Experimente por 15 dias');
+planoTeste.idPlano = "idPlano";
+
+
+const nutriTeste = new Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
+nutriTeste.idNutri = "idNutri";
+nutriTeste.usuario.idUsuario = "idNutri";
+nutriTeste.usuario.senha = "nutri123";
+
+const personalTeste = new Personal('Personal', 'personal@fitapp.com', '999999999', 'CRN 123');
+personalTeste.idPersonal = "idPersonal";
+personalTeste.usuario.idUsuario = "idPersonal";
+personalTeste.usuario.senha = "personal123";
+
+const assinanteTeste = new Assinante('Assinante', 'assinante@fitapp.com', 'idPlano', 'idNutri', 'idPersonal');
+assinanteTeste.idUsuario = "idAssinante";
+assinanteTeste.senha = 'assinante123';
+
+
+
 
 const dados = {
     usuarios: [
-        {
-            idUsuario: "e7c17d74-f067-46ca-9734-1c232ba0ea18",
-            nome: 'Administrador',
-            login: 'admin@fitapp.com',
-            senha: 'admin123',
-            bloqueado: false,
-            perfil: 'administrador'
-        },
-        {
-            idUsuario: 'idUsuarioNutri',
-            nome: 'Nutricionista',
-            login: 'nutri@fitapp.com',
-            senha: 'nutri123',
-            bloqueado: false,
-            perfil: 'nutricionista',
-            imagem: ''
-        },
-        {
-            idUsuario: "idUsuarioPersonal",
-            nome: 'Personal',
-            login: 'personal@fitapp.com',
-            senha: 'personal123',
-            bloqueado: false,
-            perfil: 'personalTrainer',
-            imagem: ''
-        },
-        {
-            idusuario: 'idUsuarioAssinante',
-            nome: 'Gui',
-            login: 'gui_111@fitapp.com',
-            senha: 'assinante123',
-            bloqueado: false,
-            perfil: 'assinante'
-        }
+        usuarioAdmin,
+        nutriTeste.usuario,
+        personalTeste.usuario,
+        assinanteTeste.usuario
     ],
 
     planos: [
-        {
-            idPlano: 'idPlano',
-            nome: 'Plano Gratuito',
-            valor: 0,
-            bloqueado: false,
-            descricao: 'Informações sobre o Plano'
-        }
+        planoTeste
     ],
 
     nutricionistas: [
-        {
-            idNutri: 'idNutri',
-            usuario: {
-                idUsuario: 'idUsuarioNutri',
-                nome: 'Nutricionista',
-                login: 'nutri@fitapp.com',
-                senha: 'nutri123',
-                bloqueado: false,
-                perfil: 'nutricionista',
-                imagem: ''
-            },
-            nome: 'Nutricionista',
-            email: 'nutri@fitapp.com',
-            telefone: '999999999',
-            registroProfissional: 'CRN 123',
-            sobreMim: ''
-        },
+        nutriTeste,               
     ],
 
     personalTrainers: [
-        {
-            idPersonal: 'idPersonal',
-            usuario: {
-                idUsuario: "idUsuarioPersonal",
-                nome: 'Personal',
-                login: 'personal@fitapp.com',
-                senha: 'personal123',
-                bloqueado: false,
-                perfil: 'personalTrainer',
-                imagem: ''
-            },
-            nome: 'Personal',
-            email: 'personal@fitapp.com',
-            telefone: '999999999',
-            registroProfissional: 'CRP 123',
-            sobreMim: ''
-        }
+        personalTeste,       
     ],
 
     assinantes: [
-        {
-            idAssinante: 'idAssinante',
-            usuario: {
-                idusuario: 'idUsuarioAssinante',
-                nome: 'Assinante',
-                login: 'assinante@fitapp.com',
-                senha: 'assinante123',
-                bloqueado: false,
-                perfil: 'assinante'
-            },
-            nome: 'Assinante',
-            email: 'assinante@fitapp.com',
-            dataNascimento: '',
-            sexo: '',
-            altura: '',
-            assinatura: {
-                idAssinatura: 'idAssinatura',
-                idPlano: 'idPlano',
-            },
-            nutricionista: 'idNutri',
-            personal: 'idPersonal',
-            objetivo: '',
-            dietas: [
-                {
-                    idDieta: 'idDieta',
-                    ativo: true,
-                    dietaNome: 'Dieta 1',
-                    dataInicio: '01/09/2022',
-                    dataFim: '30/09/2022',
-                    objetivo: 'Perda  de Peso',
-                    itens: [
-                        {
-                            tipo: "cafeDaManha",
-                            descricao: "2 ovos cozidos"
-
-                        }
-                    ]
-                }
-            ],
-            treinos: [],
-            medidas: []
-
-        }
+       assinanteTeste,
     ],
 
     mensagens: []

@@ -1,22 +1,14 @@
 const base = require('../dados');
-const crypto = require('crypto');
+
 
 function buscarPersonalPorEmail(email) {
     return base.dados.personalTrainers.find(personal => personal.email.toLowerCase() == email.toLowerCase());
+
 }
 
-function criarPersonal(usuario, telefone, registroProfissional) {
-    let novoPersonal = {
-        idPersonal: crypto.randomUUID(),
-        usuario: usuario,
-        nome: usuario.nome,
-        email: usuario.login,
-        telefone: telefone,
-        registroProfissional: registroProfissional,
-        sobreMim: ''
-    }
+function criarPersonal(novoPersonal) {
+    base.dados.usuarios.push(novoPersonal.usuario);
     base.dados.personalTrainers.push(novoPersonal);
-    return novoPersonal;
 }
 
 function buscarPersonalPorFiltro(nome) {
@@ -28,78 +20,76 @@ function buscarPersonalPorFiltro(nome) {
     }
 }
 
-function buscarPersonalPorId(id) {
-    return base.dados.personalTrainers.find(personal => personal.idPersonal == id);
+function buscarPersonalPorId(idPersonal) {
+    return base.dados.personalTrainers.find(Personal => Personal.idPersonal == idPersonal);
 }
 
-function salvarAlteracaoDeDados(nutricionista, nome, email, telefone, registroProfissional, status) {
-    if (nome != undefined && nome != null && nome != "") {
-        nutricionista.nome = nome;
-        nutricionista.usuario.nome = nome;
-    }
+function salvarAlteracaoDeDados(personal) {
+    let PersonalEncontrado = buscarPersonalPorId(personal.idPersonal);
 
-    if(email != undefined && email != null && email != "" ) {
-        nutricionista.email = email;
-        nutricionista.usuario.login = email;
-    }
-
-    if(telefone != undefined && telefone != null && telefone != "") {
-        nutricionista.telefone = telefone;
-    } 
-
-    if(registroProfissional != undefined && registroProfissional != null && registroProfissional != "") {
-        nutricionista.registroProfissional = registroProfissional;
-    }
-
-    if (typeof (status) == 'boolean') {
-        nutricionista.bloqueado = status;
-        nutricionista.usuario.bloqueado = status;
-    }
-
-
+    PersonalEncontrado = personal;
 }
 
-function salvarAlteracaoDoPerfil(personal, imagem, telefone) {
+function buscarAlunosPorFiltro(nome, emailPersonal) {
+    const personal = buscarPersonalPorEmail(emailPersonal);
 
-    if (imagem != undefined && imagem != null && imagem != "") {
-        personal.usuario.imagem = imagem;
-    }
-    
-    if(telefone != undefined && telefone != null && telefone != '') {
-        personal.telefone = telefone;
+    if(!personal) {
+        res.status(404).send({ erro: "Personal Trainer não encontrado" });
+        return;
     }
 
-}
-
-function salvarNovaSenha(personal, senha) {
-    
-    if(senha != undefined && senha != null && senha != '') {
-        personal.usuario.senha = senha;
-    }
-}
-
-function salvarAlteraçõesSobreMim(personal, texto) {
-    personal.sobreMim = texto;
-}
-
-
-function buscarAlunosPorFiltro(nome, idPersonal) {
     if(!nome) {
-        return base.dados.assinantes.filter(assinante => assinante.personal == idPersonal);
+        return base.dados.assinantes.filter(assinante => assinante.personal == personal.idPersonal);
     } else {
-        return base.dados.assinantes.filter(assinante => assinante.personal == idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
+        return base.dados.assinantes.filter(assinante => assinante.personal == personal.idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
     }
 }
+
+function buscarAlunoPorId(idAssinante) {
+    return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
+}
+
+function salvarTreino(idAssinante, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
+
+    const aluno = buscarAlunoPorId(idAssinante);
+
+    if (!aluno) {
+        res.status(404).send({ erro: "Aluno não encontrado" });
+        return;
+    }
+
+    aluno.adicionarTreino(nomeTreino, dataInicio, dataFim, objetivo, exercicios);
+
+    aluno.treinos.push(novoTreino);
+    return novoTreino;
+
+}
+
+function buscarTreinoPorId(alunoEncontrado, idTreino) {
+    return alunoEncontrado.treinos.find(treino => treino.idTreino == idTreino);
+}
+
+function salvarAlteracoesDoTreino(treinoEncontrado, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
+   treinoEncontrado.nomeTreino = nomeTreino;
+   treinoEncontrado.dataInicio = dataInicio;
+   treinoEncontrado.dataFim = dataFim;
+   treinoEncontrado.objetivo = objetivo;
+   treinoEncontrado.exercicios = exercicios;
+
+}
+
+
 
 module.exports = {
-    buscarPersonalPorEmail: buscarPersonalPorEmail,
     criarPersonal: criarPersonal,
+    buscarPersonalPorEmail: buscarPersonalPorEmail,
     buscarPersonalPorFiltro: buscarPersonalPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
-    salvarAlteracaoDoPerfil: salvarAlteracaoDoPerfil,
-    salvarNovaSenha: salvarNovaSenha,
-    salvarAlteraçõesSobreMim: salvarAlteraçõesSobreMim,
     buscarAlunosPorFiltro:  buscarAlunosPorFiltro,
+    buscarAlunoPorId: buscarAlunoPorId,
+    salvarTreino: salvarTreino,
+    buscarTreinoPorId: buscarTreinoPorId,
+    salvarAlteracoesDoTreino: salvarAlteracoesDoTreino,
 
 };

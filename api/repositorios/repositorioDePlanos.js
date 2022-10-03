@@ -1,6 +1,6 @@
 const base = require('../dados');
 
-function salvarDadosDoPlano(novoPlano) {
+function criarPlano(novoPlano) {
     base.dados.planos.push(novoPlano);
 }
 
@@ -21,9 +21,16 @@ function buscarPlanoPorId(id) {
     return base.dados.planos.find(plano => plano.idPlano == id);
 }
 
+function salvarAlteracaoDeDados(plano) {
+    let planoEncontrado = buscarPlanoPorId(plano.idPlano);
+
+    planoEncontrado = plano;
+}
+
 module.exports = {
-    salvarDadosDoPlano: salvarDadosDoPlano,
+    criarPlano: criarPlano,
     buscarPlanosPorNome: buscarPlanosPorNome,
     buscarPlanosPorFiltro: buscarPlanosPorFiltro,
-    buscarPlanoPorId: buscarPlanoPorId
+    buscarPlanoPorId: buscarPlanoPorId,
+    salvarAlteracaoDeDados: salvarAlteracaoDeDados
 }

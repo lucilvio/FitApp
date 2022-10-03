@@ -7,21 +7,8 @@ function buscarUsuarioPorLogin(login) {
 
 }
 
-function criarUsuario(nome, email, perfil) {
-    let novoUsuario = {
-        idUsuario: crypto.randomUUID(),
-        nome: nome,
-        login: email,
-        senha: geradorDeSenha.generate({
-            length: 10,
-            numbers: true
-        }),
-        bloqueado: false,
-        perfil: perfil,
-        imagem: ''
-    }
+function criarUsuario(novoUsuario) {
     base.dados.usuarios.push(novoUsuario);
-    return novoUsuario;
 }
 
 

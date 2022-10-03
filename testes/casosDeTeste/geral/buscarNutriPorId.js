@@ -37,6 +37,6 @@ it('CU-A 07 - não encontra Nutricionista quando o Id não existe', async () => 
     await spec()
         .get(`http://localhost:3000/nutricionistas/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
-        .expectJson({ erro: "Não encontrado" })
+        .expectJson({ erro: "Nutricionista não encontrado" })
         .expectStatus(404);
 });
