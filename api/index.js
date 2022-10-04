@@ -13,6 +13,7 @@ const assinantesController = require('./controllers/assinantesController');
 const mensagensController = require('./controllers/mensagensController');
 const autorizacao = require('./seguranca/autorizacao');
 const model = require('./model/perfis');
+const geralController = require('./controllers/geralController');
 
 //middlewares
 servidor.app.use(express.json());
@@ -26,8 +27,12 @@ servidor.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuarios', usuariosController.redefinirSenha);
 //buscarplanos
+servidor.app.get('/planos', geralController.buscarPlanos);
 //buscarNutri
+servidor.app.get('/nutricionistas',geralController.buscarNutricionistas);
+servidor.app.get('/nutricionistas/:idNutri', geralController.buscarNutriPorId);
 //buscarPersonal
+servidor.app.get('/personalTrainers',geralController.buscarPersonalTrainers);
 
 
 

@@ -13,6 +13,5 @@ it('CU-N 04 - O Nutricionista deve alterar as informacoes Sobre Mim', async () =
         })
         .expectStatus(200);
 
-   
-
+        
 })

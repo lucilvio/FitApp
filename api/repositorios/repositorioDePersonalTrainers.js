@@ -1,5 +1,8 @@
 const base = require('../dados');
 
+function buscarPersonalTrainersAtivos() {
+    return base.dados.personalTrainers.filter(personal => personal.usuario.bloqueado == false);
+}
 
 function buscarPersonalPorEmail(email) {
     return base.dados.personalTrainers.find(personal => personal.email.toLowerCase() == email.toLowerCase());
@@ -81,6 +84,7 @@ function salvarAlteracoesDoTreino(treinoEncontrado, nomeTreino, dataInicio, data
 
 
 module.exports = {
+    buscarPersonalTrainersAtivos:buscarPersonalTrainersAtivos,
     criarPersonal: criarPersonal,
     buscarPersonalPorEmail: buscarPersonalPorEmail,
     buscarPersonalPorFiltro: buscarPersonalPorFiltro,

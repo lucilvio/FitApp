@@ -2,6 +2,7 @@
 require('./casosDeTeste/geral/fazerLogin');
 require('./casosDeTeste/geral/redefinirSenha');
 require('./casosDeTeste/geral/cadastrarAssinante');
+require('./casosDeTeste/geral/buscarNutricionistasAtivos');
 
 
 
@@ -26,13 +27,13 @@ require('./casosDeTeste/administrador/alterarStatusDoAssinante');
 //Assinante
 
 //Nutricionista
-// require('./casosDeTeste/nutricionista/alterarDadosDoPerfil');
-// require('./casosDeTeste/nutricionista/alterarSenha');
-// require('./casosDeTeste/nutricionista/alterarInformacoesSobreMim');
-// require('./casosDeTeste/nutricionista/buscarPacientes');
-// require('./casosDeTeste/nutricionista/buscarPacientePorId');
-// require('./casosDeTeste/nutricionista/criarDieta');
-// require('./casosDeTeste/nutricionista/buscarDietaPorId');
+require('./casosDeTeste/nutricionista/alterarDadosDoPerfil');
+require('./casosDeTeste/nutricionista/alterarSenha');
+require('./casosDeTeste/nutricionista/alterarInformacoesSobreMim');
+require('./casosDeTeste/nutricionista/buscarPacientes');
+require('./casosDeTeste/nutricionista/buscarPacientePorId');
+require('./casosDeTeste/nutricionista/criarDieta');
+require('./casosDeTeste/nutricionista/buscarDietaPorId');
 
 
 

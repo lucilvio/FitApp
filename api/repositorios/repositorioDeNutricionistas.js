@@ -1,5 +1,8 @@
 const base = require('../dados');
 
+function buscarNutricionistasAtivos() {
+    return base.dados.nutricionistas.filter(nutri => nutri.usuario.bloqueado == false);
+}
 
 function buscarNutricionistaPorEmail(email) {
     return base.dados.nutricionistas.find(nutri => nutri.email.toLowerCase() == email.toLowerCase());
@@ -81,6 +84,7 @@ function salvarAlteracoesDaDieta(dietaEncontrada, nomeDieta, dataInicio, dataFim
 
 
 module.exports = {
+    buscarNutricionistasAtivos: buscarNutricionistasAtivos,
     buscarNutricionistaPorEmail: buscarNutricionistaPorEmail,
     criarNutricionista: criarNutricionista,
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,

@@ -1,5 +1,9 @@
 const base = require('../dados');
 
+function buscarPlanosAtivos() {
+    return base.dados.planos.filter(plano => plano.bloqueado == false);
+}
+
 function criarPlano(novoPlano) {
     base.dados.planos.push(novoPlano);
 }
@@ -28,6 +32,7 @@ function salvarAlteracaoDeDados(plano) {
 }
 
 module.exports = {
+    buscarPlanosAtivos: buscarPlanosAtivos,
     criarPlano: criarPlano,
     buscarPlanosPorNome: buscarPlanosPorNome,
     buscarPlanosPorFiltro: buscarPlanosPorFiltro,

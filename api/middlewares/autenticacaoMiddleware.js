@@ -16,6 +16,26 @@ function autenticar (req, res, next) {
         return;
     }
 
+    if(req.url == "/planos" && req.method == "GET") {
+        next();
+        return;
+    }
+
+    if(req.url == "/nutricionistas" && req.method == "GET") {
+        next();
+        return;
+    }
+
+    if(req.url == "/personalTrainers" && req.method == "GET") {
+        next();
+        return;
+    }
+
+    // if(req.url == "/nutricionistas/:idNutri" && req.method == "GET") {
+    //     next();
+    //     return;
+    // }
+
     if (!req.headers.authorization) {
         res.status(401).send("Não autorizado");
         return;
