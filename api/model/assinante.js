@@ -41,7 +41,37 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
         this.idPlano = idPlano;
     }
 
-    this.adicionarDieta = function (nomeDieta, dataInicio, dataFim, objetivo, itens) {
+    
+
+    function Treino(nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
+        this.idTreino = crypto.randomUUID();
+        this.ativo = true;
+        this.nomeTreino = nomeTreino;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.objetivo = objetivo;
+        this.exercicios = exercicios;
+    }
+
+    function Medidas(peso, pescoco, cintura, quadril) {
+        this.data = new Date();
+        this.peso = peso;
+        this.pescoco = pescoco;
+        this.cintura = cintura;
+        this.quadril = quadril;
+
+    }
+
+    this.alterarStatus = function (novoStatus) {
+
+        if (!novoStatus) {
+            throw { mensagem: "Não é possível alterar o status sem informação", interna: true };
+        }
+
+        this.usuario.bloqueado = novoStatus;
+    }
+
+    this.adicionarDieta = function (idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, itens) {
         if (!nomeDieta) {
             throw { mensagem: "Não é possível criar dieta sem nome", interna: true };
         }
@@ -58,25 +88,9 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
             throw { mensagem: "Não é possível criar dieta sem o objetivo", interna: true };
         }
 
-        this.dietas.push({
-            idDieta: crypto.randomUUID(),
-            ativo: true,
-            nomeDieta: nomeDieta,
-            dataInicio: dataInicio,
-            dataFim: dataFim,
-            objetivo: objetivo,
-            itens: itens
-        })
+        new Dieta ()
     }
 
-    this.alterarStatus = function (novoStatus) {
-
-        if (!novoStatus) {
-            throw { mensagem: "Não é possível alterar o status sem informação", interna: true };
-        }
-        
-        this.usuario.bloqueado = novoStatus;
-    }
 
     this.adicionarTreino = function (nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
         if (!nomeTreino) {

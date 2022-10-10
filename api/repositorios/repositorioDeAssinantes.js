@@ -1,5 +1,4 @@
 const base = require('../dados');
-const crypto = require('crypto');
 
 
 function buscarAssianantePorEmail(email) {
@@ -11,14 +10,13 @@ function criarAssinante(novoAssinante) {
     base.dados.assinantes.push(novoAssinante);
 }
 
-
+// function salvarDieta(dieta) {}
 
 function buscarAssinantePorFiltro(nome) {
     if (!nome) {
         return base.dados.assinantes;
     } else {
         return base.dados.assinantes.filter(assinante => assinante.nome.toLowerCase() == nome.toLowerCase());
-
     }
 }
 

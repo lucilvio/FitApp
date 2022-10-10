@@ -1,5 +1,5 @@
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
-
+const Dieta = require('../model/dieta');
 
 // O Nutricionista altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
@@ -108,18 +108,12 @@ function criarDieta(req, res) {
     }
 
     if (req.usuario.idUsuario == pacienteEncontrado.nutricionista) {
-            const dieta = repositorioDeNutricionistas.salvarDieta(
-                req.params.idAssinante,
-                req.body.dietaNome,
-                req.body.dataInicio,
-                req.body.dataFim,
-                req.body.objetivo,
-                req.body.itens
 
-            );
-            res.send(dieta);
+        const dieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.dietaNome, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
 
-       
+        repositorioDeNutricionistas.salvarDieta(dieta); 
+
+        res.send({ idDieta: dieta.idDieta });
 
     } else {
         res.status(400).send({ erro: "Não é possivel criar dieta " })
@@ -137,7 +131,7 @@ function buscarDietaPorId(req, res) {
         return;
     }
 
-    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(pacienteEncontrado, req.params.idDieta);
+    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
 
     if (!dietaEncontrada) {
         res.status(404).send({ erro: "Dieta não encontrada" });

@@ -52,24 +52,15 @@ function buscarPacientePorId(idAssinante) {
     return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
 }
 
-function salvarDieta(idAssinante, nomeDieta, dataInicio, dataFim, objetivo, itens) {
 
-    const paciente = buscarPacientePorId(idAssinante);
-
-    if (!paciente) {
-        res.status(404).send({ erro: "Nutricionista não encontrado" });
-        return;
-    }
-
-    paciente.adicionarDieta(nomeDieta, dataInicio, dataFim, objetivo, itens);
-
-    paciente.dietas.push(novaDieta);
-    return novaDieta;
-
+function buscarDietaPorId(idAssinante, idDieta) {
+    const pacienteEncontrado = buscarPacientePorId(idAssinante);
+    return pacienteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
 }
 
-function buscarDietaPorId(pacienteEncontrado, idDieta) {
-    return pacienteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
+function salvarDieta(dieta) {
+    const pacienteEncontrado = buscarPacientePorId(dieta.idAssinante);
+    pacienteEncontrado.dietas.push(dieta);
 }
 
 function salvarAlteracoesDaDieta(dietaEncontrada, nomeDieta, dataInicio, dataFim, objetivo, itens) {
@@ -92,8 +83,8 @@ module.exports = {
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
     buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
     buscarPacientePorId: buscarPacientePorId,
-    salvarDieta: salvarDieta,
     buscarDietaPorId: buscarDietaPorId,
+    salvarDieta: salvarDieta,
     salvarAlteracoesDaDieta: salvarAlteracoesDaDieta,
 
 };
