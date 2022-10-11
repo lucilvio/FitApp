@@ -2,7 +2,7 @@ const { spec } = require('pactum');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 
-it('CU-N 13 - deve criar dieta', async () => {
+it('CU-N 08 - deve criar dieta', async () => {
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
     await spec()
@@ -46,7 +46,7 @@ it('CU-N 13 - deve criar dieta', async () => {
 
 });
 
-it('CU-N 13 - não cria dieta para paciente não encontrado', async () => {
+it('CU-N 08 - não cria dieta para paciente não encontrado', async () => {
 
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 

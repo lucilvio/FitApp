@@ -137,6 +137,7 @@ function alterarDadosDoNutricionista(req, res) {
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: 'Nutricionista não encontrado' });
+        return;
     }
 
     nutriEncontrado.alterarDadosDeCadastro(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
@@ -207,6 +208,7 @@ function alterarDadosDoPersonal(req, res) {
 
     if (!personalEncontrado) {
         res.status(404).send({ erro: 'Personal Trainer não encontrado' });
+        return;
     }
 
     personalEncontrado.alterarDadosDeCadastro(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);

@@ -52,23 +52,21 @@ function buscarPacientePorId(idAssinante) {
     return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
 }
 
+function salvarDieta(dieta) {
+    const pacienteEncontrado = buscarPacientePorId(dieta.idAssinante);
+    pacienteEncontrado.dietas.push(dieta);
+}
 
 function buscarDietaPorId(idAssinante, idDieta) {
     const pacienteEncontrado = buscarPacientePorId(idAssinante);
     return pacienteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
 }
 
-function salvarDieta(dieta) {
-    const pacienteEncontrado = buscarPacientePorId(dieta.idAssinante);
-    pacienteEncontrado.dietas.push(dieta);
-}
 
-function salvarAlteracoesDaDieta(dietaEncontrada, nomeDieta, dataInicio, dataFim, objetivo, itens) {
-   dietaEncontrada.nomeDieta = nomeDieta;
-   dietaEncontrada.dataInicio = dataInicio;
-   dietaEncontrada.dataFim = dataFim;
-   dietaEncontrada.objetivo = objetivo;
-   dietaEncontrada.itens = itens;
+function salvarAlteracoesDaDieta(dieta) {
+    let dietaEncontrada = buscarDietaPorId(dieta.idAssinante, dieta.idDieta);
+
+    dietaEncontrada = dieta;
 
 }
 

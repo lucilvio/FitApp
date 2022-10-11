@@ -109,17 +109,15 @@ function criarDieta(req, res) {
 
     if (req.usuario.idUsuario == pacienteEncontrado.nutricionista) {
 
-        const dieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.dietaNome, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
+        const dieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
 
-        repositorioDeNutricionistas.salvarDieta(dieta); 
+        repositorioDeNutricionistas.salvarDieta(dieta);
 
         res.send({ idDieta: dieta.idDieta });
 
     } else {
         res.status(400).send({ erro: "Não é possivel criar dieta " })
     }
-
-
 }
 
 function buscarDietaPorId(req, res) {
@@ -142,31 +140,25 @@ function buscarDietaPorId(req, res) {
 
 }
 
+
 function editarDieta(req, res) {
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
-    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(pacienteEncontrado, req.params.idDieta);
-
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
-
+    
+    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
     if (!dietaEncontrada) {
         res.status(404).send({ erro: "Dieta não encontrada" });
         return;
     }
 
+    dietaEncontrada.alterarDadosDaDieta(req.params.idDieta, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
 
-    repositorioDeNutricionistas.salvarAlteracoesDaDieta(
-        dietaEncontrada,
-        req.body.dietaNome,
-        req.body.dataInicio,
-        req.body.dataFim,
-        req.body.objetivo,
-        req.body.itens
-    );
+    repositorioDeNutricionistas.salvarAlteracoesDaDieta(dietaEncontrada);
 
-    res.send(dietaEncontrada);
+    res.send();
 }
 
 module.exports = {

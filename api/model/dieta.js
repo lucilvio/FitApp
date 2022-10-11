@@ -30,6 +30,35 @@ function Dieta(idAssinante, idNutricionista, nomeDieta, dataInicio, dataFim, obj
     itens.forEach(item => {
         this.itens.push(new ItemDaDieta(this.idDieta, item.descricao, item.refeicao));
     });
+
+
+    this.alterarDadosDaDieta = function (idDieta, nomeDieta, dataInicio, dataFim, objetivo, itens) {
+        this.itens = [];
+
+        if (nomeDieta != undefined && nomeDieta != null && nomeDieta != "") {
+            this.nomeDieta = nomeDieta;
+        }
+
+        if (dataInicio != undefined && dataInicio != null && dataInicio != "") {
+            this.dataInicio = dataInicio;
+        }
+
+        if (dataFim != undefined && dataFim != null && dataFim != "") {
+            this.dataFim = dataFim;
+        }
+
+        if (objetivo != undefined && objetivo != null && objetivo != "") {
+            this.objetivo = objetivo;
+        }
+
+        if (itens != undefined && itens != null && itens != "") {
+            itens.forEach(item => {
+                this.itens.push(new ItemDaDieta(idDieta, item.descricao, item.refeicao));
+            });
+           
+        }
+
+    }
 }
 
 function ItemDaDieta(idDieta, descricao, refeicao) {
@@ -40,11 +69,11 @@ function ItemDaDieta(idDieta, descricao, refeicao) {
     if (!descricao) {
         throw { mensagem: "Não é possível adicionar item sem descrição", interna: true };
     }
-    
+
     if (!refeicao) {
         throw { mensagem: "Não é possível adicionar item sem a refeição", interna: true };
     }
-    
+
     this.idDieta = idDieta;
     this.descricao = descricao;
     this.refeicao = refeicao;

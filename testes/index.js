@@ -34,6 +34,8 @@ require('./casosDeTeste/nutricionista/buscarPacientes');
 require('./casosDeTeste/nutricionista/buscarPacientePorId');
 require('./casosDeTeste/nutricionista/criarDieta');
 require('./casosDeTeste/nutricionista/buscarDietaPorId');
+require('./casosDeTeste/nutricionista/alterarDadosDaDieta');
+
 
 
 

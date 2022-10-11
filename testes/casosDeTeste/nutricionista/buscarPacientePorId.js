@@ -26,7 +26,7 @@ it('CU-N 07 - não encontra Paciente quando o id não existe', async () => {
     await spec()
         .get(`http://localhost:3000/nutricionista/pacientes/id`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
-        .expectJson({ erro: "Não encontrado" })
+        .expectJson({ erro: "Paciente não encontrado" })
         .expectStatus(404);
 
 
