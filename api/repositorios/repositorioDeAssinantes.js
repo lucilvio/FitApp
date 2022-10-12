@@ -1,6 +1,5 @@
 const base = require('../dados');
 
-
 function buscarAssianantePorEmail(email) {
     return base.dados.assinantes.find(assinante => assinante.email.toLowerCase() == email.toLowerCase());
 }
@@ -10,7 +9,7 @@ function criarAssinante(novoAssinante) {
     base.dados.assinantes.push(novoAssinante);
 }
 
-// function salvarDieta(dieta) {}
+
 
 function buscarAssinantePorFiltro(nome) {
     if (!nome) {
@@ -26,8 +25,13 @@ function buscarAssinantePorId(idAssinante) {
 
 function salvarAlteracaoDeDados(assinante) {
     let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
-
+    
     assinanteEncontrado = assinante;
+}
+
+function salvarDieta(dieta) {
+    const pacienteEncontrado = buscarAssinantePorId(dieta.idAssinante);
+    pacienteEncontrado.dietas.push(dieta);
 }
 
 module.exports = {
@@ -36,5 +40,6 @@ module.exports = {
     buscarAssianantePorEmail: buscarAssianantePorEmail,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
-    salvarAlteracaoDeDados: salvarAlteracaoDeDados
+    salvarAlteracaoDeDados: salvarAlteracaoDeDados,
+    salvarDieta: salvarDieta
 }

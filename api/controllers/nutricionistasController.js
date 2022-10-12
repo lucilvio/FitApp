@@ -1,4 +1,5 @@
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
+const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const Dieta = require('../model/dieta');
 
 // O Nutricionista ver os dados do perfil
@@ -136,7 +137,7 @@ function criarDieta(req, res) {
 
         const dieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
 
-        repositorioDeNutricionistas.salvarDieta(dieta);
+        repositorioDeAssinantes.salvarDieta(dieta);
 
         res.send({ idDieta: dieta.idDieta });
 

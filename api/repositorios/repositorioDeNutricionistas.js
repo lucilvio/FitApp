@@ -52,11 +52,6 @@ function buscarPacientePorId(idAssinante) {
     return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
 }
 
-function salvarDieta(dieta) {
-    const pacienteEncontrado = buscarPacientePorId(dieta.idAssinante);
-    pacienteEncontrado.dietas.push(dieta);
-}
-
 function buscarDietaPorId(idAssinante, idDieta) {
     const pacienteEncontrado = buscarPacientePorId(idAssinante);
     return pacienteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
@@ -82,7 +77,6 @@ module.exports = {
     buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
     buscarPacientePorId: buscarPacientePorId,
     buscarDietaPorId: buscarDietaPorId,
-    salvarDieta: salvarDieta,
     salvarAlteracoesDaDieta: salvarAlteracoesDaDieta,
 
 };
