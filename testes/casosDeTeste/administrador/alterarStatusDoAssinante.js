@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const usuario = require('../../funcoes/usuario');
 const plano = require('../../funcoes/plano');
 const nutricionista = require('../../funcoes/nutricionista');
-const personal = require('../../funcoes/personal');
+const personal = require('../../funcoes/personalTrainer');
 const assinante = require('../../funcoes/assinante');
 
 it('CU-A 04 - deve alterar status do Assinante', async () => {

@@ -1,6 +1,6 @@
 const { spec } = require('pactum');
 const usuario = require('../../funcoes/usuario');
-const personal = require('../../funcoes/personal');
+const personal = require('../../funcoes/personalTrainer');
 const crypto = require('crypto');
 
 it('CU-A 14 - deve cadastrar Personal', async () => {

@@ -168,7 +168,7 @@ function cadastrarPersonal(req, res) {
 
 // o Administrador busca por PersonalTrainer - todos ou por nome
 function buscarPersonalTrainers(req, res) {
-    let personalTrainers = repositorioDePersonalTrainers.buscarPersonalPorFiltro(req.query.nome);
+    let personalTrainers = repositorioDePersonalTrainers.buscarPersonalTrainersPorFiltro(req.query.nome);
 
     res.send(personalTrainers.map(function (personal) {
         return {

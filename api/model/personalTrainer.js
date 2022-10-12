@@ -2,19 +2,19 @@ const Usuario = require('../model/usuario');
 
 function PersonalTrainer(nome, email, telefone, registroProfissional) {
     if (!nome) {
-        throw { mensagem: "Não é possível cadastrar PersonalTrainer sem o nome", interna: true };
+        throw { mensagem: "Não é possível cadastrar Personal Trainer sem o nome", interna: true };
     }
 
     if (!email) {
-        throw { mensagem: "Não é possível cadastrar PersonalTrainer sem e-mail", interna: true };
+        throw { mensagem: "Não é possível cadastrar Personal Trainer sem e-mail", interna: true };
     }
 
     if (!telefone) {
-        throw { mensagem: "Não é possível cadastrar PersonalTrainer sem telefone", interna: true };
+        throw { mensagem: "Não é possível cadastrar Personal Trainer sem telefone", interna: true };
     }
 
     if (!registroProfissional) {
-        throw { mensagem: "Não é possível cadastrar PersonalTrainer sem o Registro Profissional", interna: true };
+        throw { mensagem: "Não é possível cadastrar Personal Trainer sem o Registro Profissional", interna: true };
     }
 
     this.usuario = new Usuario(nome, email, 'personalTrainer');

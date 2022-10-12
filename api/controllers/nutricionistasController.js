@@ -169,7 +169,7 @@ module.exports = {
     buscarPacientePorId: buscarPacientePorId,
     criarDieta: criarDieta,
     buscarDietaPorId: buscarDietaPorId,
-    editarDieta: editarDieta,
+    alterarDieta: editarDieta,
 }
 
 

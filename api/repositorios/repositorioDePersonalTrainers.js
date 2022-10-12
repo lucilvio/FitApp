@@ -14,7 +14,7 @@ function criarPersonal(novoPersonal) {
     base.dados.personalTrainers.push(novoPersonal);
 }
 
-function buscarPersonalPorFiltro(nome) {
+function buscarPersonalTrainersPorFiltro(nome) {
     if (!nome) {
         return base.dados.personalTrainers;
     } else {
@@ -24,13 +24,13 @@ function buscarPersonalPorFiltro(nome) {
 }
 
 function buscarPersonalPorId(idPersonal) {
-    return base.dados.personalTrainers.find(Personal => Personal.idPersonal == idPersonal);
+    return base.dados.personalTrainers.find(personal => personal.idPersonal == idPersonal);
 }
 
 function salvarAlteracaoDeDados(personal) {
-    let PersonalEncontrado = buscarPersonalPorId(personal.idPersonal);
+    let personalEncontrado = buscarPersonalPorId(personal.idPersonal);
 
-    PersonalEncontrado = personal;
+    personalEncontrado = personal;
 }
 
 function buscarAlunosPorFiltro(nome, emailPersonal) {
@@ -42,9 +42,9 @@ function buscarAlunosPorFiltro(nome, emailPersonal) {
     }
 
     if(!nome) {
-        return base.dados.assinantes.filter(assinante => assinante.personal == personal.idPersonal);
+        return base.dados.assinantes.filter(assinante => assinante.personalTrainer == personal.idPersonal);
     } else {
-        return base.dados.assinantes.filter(assinante => assinante.personal == personal.idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
+        return base.dados.assinantes.filter(assinante => assinante.personalTrainer == personal.idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
     }
 }
 
@@ -52,48 +52,37 @@ function buscarAlunoPorId(idAssinante) {
     return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
 }
 
-function salvarTreino(idAssinante, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
-
-    const aluno = buscarAlunoPorId(idAssinante);
-
-    if (!aluno) {
-        res.status(404).send({ erro: "Aluno não encontrado" });
-        return;
-    }
-
-    aluno.adicionarTreino(nomeTreino, dataInicio, dataFim, objetivo, exercicios);
-
-    aluno.treinos.push(novoTreino);
-    return novoTreino;
-
+function salvarTreino(treino) {
+    const alunoEncontrado = buscarAlunoPorId(treino.idAssinante);
+    alunoEncontrado.treinos.push(treino);
 }
 
-function buscarTreinoPorId(alunoEncontrado, idTreino) {
+function buscarTreinoPorId(idAssinante, idTreino) {
+    const alunoEncontrado = buscarAlunoPorId(idAssinante);
     return alunoEncontrado.treinos.find(treino => treino.idTreino == idTreino);
 }
 
-function salvarAlteracoesDoTreino(treinoEncontrado, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
-   treinoEncontrado.nomeTreino = nomeTreino;
-   treinoEncontrado.dataInicio = dataInicio;
-   treinoEncontrado.dataFim = dataFim;
-   treinoEncontrado.objetivo = objetivo;
-   treinoEncontrado.exercicios = exercicios;
+
+function salvarAlteracoesDoTreino(treino) {
+    let treinoEncontrado = buscarTreinoPorId(treino.idAssinante, treino.idTreino);
+
+    treinoEncontrado = treino;
 
 }
 
 
 
 module.exports = {
-    buscarPersonalTrainersAtivos:buscarPersonalTrainersAtivos,
-    criarPersonal: criarPersonal,
+    buscarPersonalTrainersAtivos: buscarPersonalTrainersAtivos,
     buscarPersonalPorEmail: buscarPersonalPorEmail,
-    buscarPersonalPorFiltro: buscarPersonalPorFiltro,
+    criarPersonal: criarPersonal,
+    buscarPersonalTrainersPorFiltro: buscarPersonalTrainersPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
     buscarAlunosPorFiltro:  buscarAlunosPorFiltro,
     buscarAlunoPorId: buscarAlunoPorId,
-    salvarTreino: salvarTreino,
     buscarTreinoPorId: buscarTreinoPorId,
+    salvarTreino: salvarTreino,
     salvarAlteracoesDoTreino: salvarAlteracoesDoTreino,
 
 };

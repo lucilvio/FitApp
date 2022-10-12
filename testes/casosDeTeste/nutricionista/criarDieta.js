@@ -80,7 +80,7 @@ it('CU-N 08 - não cria dieta para paciente não encontrado', async () => {
             "objetivo": "Perda de Peso",
             "itens": [
                 {
-                    "tipo": "cafeDaManha",
+                    "refeicao": "cafeDaManha",
                     "descricao": "Leite com café"
                 }
             ],

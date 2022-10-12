@@ -6,7 +6,7 @@ it('CU-P 05 - deve listar os alunos', async () => {
     const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
 
     await spec()
-        .get(`http://localhost:3000/personal/alunos`)
+        .get(`http://localhost:3000/personalTrainer/alunos`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike([
             {
@@ -19,15 +19,19 @@ it('CU-P 05 - deve listar os alunos', async () => {
 
 });
 
-it('CU-P 05 - não deve listar os alunos para Nutricionista', async () => {
+it('CU-P 05 - não deve listar os alunos para o Nutricionista', async () => {
 
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
     await spec()
-        .get(`http://localhost:3000/personal/alunos`)
+        .get(`http://localhost:3000/personalTrainer/alunos`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectStatus(401);
 
 
 
 });
+
+
+
+

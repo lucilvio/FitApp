@@ -1,7 +1,7 @@
 const { spec } = require('pactum');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
-const personal = require('../../funcoes/personal');
+const personal = require('../../funcoes/personalTrainer');
 const usuario = require('../../funcoes/usuario');
 const plano = require('../../funcoes/plano');
 const assinante = require('../../funcoes/assinante');

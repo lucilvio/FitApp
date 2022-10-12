@@ -14,7 +14,7 @@ require('./casosDeTeste/administrador/cadastrarNutricionista');
 require('./casosDeTeste/administrador/cadastrarPersonal');
 require('./casosDeTeste/administrador/buscarPlanos');
 require('./casosDeTeste/administrador/buscarNutricionistas');
-require('./casosDeTeste/administrador/buscarPersonal');
+require('./casosDeTeste/administrador/buscarPersonalTrainers');
 require('./casosDeTeste/administrador/buscarAssinantes');
 require('./casosDeTeste/administrador/buscarPlanoPorId');
 require('./casosDeTeste/administrador/buscarNutriPorId');
@@ -41,9 +41,13 @@ require('./casosDeTeste/nutricionista/alterarDadosDaDieta');
 
 
 //Personal
-// require('./casosDeTeste/personal/alterarDadosDoPerfil');
-// require('./casosDeTeste/personal/alterarSenha');
-// require('./casosDeTeste/personal/alterarInformacoesSobreMim');
-// require('./casosDeTeste/personal/buscarAlunos');
+require('./casosDeTeste/personalTrainer/alterarDadosDoPerfil');
+require('./casosDeTeste/personalTrainer/alterarSenha');
+require('./casosDeTeste/personalTrainer/alterarInformacoesSobreMim');
+require('./casosDeTeste/personalTrainer/buscarAlunos');
+require('./casosDeTeste/personalTrainer/buscarAlunoPorId');
+require('./casosDeTeste/personalTrainer/criarTreino');
+require('./casosDeTeste/personalTrainer/buscarTreinoPorId');
+require('./casosDeTeste/personalTrainer/alterarDadosDoTreino');
 
 
