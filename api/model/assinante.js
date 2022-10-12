@@ -23,6 +23,7 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
 
     this.usuario = new Usuario(nome, email, 'assinante');
     this.idAssinante = this.usuario.idUsuario;
+    this.imagem = this.usuario.imagem;
     this.nome = nome;
     this.email = email;
     this.dataNascimento = '';
@@ -41,17 +42,6 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
         this.idPlano = idPlano;
     }
 
-    
-
-    function Treino(nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
-        this.idTreino = crypto.randomUUID();
-        this.ativo = true;
-        this.nomeTreino = nomeTreino;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        this.objetivo = objetivo;
-        this.exercicios = exercicios;
-    }
 
     function Medidas(peso, pescoco, cintura, quadril) {
         this.data = new Date();

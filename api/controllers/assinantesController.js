@@ -42,6 +42,30 @@ function cadastrarAssinante(req, res) {
     }
 
 }
+// O Assinante ver os dados do perfil
+function verDadosDoPerfil(req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    if (!assinanteEncontrado) {
+        res.status(404).send({ erro: 'Assinante não encontrado' });
+        return;
+    }
+
+    if (req.usuario.idUsuario != assinanteEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+    res.send({
+        idAssinante: assinanteEncontrado.idAssinante,
+        imagem: assinanteEncontrado.usuario.imagem,
+        email: assinanteEncontrado.usuario.login,
+        nome: assinanteEncontrado.nome,
+        dataNascimento: assinanteEncontrado.dataNascimento,
+        sexo: assinanteEncontrado.sexo,
+        altura: assinanteEncontrado.altura
+    })
+
+}
 
 
 
@@ -49,5 +73,6 @@ function cadastrarAssinante(req, res) {
 
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
+    verDadosDoPerfil: verDadosDoPerfil,
     
 }

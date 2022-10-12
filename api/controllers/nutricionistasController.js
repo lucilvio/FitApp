@@ -1,6 +1,31 @@
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const Dieta = require('../model/dieta');
 
+// O Nutricionista ver os dados do perfil
+function verDadosDoPerfil(req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
+
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: 'Nutricionista não encontrado' });
+        return;
+    }
+
+    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+    res.send({
+        idNutri: nutriEncontrado.idNutri,
+        imagem: nutriEncontrado.usuario.imagem,
+        email: nutriEncontrado.usuario.login,
+        nome: nutriEncontrado.nome,
+        registroProfissional: nutriEncontrado.registroProfissional,
+        telefone: nutriEncontrado.telefone,
+        sobreMim: nutriEncontrado.sobreMim
+    })
+
+}
+
 // O Nutricionista altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
@@ -147,7 +172,7 @@ function editarDieta(req, res) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
-    
+
     const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
     if (!dietaEncontrada) {
         res.status(404).send({ erro: "Dieta não encontrada" });
@@ -162,6 +187,7 @@ function editarDieta(req, res) {
 }
 
 module.exports = {
+    verDadosDoPerfil: verDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,

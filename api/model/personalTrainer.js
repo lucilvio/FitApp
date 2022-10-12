@@ -19,6 +19,7 @@ function PersonalTrainer(nome, email, telefone, registroProfissional) {
 
     this.usuario = new Usuario(nome, email, 'personalTrainer');
     this.idPersonal = this.usuario.idUsuario;
+    this.imagem = this.usuario.imagem;
     this.nome = nome;
     this.email = email;
     this.telefone = telefone;

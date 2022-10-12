@@ -25,8 +25,10 @@ require('./casosDeTeste/administrador/alterarDadosDoPersonal');
 require('./casosDeTeste/administrador/alterarStatusDoAssinante');
 
 //Assinante
+require('./casosDeTeste/assinante/verDadosDoPerfil');
 
 //Nutricionista
+require('./casosDeTeste/nutricionista/verDadosDoPerfil');
 require('./casosDeTeste/nutricionista/alterarDadosDoPerfil');
 require('./casosDeTeste/nutricionista/alterarSenha');
 require('./casosDeTeste/nutricionista/alterarInformacoesSobreMim');
@@ -41,6 +43,7 @@ require('./casosDeTeste/nutricionista/alterarDadosDaDieta');
 
 
 //Personal
+require('./casosDeTeste/personalTrainer/verDadosDoPerfil');
 require('./casosDeTeste/personalTrainer/alterarDadosDoPerfil');
 require('./casosDeTeste/personalTrainer/alterarSenha');
 require('./casosDeTeste/personalTrainer/alterarInformacoesSobreMim');

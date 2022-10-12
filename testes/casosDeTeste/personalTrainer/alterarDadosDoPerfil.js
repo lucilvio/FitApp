@@ -13,6 +13,14 @@ it('CU-P 02 - O Personal deve alterar os dados do perfil', async () => {
         })
         .expectStatus(200);
 
-   
+    await spec()
+        .get(`http://localhost:3000/personalTrainer/perfil`)
+        .withHeaders("Authorization", "Bearer " + tokenPersonal)
+        .expectJsonLike(
+            {
+                idPersonal: 'idPersonal'
+            }
+        )
+        .expectStatus(200);
 
 })

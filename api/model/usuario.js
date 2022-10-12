@@ -11,6 +11,7 @@ function Usuario(nome, login, perfil){
     this.idUsuario = crypto.randomUUID();
     this.nome = nome;
     this.login = login;
+    this.imagem = "";
     this.bloqueado = false;
     this.perfil = perfil;
 

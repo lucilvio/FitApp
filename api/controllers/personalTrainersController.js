@@ -1,6 +1,30 @@
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 const Treino = require('../model/treino');
 
+// O Personal ver os dados do perfil
+function verDadosDoPerfil(req, res) {
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
+
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: 'Personal Trainer não encontrado' });
+        return;
+    }
+
+    if (req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+    res.send({
+        idPersonal: personalEncontrado.idPersonal,
+        imagem: personalEncontrado.usuario.imagem,
+        email: personalEncontrado.usuario.login,
+        nome: personalEncontrado.nome,
+        registroProfissional: personalEncontrado.registroProfissional,
+        telefone: personalEncontrado.telefone,
+        sobreMim: personalEncontrado.sobreMim
+    })
+
+}
 // O Personal Trainer altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
@@ -162,6 +186,7 @@ function alterarTreino(req, res) {
 }
 
 module.exports = {
+    verDadosDoPerfil: verDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
