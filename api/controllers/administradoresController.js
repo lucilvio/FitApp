@@ -7,6 +7,7 @@ const repositorioDePersonalTrainers = require('../repositorios/repositorioDePers
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
+const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 
 
 // O Administrador cadastra um Plano
@@ -227,7 +228,6 @@ function buscarAssinantes(req, res) {
             nome: assinante.nome,
             email: assinante.email,
             bloqueado: assinante.usuario.bloqueado,
-            idPlano: assinante.assinatura.idPlano
         }
     }));
 
@@ -241,12 +241,16 @@ function buscarAssinantePorId(req, res) {
         return;
     }
 
+    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.params.idAssinante)
+
     res.send({
         idAssinante: assinanteEncontrado.idAssinante,
         nome: assinanteEncontrado.nome,
         email: assinanteEncontrado.email,
         bloqueado: assinanteEncontrado.usuario.bloqueado,
-        idPlano: assinanteEncontrado.assinatura.idPlano
+        idPlano: assinaturaEncontrada.idPlano,
+        nomePlano: assinaturaEncontrada.nome,
+        valo: assinaturaEncontrada.valor
     });
 }
 

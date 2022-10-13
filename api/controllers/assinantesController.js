@@ -4,7 +4,9 @@ const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrainers');
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
+const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 const Assinante = require('../model/assinante');
+const Assinatura = require('../model/assinatura');
 
 //O Assinante faz o registro 
 function cadastrarAssinante(req, res) {
@@ -28,7 +30,8 @@ function cadastrarAssinante(req, res) {
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssianantePorEmail(req.body.email);
     if (!assinanteEncontrado) {
-        const novoAssinante = new Assinante(req.body.nome, req.body.email, req.body.idPlano, req.body.idNutri, req.body.idPersonal);
+        const assinatura = new Assinatura(req.body.idPlano);
+        const novoAssinante = new Assinante(req.body.nome, req.body.email, assinatura, req.body.idNutri, req.body.idPersonal);
 
         repositorioDeAssinantes.criarAssinante(novoAssinante);
 
@@ -63,9 +66,8 @@ function verDadosDoPerfil(req, res) {
         dataNascimento: assinanteEncontrado.dataNascimento,
         sexo: assinanteEncontrado.sexo,
         altura: assinanteEncontrado.altura,
-        plano: assinanteEncontrado.assinatura.idPlano,
-        nutricionista: assinanteEncontrado.nutricionista,
-        personalTrainer: assinanteEncontrado.personalTrainer
+        
+       
     })
 
 }
@@ -111,13 +113,19 @@ function alterarSenha(req, res) {
 
 //O assinante ver detalhes do plano
 function verDadosDoPlano(req, res) {
-    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
+    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
 
-    if (!planoEncontrado) {
+    if (!assinaturaEncontrada) {
         res.status(404).send({ erro: "Plano não encontrado" });
         return;
     }
 
+    if (assinaturaEncontrada.bloqueado == true) {
+        res.status(404).send({ erro: "Plano bloqueado" });
+        return;
+    }
+
+    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(assinaturaEncontrada.idPlano);
     const planosAtivos = repositorioDePlanos.buscarPlanosAtivos();
     const planos = planosAtivos.map(function (plano) {
         return {

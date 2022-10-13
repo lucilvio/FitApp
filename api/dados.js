@@ -11,7 +11,6 @@ usuarioAdmin.senha = 'admin123';
 const planoTeste = new Plano('Gratuito', 0,  'Experimente por 15 dias');
 planoTeste.idPlano = "idPlano";
 
-
 const nutriTeste = new Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
 nutriTeste.idNutri = "idNutri";
 nutriTeste.usuario.idUsuario = "idNutri";
@@ -22,12 +21,10 @@ personalTeste.idPersonal = "idPersonal";
 personalTeste.usuario.idUsuario = "idPersonal";
 personalTeste.usuario.senha = "personal123";
 
-const assinanteTeste = new Assinante('Assinante', 'assinante@fitapp.com', 'idPlano', 'idNutri', 'idPersonal');
+const assinanteTeste = new Assinante('Assinante', 'assinante@fitapp.com', {idAssinatura: 'idAssinatura', idPlano: 'idPlano', bloqueado: false}, 'idNutri', 'idPersonal');
 assinanteTeste.idAssinante = "idAssinante"
 assinanteTeste.usuario.idUsuario = "idAssinante";
 assinanteTeste.usuario.senha = "assinante123";
-
-
 
 
 const dados = {
