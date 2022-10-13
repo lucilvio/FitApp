@@ -90,6 +90,25 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
+// O assinante altera a senha
+function alterarSenha (req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    if (!assinanteEncontrado) {
+        res.status(404).send({ erro: 'Assinante não encontrado' });
+        return;
+    }
+
+    if (req.usuario.idUsuario != assinanteEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+
+    assinanteEncontrado.alterarSenha(req.body.senha);
+    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    res.send();
+}
+
 
 
 
@@ -97,6 +116,7 @@ function alterarDadosDoPerfil(req, res) {
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
     verDadosDoPerfil: verDadosDoPerfil,
-    alterarDadosDoPerfil: alterarDadosDoPerfil
+    alterarDadosDoPerfil: alterarDadosDoPerfil,
+    alterarSenha: alterarSenha,
     
 }

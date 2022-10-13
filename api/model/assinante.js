@@ -60,7 +60,7 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
 
         this.usuario.bloqueado = novoStatus;
     }
-//verificar se funciona
+
     this.alterarDadosDoPerfil = function (imagem, dataNascimento, sexo, altura) {
         if (imagem != undefined && imagem != null && imagem != "") {
             this.usuario.imagem = imagem;
@@ -77,6 +77,13 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
         if (altura != undefined && altura != null && altura != "") {
             this.altura = altura;
         }
+    }
+
+    this.alterarSenha = function (senha) {
+        if (senha != undefined && senha != null && senha != '') {
+            this.usuario.senha = senha;
+        }
+
     }
 
     this.adicionarDieta = function (idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, itens) {

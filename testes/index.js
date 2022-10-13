@@ -27,6 +27,7 @@ require('./casosDeTeste/administrador/alterarStatusDoAssinante');
 //Assinante
 require('./casosDeTeste/assinante/verDadosDoPerfil');
 require('./casosDeTeste/assinante/alterarDadosDoPerfil');
+require('./casosDeTeste/assinante/alterarSenha');
 
 //Nutricionista
 require('./casosDeTeste/nutricionista/verDadosDoPerfil');
