@@ -17,7 +17,6 @@ function buscarPlanosPorFiltro(nome) {
         return base.dados.planos;
     } else {
         return base.dados.planos.filter(plano => plano.nome.toLowerCase() == nome.toLowerCase());
-        
     }
 }
 

@@ -91,7 +91,7 @@ function alterarDadosDoPerfil(req, res) {
 }
 
 // O assinante altera a senha
-function alterarSenha (req, res) {
+function alterarSenha(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     if (!assinanteEncontrado) {
@@ -109,6 +109,35 @@ function alterarSenha (req, res) {
     res.send();
 }
 
+//O assinante ver detalhes do plano
+function verDadosDoPlano(req, res) {
+    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
+
+    if (!planoEncontrado) {
+        res.status(404).send({ erro: "Plano não encontrado" });
+        return;
+    }
+
+    const planosAtivos = repositorioDePlanos.buscarPlanosAtivos();
+    const planos = planosAtivos.map(function (plano) {
+        return {
+            idPlano: plano.idPlano,
+            nome: plano.nome,
+            valor: plano.valor,
+        }
+    });
+
+    res.send({
+        idPlano: planoEncontrado.idPlano,
+        nome: planoEncontrado.nome,
+        valor: planoEncontrado.valor,
+        descricao: planoEncontrado.descricao,
+        //dataInicio: planoEncontrado.dataInicio,
+        //dataFim: planoEncontrado.dataFim,
+        planos: planos
+    });
+}
+
 
 
 
@@ -118,5 +147,6 @@ module.exports = {
     verDadosDoPerfil: verDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
-    
+    verDadosDoPlano: verDadosDoPlano,
+
 }
