@@ -9,8 +9,6 @@ function criarAssinante(novoAssinante) {
     base.dados.assinantes.push(novoAssinante);
 }
 
-
-
 function buscarAssinantePorFiltro(nome) {
     if (!nome) {
         return base.dados.assinantes;

@@ -60,6 +60,24 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
 
         this.usuario.bloqueado = novoStatus;
     }
+//verificar se funciona
+    this.alterarDadosDoPerfil = function (imagem, dataNascimento, sexo, altura) {
+        if (imagem != undefined && imagem != null && imagem != "") {
+            this.usuario.imagem = imagem;
+        }
+
+        if (dataNascimento != undefined && dataNascimento != null && dataNascimento != "") {
+            this.dataNascimento = dataNascimento;
+        }
+
+        if (sexo != undefined && sexo != null && sexo != "") {
+            this.sexo = sexo;
+        }
+
+        if (altura != undefined && altura != null && altura != "") {
+            this.altura = altura;
+        }
+    }
 
     this.adicionarDieta = function (idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, itens) {
         if (!nomeDieta) {
@@ -78,7 +96,7 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
             throw { mensagem: "Não é possível criar dieta sem o objetivo", interna: true };
         }
 
-        new Dieta ()
+        new Dieta()
     }
 
 
@@ -99,7 +117,7 @@ function Assinante(nome, email, idPlano, idNutri, idPersonal) {
             throw { mensagem: "Não é possível criar treino sem o objetivo", interna: true };
         }
 
-        this.dietas.push({
+        this.treinos.push({
             idTreino: crypto.randomUUID(),
             ativo: true,
             nomeTreino: nomeTreino,

@@ -90,7 +90,7 @@ servidor.app.patch('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', aut
 //Assinante
 servidor.app.post('/assinantes', assinantesController.cadastrarAssinante);
 servidor.app.get('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.verDadosDoPerfil); 
-//servidor.app.patch('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarDadosDoPerfil);
+servidor.app.patch('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarDadosDoPerfil);
 
 
 

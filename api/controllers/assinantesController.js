@@ -62,9 +62,32 @@ function verDadosDoPerfil(req, res) {
         nome: assinanteEncontrado.nome,
         dataNascimento: assinanteEncontrado.dataNascimento,
         sexo: assinanteEncontrado.sexo,
-        altura: assinanteEncontrado.altura
+        altura: assinanteEncontrado.altura,
+        plano: assinanteEncontrado.assinatura.idPlano,
+        nutricionista: assinanteEncontrado.nutricionista,
+        personalTrainer: assinanteEncontrado.personalTrainer
     })
 
+}
+
+// O Assinante altera dados do perfil
+function alterarDadosDoPerfil(req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    if (!assinanteEncontrado) {
+        res.status(404).send({ erro: 'Assinante não encontrado' });
+        return;
+    }
+
+    if (req.usuario.idUsuario != assinanteEncontrado.usuario.idUsuario) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+
+    assinanteEncontrado.alterarDadosDoPerfil(req.body.imagem, req.body.dataNascimento, req.body.sexo, req.body.altura);
+
+    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    res.send();
 }
 
 
@@ -74,5 +97,6 @@ function verDadosDoPerfil(req, res) {
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
     verDadosDoPerfil: verDadosDoPerfil,
+    alterarDadosDoPerfil: alterarDadosDoPerfil
     
 }
