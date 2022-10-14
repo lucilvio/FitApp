@@ -6,8 +6,8 @@ const usuario = require('../../funcoes/usuario');
 it('o sistema apresenta os Planos ativos', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPlano1 = await planos.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
-    const idPlano2 = await planos.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
+    const idPlano1 = await planos.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
+    const idPlano2 = await planos.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()
         .patch(`http://localhost:3000/admin/planos/${idPlano1}`)

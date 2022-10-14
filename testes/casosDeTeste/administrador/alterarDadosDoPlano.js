@@ -7,7 +7,7 @@ const crypto = require('crypto');
 it('CU-A 18 - deve alterar dados do Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()
         .get(`http://localhost:3000/admin/planos/${idPlano}`)
@@ -23,7 +23,7 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
         .patch(`http://localhost:3000/admin/planos/${idPlano}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
-            "nome": `Gratuito_55`,
+            "nome": `Trimestral`,
             "valor": 0,
             "bloqueado": true,
             "descricao": "Experimente gratis por 15 dias"
@@ -35,7 +35,7 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
-                nome:  `Gratuito_55`
+                nome:  `Trimestral`
             }
         )
         .expectStatus(200);
@@ -58,3 +58,21 @@ it('CU-A 18 - Não altera dados do Plano quando o Id não existe', async () => {
         .expectJson({ erro: "Plano não encontrado" })
         .expectStatus(404);
 });
+
+// it('CU-A 18 - Não altera o nome do Plano quando já existe um plano cadastrado com mesmo nome', async () => {
+//     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
+
+//     const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
+
+//     await spec()
+//         .patch(`http://localhost:3000/admin/planos/${idPlano}`)
+//         .withHeaders("Authorization", "Bearer " + token)
+//         .withJson({
+//             "nome": `Gratuito`,
+//             "valor": 0,
+//             "bloqueado": true,
+//             "descricao": "Experimente gratis por 15 dias"
+//         })
+//         .expectJson({ erro: "Já existe Plano com esse nome" })
+//         .expectStatus(400);
+// });

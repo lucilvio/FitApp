@@ -22,7 +22,7 @@ function cadastrarPlano(req, res) {
         res.send({
             idPlano: novoPlano.idPlano
         });
-    }else {
+    } else {
         res.status(400).send({ erro: "Esse plano já foi cadastrado" });
         return;
     }
@@ -49,8 +49,8 @@ function buscarPlanos(req, res) {
 function buscarPlanoPorId(req, res) {
     let planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
-    if(!planoEncontrado) {
-        res.status(404).send({ erro: "Plano não encontrado"});
+    if (!planoEncontrado) {
+        res.status(404).send({ erro: "Plano não encontrado" });
         return;
     }
 
@@ -73,8 +73,17 @@ function alterarDadosDoPlano(req, res) {
         return;
     }
 
-    planoEncontrado.alterarDadosDoPlano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
 
+    if (planoEncontrado.nome != req.body.nome) {
+        const planoEncontradoPeloNome = repositorioDePlanos.buscarPlanosPorFiltro(req.body.nome);
+
+        if (planoEncontradoPeloNome.nome == req.body.nome) {
+            res.status(400).send({ erro: "Já existe Plano com esse nome" });
+            return;
+        }
+    }
+
+    planoEncontrado.alterarDadosDoPlano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
     repositorioDePlanos.salvarAlteracaoDeDados(planoEncontrado);
     res.send();
 }
