@@ -15,7 +15,7 @@ function cadastrarPlano(req, res) {
     const planoEncontrado = repositorioDePlanos.buscarPlanosPorNome(req.body.nome);
 
     if (!planoEncontrado) {
-        const novoPlano = new Plano(req.body.nome, req.body.valor, req.body.descricao);
+        const novoPlano = new Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
 
         repositorioDePlanos.criarPlano(novoPlano);
 
@@ -37,6 +37,7 @@ function buscarPlanos(req, res) {
             idPlano: plano.idPlano,
             nome: plano.nome,
             valor: plano.valor,
+            duracao: plano.duracao,
             bloqueado: plano.bloqueado,
             descricao: plano.descricao
         }
@@ -57,6 +58,7 @@ function buscarPlanoPorId(req, res) {
         idPlano: planoEncontrado.idPlano,
         nome: planoEncontrado.nome,
         valor: planoEncontrado.valor,
+        duracao: planoEncontrado.duracao,
         descricao: planoEncontrado.descricao,
         bloqueado: planoEncontrado.bloqueado,
     })
@@ -71,7 +73,7 @@ function alterarDadosDoPlano(req, res) {
         return;
     }
 
-    planoEncontrado.alterarDadosDoPlano(req.body.nome, req.body.valor, req.body.descricao, req.body.bloqueado);
+    planoEncontrado.alterarDadosDoPlano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
 
     repositorioDePlanos.salvarAlteracaoDeDados(planoEncontrado);
     res.send();

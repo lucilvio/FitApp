@@ -8,7 +8,7 @@ const usuarioAdmin = new Usuario('Administrador', 'admin@fitapp.com', 'administr
 usuarioAdmin.idUsuario = "e7c17d74-f067-46ca-9734-1c232ba0ea18";
 usuarioAdmin.senha = 'admin123';
 
-const planoTeste = new Plano('Gratuito', 0,  'Experimente por 15 dias');
+const planoTeste = new Plano('Gratuito', 0, 15, 'Experimente por 15 dias');
 planoTeste.idPlano = "idPlano";
 
 const nutriTeste = new Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
