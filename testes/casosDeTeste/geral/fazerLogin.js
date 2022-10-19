@@ -22,3 +22,14 @@ it('CU-G 01 - Não deve fazer login quando usuario ou senha incorretos', async (
         .expectStatus(400);
 });
 
+it('CU-G 01 - Não deve fazer login quando usuario estiver bloqueado', async () => {
+    await spec()
+        .post('http://localhost:3000/login')
+        .withJson({
+            "email": "assinantebloqueado@fitapp.com",
+            "senha": "aassinante123"
+        })
+        .expectJson({ erro: "Usuário bloqueado"})
+        .expectStatus(400);
+});
+

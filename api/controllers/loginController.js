@@ -14,7 +14,7 @@ function login(req, res) {
     }
 
     if(usuarioEncontrado.bloqueado == true) {
-        res.status(400).send({ erro: "login ou senha incorreto"});
+        res.status(400).send({ erro: "Usuário bloqueado"});
         return;
     }
 

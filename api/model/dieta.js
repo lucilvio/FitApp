@@ -34,7 +34,10 @@ function Dieta(idAssinante, idNutricionista, nomeDieta, dataInicio, dataFim, obj
 
     this.alterarDadosDaDieta = function (idDieta, nomeDieta, dataInicio, dataFim, objetivo, itens) {
         this.itens = [];
-
+        
+        if (!idDieta) {
+            throw { mensagem: "Não é possível adicionar item sem o id da dieta", interna: true };
+        }
         if (nomeDieta != undefined && nomeDieta != null && nomeDieta != "") {
             this.nomeDieta = nomeDieta;
         }

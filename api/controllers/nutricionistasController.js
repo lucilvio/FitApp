@@ -11,10 +11,6 @@ function verDadosDoPerfil(req, res) {
         return;
     }
 
-    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
     res.send({
         idNutri: nutriEncontrado.idNutri,
         imagem: nutriEncontrado.usuario.imagem,
@@ -36,11 +32,6 @@ function alterarDadosDoPerfil(req, res) {
         return;
     }
 
-    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
-
     nutriEncontrado.alterarDadosDoPerfil(req.body.telefone, req.body.imagem);
 
     repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado);
@@ -56,11 +47,6 @@ function alterarSenha(req, res) {
         return;
     }
 
-    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
-
     nutriEncontrado.alterarSenha(req.body.senha);
 
     repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado);
@@ -73,11 +59,6 @@ function alterarInformacoesSobreMim(req, res) {
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: 'Nutricionista não encontrado' });
-        return;
-    }
-
-    if (req.usuario.idUsuario != nutriEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
@@ -110,6 +91,12 @@ function buscarPacientePorId(req, res) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
+    
+    if (req.usuario.idUsuario != pacienteEncontrado.nutricionista) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+   
 
     res.send({
         nome: pacienteEncontrado.nome,
@@ -155,6 +142,11 @@ function buscarDietaPorId(req, res) {
         return;
     }
 
+    if (req.usuario.idUsuario != pacienteEncontrado.nutricionista) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+
     const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
 
     if (!dietaEncontrada) {
@@ -167,7 +159,7 @@ function buscarDietaPorId(req, res) {
 }
 
 
-function editarDieta(req, res) {
+function alterarDieta(req, res) {
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });
@@ -180,15 +172,21 @@ function editarDieta(req, res) {
         return;
     }
 
-    dietaEncontrada.alterarDadosDaDieta(req.params.idDieta, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
+    if (req.usuario.idUsuario == pacienteEncontrado.nutricionista) {
+        dietaEncontrada.alterarDadosDaDieta(req.params.idDieta, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
+    
+        repositorioDeNutricionistas.salvarAlteracoesDaDieta(dietaEncontrada);
+    
+        res.send();
 
-    repositorioDeNutricionistas.salvarAlteracoesDaDieta(dietaEncontrada);
+    }else {
+        res.status(400).send({ erro: "Não é possivel alterar dieta " })
+    }
 
-    res.send();
 }
 
 module.exports = {
-    verDadosDoPerfil: verDadosDoPerfil,
+    buscarDadosDoPerfil: verDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
@@ -196,7 +194,7 @@ module.exports = {
     buscarPacientePorId: buscarPacientePorId,
     criarDieta: criarDieta,
     buscarDietaPorId: buscarDietaPorId,
-    alterarDieta: editarDieta,
+    alterarDieta: alterarDieta,
 }
 
 

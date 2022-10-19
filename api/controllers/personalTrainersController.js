@@ -186,7 +186,7 @@ function alterarTreino(req, res) {
 }
 
 module.exports = {
-    verDadosDoPerfil: verDadosDoPerfil,
+    buscarDadosDoPerfil: verDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,

@@ -1,17 +1,28 @@
 const crypto = require('crypto');
 
-function Assinatura(idPlano) {
-    if (!idPlano) {
-        throw { mensagem: "Não é possível criar assinatura sem o Id do Plano", interna: true };
+function Assinatura(idAssinante, plano) {
+    if (!idAssinante) {
+        throw { mensagem: "Não é possível criar assinatura sem o Id do Assinante", interna: true };
+    }
+    if (!plano) {
+        throw { mensagem: "Não é possível criar assinatura sem Plano", interna: true };
+    }
+    this.idAssinante = idAssinante;
+    this.idAssinatura = crypto.randomUUID();
+    this.idPlano = plano.idPlano;
+    this.bloqueado = false;
+
+    this.dataInicio = new Date();
+    this.dataFim = new Date();
+    this.dataFim.setDate(this.dataInicio.getDate() + plano.duracao);
+
+    this.alterarPlano = function (novoPlano) {
+        this.idPlano = novoPlano.idPlano;
+        this.dataInicio = new Date();
+        this.dataFim = new Date();
+        this.dataFim.setDate(this.dataInicio.getDate() + novoPlano.duracao);
     }
 
-    this.idAssinatura = crypto.randomUUID();
-    this.idPlano = idPlano;
-    this.bloqueado = false;
-    //this.dataInicio = ;
-    //this.dataFim =  ;
-
-    
 }
 
 module.exports = Assinatura;

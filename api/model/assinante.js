@@ -1,7 +1,7 @@
-const Usuario = require('../model/usuario');
-const crypto = require('crypto');
+const Usuario = require('./usuario');
+const Assinatura = require('./assinatura');
 
-function Assinante(nome, email, assinatura, idNutri, idPersonal) {
+function Assinante(nome, email, plano, idNutri, idPersonal) {
     if (!nome) {
         throw { mensagem: "Não é possível cadastrar Assinante sem o nome", interna: true };
     }
@@ -9,8 +9,8 @@ function Assinante(nome, email, assinatura, idNutri, idPersonal) {
         throw { mensagem: "Não é possível cadastrar Assinante sem e-mail", interna: true };
     }
 
-    if (!assinatura) {
-        throw { mensagem: "Não é possível cadastrar Assinante sem a Assinatura", interna: true };
+    if (!plano) {
+        throw { mensagem: "Não é possível cadastrar Assinante sem plano", interna: true };
     }
 
     if (!idNutri) {
@@ -37,8 +37,8 @@ function Assinante(nome, email, assinatura, idNutri, idPersonal) {
     this.treinos = [];
     this.medidas = [];
 
-    this.assinaturas.push(assinatura);
-   
+    this.assinaturas.push(new Assinatura(this.idAssinante, plano));
+
 
 
     function Medidas(peso, pescoco, cintura, quadril) {
@@ -52,11 +52,9 @@ function Assinante(nome, email, assinatura, idNutri, idPersonal) {
 
     this.alterarStatus = function (novoStatus) {
 
-        if (!novoStatus) {
-            throw { mensagem: "Não é possível alterar o status sem informação", interna: true };
+        if (typeof (novoStatus) == 'boolean') {
+            this.usuario.bloqueado = novoStatus;
         }
-
-        this.usuario.bloqueado = novoStatus;
     }
 
     this.alterarDadosDoPerfil = function (imagem, dataNascimento, sexo, altura) {
@@ -84,7 +82,33 @@ function Assinante(nome, email, assinatura, idNutri, idPersonal) {
 
     }
 
-   
+    this.cancelarAssinatura = function (idAssinatura) {
+        const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
+
+        if(!assinaturaEncontrada) {
+
+            throw { mensagem: "Assinatura não encontrada", interna: true };
+        }
+
+        assinaturaEncontrada.bloqueado = true;
+        this.usuario.bloqueado = true;
+    }
+
+    this.alterarPlanoDaAssinatura = function (idAssinatura, novoPlano) {
+        if(!novoPlano) {
+
+            throw { mensagem: "Plano não definido", interna: true };
+        }
+
+        const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
+
+        if(!assinaturaEncontrada) {
+
+            throw { mensagem: "Assinatura não encontrada", interna: true };
+        }
+
+        assinaturaEncontrada.alterarPlano(novoPlano);
+    }
 
 }
 

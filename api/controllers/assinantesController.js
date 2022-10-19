@@ -6,7 +6,8 @@ const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrai
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 const Assinante = require('../model/assinante');
-const Assinatura = require('../model/assinatura');
+const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
+
 
 //O Assinante faz o registro 
 function cadastrarAssinante(req, res) {
@@ -30,8 +31,7 @@ function cadastrarAssinante(req, res) {
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssianantePorEmail(req.body.email);
     if (!assinanteEncontrado) {
-        const assinatura = new Assinatura(req.body.idPlano);
-        const novoAssinante = new Assinante(req.body.nome, req.body.email, assinatura, req.body.idNutri, req.body.idPersonal);
+        const novoAssinante = new Assinante(req.body.nome, req.body.email, planoEncontrado, req.body.idNutri, req.body.idPersonal);
 
         repositorioDeAssinantes.criarAssinante(novoAssinante);
 
@@ -49,25 +49,25 @@ function cadastrarAssinante(req, res) {
 function verDadosDoPerfil(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: 'Assinante não encontrado' });
+    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
+
+    if (!assinaturaEncontrada) {
+        res.status(404).send({ erro: "Assinante não tem assinatura ativa" });
         return;
     }
 
-    if (req.usuario.idUsuario != assinanteEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
     res.send({
         idAssinante: assinanteEncontrado.idAssinante,
+        idAssinatura: assinaturaEncontrada.idAssinatura,
+        idPlano: assinaturaEncontrada.idPlano,
+        idNutri: assinanteEncontrado.nutricionista,
+        idPersonal: assinanteEncontrado.personalTrainer,
         imagem: assinanteEncontrado.usuario.imagem,
         email: assinanteEncontrado.usuario.login,
         nome: assinanteEncontrado.nome,
         dataNascimento: assinanteEncontrado.dataNascimento,
         sexo: assinanteEncontrado.sexo,
         altura: assinanteEncontrado.altura,
-        
-       
     })
 
 }
@@ -75,16 +75,6 @@ function verDadosDoPerfil(req, res) {
 // O Assinante altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: 'Assinante não encontrado' });
-        return;
-    }
-
-    if (req.usuario.idUsuario != assinanteEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
 
     assinanteEncontrado.alterarDadosDoPerfil(req.body.imagem, req.body.dataNascimento, req.body.sexo, req.body.altura);
 
@@ -96,65 +86,113 @@ function alterarDadosDoPerfil(req, res) {
 function alterarSenha(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: 'Assinante não encontrado' });
-        return;
-    }
-
-    if (req.usuario.idUsuario != assinanteEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
-
     assinanteEncontrado.alterarSenha(req.body.senha);
     repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
     res.send();
 }
 
-//O assinante ver detalhes do plano
-function verDadosDoPlano(req, res) {
-    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
+//O assinante ver dados da assinatura
+function verDadosDaAssinatura(req, res) {
+    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!assinaturaEncontrada) {
-        res.status(404).send({ erro: "Plano não encontrado" });
+        res.status(404).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
     if (assinaturaEncontrada.bloqueado == true) {
-        res.status(404).send({ erro: "Plano bloqueado" });
+        res.status(400).send({ erro: "Assinatura cancelada" });
+        return;
+    }
+    
+    if (req.usuario.idUsuario != assinaturaEncontrada.idAssinante) {
+        res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
     const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(assinaturaEncontrada.idPlano);
-    const planosAtivos = repositorioDePlanos.buscarPlanosAtivos();
-    const planos = planosAtivos.map(function (plano) {
-        return {
-            idPlano: plano.idPlano,
-            nome: plano.nome,
-            valor: plano.valor,
-        }
-    });
+    if (!planoEncontrado) {
+        res.status(404).send({ erro: "Plano não encontrado" });
+        return;
+    }
 
     res.send({
-        idPlano: planoEncontrado.idPlano,
+        idPlano: assinaturaEncontrada.idPlano,
         nome: planoEncontrado.nome,
         valor: planoEncontrado.valor,
         descricao: planoEncontrado.descricao,
-        //dataInicio: planoEncontrado.dataInicio,
-        //dataFim: planoEncontrado.dataFim,
-        planos: planos
+        dataInicio: assinaturaEncontrada.dataInicio,
+        dataFim: assinaturaEncontrada.dataFim,
     });
 }
 
+// O Assinante cancela a Assinatura
+function cancelarAssinatura(req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    assinanteEncontrado.cancelarAssinatura(req.params.idAssinatura);
+    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    res.send();
+}
+
+// O Assinante altera a assinatura
+function alterarPlanoDaAssinatura (req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
+
+    assinanteEncontrado.alterarPlanoDaAssinatura(req.params.idAssinatura, planoEncontrado);
+    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    res.send();
+}
 
 
+// O Assinante vê os dados da Nutricionista
+function buscarDadosDoNutri (req, res) {
+    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
+
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Nutricionista não encontrado" });
+        return;
+    }
+
+    res.send({
+        imagem: nutriEncontrado.imagem,
+        nome: nutriEncontrado.nome,
+        sobreMim: nutriEncontrado.sobreMim
+    })
+}
+
+// O Assinante vê os dados do Personal trainer
+function buscarDadosDoPersonal (req, res) {
+    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
+
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Personal Trainer não encontrado" });
+        return;
+    }
+
+    res.send({
+        imagem: personalEncontrado.imagem,
+        nome: personalEncontrado.nome,
+        sobreMim: personalEncontrado.sobreMim
+    })
+}
+// O Assinante lista as Dietas
+// O Assinante lista os Treinos
+// O Assinante salva as suas Medidas
+// O Assinante vê o historio de medidas
 
 
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
-    verDadosDoPerfil: verDadosDoPerfil,
+    buscarDadosDoPerfil: verDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
-    verDadosDoPlano: verDadosDoPlano,
+    buscarDadosDaAssinatura: verDadosDaAssinatura,
+    cancelarAssinatura: cancelarAssinatura,
+    alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
+    buscarDadosDoNutri:  buscarDadosDoNutri,
+    buscarDadosDoPersonal: buscarDadosDoPersonal
 
 }
