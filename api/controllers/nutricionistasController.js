@@ -123,8 +123,8 @@ function criarDieta(req, res) {
     if (req.usuario.idUsuario == pacienteEncontrado.nutricionista) {
 
         const dieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
-
-        repositorioDeAssinantes.salvarDieta(dieta);
+        pacienteEncontrado.inserirDieta(dieta);
+        repositorioDeAssinantes.salvarDieta(pacienteEncontrado);
 
         res.send({ idDieta: dieta.idDieta });
 

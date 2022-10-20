@@ -7,6 +7,7 @@ const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 const Assinante = require('../model/assinante');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
+const Medidas = require('../model/medidas');
 
 
 //O Assinante faz o registro 
@@ -181,6 +182,12 @@ function buscarDadosDoPersonal (req, res) {
 // O Assinante lista as Dietas
 // O Assinante lista os Treinos
 // O Assinante salva as suas Medidas
+function inserirMedidas (req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+    assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
+    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
+    res.send();
+}
 // O Assinante vê o historio de medidas
 
 
@@ -193,6 +200,7 @@ module.exports = {
     cancelarAssinatura: cancelarAssinatura,
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
     buscarDadosDoNutri:  buscarDadosDoNutri,
-    buscarDadosDoPersonal: buscarDadosDoPersonal
+    buscarDadosDoPersonal: buscarDadosDoPersonal,
+    inserirMedidas: inserirMedidas
 
 }

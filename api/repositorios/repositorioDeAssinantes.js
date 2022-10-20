@@ -23,13 +23,17 @@ function buscarAssinantePorId(idAssinante) {
 
 function salvarAlteracaoDeDados(assinante) {
     let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
-    
     assinanteEncontrado = assinante;
 }
 
-function salvarDieta(dieta) {
-    const pacienteEncontrado = buscarAssinantePorId(dieta.idAssinante);
-    pacienteEncontrado.dietas.push(dieta);
+function salvarDieta(assinante) {
+    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
+    assinanteEncontrado = assinante;
+}
+
+function salvarMedidas(assinante) {
+    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
+    assinanteEncontrado = assinante;
 }
 
 module.exports = {
@@ -39,5 +43,6 @@ module.exports = {
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
-    salvarDieta: salvarDieta
+    salvarDieta: salvarDieta,
+    salvarMedidas: salvarMedidas,
 }

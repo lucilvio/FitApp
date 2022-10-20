@@ -90,14 +90,15 @@ servidor.app.patch('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', aut
 //Assinante
 servidor.app.post('/assinantes', assinantesController.cadastrarAssinante);
 servidor.app.get('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoPerfil); 
+servidor.app.patch('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarDadosDoPerfil);
 servidor.app.get('/assinante/perfil/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoNutri); 
 servidor.app.get('/assinante/perfil/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoPersonal); 
-servidor.app.patch('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarDadosDoPerfil);
 servidor.app.patch('/assinante/senha', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarSenha);
 servidor.app.get('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDaAssinatura);
 servidor.app.delete('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.cancelarAssinatura);
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura);
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura);
+servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), assinantesController.inserirMedidas);
 
 
 

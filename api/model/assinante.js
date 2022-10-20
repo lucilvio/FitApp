@@ -40,16 +40,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.assinaturas.push(new Assinatura(this.idAssinante, plano));
 
 
-
-    function Medidas(peso, pescoco, cintura, quadril) {
-        this.data = new Date();
-        this.peso = peso;
-        this.pescoco = pescoco;
-        this.cintura = cintura;
-        this.quadril = quadril;
-
-    }
-
     this.alterarStatus = function (novoStatus) {
 
         if (typeof (novoStatus) == 'boolean') {
@@ -82,10 +72,11 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
 
     }
 
+
     this.cancelarAssinatura = function (idAssinatura) {
         const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
 
-        if(!assinaturaEncontrada) {
+        if (!assinaturaEncontrada) {
 
             throw { mensagem: "Assinatura não encontrada", interna: true };
         }
@@ -95,19 +86,51 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     }
 
     this.alterarPlanoDaAssinatura = function (idAssinatura, novoPlano) {
-        if(!novoPlano) {
+        if (!novoPlano) {
 
             throw { mensagem: "Plano não definido", interna: true };
         }
 
         const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
 
-        if(!assinaturaEncontrada) {
+        if (!assinaturaEncontrada) {
 
             throw { mensagem: "Assinatura não encontrada", interna: true };
         }
 
         assinaturaEncontrada.alterarPlano(novoPlano);
+    }
+
+    this.inserirMedidas = function (medidas) {
+        if (this.medidas.length > 0) {
+            const ultimaMedida = this.medidas.reduce((a, b) => a.data > b.data ? a : b);
+
+            if(!medidas.peso) {
+                medidas.peso = ultimaMedida.peso
+            }
+
+            if(!medidas.pescoco) {
+                medidas.pescoco = ultimaMedida.pescoco
+            }
+
+            if(!medidas.cintura) {
+                medidas.cintura = ultimaMedida.cintura
+            }
+            
+            if(!medidas.quadril) {
+                medidas.quadril = ultimaMedida.quadril
+            }
+
+            this.medidas.push(medidas);
+
+        } else {
+            this.medidas.push(medidas);
+        }
+
+    }
+
+    this.inserirDieta = function (dieta) {
+        this.dietas.push(dieta);
     }
 
 }
