@@ -179,8 +179,46 @@ function buscarDadosDoPersonal (req, res) {
         sobreMim: personalEncontrado.sobreMim
     })
 }
-// O Assinante lista as Dietas
-// O Assinante lista os Treinos
+// O Assinante busca as Dietas
+function buscarDietas (req, res) {
+    const dietas = repositorioDeAssinantes.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
+
+    res.send(dietas.map(function (dieta) {
+        return {
+            idDieta: dieta.idDieta,
+            nome: dieta.nomeDieta,
+            objetivo: dieta.objetivo,
+            dataInicio: dieta.dataInicio,
+            dataFim: dieta.dataFim
+        }
+    }));
+}
+
+// O Assinante busca dieta por id
+function buscarDietaPorId (req, res) {
+    const dietaEncontrada = repositorioDeAssinantes.buscarDietaPorId(req.usuario.idUsuario, req.params.idDieta);
+
+    if(!dietaEncontrada) {
+        res.status(404).send({ erro: "Dieta não encontrada" });
+        return;
+    }
+
+    res.send({
+        idDieta: dietaEncontrada.idDieta,
+        nome: dietaEncontrada.nomeDieta,
+        objetivo: dietaEncontrada.objetivo,
+        itens: dietaEncontrada.itens
+    });
+}
+// O Assinante busca os Treinos
+function buscarTreinos (req, res) {
+
+}
+
+// O Assinante busca treino por Id
+function buscarTreinoPorId (req, res) {
+
+}
 // O Assinante salva as suas Medidas
 function inserirMedidas (req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
@@ -206,6 +244,8 @@ module.exports = {
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
     buscarDadosDoNutri:  buscarDadosDoNutri,
     buscarDadosDoPersonal: buscarDadosDoPersonal,
+    buscarDietas: buscarDietas,
+    buscarDietaPorId: buscarDietaPorId,
     inserirMedidas: inserirMedidas,
     buscarMedidas: buscarMedidas
 

@@ -31,6 +31,33 @@ function salvarDieta(assinante) {
     assinanteEncontrado = assinante;
 }
 
+function buscarDietasPorFiltro (nome, idAssinante) {
+    const assinanteEncontrado = buscarAssinantePorId(idAssinante);
+
+    if(!assinanteEncontrado) {
+        res.status(404).send({ erro: "Assinante não encontrado" });
+        return;
+    }
+
+    if(!nome) {
+        return assinanteEncontrado.dietas;
+    } else {
+        return assinanteEncontrado.dietas.filter(dieta => dieta.nome == nome);
+    }
+    
+}
+
+function buscarDietaPorId (idAssinante, idDieta) {
+    const assinanteEncontrado = buscarAssinantePorId(idAssinante);
+
+    if(!assinanteEncontrado) {
+        res.status(404).send({ erro: "Assinante não encontrado" });
+        return;
+    }
+
+    return assinanteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
+}
+
 function salvarMedidas(assinante) {
     let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
     assinanteEncontrado = assinante;
@@ -44,5 +71,7 @@ module.exports = {
     buscarAssinantePorId: buscarAssinantePorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
     salvarDieta: salvarDieta,
+    buscarDietasPorFiltro: buscarDietasPorFiltro,
+    buscarDietaPorId: buscarDietaPorId,
     salvarMedidas: salvarMedidas,
 }

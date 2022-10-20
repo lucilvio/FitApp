@@ -100,6 +100,8 @@ servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura);
 servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), assinantesController.inserirMedidas);
 servidor.app.get('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarMedidas);
+servidor.app.get('/assinante/dietas', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDietas);
+servidor.app.get('/assinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDietaPorId);
 
 
 

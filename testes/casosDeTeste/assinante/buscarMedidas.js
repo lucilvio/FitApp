@@ -1,7 +1,7 @@
 const { spec } = require('pactum');
 const usuario = require('../../funcoes/usuario');
 
-it('CU-AS 22 - O Assinante deve ver historico de medidas', async () => {
+it('CU-AS 16 - O Assinante deve ver historico de medidas', async () => {
 
     const tokenAssinante = await usuario.gerarToken('assinante@fitapp.com', 'assinante123');
 
