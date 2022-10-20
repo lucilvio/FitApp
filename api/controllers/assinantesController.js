@@ -212,12 +212,34 @@ function buscarDietaPorId (req, res) {
 }
 // O Assinante busca os Treinos
 function buscarTreinos (req, res) {
+    const treinos = repositorioDeAssinantes.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
 
+    res.send(treinos.map(function (treino) {
+        return {
+            idTreino: treino.idTreino,
+            nome: treino.nomeTreino,
+            objetivo: treino.objetivo,
+            dataInicio: treino.dataInicio,
+            dataFim: treino.dataFim
+        }
+    }));
 }
 
 // O Assinante busca treino por Id
 function buscarTreinoPorId (req, res) {
+    const treinoEncontrado = repositorioDeAssinantes.buscarTreinoPorId(req.usuario.idUsuario, req.params.idTreino);
 
+    if(!treinoEncontrado) {
+        res.status(404).send({ erro: "Treino não encontrado" });
+        return;
+    }
+
+    res.send({
+        idTreino: treinoEncontrado.idTreino,
+        nome: treinoEncontrado.nomeTreino,
+        objetivo: treinoEncontrado.objetivo,
+        exercicios: treinoEncontrado.exercicios
+    });
 }
 // O Assinante salva as suas Medidas
 function inserirMedidas (req, res) {
@@ -246,6 +268,8 @@ module.exports = {
     buscarDadosDoPersonal: buscarDadosDoPersonal,
     buscarDietas: buscarDietas,
     buscarDietaPorId: buscarDietaPorId,
+    buscarTreinos: buscarTreinos,
+    buscarTreinoPorId: buscarTreinoPorId,
     inserirMedidas: inserirMedidas,
     buscarMedidas: buscarMedidas
 

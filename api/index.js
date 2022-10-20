@@ -102,6 +102,8 @@ servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assin
 servidor.app.get('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarMedidas);
 servidor.app.get('/assinante/dietas', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDietas);
 servidor.app.get('/assinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDietaPorId);
+servidor.app.get('/assinante/treinos', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarTreinos);
+servidor.app.get('/assinante/treino/:idTreino', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarTreinoPorId);
 
 
 
