@@ -189,6 +189,11 @@ function inserirMedidas (req, res) {
     res.send();
 }
 // O Assinante vê o historio de medidas
+function buscarMedidas (req, res) {
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    res.send(assinanteEncontrado.medidas)
+}
 
 
 module.exports = {
@@ -201,6 +206,7 @@ module.exports = {
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
     buscarDadosDoNutri:  buscarDadosDoNutri,
     buscarDadosDoPersonal: buscarDadosDoPersonal,
-    inserirMedidas: inserirMedidas
+    inserirMedidas: inserirMedidas,
+    buscarMedidas: buscarMedidas
 
 }

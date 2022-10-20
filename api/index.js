@@ -99,6 +99,7 @@ servidor.app.delete('/assinante/assinaturas/:idAssinatura', autorizacao.autoriza
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura);
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura);
 servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), assinantesController.inserirMedidas);
+servidor.app.get('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarMedidas);
 
 
 

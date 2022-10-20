@@ -34,6 +34,7 @@ require('./casosDeTeste/assinante/alterarPlanoDaAssinatura');
 require('./casosDeTeste/assinante/buscarDadosDoNutri');
 require('./casosDeTeste/assinante/buscarDadosDoPersonal');
 require('./casosDeTeste/assinante/inserirMedidas');
+require('./casosDeTeste/assinante/buscarMedidas');
 
 //Nutricionista
 require('./casosDeTeste/nutricionista/buscarDadosDoPerfil');
