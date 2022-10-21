@@ -100,7 +100,7 @@ function buscarAlunos(req, res) {
     }));
 }
 
-//O Personal Trainer ver dados do Aluno
+//O Personal Trainer busca dados do Aluno
 function buscarAlunoPorId(req, res) {
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
@@ -115,13 +115,26 @@ function buscarAlunoPorId(req, res) {
         dataNascimento: alunoEncontrado.dataNascimento,
         sexo: alunoEncontrado.sexo,
         altura: alunoEncontrado.altura,
-        medidas: alunoEncontrado.medidas,
         treinos: alunoEncontrado.treinos
 
     });
 
 }
 
+// O Personal busca o historico de medidas do Aluno
+function buscarMedidasDoAluno (req, res) {
+    const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+
+    if (!alunoEncontrado) {
+        res.status(404).send({ erro: "Aluno não encontrado" });
+        return;
+    }
+
+    res.send({
+        medidas: alunoEncontrado.medidas,
+    });
+
+}
 // O Personal Trainer cria dieta
 function criarTreino(req, res) {
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
@@ -192,6 +205,7 @@ module.exports = {
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarAlunos: buscarAlunos,
     buscarAlunoPorId: buscarAlunoPorId,
+    buscarMedidasDoAluno: buscarMedidasDoAluno,
     criarTreino: criarTreino,
     buscarTreinoPorId: buscarTreinoPorId,
     alterarTreino: alterarTreino,

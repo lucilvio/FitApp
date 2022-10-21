@@ -83,7 +83,7 @@ function buscarPacientes(req, res) {
     }));
 }
 
-//O Nutricionista ver dados do Paciente
+//O Nutricionista busca dados do Paciente
 function buscarPacientePorId(req, res) {
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
@@ -104,11 +104,30 @@ function buscarPacientePorId(req, res) {
         dataNascimento: pacienteEncontrado.dataNascimento,
         sexo: pacienteEncontrado.sexo,
         altura: pacienteEncontrado.altura,
-        medidas: pacienteEncontrado.medidas,
         dietas: pacienteEncontrado.dietas
 
     });
 
+}
+
+// O Nutricionista busca as medidas do paciente
+function buscarMedidasDoPaciente (req, res) {
+    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+
+    if (!pacienteEncontrado) {
+        res.status(404).send({ erro: "Paciente não encontrado" });
+        return;
+    }
+    
+    if (req.usuario.idUsuario != pacienteEncontrado.nutricionista) {
+        res.status(401).send({ erro: 'Não autorizado' });
+        return;
+    }
+   
+
+    res.send({
+        medidas: pacienteEncontrado.medidas
+    });
 }
 
 // O Nutricionista cria dieta
@@ -192,6 +211,7 @@ module.exports = {
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarPacientes: buscarPacientes,
     buscarPacientePorId: buscarPacientePorId,
+    buscarMedidasDoPaciente: buscarMedidasDoPaciente,
     criarDieta: criarDieta,
     buscarDietaPorId: buscarDietaPorId,
     alterarDieta: alterarDieta,

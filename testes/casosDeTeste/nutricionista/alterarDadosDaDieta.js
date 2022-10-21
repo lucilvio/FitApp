@@ -7,26 +7,6 @@ it('CU-N 10 - deve alterar dados da dieta', async () => {
 
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
-    await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes`)
-        .withHeaders("Authorization", "Bearer " + tokenNutri)
-        .expectJsonLike([
-            {
-                idAssinante: 'idAssinante'
-            }
-        ])
-        .expectStatus(200);
-
-    await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante`)
-        .withHeaders("Authorization", "Bearer " + tokenNutri)
-        .expectJsonLike(
-            {
-                nome: 'Assinante'
-            }
-        )
-        .expectStatus(200);
-
     const idDieta = await nutricionista.criarDieta(tokenNutri, "Dieta 4", "01/12/2022", "31/12/2022", "Manutenção de Peso", [{ "refeicao": "almoço", "descricao": "Arroz" }]);
 
     await spec()
@@ -69,7 +49,7 @@ it('CU-N 10 - deve alterar dados da dieta', async () => {
 
 });
 
-it('CU-N  10 - não altera dieta para quando não encontra o paciente', async () => {
+it('CU-N 10 - não altera dieta para quando não encontra o paciente', async () => {
 
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
@@ -99,7 +79,7 @@ it('CU-N  10 - não altera dieta para quando não encontra o paciente', async ()
 
 });
 
-it('CU-N  10 - não altera dieta quando não encontra a dieta', async () => {
+it('CU-N 10 - não altera dieta quando não encontra a dieta', async () => {
 
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 

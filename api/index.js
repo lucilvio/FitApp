@@ -72,6 +72,7 @@ servidor.app.patch('/nutricionista/senha', autorizacao.autorizar(model.perfil.nu
 servidor.app.patch('/nutricionista/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim);
 servidor.app.get('/nutricionista/pacientes', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
 servidor.app.get('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId);
+servidor.app.get('/nutricionista/pacientes/:idAssinante/medidas', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarMedidasDoPaciente);
 servidor.app.post('/nutricionista/pacientes/:idAssinante/dietas', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta);
 servidor.app.get('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarDietaPorId);
 servidor.app.patch('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDieta);
@@ -83,6 +84,7 @@ servidor.app.patch('/personalTrainer/senha', autorizacao.autorizar(model.perfil.
 servidor.app.patch('/personalTrainer/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
 servidor.app.get('/personalTrainer/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
 servidor.app.get('/personalTrainer/alunos/:idAssinante', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunoPorId);
+servidor.app.get('/personalTrainer/alunos/:idAssinante/medidas', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarMedidasDoAluno);
 servidor.app.post('/personalTrainer/alunos/:idAssinante/treinos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.criarTreino);
 servidor.app.get('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarTreinoPorId);
 servidor.app.patch('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarTreino);
