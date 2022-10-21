@@ -31,6 +31,11 @@ function salvarDieta(assinante) {
     assinanteEncontrado = assinante;
 }
 
+function salvarTreino(assinante) {
+    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
+    assinanteEncontrado = assinante;
+}
+
 function buscarDietasPorFiltro (nome, idAssinante) {
     const assinanteEncontrado = buscarAssinantePorId(idAssinante);
 
@@ -98,6 +103,7 @@ module.exports = {
     buscarAssinantePorId: buscarAssinantePorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
     salvarDieta: salvarDieta,
+    salvarTreino: salvarTreino,
     buscarDietasPorFiltro: buscarDietasPorFiltro,
     buscarDietaPorId: buscarDietaPorId,
     buscarTreinosPorFiltro: buscarTreinosPorFiltro,

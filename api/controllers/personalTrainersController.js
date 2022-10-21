@@ -1,8 +1,9 @@
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
+const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const Treino = require('../model/treino');
 
 // O Personal ver os dados do perfil
-function verDadosDoPerfil(req, res) {
+function buscarDadosDoPerfil(req, res) {
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
 
     if (!personalEncontrado) {
@@ -10,10 +11,6 @@ function verDadosDoPerfil(req, res) {
         return;
     }
 
-    if (req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
     res.send({
         idPersonal: personalEncontrado.idPersonal,
         imagem: personalEncontrado.usuario.imagem,
@@ -34,11 +31,6 @@ function alterarDadosDoPerfil(req, res) {
         return;
     }
 
-    if (req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
-
     personalEncontrado.alterarDadosDoPerfil(req.body.telefone, req.body.imagem);
 
     repositorioDePersonalTrainers.salvarAlteracaoDeDados(personalEncontrado);
@@ -51,11 +43,6 @@ function alterarSenha(req, res) {
 
     if (!personalEncontrado) {
         res.status(404).send({ erro: 'Personal Trainer não encontrado' });
-        return;
-    }
-
-    if (req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
@@ -74,11 +61,6 @@ function alterarInformacoesSobreMim(req, res) {
         return;
     }
 
-    if (req.usuario.idUsuario != personalEncontrado.usuario.idUsuario) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
-
     personalEncontrado.alterarSobreMim(req.body.texto);
 
     repositorioDePersonalTrainers.salvarAlteracaoDeDados(personalEncontrado);
@@ -93,9 +75,8 @@ function buscarAlunos(req, res) {
         return {
             idAssinante: aluno.idAssinante,
             nome: aluno.nome,
-            objetivo: '',
-            treino: '',
-            periodo: ''
+            objetivo: aluno.objetivo,
+            treinos: aluno.treinos
         }
     }));
 }
@@ -106,6 +87,11 @@ function buscarAlunoPorId(req, res) {
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
+        return;
+    }
+
+    if (req.usuario.idUsuario != alunoEncontrado.personalTrainer) {
+        res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
@@ -122,11 +108,16 @@ function buscarAlunoPorId(req, res) {
 }
 
 // O Personal busca o historico de medidas do Aluno
-function buscarMedidasDoAluno (req, res) {
+function buscarMedidasDoAluno(req, res) {
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
+        return;
+    }
+
+    if (req.usuario.idUsuario != alunoEncontrado.personalTrainer) {
+        res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
@@ -135,6 +126,7 @@ function buscarMedidasDoAluno (req, res) {
     });
 
 }
+
 // O Personal Trainer cria dieta
 function criarTreino(req, res) {
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
@@ -147,8 +139,8 @@ function criarTreino(req, res) {
     if (req.usuario.idUsuario == alunoEncontrado.personalTrainer) {
 
         const treino = new Treino(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeTreino, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.exercicios);
-
-        repositorioDePersonalTrainers.salvarTreino(treino);
+        alunoEncontrado.inserirTreino(treino);
+        repositorioDeAssinantes.salvarTreino(treino);
 
         res.send({ idTreino: treino.idTreino });
 
@@ -163,6 +155,11 @@ function buscarTreinoPorId(req, res) {
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
+        return;
+    }
+
+    if (req.usuario.idUsuario != alunoEncontrado.personalTrainer) {
+        res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
@@ -184,22 +181,28 @@ function alterarTreino(req, res) {
         res.status(404).send({ erro: "Aluno não encontrado" });
         return;
     }
-    
+
     const treinoEncontrado = repositorioDePersonalTrainers.buscarTreinoPorId(req.params.idAssinante, req.params.idTreino);
     if (!treinoEncontrado) {
         res.status(404).send({ erro: "Treino não encontrado" });
         return;
     }
 
-    treinoEncontrado.alterarDadosDoTreino(req.params.idTreino, req.body.nomeTreino, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.exercicios);
+    if (req.usuario.idUsuario == alunoEncontrado.personalTrainer) {
+        treinoEncontrado.alterarDadosDoTreino(req.params.idTreino, req.body.nomeTreino, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.exercicios);
 
-    repositorioDePersonalTrainers.salvarAlteracoesDoTreino(treinoEncontrado);
+        repositorioDePersonalTrainers.salvarAlteracoesDoTreino(treinoEncontrado);
 
-    res.send();
+        res.send();
+    } else {
+        res.status(401).send({ erro: 'Não autorizado' });
+    }
+
+
 }
 
 module.exports = {
-    buscarDadosDoPerfil: verDadosDoPerfil,
+    buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,

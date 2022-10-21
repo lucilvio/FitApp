@@ -35,6 +35,10 @@ function Treino(idAssinante, idPersonal, nomeTreino, dataInicio, dataFim, objeti
     this.alterarDadosDoTreino = function (idTreino, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
         this.exercicios = [];
 
+        if (!idTreino) {
+            throw { mensagem: "Não é possível adicionar exercicio sem o id da dieta", interna: true };
+        }
+
         if (nomeTreino != undefined && nomeTreino != null && nomeTreino != "") {
             this.nomeTreino = nomeTreino;
         }

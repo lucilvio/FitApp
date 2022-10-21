@@ -116,7 +116,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
             if(!medidas.cintura) {
                 medidas.cintura = ultimaMedida.cintura
             }
-            
+
             if(!medidas.quadril) {
                 medidas.quadril = ultimaMedida.quadril
             }
@@ -132,6 +132,10 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.inserirDieta = function (dieta) {
         this.dietas.push(dieta);
     }
+
+    this.inserirTreino = function (treino) {
+        this.treinos.push(treino);
+    } 
 
 }
 

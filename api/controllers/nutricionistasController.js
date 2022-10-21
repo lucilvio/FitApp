@@ -3,7 +3,7 @@ const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes
 const Dieta = require('../model/dieta');
 
 // O Nutricionista ver os dados do perfil
-function verDadosDoPerfil(req, res) {
+function buscarDadosDoPerfil(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
 
     if (!nutriEncontrado) {
@@ -76,9 +76,8 @@ function buscarPacientes(req, res) {
         return {
             idAssinante: paciente.idAssinante,
             nome: paciente.nome,
-            objetivo: '',
-            dieta: '',
-            periodo: ''
+            objetivo: paciente.objetivo,
+            dietas: paciente.dietas
         }
     }));
 }
@@ -205,7 +204,7 @@ function alterarDieta(req, res) {
 }
 
 module.exports = {
-    buscarDadosDoPerfil: verDadosDoPerfil,
+    buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,

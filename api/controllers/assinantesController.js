@@ -46,8 +46,8 @@ function cadastrarAssinante(req, res) {
     }
 
 }
-// O Assinante ver os dados do perfil
-function verDadosDoPerfil(req, res) {
+// O Assinante busca os dados do perfil
+function buscarDadosDoPerfil(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
@@ -92,8 +92,8 @@ function alterarSenha(req, res) {
     res.send();
 }
 
-//O assinante ver dados da assinatura
-function verDadosDaAssinatura(req, res) {
+//O assinante buscar dados da assinatura
+function buscarDadosDaAssinatura(req, res) {
     const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!assinaturaEncontrada) {
@@ -148,7 +148,7 @@ function alterarPlanoDaAssinatura (req, res) {
 }
 
 
-// O Assinante vê os dados da Nutricionista
+// O Assinante busca os dados da Nutricionista
 function buscarDadosDoNutri (req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
@@ -164,7 +164,7 @@ function buscarDadosDoNutri (req, res) {
     })
 }
 
-// O Assinante vê os dados do Personal trainer
+// O Assinante busca os dados do Personal trainer
 function buscarDadosDoPersonal (req, res) {
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
@@ -258,10 +258,10 @@ function buscarMedidas (req, res) {
 
 module.exports = {
     cadastrarAssinante: cadastrarAssinante,
-    buscarDadosDoPerfil: verDadosDoPerfil,
+    buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
     alterarSenha: alterarSenha,
-    buscarDadosDaAssinatura: verDadosDaAssinatura,
+    buscarDadosDaAssinatura: buscarDadosDaAssinatura,
     cancelarAssinatura: cancelarAssinatura,
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
     buscarDadosDoNutri:  buscarDadosDoNutri,
