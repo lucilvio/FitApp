@@ -28,18 +28,22 @@ servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuarios', usuariosController.redefinirSenha);
 
 servidor.app.get('/planos', geralController.buscarPlanos);
+servidor.app.get('/planos/:idPlano', geralController.buscarPlanoPorId);
 
 servidor.app.get('/nutricionistas',geralController.buscarNutricionistas);
 servidor.app.get('/nutricionistas/:idNutri', geralController.buscarNutriPorId);
 
 servidor.app.get('/personalTrainers',geralController.buscarPersonalTrainers);
+servidor.app.get('/personalTrainers/:idPersonal', geralController.buscarPersonalPorId);
 
 
 
 servidor.app.post('/mensagem', mensagensController.enviarMensagem);
-servidor.app.get('/mensagem', mensagensController.buscarMensagensPorFiltro);
+servidor.app.get('/mensagem/recebidas', mensagensController.buscarMensagensRecebidas);
+servidor.app.get('/mensagem/enviadas', mensagensController.buscarMensagensEnviadas);
+servidor.app.get('/mensagem/excluidas', mensagensController.buscarMensagensExcluidas);
 servidor.app.get('/mensagens/:idMensagem', mensagensController.buscarMensagemPorId);
-servidor.app.patch('/mensagens/:idMensagem', mensagensController.excluirMensagem);
+servidor.app.delete('/mensagens/:idMensagem', mensagensController.excluirMensagem);
 servidor.app.post('/mensagens/:idMensagem', mensagensController.responderMensagem);
 
 

@@ -2,8 +2,12 @@
 require('./casosDeTeste/geral/fazerLogin');
 require('./casosDeTeste/geral/redefinirSenha');
 require('./casosDeTeste/geral/cadastrarAssinante');
+require('./casosDeTeste/geral/buscarPlanosAtivos');
 require('./casosDeTeste/geral/buscarNutricionistasAtivos');
-
+require('./casosDeTeste/geral/buscarPersonalTrainersAtivos');
+require('./casosDeTeste/geral/buscarPlanoPorId');
+require('./casosDeTeste/geral/buscarNutricionistaPorId');
+require('./casosDeTeste/geral/buscarPersonalTrainerPorId');
 
 
 

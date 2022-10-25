@@ -1,6 +1,6 @@
 const { spec } = require('pactum');
 const crypto = require('crypto');
-const personalTrainers = require('../../funcoes/personal');
+const personalTrainers = require('../../funcoes/personalTrainer');
 const usuario = require('../../funcoes/usuario');
 
 it('o sistema apresenta os Personal Trainers ativos', async () => {

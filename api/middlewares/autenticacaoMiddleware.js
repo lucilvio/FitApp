@@ -16,17 +16,17 @@ function autenticar (req, res, next) {
         return;
     }
 
-    if(req.url == "/planos" && req.method == "GET") {
+    if( req.url.startsWith("/planos")  && req.method == "GET") {
         next();
         return;
     }
 
-    if(req.url == "/nutricionistas" && req.method == "GET") {
+    if(req.url.startsWith("/nutricionistas") && req.method == "GET") {
         next();
         return;
     }
 
-    if(req.url == "/personalTrainers" && req.method == "GET") {
+    if(req.url.startsWith("/personalTrainers") && req.method == "GET") {
         next();
         return;
     }

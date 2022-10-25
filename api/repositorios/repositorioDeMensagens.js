@@ -1,32 +1,41 @@
 const base = require('../dados');
 
-function salvarMensagem(novaMensagem) {
-    base.dados.mensagens.push(novaMensagem);
+function buscarMensagensRecebidas(idUsuario) {
+    return base.dados.mensagens.filter(mensagem => mensagem.idUsuarioDestinatario == idUsuario && mensagem.excluida == false);
 }
 
-function buscarMensagensPorDestinatario(destinatario, excluida) {
-    if(!excluida) {
-        excluida = "false";
+function buscarMensagensEnviadas(idUsuario) {
+    return base.dados.mensagens.filter(mensagem => mensagem.idUsuarioRemetente == idUsuario);
+}
+
+function buscarMensagensExcluidas(idUsuario) {
+    return base.dados.mensagens.filter(mensagem => mensagem.idUsuarioDestinatario == idUsuario && mensagem.excluida == true);
+}
+
+function buscarMensagemPorId(idUsuario, idMensagem) {
+    return base.dados.mensagens.find(mensagem => mensagem.idMensagem == idMensagem);
+}
+
+function salvarMensagem(mensagem) {
+    base.dados.mensagens.push(mensagem);
+}
+
+function excluirMensagem(idUsuario, idMensagem) {
+    const mensagemEncontrada = buscarMensagemPorId(idUsuario, idMensagem);
+
+    if(!mensagemEncontrada) {
+        throw { mensagem: "Mensagem não encontrada", interna: true };
     }
 
-    return base.dados.mensagens.filter(mensagem => mensagem.destinatario == destinatario && mensagem.excluida.toString().toLowerCase() === excluida.toLowerCase());
-}
-
-function buscarMensagensPorRemetente(remetente, excluida) {
-    if(!excluida) {
-        excluida = "false";
-    }
-
-    return base.dados.mensagens.filter(mensagem => mensagem.remetente == remetente && mensagem.excluida.toString().toLowerCase() === excluida.toLowerCase());
-}
-
-function buscarMensagemPorId(idMensagem) {
-    return base.dados.mensagens.find(mensagem => mensagem.id == idMensagem);
+    mensagemEncontrada.excluida = true;
 }
 
 module.exports = {
-    buscarMensagensPorDestinatario: buscarMensagensPorDestinatario,
-    buscarMensagensPorRemetente: buscarMensagensPorRemetente,
+    buscarMensagensRecebidas: buscarMensagensRecebidas,
+    buscarMensagensEnviadas: buscarMensagensEnviadas,
+    buscarMensagensExcluidas: buscarMensagensExcluidas,
     buscarMensagemPorId: buscarMensagemPorId,
     salvarMensagem: salvarMensagem,
+    excluirMensagem: excluirMensagem,
+
 }

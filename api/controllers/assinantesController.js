@@ -8,6 +8,9 @@ const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinatur
 const Assinante = require('../model/assinante');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 const Medidas = require('../model/medidas');
+const repositorioDeMensagens = require('../repositorios/repositorioDeMensagens');
+const Mensagem = require('../model/mensagem');
+const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 
 
 //O Assinante faz o registro 
@@ -38,6 +41,9 @@ function cadastrarAssinante(req, res) {
 
         servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
 
+        const admin = repositorioDeUsuarios.buscarAdmin();
+        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.usuario.login, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
+        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.usuario.login, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
         res.send({
             idAssinante: novoAssinante.idAssinante
         });

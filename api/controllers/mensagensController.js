@@ -1,32 +1,10 @@
-const base = require('../dados');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeMensagem = require('../repositorios/repositorioDeMensagens');
-const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
-const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrainers');
-const crypto = require('crypto');
+const Mensagem = require('../model/mensagem');
+
 
 function enviarMensagem(req, res) {
-    if (!req.body.remetente) {
-        res.status(400).send({ erro: "Não é possível enviar mensagem sem remetente" });
-        return;
-    }
-
-    if (!req.body.destinatario) {
-        res.status(400).send({ erro: "Não é possível enviar mensagem sem destinatario" });
-        return;
-    }
-
-    let novaMensagem = {
-        id: crypto.randomUUID(),
-        remetente: req.body.remetente,
-        destinatario: req.body.destinatario,
-        data: new Date(),
-        assunto: req.body.assunto,
-        texto: req.body.texto,
-        excluida: false
-    }
-
-    const remetenteEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(req.body.remetente);
+    const remetenteEncontrado = repositorioDeUsuarios.buscarUsuarioPorId(req.usuario.idUsuario);
     if (!remetenteEncontrado) {
         res.status(404).send({ erro: "Remetente não encontrado" });
         return;
@@ -38,34 +16,48 @@ function enviarMensagem(req, res) {
         return;
     }
 
-    repositorioDeMensagem.salvarMensagem(novaMensagem);
+    const mensagem = new Mensagem(remetenteEncontrado.idUsuario, remetenteEncontrado.login, destinatarioEncontrado.idUsuario,destinatarioEncontrado.login,  req.body.assunto, req.body.texto);
+    repositorioDeMensagem.salvarMensagem(mensagem);
 
-    res.send(novaMensagem)
+    res.send({idMensagem: mensagem.idMensagem})
 
 }
 
-function buscarMensagensPorFiltro(req, res) {
-
-    if (!req.query.destinatario && !req.query.remetente) {
-        res.status(400).send({ erro: "Não é possível buscar mensagem sem destinatario ou remetente" });
-        return;
-    }
-
-    let mensagens;
-
-    if (req.query.destinatario) {
-        mensagens = repositorioDeMensagem.buscarMensagensPorDestinatario(req.query.destinatario, req.query.excluida);
-    }
-
-    if(req.query.remetente) {
-        mensagens = repositorioDeMensagem.buscarMensagensPorRemetente(req.query.remetente, req.query.excluida);
-    }
-
+function buscarMensagensRecebidas(req, res) {
+    const mensagens = repositorioDeMensagem.buscarMensagensRecebidas(req.usuario.idUsuario);
 
     res.send(mensagens.map(function (mensagem) {
         return {
-            idMensagem: mensagem.id,
-            remetente: mensagem.remetente,
+            idMensagem: mensagem.idMensagem,
+            remetente: mensagem.emailRemetente,
+            data: mensagem.data,
+            assunto: mensagem.assunto,
+            texto: mensagem.texto
+        }
+    }))
+}
+
+function buscarMensagensEnviadas(req, res) {
+    const mensagens = repositorioDeMensagem.buscarMensagensEnviadas(req.usuario.idUsuario);
+
+    res.send(mensagens.map(function (mensagem) {
+        return {
+            idMensagem: mensagem.idMensagem,
+            remetente: mensagem.emailRemetente,
+            destinatario: mensagem.emailDestinatario,
+            data: mensagem.data,
+            assunto: mensagem.assunto,
+            texto: mensagem.texto
+        }
+    }))
+}
+function buscarMensagensExcluidas(req, res) {
+    const mensagens = repositorioDeMensagem.buscarMensagensExcluidas(req.usuario.idUsuario);
+
+    res.send(mensagens.map(function (mensagem) {
+        return {
+            idMensagem: mensagem.idMensagem,
+            remetente: mensagem.emailRemetente,
             data: mensagem.data,
             assunto: mensagem.assunto,
             texto: mensagem.texto
@@ -79,15 +71,15 @@ function buscarMensagemPorId(req, res) {
         return;
     }
 
-    let mensagem = repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
+    let mensagem = repositorioDeMensagem.buscarMensagemPorId(req.usuario.idUsuario, req.params.idMensagem);
     if (!mensagem) {
         res.status(404).send({ erro: "Mensagem não encontrada" });
         return;
     }
 
     res.send({
-        remetente: mensagem.remetente,
-        destinatario: mensagem.destinatario,
+        remetente: mensagem.emailRemetente,
+        destinatario: mensagem.emailDestinatario,
         data: mensagem.data,
         assunto: mensagem.assunto,
         texto: mensagem.texto
@@ -100,14 +92,8 @@ function excluirMensagem(req, res) {
         return;
     }
 
-    let mensagem = repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
-    if (!mensagem) {
-        res.status(404).send({ erro: "Mensagem não encontrada" });
-    }
-
-    mensagem.excluida = req.body.excluida;
-
-    res.send(mensagem);
+    repositorioDeMensagem.excluirMensagem(req.usuario.idUsuario, req.params.idMensagem)
+    res.send();
 
 }
 
@@ -117,45 +103,32 @@ function responderMensagem(req, res) {
         return;
     }
 
-    let mensagem = repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
+    const mensagem = repositorioDeMensagem.buscarMensagemPorId(req.usuario.idUsuario, req.params.idMensagem);
+
     if (!mensagem) {
         res.status(404).send({ erro: "Mensagem não encontrada" });
+        return;
     }
 
-    let novaMensagem = {
-        id: crypto.randomUUID(),
-        remetente: mensagem.destinatario,
-        destinatario: mensagem.remetente,
-        data: new Date(),
-        assunto: mensagem.assunto,
-        texto: req.body.texto,
-        excluida: false,
-    }
+    const resposta = new Mensagem (req.usuario.idUsuario, req.usuario.email, mensagem.idUsuarioRemetente,mensagem.emailRemetente, mensagem.assunto, req.body.texto);
 
-    base.dados.mensagens.push(novaMensagem);
+    mensagem.idMensagemResposta = resposta.idMensagem;
 
-    res.send(novaMensagem);
+    repositorioDeMensagem.salvarMensagem(mensagem);
+    repositorioDeMensagem.salvarMensagem(resposta);
 
-
+    res.send({idMensagemResposta: resposta.idMensagem});
 }
 
-function enviarNotificacaoNovoAssinante(idNutri, idPersonal) {
-    const nutricionista = repositorioDeNutricionistas.buscarNutriPorId(idNutri);
-    const personal = repositorioDePersonal.buscarPersonalPorId(idPersonal);
 
-    const destinatarios = [nutricionista.email, personal.email];
-
-    destinatarios.forEach(destinatario)
-
-   
-
-}
 
 
 
 module.exports = {
     enviarMensagem: enviarMensagem,
-    buscarMensagensPorFiltro: buscarMensagensPorFiltro,
+    buscarMensagensRecebidas: buscarMensagensRecebidas,
+    buscarMensagensEnviadas: buscarMensagensEnviadas,
+    buscarMensagensExcluidas: buscarMensagensExcluidas,
     buscarMensagemPorId: buscarMensagemPorId,
     excluirMensagem: excluirMensagem,
     responderMensagem: responderMensagem

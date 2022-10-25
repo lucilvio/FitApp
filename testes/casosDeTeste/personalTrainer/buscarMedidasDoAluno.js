@@ -15,8 +15,6 @@ it('CU-P 11 - deve listar o historico de medidas do aluno', async () => {
         )
         .expectStatus(200);
 
-
-
 });
 
 it('CU-P 11 - não encontra historico de medidas quando o id do aluno não existe', async () => {

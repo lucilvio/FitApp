@@ -9,11 +9,16 @@ it('o sistema apresenta os Planos ativos', async () => {
     const idPlano1 = await planos.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
     const idPlano2 = await planos.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
 
+   
     await spec()
         .patch(`http://localhost:3000/admin/planos/${idPlano1}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
-            "bloqueado": true
+            "nome": `Anual_${crypto.randomUUID()}`,
+            "valor": 100,
+            "bloqueado": false,
+            "duracao": 30,
+            "descricao": "Experimente gratis por 10 dias"
         })
         .expectStatus(200);
 
@@ -21,10 +26,8 @@ it('o sistema apresenta os Planos ativos', async () => {
         .get(`http://localhost:3000/planos`)
         .expectJsonLike([
             {
-               idPlano: idPlano2
+                idPlano: idPlano2
             }
         ])
         .expectStatus(200);
-
-        
 })

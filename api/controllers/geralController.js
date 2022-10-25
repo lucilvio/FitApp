@@ -11,6 +11,7 @@ function buscarPlanos(req, res) {
             idPlano: plano.idPlano,
             nome: plano.nome,
             valor: plano.valor,
+            duracao: plano.duracao,
             descricao: plano.descricao
         }
     }));
@@ -59,9 +60,44 @@ function buscarNutriPorId(req, res) {
     });
 }
 
+function buscarPersonalPorId(req, res) {
+    const PersonalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
+
+    if (!PersonalEncontrado) {
+        res.status(404).send({ erro: "Personal Trainer não encontrado" });
+        return;
+    }
+
+    res.send({
+        idPersonal: PersonalEncontrado.idPersonal,
+        nome: PersonalEncontrado.nome,
+        imagem: PersonalEncontrado.usuario.imagem,
+        sobreMim: PersonalEncontrado.sobreMim
+    });
+}
+
+function buscarPlanoPorId(req, res) {
+    const PlanoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
+
+    if (!PlanoEncontrado) {
+        res.status(404).send({ erro: "Plano não encontrado" });
+        return;
+    }
+
+    res.send({
+        idPlano: PlanoEncontrado.idPlano,
+        nome: PlanoEncontrado.nome,
+        valor: PlanoEncontrado.valor,
+        duracao: PlanoEncontrado.duracao,
+        descricao: PlanoEncontrado.descricao
+    });
+}
+
 module.exports = {
     buscarPlanos: buscarPlanos,
     buscarNutricionistas: buscarNutricionistas,
     buscarPersonalTrainers: buscarPersonalTrainers,
     buscarNutriPorId: buscarNutriPorId,
+    buscarPersonalPorId: buscarPersonalPorId,
+    buscarPlanoPorId: buscarPlanoPorId
 }

@@ -19,23 +19,25 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
         )
         .expectStatus(200);
 
-    await spec()
-        .patch(`http://localhost:3000/admin/planos/${idPlano}`)
-        .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": `Trimestral`,
-            "valor": 0,
-            "bloqueado": true,
-            "descricao": "Experimente gratis por 15 dias"
-        })
-        .expectStatus(200);
+    const nomeNovoPlano =  `Trimestral_${crypto.randomUUID()}`
 
         await spec()
+            .patch(`http://localhost:3000/admin/planos/${idPlano}`)
+            .withHeaders("Authorization", "Bearer " + token)
+            .withJson({
+                "nome": nomeNovoPlano,
+                "valor": 0,
+                "bloqueado": true,
+                "descricao": "Experimente gratis por 15 dias"
+            })
+            .expectStatus(200);
+
+    await spec()
         .get(`http://localhost:3000/admin/planos/${idPlano}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
-                nome:  `Trimestral`
+                nome: nomeNovoPlano
             }
         )
         .expectStatus(200);
