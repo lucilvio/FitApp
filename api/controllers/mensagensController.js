@@ -78,6 +78,7 @@ function buscarMensagemPorId(req, res) {
     }
 
     res.send({
+        idMensagem: mensagem.idMensagem,
         remetente: mensagem.emailRemetente,
         destinatario: mensagem.emailDestinatario,
         data: mensagem.data,

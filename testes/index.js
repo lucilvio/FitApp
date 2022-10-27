@@ -8,6 +8,13 @@ require('./casosDeTeste/geral/buscarPersonalTrainersAtivos');
 require('./casosDeTeste/geral/buscarPlanoPorId');
 require('./casosDeTeste/geral/buscarNutricionistaPorId');
 require('./casosDeTeste/geral/buscarPersonalTrainerPorId');
+require('./casosDeTeste/geral/enviarMensagem');
+require('./casosDeTeste/geral/buscarMensagemPorId');
+require('./casosDeTeste/geral/responderMensagem');
+require('./casosDeTeste/geral/excluirMensagem');
+require('./casosDeTeste/geral/buscarMensagensRecebidas');
+require('./casosDeTeste/geral/buscarMensagensEnviadas');
+require('./casosDeTeste/geral/buscarMensagensExcluidas');
 
 
 
