@@ -22,23 +22,6 @@ function Usuario(nome, login, perfil){
 
     this.senha = senha;
     this.mensagens = [];
-
-    // this.enviarMensagem = function (idUsuarioDestinatario, assunto, texto) {
-    //     const mensagem = new Mensagem(this.idUsuario, idUsuarioDestinatario, assunto, texto);
-    //     this.mensagens.push(mensagem)
-    // }
-
-    // this.excluirMensagem = function (idMensagem) {
-    //     const mensagemEncontrada = this.mensagens.find(mensagem => mensagem.idMensagem == idMensagem);
-    //     mensagemEncontrada.excluida = false;
-    // }
-
-    // this.responderMensagem = function (idMensagem, texto) {
-    //     const mensagemEncontrada = this.mensagens.find(mensagem => mensagem.idMensagem == idMensagem);
-    //     const mensagemResposta = new Mensagem(this.idUsuario, mensagemEncontrada.idUsuarioRemetente, mensagemEncontrada.assunto, texto);
-
-
-    // }
 }
 
 module.exports = Usuario;

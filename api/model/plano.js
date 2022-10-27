@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+
 function Plano(nome, valor, duracao, descricao) {
     if (!nome) {
         throw { mensagem: "Não é possível cadastrar Plano sem o nome", interna: true };

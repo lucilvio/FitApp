@@ -5,12 +5,12 @@ const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutric
 const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrainers');
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
-const Assinante = require('../model/assinante');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
-const Medidas = require('../model/medidas');
 const repositorioDeMensagens = require('../repositorios/repositorioDeMensagens');
-const Mensagem = require('../model/mensagem');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
+const Assinante = require('../model/assinante');
+const Medidas = require('../model/medidas');
+const Mensagem = require('../model/mensagem');
 
 
 //O Assinante faz o registro 

@@ -151,6 +151,7 @@ function criarDieta(req, res) {
     }
 }
 
+// O Nutricionista busca dieta por id
 function buscarDietaPorId(req, res) {
 
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
@@ -176,7 +177,7 @@ function buscarDietaPorId(req, res) {
 
 }
 
-
+// O Nutricionista altera dieta
 function alterarDieta(req, res) {
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
     if (!pacienteEncontrado) {

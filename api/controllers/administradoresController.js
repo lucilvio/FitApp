@@ -244,6 +244,7 @@ function buscarAssinantes(req, res) {
 
 }
 
+// o Administrador busca assinante por Id
 function buscarAssinantePorId(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
 

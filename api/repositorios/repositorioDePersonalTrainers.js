@@ -70,8 +70,6 @@ function salvarAlteracoesDoTreino(treino) {
 
 }
 
-
-
 module.exports = {
     buscarPersonalTrainersAtivos: buscarPersonalTrainersAtivos,
     buscarPersonalPorEmail: buscarPersonalPorEmail,
@@ -84,5 +82,4 @@ module.exports = {
     buscarTreinoPorId: buscarTreinoPorId,
     salvarTreino: salvarTreino,
     salvarAlteracoesDoTreino: salvarAlteracoesDoTreino,
-
 };

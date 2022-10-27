@@ -57,15 +57,12 @@ function buscarDietaPorId(idAssinante, idDieta) {
     return pacienteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
 }
 
-
 function salvarAlteracoesDaDieta(dieta) {
     let dietaEncontrada = buscarDietaPorId(dieta.idAssinante, dieta.idDieta);
 
     dietaEncontrada = dieta;
 
 }
-
-
 
 module.exports = {
     buscarNutricionistasAtivos: buscarNutricionistasAtivos,

@@ -1,8 +1,8 @@
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
-//buscar ao carregar a pagina do site
 
+//buscar planos ativos ao carregar a pagina do site
 function buscarPlanos(req, res) {
     let planos = repositorioDePlanos.buscarPlanosAtivos();
 
@@ -17,6 +17,7 @@ function buscarPlanos(req, res) {
     }));
 }
 
+//buscar Nutricionistas ativos ao carregar a pagina do site
 function buscarNutricionistas(req, res) {
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasAtivos();
 
@@ -30,7 +31,7 @@ function buscarNutricionistas(req, res) {
     }));
 }
 
-
+//buscar Personal Trainers ativos ao carregar a pagina do site
 function buscarPersonalTrainers(req, res) {
     let personalTrainers = repositorioDePersonalTrainers.buscarPersonalTrainersAtivos();
 
@@ -44,6 +45,7 @@ function buscarPersonalTrainers(req, res) {
     }));
 }
 
+//buscar Nutricionista por Id na pagina do site
 function buscarNutriPorId(req, res) {
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
@@ -60,6 +62,7 @@ function buscarNutriPorId(req, res) {
     });
 }
 
+//buscar Personal trainer por Id na pagina do site
 function buscarPersonalPorId(req, res) {
     const PersonalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
@@ -76,6 +79,7 @@ function buscarPersonalPorId(req, res) {
     });
 }
 
+//buscar Plano por Id na pagina do site
 function buscarPlanoPorId(req, res) {
     const PlanoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 

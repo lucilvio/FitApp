@@ -22,6 +22,7 @@ function buscarDadosDoPerfil(req, res) {
     })
 
 }
+
 // O Personal Trainer altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
@@ -149,6 +150,7 @@ function criarTreino(req, res) {
     }
 }
 
+// O Personal Trainer busca terino por Id
 function buscarTreinoPorId(req, res) {
 
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
@@ -174,7 +176,7 @@ function buscarTreinoPorId(req, res) {
 
 }
 
-
+// O Personal Trainer altera treino
 function alterarTreino(req, res) {
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
     if (!alunoEncontrado) {
