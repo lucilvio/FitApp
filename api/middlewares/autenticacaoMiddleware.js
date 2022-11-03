@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 
 function autenticar (req, res, next) {
+    if(req.url.startsWith("/swagger")) {
+        next();
+        return;
+    }
+    
     if (req.url == "/login") {
         next();
         return;

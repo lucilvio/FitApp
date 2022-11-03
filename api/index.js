@@ -20,7 +20,7 @@ servidor.app.use(express.json());
 
 servidor.app.use(autenticacaoMiddleware.autenticar);
 
-servidor.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 
 //Geral

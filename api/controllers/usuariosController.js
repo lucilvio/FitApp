@@ -4,6 +4,10 @@ const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const geradorDeSenha = require('generate-password');
 
 function redefinirSenha(req, res) {
+    // #swagger.tags = ['Usuário']
+    // #swagger.description = 'endpoint para redefinir a senha de login.'
+    // #swagger.security = [] 
+
     if(!req.body.email) {
         res.status(400).send({ erro: "Não é possível redefinir senha sem e-mail"});
         return;

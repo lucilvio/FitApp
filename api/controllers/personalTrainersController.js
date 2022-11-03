@@ -2,8 +2,10 @@ const repositorioDePersonalTrainers = require('../repositorios/repositorioDePers
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const Treino = require('../model/treino');
 
-// O Personal ver os dados do perfil
 function buscarDadosDoPerfil(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para buscar dados do perfil.'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
 
     if (!personalEncontrado) {
@@ -23,8 +25,10 @@ function buscarDadosDoPerfil(req, res) {
 
 }
 
-// O Personal Trainer altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para alterar dados do perfil.'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
 
     if (!personalEncontrado) {
@@ -38,8 +42,10 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-// O Personal Trainer altera a senha
 function alterarSenha(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para alterar senha de login.'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
 
     if (!personalEncontrado) {
@@ -53,8 +59,10 @@ function alterarSenha(req, res) {
     res.send();
 }
 
-// O Personal Trainer altera informações "sobre mim"
 function alterarInformacoesSobreMim(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para alterar informações "Sobre Mim".'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
 
     if (!personalEncontrado) {
@@ -68,8 +76,10 @@ function alterarInformacoesSobreMim(req, res) {
     res.send();
 }
 
-// O Personal Trainer busca seus Alunos
 function buscarAlunos(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para buscar alunos.'
+
     const alunos = repositorioDePersonalTrainers.buscarAlunosPorFiltro(req.query.nome, req.usuario.email);
 
     res.send(alunos.map(function (aluno) {
@@ -82,8 +92,10 @@ function buscarAlunos(req, res) {
     }));
 }
 
-//O Personal Trainer busca dados do Aluno
 function buscarAlunoPorId(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para buscar aluno por Id.'
+
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
@@ -108,8 +120,10 @@ function buscarAlunoPorId(req, res) {
 
 }
 
-// O Personal busca o historico de medidas do Aluno
 function buscarMedidasDoAluno(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para buscar medidas do aluno.'
+
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
@@ -128,8 +142,10 @@ function buscarMedidasDoAluno(req, res) {
 
 }
 
-// O Personal Trainer cria dieta
 function criarTreino(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para criar treino.'
+
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
@@ -150,8 +166,9 @@ function criarTreino(req, res) {
     }
 }
 
-// O Personal Trainer busca terino por Id
 function buscarTreinoPorId(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para buscar treino por Id.'
 
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
@@ -176,8 +193,10 @@ function buscarTreinoPorId(req, res) {
 
 }
 
-// O Personal Trainer altera treino
 function alterarTreino(req, res) {
+    // #swagger.tags = ['Personal Trainer']
+    // #swagger.description = 'endpoint para alterar treino.'
+
     const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });

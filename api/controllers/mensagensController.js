@@ -4,6 +4,9 @@ const Mensagem = require('../model/mensagem');
 
 
 function enviarMensagem(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para enviar mensagem.'
+
     const remetenteEncontrado = repositorioDeUsuarios.buscarUsuarioPorId(req.usuario.idUsuario);
     if (!remetenteEncontrado) {
         res.status(404).send({ erro: "Remetente não encontrado" });
@@ -24,6 +27,9 @@ function enviarMensagem(req, res) {
 }
 
 function buscarMensagensRecebidas(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para buscar mensagens recebidas.'
+
     const mensagens = repositorioDeMensagem.buscarMensagensRecebidas(req.usuario.idUsuario);
 
     res.send(mensagens.map(function (mensagem) {
@@ -38,6 +44,9 @@ function buscarMensagensRecebidas(req, res) {
 }
 
 function buscarMensagensEnviadas(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para buscar mensagens enviadas.'
+
     const mensagens = repositorioDeMensagem.buscarMensagensEnviadas(req.usuario.idUsuario);
 
     res.send(mensagens.map(function (mensagem) {
@@ -52,6 +61,9 @@ function buscarMensagensEnviadas(req, res) {
     }))
 }
 function buscarMensagensExcluidas(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para buscar mensagens excluídas.'
+
     const mensagens = repositorioDeMensagem.buscarMensagensExcluidas(req.usuario.idUsuario);
 
     res.send(mensagens.map(function (mensagem) {
@@ -66,6 +78,9 @@ function buscarMensagensExcluidas(req, res) {
 }
 
 function buscarMensagemPorId(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para buscar mensagem por Id.'
+
     if (!req.params.idMensagem) {
         res.status(400).send({ erro: "Não é possível buscar mensagem sem Id" });
         return;
@@ -88,6 +103,9 @@ function buscarMensagemPorId(req, res) {
 }
 
 function excluirMensagem(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para excluir mensagem.'
+
     if (!req.params.idMensagem) {
         res.status(400).send({ erro: "Não é possível excluir mensagem sem o id da mensagem" });
         return;
@@ -99,6 +117,9 @@ function excluirMensagem(req, res) {
 }
 
 function responderMensagem(req, res) {
+    // #swagger.tags = ['Mensagem']
+    // #swagger.description = 'endpoint para responder mensagem.'
+
     if (!req.params.idMensagem) {
         res.status(400).send({ erro: "Não é possível responder mensagem sem o id da mensagem" });
         return;

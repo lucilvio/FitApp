@@ -1,76 +1,2060 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "FitApp",
-        "description": "Serviço que visa ajudar todas as pessoas que querem adotar um estilo de vida mais saudável com a união de bons hábitos alimenta-res e à prática de exercícios físicos.",
-        "contact": {
-            "name": "Vanessa Dias",
-            "url": "https://github.com/VanessaPDias",
-            "email": "vanessapdias@outlook.com"
-        },
-        "version": "1.0.0"
+  "swagger": "2.0",
+  "info": {
+    "title": "FitApp",
+    "description": "Serviço que visa ajudar todas as pessoas que querem adotar um estilo de vida mais saudável com a união de bons hábitos alimenta-res e à prática de exercícios físicos.",
+    "contact": {
+      "name": "Vanessa Dias",
+      "url": "https://github.com/VanessaPDias",
+      "email": "vanessapdias@outlook.com"
     },
-    "servers": [
-        {
-            "url": "http://localhost:3000"
-            
-        }
-    ],
-    "paths": {
-        "/usuarios": {
-            "post": {
-                "summary": "Cadastro de usuário",
-                "description": "Essa rota será responsável por cadastrar um novo usuário",
-                "tags": [
-                    "Usuarios"
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "user": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string"
-                                        },
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "email": {
-                                            "type": "string"
-                                        },
-                                        "password": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            },
-                            "examples": {
-                                "user": {
-                                    "value": {
-                                        "name": "João Cardoso",
-                                        "email": "jcardoso@email.com",
-                                        "senha": "123Jc56"
-                                    }
-                                }
-                            }
-                        }
-                    }
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "any description..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "endpoint para fazer login.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
                 },
-                "responses": {
-                    "400": {
-                        "description": "Erros de validação de regras de negocio"
-                    },
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {}
-                        }
-                    }
+                "senha": {
+                  "example": "any"
                 }
+              }
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": []
+      }
+    },
+    "/usuarios": {
+      "patch": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "endpoint para redefinir a senha de login.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": []
+      }
+    },
+    "/planos": {
+      "get": {
+        "tags": [
+          "Geral"
+        ],
+        "description": "endpoint para buscar planos ativos ao carregar a pagina do site.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": []
+      }
+    },
+    "/planos/{idPlano}": {
+      "get": {
+        "tags": [
+          "Geral"
+        ],
+        "description": "endpoint para buscar Plano por Id na pagina do site.",
+        "parameters": [
+          {
+            "name": "idPlano",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nutricionistas": {
+      "get": {
+        "tags": [
+          "Geral"
+        ],
+        "description": "endpoint para buscar Nutricionistas ativos ao carregar a pagina do site.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nutricionistas/{idNutri}": {
+      "get": {
+        "tags": [
+          "Geral"
+        ],
+        "description": "endpoint para buscar Nutricionista por Id na pagina do site.",
+        "parameters": [
+          {
+            "name": "idNutri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": []
+      }
+    },
+    "/personalTrainers": {
+      "get": {
+        "tags": [
+          "Geral"
+        ],
+        "description": "endpoint para buscar buscar Personal Trainers ativos ao carregar a pagina do site.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": []
+      }
+    },
+    "/personalTrainers/{idPersonal}": {
+      "get": {
+        "tags": [
+          "Geral"
+        ],
+        "description": "endpoint para buscar Personal trainer por Id na pagina do site.",
+        "parameters": [
+          {
+            "name": "idPersonal",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": []
+      }
+    },
+    "/mensagem": {
+      "post": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para enviar mensagem.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "destinatario": {
+                  "example": "any"
+                },
+                "assunto": {
+                  "example": "any"
+                },
+                "texto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
         }
-
-    }    
+      }
+    },
+    "/mensagem/recebidas": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para buscar mensagens recebidas.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/mensagem/enviadas": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para buscar mensagens enviadas.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/mensagem/excluidas": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para buscar mensagens excluídas.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/mensagens/{idMensagem}": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para buscar mensagem por Id.",
+        "parameters": [
+          {
+            "name": "idMensagem",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para excluir mensagem.",
+        "parameters": [
+          {
+            "name": "idMensagem",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Mensagem"
+        ],
+        "description": "endpoint para responder mensagem.",
+        "parameters": [
+          {
+            "name": "idMensagem",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "texto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/admin/planos": {
+      "post": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para cadastrar um Plano.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "valor": {
+                  "example": "any"
+                },
+                "duracao": {
+                  "example": "any"
+                },
+                "descricao": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar planos - todos ou por nome.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/planos/{idPlano}": {
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar plano por Id.",
+        "parameters": [
+          {
+            "name": "idPlano",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para alterar dados do plano.",
+        "parameters": [
+          {
+            "name": "idPlano",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "valor": {
+                  "example": "any"
+                },
+                "duracao": {
+                  "example": "any"
+                },
+                "descricao": {
+                  "example": "any"
+                },
+                "bloqueado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/admin/nutricionistas": {
+      "post": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para cadastrar Nutricionista.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "registroProfissional": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar Nutricionistas cadastrados - todos ou por nome.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/nutricionistas/{idNutri}": {
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar Nutricionistas por Id.",
+        "parameters": [
+          {
+            "name": "idNutri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para alterar dados cadastrais do Nutricionista.",
+        "parameters": [
+          {
+            "name": "idNutri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "registroProfissional": {
+                  "example": "any"
+                },
+                "bloqueado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/admin/personalTrainers": {
+      "post": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para cadastrar Personal Trainer.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "registroProfissional": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar Personal Trainer - todos ou por nome.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/personalTrainers/{idPersonal}": {
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar Personal Trainer por Id.",
+        "parameters": [
+          {
+            "name": "idPersonal",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para alterar os dados cadastrais do Personal Trainer.",
+        "parameters": [
+          {
+            "name": "idPersonal",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "registroProfissional": {
+                  "example": "any"
+                },
+                "bloqueado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/admin/assinantes": {
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar assinantes cadastrados - todos ou por nome.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/assinantes/{idAssinante}": {
+      "get": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para buscar assinantes por Id.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Administrador"
+        ],
+        "description": "endpoint para alterar o status do Assinante.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bloqueado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/perfil": {
+      "get": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para buscar dados do perfil.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para alterar dados do perfil.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "telefone": {
+                  "example": "any"
+                },
+                "imagem": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/senha": {
+      "patch": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para alterar senha de login.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/sobreMim": {
+      "patch": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para alterar informações \"Sobre Mim\".",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "texto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/pacientes": {
+      "get": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para buscar pacientes - todos ou por nome.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/nutricionista/pacientes/{idAssinante}": {
+      "get": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para buscar paciente por Id.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/pacientes/{idAssinante}/medidas": {
+      "get": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para buscar medidas do paciente.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/pacientes/{idAssinante}/dietas": {
+      "post": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para criar dieta.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeDieta": {
+                  "example": "any"
+                },
+                "dataInicio": {
+                  "example": "any"
+                },
+                "dataFim": {
+                  "example": "any"
+                },
+                "objetivo": {
+                  "example": "any"
+                },
+                "itens": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/nutricionista/pacientes/{idAssinante}/dietas/{idDieta}": {
+      "get": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para buscar dieta por Id.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idDieta",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Nutricionista"
+        ],
+        "description": "endpoint para alterar dieta.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idDieta",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeDieta": {
+                  "example": "any"
+                },
+                "dataInicio": {
+                  "example": "any"
+                },
+                "dataFim": {
+                  "example": "any"
+                },
+                "objetivo": {
+                  "example": "any"
+                },
+                "itens": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/perfil": {
+      "get": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para buscar dados do perfil.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para alterar dados do perfil.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "telefone": {
+                  "example": "any"
+                },
+                "imagem": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/senha": {
+      "patch": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para alterar senha de login.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/sobreMim": {
+      "patch": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para alterar informações \"Sobre Mim\".",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "texto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/alunos": {
+      "get": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para buscar alunos.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/personalTrainer/alunos/{idAssinante}": {
+      "get": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para buscar aluno por Id.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/alunos/{idAssinante}/medidas": {
+      "get": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para buscar medidas do aluno.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/alunos/{idAssinante}/treinos": {
+      "post": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para criar treino.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeTreino": {
+                  "example": "any"
+                },
+                "dataInicio": {
+                  "example": "any"
+                },
+                "dataFim": {
+                  "example": "any"
+                },
+                "objetivo": {
+                  "example": "any"
+                },
+                "exercicios": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/personalTrainer/alunos/{idAssinante}/treinos/{idTreino}": {
+      "get": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para buscar treino por Id.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idTreino",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Personal Trainer"
+        ],
+        "description": "endpoint para alterar treino.",
+        "parameters": [
+          {
+            "name": "idAssinante",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idTreino",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeTreino": {
+                  "example": "any"
+                },
+                "dataInicio": {
+                  "example": "any"
+                },
+                "dataFim": {
+                  "example": "any"
+                },
+                "objetivo": {
+                  "example": "any"
+                },
+                "exercicios": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/assinantes": {
+      "post": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para cadastrar Assinante.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idPlano": {
+                  "example": "any"
+                },
+                "idNutri": {
+                  "example": "any"
+                },
+                "idPersonal": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/perfil": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar dados do perfil do assinante.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para alterar os dados do perfil.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imagem": {
+                  "example": "any"
+                },
+                "dataNascimento": {
+                  "example": "any"
+                },
+                "sexo": {
+                  "example": "any"
+                },
+                "altura": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/perfil/nutricionistas/{idNutri}": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar informações do Nutricionista.",
+        "parameters": [
+          {
+            "name": "idNutri",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/assinante/perfil/personalTrainers/{idPersonal}": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar informações do Personal Trainer.",
+        "parameters": [
+          {
+            "name": "idPersonal",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/assinante/senha": {
+      "patch": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para alterar a senha do login.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/assinaturas/{idAssinatura}": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar dados da Assinatura.",
+        "parameters": [
+          {
+            "name": "idAssinatura",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para cancelar Assinatura.",
+        "parameters": [
+          {
+            "name": "idAssinatura",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para alterar o Plano da Assinatura.",
+        "parameters": [
+          {
+            "name": "idAssinatura",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idPlano": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/medidas": {
+      "post": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para inserir medidas.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "peso": {
+                  "example": "any"
+                },
+                "pescoco": {
+                  "example": "any"
+                },
+                "cintura": {
+                  "example": "any"
+                },
+                "quadril": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar medidas.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/dietas": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar dietas.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/dietas/{idDieta}": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar dieta por Id.",
+        "parameters": [
+          {
+            "name": "idDieta",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/assinante/treinos": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar Treinos.",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/assinante/treino/{idTreino}": {
+      "get": {
+        "tags": [
+          "Assinante"
+        ],
+        "description": "endpoint para buscar treino por Id.",
+        "parameters": [
+          {
+            "name": "idTreino",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ]
 }

@@ -10,8 +10,10 @@ const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 
 
-// O Administrador cadastra um Plano
 function cadastrarPlano(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para cadastrar um Plano.'
+
     const planoEncontrado = repositorioDePlanos.buscarPlanosPorNome(req.body.nome);
 
     if (!planoEncontrado) {
@@ -28,8 +30,10 @@ function cadastrarPlano(req, res) {
     }
 }
 
-// O Administrador busca os planos - todos ou por nome
 function buscarPlanos(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar planos - todos ou por nome.'
+
     let planos = repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
 
     res.send(planos.map(function (plano) {
@@ -47,6 +51,9 @@ function buscarPlanos(req, res) {
 
 // O administrador busca plano por Id
 function buscarPlanoPorId(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar plano por Id.'
+
     let planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
     if (!planoEncontrado) {
@@ -64,8 +71,10 @@ function buscarPlanoPorId(req, res) {
     })
 }
 
-// O Administrador altera dados do plano
 function alterarDadosDoPlano(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para alterar dados do plano.'
+
     const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
     if (!planoEncontrado) {
@@ -88,8 +97,10 @@ function alterarDadosDoPlano(req, res) {
     res.send();
 }
 
-// O Administrador cadastra um Nutricionista
 function cadastrarNutricionista(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para cadastrar Nutricionista.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
 
     if (!nutriEncontrado) {
@@ -107,8 +118,10 @@ function cadastrarNutricionista(req, res) {
     }
 }
 
-// o Administrador busca por Nutricionistas - todos ou por nome
 function buscarNutricionistas(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar Nutricionistas cadastrados - todos ou por nome.'
+
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
 
     res.send(nutricionistas.map(function (nutri) {
@@ -124,6 +137,9 @@ function buscarNutricionistas(req, res) {
 }
 
 function buscarNutriPorId(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar Nutricionistas por Id.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
     if (!nutriEncontrado) {
@@ -143,8 +159,10 @@ function buscarNutriPorId(req, res) {
     });
 }
 
-// O Administrador altera os dados cadastrais do Nutricionista
 function alterarDadosDoNutricionista(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para alterar dados cadastrais do Nutricionista.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
     if (!nutriEncontrado) {
@@ -159,8 +177,10 @@ function alterarDadosDoNutricionista(req, res) {
 }
 
 
-// O Administrador cadastra um Personal Trainer
 function cadastrarPersonal(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para cadastrar Personal Trainer.'
+
     const personalTrainer = repositorioDePersonalTrainers.buscarPersonalPorEmail(req.body.email);
 
     if (!personalTrainer) {
@@ -178,8 +198,10 @@ function cadastrarPersonal(req, res) {
     }
 }
 
-// o Administrador busca por PersonalTrainer - todos ou por nome
 function buscarPersonalTrainers(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar Personal Trainer - todos ou por nome.'
+
     let personalTrainers = repositorioDePersonalTrainers.buscarPersonalTrainersPorFiltro(req.query.nome);
 
     res.send(personalTrainers.map(function (personal) {
@@ -195,6 +217,9 @@ function buscarPersonalTrainers(req, res) {
 }
 
 function buscarPersonalPorId(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar Personal Trainer por Id.'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
     if (!personalEncontrado) {
@@ -214,8 +239,10 @@ function buscarPersonalPorId(req, res) {
     });
 }
 
-// O Administrador altera os dados cadastrais do Personal Trainer
 function alterarDadosDoPersonal(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para alterar os dados cadastrais do Personal Trainer.'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
     if (!personalEncontrado) {
@@ -229,8 +256,10 @@ function alterarDadosDoPersonal(req, res) {
     res.send();
 }
 
-// o Administrador busca assinantes - todos ou por nome
 function buscarAssinantes(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar assinantes cadastrados - todos ou por nome.'
+
     const assinantes = repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
 
     res.send(assinantes.map(function (assinante) {
@@ -244,8 +273,10 @@ function buscarAssinantes(req, res) {
 
 }
 
-// o Administrador busca assinante por Id
 function buscarAssinantePorId(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para buscar assinantes por Id.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
 
     if (!assinanteEncontrado) {
@@ -266,8 +297,10 @@ function buscarAssinantePorId(req, res) {
     });
 }
 
-// O Administrador altera o status do Assinante
 function alterarStatusDoAssinante(req, res) {
+    // #swagger.tags = ['Administrador']
+    // #swagger.description = 'endpoint para alterar o status do Assinante.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
 
     if (!assinanteEncontrado) {

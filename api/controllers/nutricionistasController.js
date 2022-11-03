@@ -2,8 +2,10 @@ const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutric
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const Dieta = require('../model/dieta');
 
-// O Nutricionista ver os dados do perfil
 function buscarDadosDoPerfil(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para buscar dados do perfil.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
 
     if (!nutriEncontrado) {
@@ -23,8 +25,10 @@ function buscarDadosDoPerfil(req, res) {
 
 }
 
-// O Nutricionista altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para alterar dados do perfil.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
 
     if (!nutriEncontrado) {
@@ -38,8 +42,10 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-// O nutricionista altera a senha
 function alterarSenha(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para alterar senha de login.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
 
     if (!nutriEncontrado) {
@@ -53,8 +59,10 @@ function alterarSenha(req, res) {
     res.send();
 }
 
-// O Nutricionista altera informações "sobre mim"
 function alterarInformacoesSobreMim(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para alterar informações "Sobre Mim".'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
 
     if (!nutriEncontrado) {
@@ -68,8 +76,10 @@ function alterarInformacoesSobreMim(req, res) {
     res.send();
 }
 
-// O nutricionista busca seus pacientes
 function buscarPacientes(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para buscar pacientes - todos ou por nome.'
+
     const pacientes = repositorioDeNutricionistas.buscarPacientesPorFiltro(req.query.nome, req.usuario.email);
 
     res.send(pacientes.map(function (paciente) {
@@ -82,8 +92,10 @@ function buscarPacientes(req, res) {
     }));
 }
 
-//O Nutricionista busca dados do Paciente
 function buscarPacientePorId(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para buscar paciente por Id.'
+
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
@@ -109,8 +121,10 @@ function buscarPacientePorId(req, res) {
 
 }
 
-// O Nutricionista busca as medidas do paciente
 function buscarMedidasDoPaciente (req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para buscar medidas do paciente.'
+
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
@@ -129,8 +143,10 @@ function buscarMedidasDoPaciente (req, res) {
     });
 }
 
-// O Nutricionista cria dieta
 function criarDieta(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para criar dieta.'
+
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
@@ -151,8 +167,9 @@ function criarDieta(req, res) {
     }
 }
 
-// O Nutricionista busca dieta por id
 function buscarDietaPorId(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para buscar dieta por Id.'
 
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
@@ -177,8 +194,10 @@ function buscarDietaPorId(req, res) {
 
 }
 
-// O Nutricionista altera dieta
 function alterarDieta(req, res) {
+    // #swagger.tags = ['Nutricionista']
+    // #swagger.description = 'endpoint para alterar dieta.'
+
     const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });

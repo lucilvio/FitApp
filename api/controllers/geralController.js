@@ -2,8 +2,11 @@ const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutric
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 
-//buscar planos ativos ao carregar a pagina do site
 function buscarPlanos(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para buscar planos ativos ao carregar a pagina do site.'
+    // #swagger.security = [] 
+
     let planos = repositorioDePlanos.buscarPlanosAtivos();
 
     res.send(planos.map(function (plano) {
@@ -17,8 +20,11 @@ function buscarPlanos(req, res) {
     }));
 }
 
-//buscar Nutricionistas ativos ao carregar a pagina do site
 function buscarNutricionistas(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para buscar Nutricionistas ativos ao carregar a pagina do site.'
+    // #swagger.security = [] 
+
     let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasAtivos();
 
     res.send(nutricionistas.map(function (nutri) {
@@ -31,8 +37,11 @@ function buscarNutricionistas(req, res) {
     }));
 }
 
-//buscar Personal Trainers ativos ao carregar a pagina do site
 function buscarPersonalTrainers(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para buscar buscar Personal Trainers ativos ao carregar a pagina do site.'
+    // #swagger.security = [] 
+
     let personalTrainers = repositorioDePersonalTrainers.buscarPersonalTrainersAtivos();
 
     res.send(personalTrainers.map(function (personal) {
@@ -45,8 +54,11 @@ function buscarPersonalTrainers(req, res) {
     }));
 }
 
-//buscar Nutricionista por Id na pagina do site
 function buscarNutriPorId(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para buscar Nutricionista por Id na pagina do site.'
+    // #swagger.security = [] 
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
     if (!nutriEncontrado) {
@@ -62,8 +74,11 @@ function buscarNutriPorId(req, res) {
     });
 }
 
-//buscar Personal trainer por Id na pagina do site
 function buscarPersonalPorId(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para buscar Personal trainer por Id na pagina do site.'
+    // #swagger.security = [] 
+
     const PersonalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
     if (!PersonalEncontrado) {
@@ -79,8 +94,11 @@ function buscarPersonalPorId(req, res) {
     });
 }
 
-//buscar Plano por Id na pagina do site
 function buscarPlanoPorId(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para buscar Plano por Id na pagina do site.'
+    // #swagger.security = [] 
+
     const PlanoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
     if (!PlanoEncontrado) {

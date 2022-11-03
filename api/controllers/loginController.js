@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 
 
 function login(req, res) {
+    // #swagger.tags = ['Usuário']
+    // #swagger.description = 'endpoint para fazer login.'
+    // #swagger.security = [] 
+
     const login = req.body.email;
     const senha = req.body.senha;
 

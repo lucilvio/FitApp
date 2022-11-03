@@ -13,8 +13,10 @@ const Medidas = require('../model/medidas');
 const Mensagem = require('../model/mensagem');
 
 
-//O Assinante faz o registro 
 function cadastrarAssinante(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para cadastrar Assinante.'
+
     const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
     if (!planoEncontrado) {
         res.status(400).send({ erro: "Plano não encontrado" });
@@ -52,8 +54,11 @@ function cadastrarAssinante(req, res) {
     }
 
 }
-// O Assinante busca os dados do perfil
+
 function buscarDadosDoPerfil(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar dados do perfil do assinante.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
@@ -79,8 +84,10 @@ function buscarDadosDoPerfil(req, res) {
 
 }
 
-// O Assinante altera dados do perfil
 function alterarDadosDoPerfil(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para alterar os dados do perfil.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     assinanteEncontrado.alterarDadosDoPerfil(req.body.imagem, req.body.dataNascimento, req.body.sexo, req.body.altura);
@@ -89,8 +96,10 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-// O assinante altera a senha
 function alterarSenha(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para alterar a senha do login.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     assinanteEncontrado.alterarSenha(req.body.senha);
@@ -98,8 +107,10 @@ function alterarSenha(req, res) {
     res.send();
 }
 
-//O assinante buscar dados da assinatura
 function buscarDadosDaAssinatura(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar dados da Assinatura.'
+
     const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!assinaturaEncontrada) {
@@ -133,8 +144,10 @@ function buscarDadosDaAssinatura(req, res) {
     });
 }
 
-// O Assinante cancela a Assinatura
 function cancelarAssinatura(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para cancelar Assinatura.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     assinanteEncontrado.cancelarAssinatura(req.params.idAssinatura);
@@ -142,8 +155,10 @@ function cancelarAssinatura(req, res) {
     res.send();
 }
 
-// O Assinante altera a assinatura
 function alterarPlanoDaAssinatura (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para alterar o Plano da Assinatura.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
@@ -154,8 +169,10 @@ function alterarPlanoDaAssinatura (req, res) {
 }
 
 
-// O Assinante busca os dados da Nutricionista
 function buscarDadosDoNutri (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar informações do Nutricionista.'
+
     const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
     if (!nutriEncontrado) {
@@ -170,8 +187,10 @@ function buscarDadosDoNutri (req, res) {
     })
 }
 
-// O Assinante busca os dados do Personal trainer
 function buscarDadosDoPersonal (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar informações do Personal Trainer.'
+
     const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
     if (!personalEncontrado) {
@@ -185,8 +204,11 @@ function buscarDadosDoPersonal (req, res) {
         sobreMim: personalEncontrado.sobreMim
     })
 }
-// O Assinante busca as Dietas
+
 function buscarDietas (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar dietas.'
+
     const dietas = repositorioDeAssinantes.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     res.send(dietas.map(function (dieta) {
@@ -200,8 +222,11 @@ function buscarDietas (req, res) {
     }));
 }
 
-// O Assinante busca dieta por id
+
 function buscarDietaPorId (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar dieta por Id.'
+
     const dietaEncontrada = repositorioDeAssinantes.buscarDietaPorId(req.usuario.idUsuario, req.params.idDieta);
 
     if(!dietaEncontrada) {
@@ -216,8 +241,11 @@ function buscarDietaPorId (req, res) {
         itens: dietaEncontrada.itens
     });
 }
-// O Assinante busca os Treinos
+
 function buscarTreinos (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar Treinos.'
+
     const treinos = repositorioDeAssinantes.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     res.send(treinos.map(function (treino) {
@@ -231,8 +259,10 @@ function buscarTreinos (req, res) {
     }));
 }
 
-// O Assinante busca treino por Id
 function buscarTreinoPorId (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar treino por Id.'
+
     const treinoEncontrado = repositorioDeAssinantes.buscarTreinoPorId(req.usuario.idUsuario, req.params.idTreino);
 
     if(!treinoEncontrado) {
@@ -247,15 +277,21 @@ function buscarTreinoPorId (req, res) {
         exercicios: treinoEncontrado.exercicios
     });
 }
-// O Assinante salva as suas Medidas
+
 function inserirMedidas (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para inserir medidas.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
     assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
     repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
     res.send();
 }
-// O Assinante vê o historio de medidas
+
 function buscarMedidas (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar medidas.'
+
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     res.send(assinanteEncontrado.medidas)
