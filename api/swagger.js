@@ -8,7 +8,7 @@ const endpointsFiles = ['./index.js']
 const doc = {
     info: {
         title: "FitApp",
-        description: "Serviço que visa ajudar todas as pessoas que querem adotar um estilo de vida mais saudável com a união de bons hábitos alimenta-res e à prática de exercícios físicos.",
+        description: "Serviço que visa ajudar todas as pessoas que querem adotar um estilo de vida mais saudável com a união de bons hábitos alimenta-res e a prática de exercícios físicos.",
         contact: {
             name: "Vanessa Dias",
             url: "https://github.com/VanessaPDias",
