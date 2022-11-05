@@ -14,8 +14,10 @@ const mensagensController = require('./controllers/mensagensController');
 const autorizacao = require('./seguranca/autorizacao');
 const model = require('./model/perfis');
 const geralController = require('./controllers/geralController');
+const cors = require('cors');
 
 //middlewares
+servidor.app.use(cors());
 servidor.app.use(express.json());
 
 servidor.app.use(autenticacaoMiddleware.autenticar);

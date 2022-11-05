@@ -14,6 +14,9 @@ planoGratuitoTeste.idPlano = "idPlano";
 const planoMensalTeste = new Plano('Mensal', 100, 30, 'Experimente por 30 dias');
 planoMensalTeste.idPlano = "idMensal";
 
+const planoAnualTeste = new Plano('Trimestral', 250, 90, 'Experimente por 90 dias');
+planoAnualTeste.idPlano = "idAnual";
+
 const nutriTeste = new Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
 nutriTeste.idNutri = "idNutri";
 nutriTeste.usuario.idUsuario = "idNutri";
@@ -60,7 +63,8 @@ const dados = {
 
     planos: [
         planoGratuitoTeste,
-        planoMensalTeste
+        planoMensalTeste,
+        planoAnualTeste
     ],
 
     nutricionistas: [
