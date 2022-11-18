@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitApp - Perfil</title>
-    <script src="./servicosDoPerfil.js"></script>
-    <script src="./perfil.js"></script>
+    <title>FitApp - Perfil</title>    
+    <script type="module" src="./perfil.js"></script>
 </head>
 <body>
     <div>
@@ -16,7 +15,7 @@
                 <span id="email"></span>
             </div>
             <div>
-                <form action="">
+                <form>
                     <div>
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome">
@@ -43,8 +42,24 @@
                 </form>
             </div>
         </div>
-        <div></div>
-        <div></div>
+        <div>
+            <form>
+                <h4>Alterar Senha</h4>
+                <div>
+                    <label for="senha-atual">Senha Atual</label>
+                    <input type="text" id="senha-atual" name="senha-atual">
+                </div>
+                <br>
+                <div>
+                    <label for="nova-senha">Nova Senha</label>
+                    <input type="text" id="nova-senha" name="nova-senha">
+                </div>
+                <br>
+                <div>
+                    <button id="btn-alterar-senha">Alterar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

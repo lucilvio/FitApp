@@ -1,4 +1,6 @@
-async function fazerLogin(email, senha) {
+import * as util from "../util/tratamentoDeRespostaApi.js";
+
+export async function fazerLogin(email, senha) {
     const url = `http://localhost:3000/login`;
 
     const request = new Request(url, {
@@ -16,13 +18,5 @@ async function fazerLogin(email, senha) {
 
     const resposta = await fetch(request);
 
-    if(resposta.status == 400) {
-        const json = await resposta.json();
-        throw json;
-    }
-
-    if (resposta.ok) {
-        const json = await resposta.json();
-        return json;
-    }
+    return util.tratarRespostaApi(resposta);
 }

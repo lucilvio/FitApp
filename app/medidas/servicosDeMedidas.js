@@ -1,4 +1,6 @@
-async function salvarMedidas(token, peso, pescoco, cintura, quadril) {
+import * as util from "../util/tratamentoDeRespostaApi.js"
+
+export async function salvarMedidas(token, peso, pescoco, cintura, quadril) {
     const url = `http://localhost:3000/assinante/medidas`;
 
     const request = new Request(url, {
@@ -19,19 +21,5 @@ async function salvarMedidas(token, peso, pescoco, cintura, quadril) {
 
     const resposta = await fetch(request);
     
-    if (resposta.ok) {
-        const r = await resposta.text();
-
-        if(r.length > 0)
-        {
-            const json = await resposta.json();
-            return json;            
-        }
-        else {
-            return;
-        }
-    } else {
-        const json = await resposta.json();
-        throw json;
-    }
+    return util.tratarRespostaApi(resposta);
 }

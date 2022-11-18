@@ -1,3 +1,6 @@
+import * as servicos from "./servicosDeCriacaoDeConta.js";
+import * as erros from "../util/tratamentoDeErros.js";
+
 window.onload = aoCarregarPagina;
 
 function aoCarregarPagina() {
@@ -12,9 +15,9 @@ async function cadastrarAssinante() {
     const personalTrainer = "idPersonal";
 
     try {
-        await criarConta(nome, email, plano, nutricionista, personalTrainer);
+        await servicos.criarConta(nome, email, plano, nutricionista, personalTrainer);
         window.location.href = "../login/entrar.html";
     } catch (error) {
-        alert(error.erro);
+        erros.tratarErro(error);
     }
 }

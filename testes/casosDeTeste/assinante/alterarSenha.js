@@ -9,7 +9,8 @@ it('CU-AS 03 - O Assinante deve alterar a senha', async () => {
         .patch(`http://localhost:3000/assinante/senha`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .withJson({
-            "senha": "1",
+            "senhaAtual": "assinante123",
+            "novaSenha": "1",
         })
         .expectStatus(200);
 
@@ -25,10 +26,8 @@ it('CU-AS 03 - O Assinante deve alterar a senha', async () => {
         .patch(`http://localhost:3000/assinante/senha`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .withJson({
-            "senha": "assinante123",
+            "senhaAtual": "1",
+            "novaSenha": "assinante123"
         })
         .expectStatus(200);
-
-
-
 });

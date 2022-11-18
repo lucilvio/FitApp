@@ -1,4 +1,6 @@
-async function buscarDados(token) {
+import * as util from "../util/tratamentoDeRespostaApi.js"
+
+export async function buscarDados(token) {
     const url = `http://localhost:3000/assinante/perfil`;
 
     const resposta = await fetch(url, {
@@ -7,18 +9,52 @@ async function buscarDados(token) {
         }
     });
 
-    if (resposta.ok) {
-        const r = await resposta.text();
+    return util.tratarRespostaApi(resposta);
+}
 
-        if(r.length > 0)
-        {
-            return JSON.parse(r);            
+export async function salvarDados(token, fotoPerfil, nome, dataNascimento, sexo, altura) {
+    const url = `http://localhost:3000/assinante/perfil`;
+
+    const request = new Request(url, {
+        method: 'PATCH',
+        body: JSON.stringify(
+            {
+                imagem: fotoPerfil,
+                nome: nome,
+                dataNascimento: dataNascimento,
+                sexo: sexo,
+                altura: altura
+            }),
+        headers: {
+            authorization: "Bearer " + token,
+            "Content-Type": "application/json"
         }
-        else {
-            return;
+
+    });
+
+    const resposta = await fetch(request);
+
+    return util.tratarRespostaApi(resposta);
+}
+
+export async function alterarSenha(token, senhaAtual, novaSenha) {
+    const url = `http://localhost:3000/assinante/senha`;
+
+    const request = new Request(url, {
+        method: 'PATCH',
+        body: JSON.stringify(
+            {
+                senhaAtual: senhaAtual,
+                novaSenha: novaSenha
+            }),
+        headers: {
+            authorization: "Bearer " + token,
+            "Content-Type": "application/json"
         }
-    } else {
-        const json = await resposta.json();
-        throw json;
-    }
+
+    });
+
+    const resposta = await fetch(request);
+
+    return util.tratarRespostaApi(resposta);
 }

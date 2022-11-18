@@ -105,11 +105,14 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         }
     }
 
-    this.alterarSenha = function (senha) {
-        if (senha != undefined && senha != null && senha != '') {
-            this.usuario.senha = senha;
+    this.alterarSenha = function (senhaAtual, novaSenha) {
+        if (senhaAtual == this.usuario.senha) {
+            if (novaSenha != undefined && novaSenha != null && novaSenha != '') {
+                this.usuario.senha = novaSenha;
+            }
+        } else {
+            throw { mensagem: "Senha atual incorreta", interna: true };
         }
-
     }
 
 

@@ -5,27 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitApp - Entrar</title>
-    <script src="servicosDeLogin.js"></script>
-    <script src="entrar.js"></script>
+    <script type="module" src="entrar.js"></script>
 </head>
 <body>
     <div>
         <form id="formulario">
             <div>
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email">
+                <input type="email" id="email" name="email" required>
             </div>
             
             <br>
             
             <div>
                 <label for="senha">Senha:</label>
-                <input type="text" id="senha" name="senha">
+                <input type="password" id="senha" name="senha">
             </div>
 
             <br>
             <div>
-                <button type="button" id="btn-fazerLogin">Entrar</button>
+                <button type="submit" id="btn-fazerLogin">Entrar</button>
             </div>
         </form>
     </div>

@@ -1,5 +1,6 @@
+import * as util from "../util/tratamentoDeRespostaApi.js"
 
-async function buscarDados(token) {
+export async function buscarDados(token) {
     const url = `http://localhost:3000/assinante/dashboard`;
 
     const resposta = await fetch(url, {
@@ -8,18 +9,5 @@ async function buscarDados(token) {
         }
     });
 
-    if (resposta.ok) {
-        const r = await resposta.text();
-
-        if(r.length > 0)
-        {
-            return JSON.parse(r);            
-        }
-        else {
-            return;
-        }
-    } else {
-        const json = await resposta.json();
-        throw json;
-    }
+    return util.tratarRespostaApi(resposta);
 }

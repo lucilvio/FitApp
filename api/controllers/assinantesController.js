@@ -98,7 +98,7 @@ function buscarDadosDoPerfil(req, res) {
         res.status(404).send({ erro: "Assinante não tem assinatura ativa" });
         return;
     }
-
+    
     res.send({
         idAssinante: assinanteEncontrado.idAssinante,
         idAssinatura: assinaturaEncontrada.idAssinatura,
@@ -133,7 +133,7 @@ function alterarSenha(req, res) {
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
-    assinanteEncontrado.alterarSenha(req.body.senha);
+    assinanteEncontrado.alterarSenha(req.body.senhaAtual, req.body.novaSenha);
     repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
     res.send();
 }

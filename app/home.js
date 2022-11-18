@@ -1,3 +1,4 @@
+import * as servicos from "./servicosDaHome.js";
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {

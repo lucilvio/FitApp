@@ -1,15 +1,23 @@
+import * as servicos from "./servicosDoDashboard.js"
+import * as erros from "../util/tratamentoDeErros.js";
+import * as seguranca from "../seguranca/seguranca.js";
+
+if(!seguranca.tokenValido()) {
+    window.location.href = "/app/login/entrar.html";
+}
 
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
     document.querySelector("#foto-perfil").onclick = mostrarMenu;
+    document.querySelector("#sair").onclick = fazerLogout;
     await buscarDadosDoPerfil();
 }
 
 async function buscarDadosDoPerfil() {
     try {
-        const token = localStorage.getItem("fitapp_token");
-        const resposta = await buscarDados(token);
+        const token = seguranca.pegarToken();
+        const resposta = await servicos.buscarDados(token);
         const data = new Date();
 
         document.querySelector("#nome").innerHTML = resposta.nome;
@@ -19,7 +27,7 @@ async function buscarDadosDoPerfil() {
         document.querySelector("#idade").innerHTML = resposta.idade;
         document.querySelector("#imc").innerHTML = resposta.imc;
     } catch (error) {
-        console.error(error);
+        erros.tratarErro(error);
     }
 }
 
@@ -31,4 +39,9 @@ function mostrarMenu() {
     } else if(menu.style.display == "block") {
         menu.style.display = "none";
     }
+}
+
+function fazerLogout() {
+    seguranca.removerToken();
+    window.location.href = "/app/index.html";
 }
