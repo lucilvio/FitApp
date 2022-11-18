@@ -36,6 +36,7 @@ require('./casosDeTeste/administrador/alterarDadosDoPersonal');
 require('./casosDeTeste/administrador/alterarStatusDoAssinante');
 
 //Assinante
+require('./casosDeTeste/assinante/buscarDadosDoDashboard');
 require('./casosDeTeste/assinante/buscarDadosDoPerfil');
 require('./casosDeTeste/assinante/alterarDadosDoPerfil');
 require('./casosDeTeste/assinante/alterarSenha');

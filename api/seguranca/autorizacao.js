@@ -3,7 +3,7 @@ function autorizar(perfil) {
         if (req.usuario.perfil == perfil) {
             next();
         } else {
-            res.status(401).send("Não autorizado");
+            res.status(401).send({erro: "Não autorizado"});
         }
     }
 }

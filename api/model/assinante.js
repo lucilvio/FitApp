@@ -39,6 +39,46 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
 
     this.assinaturas.push(new Assinatura(this.idAssinante, plano));
 
+    this.dietaAtual = function () {
+        return this.dietas.find(dieta => dieta.ativo == true);
+    }
+
+    this.treinoAtual = function () {
+        return this.treinos.find(treino => treino.ativo == true);
+    }
+
+    this.medidasAtuais = function () {
+        const dataDaUltimaMedida = Math.max(...this.medidas.map(medida => new Date(medida.data)));
+        return this.medidas.find(medida => medida.data.getTime() == dataDaUltimaMedida);
+    }
+
+    this.imc = function () {
+        const medidas = this.medidasAtuais();
+        if (!medidas) {
+            return 0;
+        }
+        if (medidas.peso == 0) {
+            return 0;
+        }
+
+        if (this.altura == 0) {
+            return 0;
+        }
+
+        const alturaConvertida = (this.altura * this.altura) / 100;
+
+        return medidas.peso / alturaConvertida;
+    }
+
+    this.idade = function () {
+        if (!this.dataNascimento) {
+            return 0;
+        }
+
+        const dataAtual = new Date().getTime();
+        const dataSubtraidaEmMilessegundos = dataAtual - this.dataNascimento
+        return Math.floor(dataSubtraidaEmMilessegundos / 31536000000);
+    }
 
     this.alterarStatus = function (novoStatus) {
 
@@ -53,7 +93,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         }
 
         if (dataNascimento != undefined && dataNascimento != null && dataNascimento != "") {
-            this.dataNascimento = dataNascimento;
+            this.dataNascimento = Date.parse(dataNascimento);
         }
 
         if (sexo != undefined && sexo != null && sexo != "") {
@@ -105,19 +145,19 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         if (this.medidas.length > 0) {
             const ultimaMedida = this.medidas.reduce((a, b) => a.data > b.data ? a : b);
 
-            if(!medidas.peso) {
+            if (!medidas.peso) {
                 medidas.peso = ultimaMedida.peso
             }
 
-            if(!medidas.pescoco) {
+            if (!medidas.pescoco) {
                 medidas.pescoco = ultimaMedida.pescoco
             }
 
-            if(!medidas.cintura) {
+            if (!medidas.cintura) {
                 medidas.cintura = ultimaMedida.cintura
             }
 
-            if(!medidas.quadril) {
+            if (!medidas.quadril) {
                 medidas.quadril = ultimaMedida.quadril
             }
 
@@ -130,12 +170,15 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     }
 
     this.inserirDieta = function (dieta) {
+        this.dietas.forEach(dieta => dieta.ativo = false);
+
         this.dietas.push(dieta);
     }
 
     this.inserirTreino = function (treino) {
+        this.treinos.forEach(treino => treino.ativo = false);
         this.treinos.push(treino);
-    } 
+    }
 
 }
 

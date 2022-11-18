@@ -26,6 +26,7 @@ function Dieta(idAssinante, idNutricionista, nomeDieta, dataInicio, dataFim, obj
     this.dataFim = dataFim;
     this.objetivo = objetivo;
     this.itens = [];
+    this.data = new Date();
 
     itens.forEach(item => {
         this.itens.push(new ItemDaDieta(this.idDieta, item.descricao, item.refeicao));

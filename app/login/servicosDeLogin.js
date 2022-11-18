@@ -1,15 +1,12 @@
-async function criarConta(nome, email, plano, nutricionista, personalTrainer) {
-    const url = `http://localhost:3000/assinantes`;
+async function fazerLogin(email, senha) {
+    const url = `http://localhost:3000/login`;
 
     const request = new Request(url, {
         method: 'POST',
         body: JSON.stringify(
             {
-                nome: nome,
                 email: email,
-                idPlano: plano,
-                idNutri: nutricionista,
-                idPersonal: personalTrainer
+                senha: senha
             }),
         headers: {
             "Content-Type": "application/json"

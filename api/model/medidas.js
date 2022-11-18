@@ -5,7 +5,6 @@ function Medidas(peso, pescoco, cintura, quadril) {
     this.pescoco = pescoco;
     this.cintura = cintura;
     this.quadril = quadril;
-
 }
 
 module.exports = Medidas;

@@ -55,6 +55,37 @@ function cadastrarAssinante(req, res) {
 
 }
 
+function buscarDadosDoDashboard(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar dados do daskboard do assinante.'
+
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
+
+    if (!assinaturaEncontrada) {
+        res.status(404).send({ erro: "Assinante não tem assinatura ativa" });
+        return;
+    }
+    const dietaAtual = assinanteEncontrado.dietaAtual();
+    const treinoAtual = assinanteEncontrado.treinoAtual();
+    const medidasAtuais = assinanteEncontrado.medidasAtuais();
+
+    res.send({
+        idAssinante: assinanteEncontrado.idAssinante,
+        imagem: assinanteEncontrado.usuario.imagem,
+        nome: assinanteEncontrado.nome,
+        altura: assinanteEncontrado.altura,
+        peso: !medidasAtuais ? 0 : medidasAtuais.peso,
+        idade:assinanteEncontrado.idade(),
+        imc:assinanteEncontrado.imc(),
+        idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
+        idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
+        medidas: assinanteEncontrado.medidas
+    })
+
+}
+
 function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do perfil do assinante.'
@@ -299,6 +330,7 @@ function buscarMedidas (req, res) {
 
 
 module.exports = {
+    buscarDadosDoDashboard: buscarDadosDoDashboard,
     cadastrarAssinante: cadastrarAssinante,
     buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,

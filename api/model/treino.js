@@ -26,6 +26,7 @@ function Treino(idAssinante, idPersonal, nomeTreino, dataInicio, dataFim, objeti
     this.dataFim = dataFim;
     this.objetivo = objetivo;
     this.exercicios = [];
+    this.data = new Date();
 
     exercicios.forEach(exercicio => {
         this.exercicios.push(new ExercicioDoTreino(this.idTreino, exercicio.descricao, exercicio.diaDoTreino));

@@ -37,7 +37,7 @@ function autenticar (req, res, next) {
     }
 
     if (!req.headers.authorization) {
-        res.status(401).send("Não autorizado");
+        res.status(401).send({erro: "Não autorizado"});
         return;
     }
 
