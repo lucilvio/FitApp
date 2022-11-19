@@ -2,7 +2,7 @@ import * as servicos from "./servicosDoPerfil.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 
-if(!seguranca.tokenValido()) {
+if (!seguranca.tokenValido()) {
     window.location.href = "/app/login/entrar.html";
 }
 
@@ -26,7 +26,7 @@ async function buscarDadosDoPerfil() {
         let dataFormatada;
         if (!resposta.dataNascimento) {
             dataFormatada = "";
-        } else{
+        } else {
             const data = new Date(resposta.dataNascimento);
             const zeroEsquerda = (data.getMonth() + 1) < 10 ? '0' : '';
             dataFormatada = zeroEsquerda + (data.getMonth() + 1) + '/' + data.getDate() + '/' + data.getFullYear()
@@ -41,8 +41,6 @@ async function buscarDadosDoPerfil() {
 
 async function salvarDadosDoPerfil(evento) {
     try {
-        evento.preventDefault();
-
         const token = seguranca.pegarToken();
 
         const fotoPerfil = document.querySelector("#foto-perfil").getAttribute("src", "");
@@ -51,7 +49,15 @@ async function salvarDadosDoPerfil(evento) {
         const sexo = document.querySelector("#sexo").value;
         const altura = document.querySelector("#altura").value;
 
+        const formulario = document.querySelector("#formulario-perfil");
+        if (formulario.checkValidity() == false) {
+            return false;
+        }
+
+        evento.preventDefault();
+
         await servicos.salvarDados(token, fotoPerfil, nome, dataNascimento, sexo, altura);
+        alert("Salvo com sucesso");
         await buscarDadosDoPerfil()
     } catch (error) {
         erros.tratarErro(error);
@@ -61,13 +67,18 @@ async function salvarDadosDoPerfil(evento) {
 
 async function alterarSenhaDeAcesso(evento) {
     try {
-        evento.preventDefault();
-
         const token = seguranca.pegarToken();
         const senhaAtual = document.querySelector("#senha-atual").value;
         const novaSenha = document.querySelector("#nova-senha").value;
 
+        const formulario = document.querySelector("#formulario-alterar-senha");
+        if (formulario.checkValidity() == false) {
+            return false;
+        }
+    
+        evento.preventDefault();
         await servicos.alterarSenha(token, senhaAtual, novaSenha);
+        alert("Senha Alterada")
     } catch (error) {
         erros.tratarErro(error);
     }

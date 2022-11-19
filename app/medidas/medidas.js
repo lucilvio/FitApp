@@ -12,13 +12,19 @@ function aoCarregarPagina() {
     document.querySelector("#btn-salvarMedidas").onclick = inserirMedidas;
 }
 
-async function inserirMedidas() {
+async function inserirMedidas(evento) {
     const peso = document.querySelector("#peso").value;
     const pescoco = document.querySelector("#pescoco").value;
     const cintura = document.querySelector("#cintura").value;
     const quadril = document.querySelector("#quadril").value;
     const token = seguranca.pegarToken();
-    
+
+    const formulario = document.querySelector("#formulario");
+    if (formulario.checkValidity() == false) {
+        return false;
+    }
+
+    evento.preventDefault();
 
     try {
         await servicos.salvarMedidas(token, peso, pescoco, cintura, quadril);
