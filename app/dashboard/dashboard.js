@@ -1,6 +1,8 @@
 import * as servicos from "./servicosDoDashboard.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
+import * as cabecalho from "../cabecalho/cabecalho.js";
+import * as menu from "../menu/menu.js";
 
 if(!seguranca.tokenValido()) {
     window.location.href = "/app/login/entrar.html";
@@ -8,9 +10,9 @@ if(!seguranca.tokenValido()) {
 
 window.onload = aoCarregarPagina;
 
-async function aoCarregarPagina() {
-    document.querySelector("#foto-perfil").onclick = mostrarMenu;
-    document.querySelector("#sair").onclick = fazerLogout;
+async function aoCarregarPagina() {    
+    await cabecalho.carregarCabecalho();
+    await menu.carregarMenu();
     await buscarDadosDoPerfil();
 }
 

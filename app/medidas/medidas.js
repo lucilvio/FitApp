@@ -1,6 +1,8 @@
 import * as servicos from "./servicosDeMedidas.js";
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
+import * as cabecalho from "../cabecalho/cabecalho.js";
+import * as menu from "../menu/menu.js";
 
 if(!seguranca.tokenValido()) {
     window.location.href = "/app/login/entrar.html";
@@ -9,6 +11,8 @@ if(!seguranca.tokenValido()) {
 window.onload = aoCarregarPagina;
 
 function aoCarregarPagina() {
+    cabecalho.carregarCabecalho();
+    menu.carregarMenu();
     document.querySelector("#btn-salvarMedidas").onclick = inserirMedidas;
 }
 
