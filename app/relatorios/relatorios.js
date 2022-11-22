@@ -1,8 +1,8 @@
 import * as servicos from "./servicosDeRelatorios.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
-import * as cabecalho from "../cabecalho/cabecalho.js";
-import * as menu from "../menu/menu.js";
+import * as paginaMestra from "../paginaMestra/paginaMestra.js";
+
 
 if(!seguranca.tokenValido()) {
     window.location.href = "/app/login/entrar.html";
@@ -11,8 +11,7 @@ if(!seguranca.tokenValido()) {
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {    
-    await cabecalho.carregarCabecalho();
-    await menu.carregarMenu();
+    await paginaMestra.carregar("relatorios/relatorios-conteudo.html", "Relatórios");
     await buscarMedidas();
 }
 

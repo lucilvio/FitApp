@@ -1,8 +1,7 @@
 import * as servicos from "./servicosDoPerfil.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
-import * as cabecalho from "../cabecalho/cabecalho.js";
-import * as menu from "../menu/menu.js";
+import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 if (!seguranca.tokenValido()) {
     window.location.href = "/app/login/entrar.html";
@@ -11,8 +10,7 @@ if (!seguranca.tokenValido()) {
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    cabecalho.carregarCabecalho();
-    menu.carregarMenu();
+    await paginaMestra.carregar("perfil/perfil-conteudo.html", "Perfil");
 
     document.querySelector("#btn-salvar-dados-perfil").onclick = salvarDadosDoPerfil;
     document.querySelector("#btn-alterar-senha").onclick = alterarSenhaDeAcesso;
