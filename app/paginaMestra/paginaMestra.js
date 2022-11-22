@@ -1,45 +1,61 @@
 import * as seguranca from "../seguranca/seguranca.js";
 
-let conteudoPaginaInterna;
-let aoCarregarPaginaInterna;
-
-export async function carregar(caminhoPaginaInterna, carregarPaginaInterna) {
+export async function carregar(caminhoPaginaInterna, titulo) {
+    //faz fetch da pagina mestra, tranforma a resposta em texto e guarda na const 
     const paginaMestra = await fetch("/app/paginaMestra/paginaMestra.html");
     const conteudoDaPaginaMestra = await paginaMestra.text();
 
+    //faz fetch da pagina interna(pagina informada no parametro) tranforma a resposta em texto e guarda na const
     const paginaInterna = await fetch("/app/" + caminhoPaginaInterna);
-    conteudoPaginaInterna = await paginaInterna.text();
-    
-    document.open();
-    document.write(conteudoDaPaginaMestra);
-    document.close();
+    const conteudoPaginaInterna = await paginaInterna.text();
 
-    window.onload = aoCarregarPaginaMestra;
+    //tranforma o texto da pagina mestra em Html
+    const parser = new DOMParser();
+    const paginaMestraHtml = parser.parseFromString(conteudoDaPaginaMestra, "text/html");
 
-    aoCarregarPaginaInterna = carregarPaginaInterna;
-}
+    //encontra o titulo da pagina mestra e concatena o titulo que veio como parametro na funcao
+    paginaMestraHtml.querySelector("title").innerHTML = "FitApp - " + titulo;
+    //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
+    paginaMestraHtml.querySelector("main").innerHTML = conteudoPaginaInterna;
 
-async function aoCarregarPaginaMestra() {
-    const body = document.querySelector("body");
-    const main = document.createElement("main");
-    main.innerHTML = conteudoPaginaInterna;
+    //adiciona o elemento lang no HTML da pagina criada
+    document.documentElement.setAttribute("lang", "pt-BR");
+    //substitui o conteudo html da pagina criada pelo conteudo da pagina mestra
+    document.documentElement.innerHTML = paginaMestraHtml.documentElement.innerHTML;
 
-    body.append(main);
+    //funcao para forcar o carregamento dos scripts da pagina mestra
+    carregarScripts();
 
     document.querySelector("#cabecalho-foto-perfil").onclick = mostrarMenu;
     document.querySelector("#cabecalho-sair").onclick = fazerLogout;
+}
 
-    if(aoCarregarPaginaInterna) {
-        await aoCarregarPaginaInterna();
-    }
+function carregarScripts() {
+    const scripts = document.querySelectorAll("script");
+
+    scripts.forEach(script => {
+        if (!script.src) {
+            return;
+        }
+        //cria um novo elemento <script> com mesmo src do script encontrado
+        const scriptHtml = document.createElement("script");
+        scriptHtml.src = script.src;
+        scriptHtml.type = "text/javascript";
+
+        //remove o script encontrado da pagina
+        script.remove();
+
+        //adiciona o script criado na pagina
+        document.querySelector("head").append(scriptHtml);
+    });
 }
 
 function mostrarMenu() {
     const menu = document.querySelector("#menu-perfil");
 
-    if(menu.style.display == "none") {
+    if (menu.style.display == "none") {
         menu.style.display = "block";
-    } else if(menu.style.display == "block") {
+    } else if (menu.style.display == "block") {
         menu.style.display = "none";
     }
 }

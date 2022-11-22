@@ -7,9 +7,10 @@ if(!seguranca.tokenValido()) {
     window.location.href = "/app/login/entrar.html";
 }
 
-await paginaMestra.carregar("dashboard/dashboard-conteudo.html", aoCarregarPagina);
+window.onload = aoCarregarPagina();
 
 async function aoCarregarPagina() {    
+    await paginaMestra.carregar("dashboard/dashboard-conteudo.html", "Inicio");
     await buscarDadosDoPerfil();
 }
 
