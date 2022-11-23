@@ -16,7 +16,7 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     //encontra o titulo da pagina mestra e concatena o titulo que veio como parametro na funcao
     paginaMestraHtml.querySelector("title").innerHTML = "FitApp - " + titulo;
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
-    paginaMestraHtml.querySelector("main").innerHTML = conteudoPaginaInterna;
+    paginaMestraHtml.querySelector("#container-conteudo").innerHTML = conteudoPaginaInterna;
 
     //adiciona o elemento lang no HTML da pagina criada
     document.documentElement.setAttribute("lang", "pt-BR");
