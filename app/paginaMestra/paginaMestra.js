@@ -26,7 +26,6 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     //funcao para forcar o carregamento dos scripts da pagina mestra
     carregarScripts();
 
-    document.querySelector("#cabecalho-foto-perfil").onclick = mostrarMenu;
     document.querySelector("#cabecalho-sair").onclick = fazerLogout;
 }
 
@@ -48,16 +47,6 @@ function carregarScripts() {
         //adiciona o script criado na pagina
         document.querySelector("head").append(scriptHtml);
     });
-}
-
-function mostrarMenu() {
-    const menu = document.querySelector("#menu-perfil");
-
-    if (menu.style.display == "none") {
-        menu.style.display = "block";
-    } else if (menu.style.display == "block") {
-        menu.style.display = "none";
-    }
 }
 
 function fazerLogout() {

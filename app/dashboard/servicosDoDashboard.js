@@ -11,3 +11,4 @@ export async function buscarDados(token) {
 
     return util.tratarRespostaApi(resposta);
 }
+
