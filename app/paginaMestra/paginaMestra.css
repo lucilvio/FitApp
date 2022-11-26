@@ -1,0 +1,13 @@
+#menu-lateral, .list-group-item, .offcanvas {
+    background-color: #FED233;
+}
+
+#container-conteudo {
+    background-color: #EDEDED;
+}
+
+.medidas-dashboard {
+    color: #FED233;
+    font-size: larger;
+    font-weight: bolder;
+}

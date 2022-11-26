@@ -18,14 +18,12 @@ async function buscarDadosDoPerfil() {
     try {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token);
-        const data = new Date();
 
         document.querySelector("#nome").innerHTML = resposta.nome;
-        document.querySelector("#data").innerHTML = data;
         document.querySelector("#altura").innerHTML = resposta.altura;
         document.querySelector("#peso").innerHTML = resposta.peso;
         document.querySelector("#idade").innerHTML = resposta.idade;
-        document.querySelector("#imc").innerHTML = resposta.imc;
+        document.querySelector("#imc").innerHTML = resposta.imc.toFixed(2);
     } catch (error) {
         erros.tratarErro(error);
     }

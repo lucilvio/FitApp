@@ -6,151 +6,126 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitApp</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/app/paginaMestra/paginaMestra.css">
 </head>
 
-<body>
-    <header class="p-3 border-bottom">
-        <div class="container-fluid d-flex justify-content-between align-items-center" style="color: #212529;">
-            <div class=" fw-bolder fs-5">
-                <a class="d-block d-sm-none link-dark text-decoration-none" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasToDo" aria-controls="offcanvasToDo">
-                    <i class="bi bi-list fs-1 me-2"></i>
-                    <span>ToDoList</span>
-                </a>
-                <a class="link-dark text-decoration-none d-none d-sm-block">
-                    <img src="./imagens/iconeLista.png" class="me-2" alt="" width="40" height="40">
-                    <span>ToDoList</span>
-                </a>
-            </div>
+<body class="row vh-100">
+    <!--cabecalho - telas maiores -->
+    <div class="col-sm-4 d-none d-sm-block" id="menu-lateral">
+        <div class="py-2 ps-3">
+            <a href="/app/dashboard/dashboard.html" class="link-dark text-decoration-none d-none d-sm-block">
+                <span class="fw-bold fs-5"><img src="/documentacao/imagens/dumbbell.png" class="me-2" alt="logo-coracao"
+                        width="40" height="40">FitApp</span>
+            </a>
+        </div>
 
-            <div class="d-flex align-items-center justify-content-end">
-                <div class="flex-shrink-0 dropdown me-3">
-                    <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img id="cabecalho-foto-perfil" src="./imagens/user.png" alt="" width="40" height="40"
-                            class="rounded-circle">
-                        <strong id="nome-usuario"></strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a class="dropdown-item"><i class="bi bi-gear me-2"></i>Configurações</a></li>
-                        <li><a class="dropdown-item"><i class="bi bi-person me-2"></i>Perfil</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" id="cabecalho-sair"><i class="bi bi-power me-2"></i>Sair</a>
-                        </li>
-                    </ul>
+
+        <!--menu lateral esquerda -->
+        <div class="d-none d-sm-block">
+            <div class="d-flex flex-column ">
+                <div class="py-3">
+                    <div class="list-group ">
+                        <a href="/app/dashboard/dashboard.html"
+                            class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><i
+                                class="bi bi-house-door fs-2 me-2"></i>Início</a>
+                        <a href="/app/medidas/medidas.html"
+                            class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><img
+                                src="/documentacao/imagens/ruler.png" width="29.44" height="29.44"
+                                alt="imagem-fita-metrica"> Medidas</a>
+                        <a href="/app/relatorios/relatorios.html"
+                            class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><i
+                                class="bi bi-clipboard-data fs-2 me-2"></i></i>Relatórios</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
-    <main>
-        <div class="container-fluid align-items-center">
-            <div class="row vh-100">
-                <div class="d-block d-sm-none offcanvas offcanvas-start" id="offcanvasToDo"
-                    aria-labelledby="offcanvasToDoLabel">
-                    <div class="d-flex flex-column ">
-                        <div class="d-flex justify-content-between py-3 ">
-                            <a href="#todas" class="link-dark text-decoration-none fw-bolder fs-5">ToDoList</a>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="py-3 border-bottom">
-                            <form class="w-100">
-                                <input type="search" class="form-control" placeholder="Procurar" aria-label="Search">
-                            </form>
-                        </div>
-                        <div class="my-3">
-                            <div class="list-group ">
-                                <a href="#todas" class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-list-ul me-2"></i>Todas</a>
-                                <a href="#a-fazer" class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-question me-2"></i>A fazer</a>
-                                <a href="#concluidas"
-                                    class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-check me-2"></i>Concluídas</a>
-                                <a href="#prioridades"
-                                    class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-star me-2"></i>Com Prioridades</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-3 d-none d-sm-block">
-                    <div class="d-flex flex-column ">
-                        <div class="py-3 border-bottom">
-                            <form class="w-100">
-                                <input type="search" class="form-control" placeholder="Procurar" aria-label="Search">
-                            </form>
-                        </div>
-                        <div class="my-3">
-                            <div class="list-group ">
-                                <a href="#todas" class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-list-ul me-2"></i>Todas</a>
-                                <a href="#a-fazer" class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-question me-2"></i>A fazer</a>
-                                <a href="#concluidas"
-                                    class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-check me-2"></i>Concluídas</a>
-                                <a href="#prioridades"
-                                    class="list-group-item list-group-item-action border-0 item-menu"><i
-                                        class="bi bi-star me-2"></i>Com Prioridades</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col" id="container-conteudo">                    
-                </div>
-            </div>        
-        </div>
-    </main>
-</body>
-
-<!-- <body class="vh-100">
-    <div class="container-fluid h-100 d-flex">
-        <div class="col-3">
-            <aside>
-                <div>
-                    <img src="" alt="logo-coracao">
-                    <span>FitApp</span>
-                </div>
-                <div>
-                    <a href="/app/dashboard/dashboard.html">Início</a>
-                </div>
-                <div>
-                    <a href="/app/medidas/medidas.html">Medidas</a>
-                </div>
-                <div>
-                    <a href="/app/relatorios/relatorios.html">Relatórios</a>
-                </div>
-            </aside>
-        </div>
-        <div class="col-9">
-            <header>
-                <div>
-                    <img id="cabecalho-foto-perfil"
-                        src="https://img1.gratispng.com/20180722/ybz/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c09380f76.0349129615323166812296.jpg"
-                        alt="foto-perfil" height="32" width="32">
-                </div>
-                <div id="menu-perfil" style="display: none;">
-                    <a href="../perfil/perfil.html">ver Perfil</a>
-                    <a id="cabecalho-sair" href="#">Sair</a>
-                </div>
-            </header>
-            <main></main>
-        </div>
-
 
     </div>
-</body> -->
 
+    <div class="col-sm-8">
+        <header class="py-2 border-bottom">
+            <div class="container-fluid px-2 d-flex justify-content-between align-items-center">
+                <!--cabecalho hamburguer/Logo- mobile -->
+                <div class="d-flex fw-bolder fs-5">
+                    <a class="d-block d-sm-none link-dark text-decoration-none" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvas" aria-controls="offcanvas">
+                        <i class="bi bi-list fs-1"></i>
+                    </a>
+                    <a href="/app/dashboard/dashboard.html"
+                        class="d-block d-sm-none link-dark text-decoration-none">FitApp</a>
+
+                </div>
+
+                <!--cabecalho - perfil -->
+                <div class="d-flex align-items-center justify-content-end">
+                    <span id="nome" class="me-3"></span>
+                    <div class="flex-shrink-0 dropdown me-3">
+                        <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i id="cabecalho-foto-perfil" class="bi bi-person-circle fs-1"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="../perfil/perfil.html"><i
+                                        class="bi bi-person me-2"></i>Meu
+                                    Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" id="cabecalho-sair" href="../index.html"><i
+                                        class="bi bi-power me-2"></i>Sair</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class=" ">
+                <div class="row vh-100">
+                    <!--offCanvas - links lareal esquerda-->
+                    <div class="d-block d-sm-none offcanvas offcanvas-start" id="offcanvas"
+                        aria-labelledby="offcanvasLabel">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-between py-3">
+                                <span class="link-dark text-decoration-none fw-bolder fs-5"><img
+                                        src="/documentacao/imagens/dumbbell.png" class="me-2" alt="logo-coracao"
+                                        width="40" height="40">FitApp</span>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="py-3">
+                                <div class="list-group">
+                                    <a href="/app/dashboard/dashboard.html"
+                                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><i
+                                            class="bi bi-house-door fs-2 me-2"></i>Início</a>
+                                    <a href="/app/medidas/medidas.html"
+                                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><img
+                                        src="/documentacao/imagens/ruler.png" width="29.44" height="29.44"
+                                        alt="imagem-fita-metrica">Medidas</a>
+                                    <a href="/app/relatorios/relatorios.html"
+                                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><i
+                                            class="bi bi-clipboard-data fs-2 me-2"></i></i>Relatórios</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--conteudo-->
+                    <div class="col" id="container-conteudo">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
 
 </html>
