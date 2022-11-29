@@ -324,8 +324,22 @@ function buscarMedidas (req, res) {
     // #swagger.description = 'endpoint para buscar medidas.'
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+    
 
-    res.send(assinanteEncontrado.medidas)
+    res.send({
+        historicoMedidas: assinanteEncontrado.medidas, 
+        medidasAtuais: assinanteEncontrado.medidasAtuais()
+    });
+}
+
+function excluirMedidas (req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para excluir medidas.'
+
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+    assinanteEncontrado.excluirMedidas(req.params.idMedida);
+    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
+    res.send();
 }
 
 
@@ -345,6 +359,7 @@ module.exports = {
     buscarTreinos: buscarTreinos,
     buscarTreinoPorId: buscarTreinoPorId,
     inserirMedidas: inserirMedidas,
-    buscarMedidas: buscarMedidas
+    buscarMedidas: buscarMedidas,
+    excluirMedidas: excluirMedidas
 
 }

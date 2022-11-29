@@ -19,9 +19,6 @@ it('CU-AS 16 - O Assinante deve ver historico de medidas', async () => {
     await spec()
         .get(`http://localhost:3000/assinante/medidas`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
-        .expectJsonLike([])
+        .expectJsonLike({})
         .expectStatus(200);
-
-
-
 });

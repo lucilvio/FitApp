@@ -47,6 +47,7 @@ require('./casosDeTeste/assinante/buscarDadosDoNutri');
 require('./casosDeTeste/assinante/buscarDadosDoPersonal');
 require('./casosDeTeste/assinante/inserirMedidas');
 require('./casosDeTeste/assinante/buscarMedidas');
+require('./casosDeTeste/assinante/excluirMedidas');
 require('./casosDeTeste/assinante/buscarDietas');
 require('./casosDeTeste/assinante/buscarDietaPorId');
 require('./casosDeTeste/assinante/buscarTreinos');

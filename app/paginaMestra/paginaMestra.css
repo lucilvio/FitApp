@@ -2,8 +2,12 @@
     background-color: #FED233;
 }
 
-#container-conteudo {
+body {
     background-color: #EDEDED;
+}
+
+header {
+    background-color: white;
 }
 
 .medidas-dashboard {

@@ -183,6 +183,17 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         this.treinos.push(treino);
     }
 
+    this.excluirMedidas = function(idMedida) {
+        const medidaEncontrada = this.medidas.find(medida => medida.idMedida == idMedida);
+
+        if (!medidaEncontrada) {
+
+            throw { mensagem: "Medida não encontrada", interna: true };
+        }
+
+      this.medidas = this.medidas.filter(medida => medida.idMedida != idMedida);
+    }
+
 }
 
 module.exports = Assinante
