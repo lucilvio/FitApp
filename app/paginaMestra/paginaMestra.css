@@ -11,3 +11,11 @@
     font-size: larger;
     font-weight: bolder;
 }
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+    background-color: #c1a12b;
+}
+
+.list-group-item-action:focus, .list-group-item-action:active {
+    background-color: #c1a12b;
+}
