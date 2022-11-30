@@ -314,9 +314,10 @@ function inserirMedidas (req, res) {
     // #swagger.description = 'endpoint para inserir medidas.'
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
+    const medida = new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
+    assinanteEncontrado.inserirMedidas(medida);
     repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
-    res.send();
+    res.send({idMedida: medida.idMedida});
 }
 
 function buscarMedidas (req, res) {
