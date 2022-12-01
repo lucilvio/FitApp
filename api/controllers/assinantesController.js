@@ -77,8 +77,8 @@ function buscarDadosDoDashboard(req, res) {
         nome: assinanteEncontrado.nome,
         altura: assinanteEncontrado.altura,
         peso: !medidasAtuais ? 0 : medidasAtuais.peso,
-        idade:assinanteEncontrado.idade(),
-        imc:assinanteEncontrado.imc(),
+        idade: assinanteEncontrado.idade(),
+        imc: assinanteEncontrado.imc(),
         idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
         idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
         medidas: assinanteEncontrado.medidas
@@ -98,7 +98,7 @@ function buscarDadosDoPerfil(req, res) {
         res.status(404).send({ erro: "Assinante não tem assinatura ativa" });
         return;
     }
-    
+
     res.send({
         idAssinante: assinanteEncontrado.idAssinante,
         idAssinatura: assinaturaEncontrada.idAssinatura,
@@ -153,7 +153,7 @@ function buscarDadosDaAssinatura(req, res) {
         res.status(400).send({ erro: "Assinatura cancelada" });
         return;
     }
-    
+
     if (req.usuario.idUsuario != assinaturaEncontrada.idAssinante) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
@@ -186,7 +186,7 @@ function cancelarAssinatura(req, res) {
     res.send();
 }
 
-function alterarPlanoDaAssinatura (req, res) {
+function alterarPlanoDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para alterar o Plano da Assinatura.'
 
@@ -200,7 +200,7 @@ function alterarPlanoDaAssinatura (req, res) {
 }
 
 
-function buscarDadosDoNutri (req, res) {
+function buscarDadosDoNutri(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar informações do Nutricionista.'
 
@@ -218,7 +218,7 @@ function buscarDadosDoNutri (req, res) {
     })
 }
 
-function buscarDadosDoPersonal (req, res) {
+function buscarDadosDoPersonal(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar informações do Personal Trainer.'
 
@@ -236,7 +236,7 @@ function buscarDadosDoPersonal (req, res) {
     })
 }
 
-function buscarDietas (req, res) {
+function buscarDietas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dietas.'
 
@@ -254,13 +254,13 @@ function buscarDietas (req, res) {
 }
 
 
-function buscarDietaPorId (req, res) {
+function buscarDietaPorId(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dieta por Id.'
 
     const dietaEncontrada = repositorioDeAssinantes.buscarDietaPorId(req.usuario.idUsuario, req.params.idDieta);
 
-    if(!dietaEncontrada) {
+    if (!dietaEncontrada) {
         res.status(404).send({ erro: "Dieta não encontrada" });
         return;
     }
@@ -273,7 +273,7 @@ function buscarDietaPorId (req, res) {
     });
 }
 
-function buscarTreinos (req, res) {
+function buscarTreinos(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar Treinos.'
 
@@ -290,13 +290,13 @@ function buscarTreinos (req, res) {
     }));
 }
 
-function buscarTreinoPorId (req, res) {
+function buscarTreinoPorId(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar treino por Id.'
 
     const treinoEncontrado = repositorioDeAssinantes.buscarTreinoPorId(req.usuario.idUsuario, req.params.idTreino);
 
-    if(!treinoEncontrado) {
+    if (!treinoEncontrado) {
         res.status(404).send({ erro: "Treino não encontrado" });
         return;
     }
@@ -309,31 +309,36 @@ function buscarTreinoPorId (req, res) {
     });
 }
 
-function inserirMedidas (req, res) {
+function inserirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para inserir medidas.'
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    const medida = new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
-    assinanteEncontrado.inserirMedidas(medida);
+    assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
     repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
-    res.send({idMedida: medida.idMedida});
+
+    res.send({ idMedida: assinanteEncontrado.medidasAtuais().idMedida });
 }
 
-function buscarMedidas (req, res) {
+function buscarMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar medidas.'
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    
+
+    const medidasOrdenadasPorData = assinanteEncontrado.medidas.sort(function (a, b) {
+        if (a.data < b.data) {
+            return 1;
+        }
+    });
 
     res.send({
-        historicoMedidas: assinanteEncontrado.medidas, 
+        historicoMedidas: medidasOrdenadasPorData,
         medidasAtuais: assinanteEncontrado.medidasAtuais()
     });
 }
 
-function excluirMedidas (req, res) {
+function excluirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para excluir medidas.'
 
@@ -353,7 +358,7 @@ module.exports = {
     buscarDadosDaAssinatura: buscarDadosDaAssinatura,
     cancelarAssinatura: cancelarAssinatura,
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
-    buscarDadosDoNutri:  buscarDadosDoNutri,
+    buscarDadosDoNutri: buscarDadosDoNutri,
     buscarDadosDoPersonal: buscarDadosDoPersonal,
     buscarDietas: buscarDietas,
     buscarDietaPorId: buscarDietaPorId,

@@ -21,8 +21,8 @@ async function entrar(evento) {
 
     try {
         const resposta = await servicos.fazerLogin(email, senha);
-        localStorage.setItem("fitapp_token", resposta.token);
-
+        seguranca.gravarToken(resposta.token);
+        
         const usuario = seguranca.pegarUsuarioDoToken(resposta.token);
 
         if(usuario.perfil == "assinante") {

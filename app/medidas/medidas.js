@@ -14,6 +14,7 @@ async function aoCarregarPagina() {
     await paginaMestra.carregar("medidas/medidas-conteudo.html", "Medidas");
     await buscarMedidas();
     document.querySelector("#btn-salvarMedidas").onclick = inserirMedidas;
+
 }
 
 async function buscarMedidas() {
@@ -25,30 +26,49 @@ async function buscarMedidas() {
         document.querySelector("#pescoco").innerHTML = resposta.medidasAtuais.pescoco;
         document.querySelector("#cintura").innerHTML = resposta.medidasAtuais.cintura;
         document.querySelector("#quadril").innerHTML = resposta.medidasAtuais.quadril;
-        resposta.historicoMedidas.forEach(medida => {
 
-            document.querySelector("#historico-medidas").innerHTML = document.querySelector("#historico-medidas").innerHTML +
+        if (resposta.historicoMedidas.length == 0) {
+            document.querySelector("#historico-medidas").innerHTML =
                 `<tr>
-            <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
-            <td>${medida.peso} kg</td>
-            <td>${medida.pescoco} cm</td>
-            <td>${medida.cintura} cm</td>
-            <td>${medida.quadril} cm</td>
-            <td><i id="editar-medidas" class="bi bi-pencil-square"></i></td>
-            <td><i id="excluir-medidas" class="bi bi-trash3"></i></td>
-            </tr>`;
-        });
+                <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
+                <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
+                <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
+                <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
+                <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
+                </tr>`;
+        } else {
+            resposta.historicoMedidas.forEach(medida => {
+                document.querySelector("#historico-medidas").innerHTML = document.querySelector("#historico-medidas").innerHTML +
+                    `<tr>
+                <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
+                <td>${medida.peso} kg</td>
+                <td>${medida.pescoco} cm</td>
+                <td>${medida.cintura} cm</td>
+                <td>${medida.quadril} cm</td>
+                <td><i class="bi bi-trash3 btn-excluirMedidas" data-idmedida=${medida.idMedida}></i></td>
+                </tr>`;
+            });
+        }
 
+        adicionarEventoExcluir();
 
     } catch (error) {
         erros.tratarErro(error);
     }
 }
+
+function adicionarEventoExcluir() {
+    const listaBtnExcluir = document.querySelectorAll(".btn-excluirMedidas");
+    listaBtnExcluir.forEach(element => {
+        element.onclick = excluirMedidas;
+    });
+}
+
 async function inserirMedidas(evento) {
-    const peso = document.querySelector("#peso").value;
-    const pescoco = document.querySelector("#pescoco").value;
-    const cintura = document.querySelector("#cintura").value;
-    const quadril = document.querySelector("#quadril").value;
+    const peso = document.querySelector("#form-peso").value;
+    const pescoco = document.querySelector("#form-pescoco").value;
+    const cintura = document.querySelector("#form-cintura").value;
+    const quadril = document.querySelector("#form-quadril").value;
     const token = seguranca.pegarToken();
 
     const formulario = document.querySelector("#formulario");
@@ -60,6 +80,18 @@ async function inserirMedidas(evento) {
 
     try {
         await servicos.salvarMedidas(token, peso, pescoco, cintura, quadril);
+        window.location.reload();
+    } catch (error) {
+        erros.tratarErro(error);
+    }
+}
+
+async function excluirMedidas(evento) {
+    const idMedida = evento.target.dataset.idmedida;
+    const token = seguranca.pegarToken();
+    try {
+        await servicos.excluirMedidas(token, idMedida);
+        window.location.reload();
     } catch (error) {
         erros.tratarErro(error);
     }

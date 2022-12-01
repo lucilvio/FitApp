@@ -1,5 +1,6 @@
 const Usuario = require('./usuario');
 const Assinatura = require('./assinatura');
+const Medidas = require('./medidas');
 
 function Assinante(nome, email, plano, idNutri, idPersonal) {
     if (!nome) {
@@ -48,15 +49,17 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     }
 
     this.medidasAtuais = function () {
+        if (this.medidas.length == 0) {
+            return new Medidas(0, 0, 0, 0);
+        }
+
         const dataDaUltimaMedida = Math.max(...this.medidas.map(medida => new Date(medida.data)));
         return this.medidas.find(medida => medida.data.getTime() == dataDaUltimaMedida);
     }
 
     this.imc = function () {
         const medidas = this.medidasAtuais();
-        if (!medidas) {
-            return 0;
-        }
+
         if (medidas.peso == 0) {
             return 0;
         }
@@ -145,31 +148,33 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     }
 
     this.inserirMedidas = function (medidas) {
-        if (this.medidas.length > 0) {
-            const ultimaMedida = this.medidas.reduce((a, b) => a.data > b.data ? a : b);
+        const medidasAtuais = this.medidasAtuais();
 
-            if (!medidas.peso) {
-                medidas.peso = ultimaMedida.peso
-            }
-
-            if (!medidas.pescoco) {
-                medidas.pescoco = ultimaMedida.pescoco
-            }
-
-            if (!medidas.cintura) {
-                medidas.cintura = ultimaMedida.cintura
-            }
-
-            if (!medidas.quadril) {
-                medidas.quadril = ultimaMedida.quadril
-            }
-
-            this.medidas.push(medidas);
-
-        } else {
-            this.medidas.push(medidas);
+        if (!medidas) {
+            throw { mensagem: "Medidas não definidas", interna: true };
         }
 
+        if (!medidas.peso) {
+            medidas.peso = medidasAtuais.peso;
+        }
+
+        if (!medidas.pescoco) {
+            medidas.pescoco = medidasAtuais.pescoco;
+        }
+
+        if (!medidas.cintura) {
+            medidas.cintura = medidasAtuais.cintura;
+        }
+
+        if (!medidas.quadril) {
+            medidas.quadril = medidasAtuais.quadril;
+        }
+
+        if(medidas.peso == 0 && medidas.pescoco == 0 && medidas.cintura == 0 && medidas.quadril == 0) {
+            throw { mensagem: "Pelo menos uma das medidas deve ser informada", interna: true };
+        }
+
+        this.medidas.push(medidas);
     }
 
     this.inserirDieta = function (dieta) {
@@ -183,7 +188,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         this.treinos.push(treino);
     }
 
-    this.excluirMedidas = function(idMedida) {
+    this.excluirMedidas = function (idMedida) {
         const medidaEncontrada = this.medidas.find(medida => medida.idMedida == idMedida);
 
         if (!medidaEncontrada) {
@@ -191,7 +196,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
             throw { mensagem: "Medida não encontrada", interna: true };
         }
 
-      this.medidas = this.medidas.filter(medida => medida.idMedida != idMedida);
+        this.medidas = this.medidas.filter(medida => medida.idMedida != idMedida);
     }
 
 }

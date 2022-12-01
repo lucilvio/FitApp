@@ -35,3 +35,19 @@ export async function salvarMedidas(token, peso, pescoco, cintura, quadril) {
     
     return util.tratarRespostaApi(resposta);
 }
+
+export async function excluirMedidas(token, idMedida) {
+    const url = `http://localhost:3000/assinante/medidas/${idMedida}`;
+
+    const request = new Request(url, {
+        method: 'DELETE',        
+        headers: {
+            authorization: "Bearer " + token,
+            "Content-Type": "application/json"
+        }
+    });
+
+    const resposta = await fetch(request);
+    
+    return util.tratarRespostaApi(resposta);
+}

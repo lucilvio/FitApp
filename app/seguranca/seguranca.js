@@ -14,6 +14,10 @@ export function tokenValido() {
     return true;
 }
 
+export function gravarToken(token) {
+    localStorage.setItem(chaveToken, token);
+}
+
 export function pegarToken() {
     return localStorage.getItem(chaveToken);
 }
@@ -22,7 +26,9 @@ export function removerToken() {
     localStorage.removeItem(chaveToken);
 }
 
-export function pegarUsuarioDoToken(token) {
+export function pegarUsuarioDoToken() {
+    const token = pegarToken();
+
     const tokenDecodificado = decodificarToken(token);
 
     return {

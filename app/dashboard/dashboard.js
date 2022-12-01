@@ -20,7 +20,6 @@ async function buscarDadosDoPerfil() {
         const resposta = await servicos.buscarDados(token);
         const ctx = document.querySelector("#myChart");
         
-        document.querySelector("#nome").innerHTML = resposta.nome;
         document.querySelector("#altura").innerHTML = resposta.altura;
         document.querySelector("#peso").innerHTML = resposta.peso;
         document.querySelector("#idade").innerHTML = resposta.idade;
