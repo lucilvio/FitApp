@@ -51,5 +51,4 @@ function criarGrafico(ctx, medidas) {
             }]
         }
     });
-
 }

@@ -23,3 +23,7 @@ header {
 .list-group-item-action:focus, .list-group-item-action:active {
     background-color: #c1a12b;
 }
+
+a, input, select {
+    cursor: pointer;
+}

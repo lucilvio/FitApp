@@ -327,9 +327,14 @@ function buscarMedidas(req, res) {
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
     const medidasOrdenadasPorData = assinanteEncontrado.medidas.sort(function (a, b) {
-        if (a.data < b.data) {
+        if (a.data.getTime() < b.data.getTime()) {
             return 1;
         }
+        if (a.data.getTime() > b.data.getTime()) {
+            return -1;
+        }
+
+        return 0;
     });
 
     res.send({
