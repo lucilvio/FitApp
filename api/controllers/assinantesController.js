@@ -107,7 +107,7 @@ function buscarDadosDoPerfil(req, res) {
         idPersonal: assinanteEncontrado.personalTrainer,
         imagem: assinanteEncontrado.usuario.imagem,
         email: assinanteEncontrado.usuario.login,
-        nome: assinanteEncontrado.nome,
+        nome: assinanteEncontrado.usuario.nome,
         dataNascimento: assinanteEncontrado.dataNascimento,
         sexo: assinanteEncontrado.sexo,
         altura: assinanteEncontrado.altura,
@@ -121,7 +121,7 @@ function alterarDadosDoPerfil(req, res) {
 
     const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
 
-    assinanteEncontrado.alterarDadosDoPerfil(req.body.imagem, req.body.dataNascimento, req.body.sexo, req.body.altura);
+    assinanteEncontrado.alterarDadosDoPerfil(req.body.nome, req.body.imagem, req.body.dataNascimento, req.body.sexo, req.body.altura);
 
     repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
     res.send();

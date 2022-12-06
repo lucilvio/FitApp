@@ -17,7 +17,7 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     paginaMestraHtml.querySelector("title").innerHTML = "FitApp - " + titulo;
 
     // adiciona o nome do usuario no cabeçalho
-    paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = seguranca.pegarUsuarioDoToken().nome;
+    paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = seguranca.pegarNomeDoUsuario();
 
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
     paginaMestraHtml.querySelector("#container-conteudo").innerHTML = conteudoPaginaInterna;

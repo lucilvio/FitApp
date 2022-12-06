@@ -12,8 +12,8 @@ window.onload = aoCarregarPagina;
 async function aoCarregarPagina() {
     await paginaMestra.carregar("perfil/perfil-conteudo.html", "Perfil");
 
-    document.querySelector("#btn-salvar-dados-perfil").onclick = salvarDadosDoPerfil;
-    document.querySelector("#btn-alterar-senha").onclick = alterarSenhaDeAcesso;
+    document.querySelector("#btn-salvarDadosDoPerfil").onclick = salvarDadosDoPerfil;
+    document.querySelector("#btn-alterarSenha").onclick = alterarSenhaDeAcesso;
     await buscarDadosDoPerfil();
 }
 
@@ -22,7 +22,7 @@ async function buscarDadosDoPerfil() {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token);
 
-        document.querySelector("#foto-perfil").setAttribute("src", "https://img1.gratispng.com/20180722/ybz/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c09380f76.0349129615323166812296.jpg")
+        document.querySelector("#foto-perfil").setAttribute("src", "../../documentacao/imagens/elizeu-dias-2EGNqazbAMk-unsplash.jpg")
         document.querySelector("#email").innerHTML = resposta.email;
         document.querySelector("#nome").value = resposta.nome;
 
@@ -60,8 +60,9 @@ async function salvarDadosDoPerfil(evento) {
         evento.preventDefault();
 
         await servicos.salvarDados(token, fotoPerfil, nome, dataNascimento, sexo, altura);
-        alert("Salvo com sucesso");
-        await buscarDadosDoPerfil()
+        seguranca.atualizarNomeUsuarioLogado(nome);
+        window.location.reload();
+        
     } catch (error) {
         erros.tratarErro(error);
     }
@@ -81,7 +82,7 @@ async function alterarSenhaDeAcesso(evento) {
     
         evento.preventDefault();
         await servicos.alterarSenha(token, senhaAtual, novaSenha);
-        alert("Senha Alterada")
+        window.location.reload();
     } catch (error) {
         erros.tratarErro(error);
     }

@@ -10,6 +10,7 @@ it('CU-AS 02 - O Assinante deve alterar os dados do Perfil', async () => {
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .withJson({
             "imagem": "umaImagem.jpg",
+            "nome": "Assinante",
             "dataNascimento": "23/01/2006",
             "sexo": "Masculino",
             "altura": 178

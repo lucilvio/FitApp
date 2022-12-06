@@ -1,51 +1,92 @@
 <div>
     <div class="row">
-        <h6><i class="bi bi-clipboard-data me-1 fs-4"></i>Relatórios</h6>
+        <h6><i class="bi bi-person me-1 fs-4"></i>Meu Perfil</h6>
     </div>
 
     <div class="row py-3">
-        <div class="col">
+        <div class="col-12 col-sm-5">
             <div class="card shadow">
                 <div class="card-body row">
-                    <h6 style="color:  #FED233;" class="card-title ">Filtro</h6>
-                    <div class="col-12 col-sm-4 py-3">
-                        <h6>Medida</h6>
-                        <select class="form-select form-select-sm" name="opcoes-medidas" id="opcoes-medidas">
-                            <option value="peso" selected>Peso</option>
-                            <option value="pescoco">Pescoço</option>
-                            <option value="cintura">Cintura</option>
-                            <option value="quadril">Quadril</option>
-                        </select>
-                    </div>
-                    <div class="col-6 col-sm-4 py-3">
-                        <h6>De</h6>
-                        <div class="input-group input-group-sm mb-3">
-                            <input type="date" class="form-control" aria-label="data-inicio" id="data-inicio">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <div>
+                                    <img src="" class="rounded-circle mx-auto d-block" alt="foto-perfil-usuario"
+                                        id="foto-perfil" width="142" height="142">
+                                </div>
+                                <div class="pt-3 text-center">
+                                    <span id="email"></span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-sm-4 py-3">
-                        <h6>Até</h6>
-                        <div class="input-group input-group-sm mb-3">
-                            <input type="date" class="form-control" aria-label="data-fim" id="data-fim">
+                        <div class="row">
+                            <form id="formulario-perfil">
+                                <div class="pt-3">
+                                    <label class="form-label fw-semibold" for="nome">Nome</label>
+                                    <div class="input-group input-group-sm">
+                                        <input class="form-control" type="text" id="nome" name="nome" required>
+                                    </div>
+                                </div>
+                                <div class="pt-3">
+                                    <label class="form-label fw-semibold" for="data-nascimento">Data de
+                                        Nascimento</label>
+                                    <div class="input-group input-group-sm">
+                                        <input class="form-control" type="datetime" id="data-nascimento"
+                                            name="data-nascimento">
+                                    </div>
+                                </div>
+                                <div class="pt-3">
+                                    <label class="form-label fw-semibold" for="sexo">Sexo</label>
+                                    <div class="input-group input-group-sm">
+                                        <input class="form-control" type="text" id="sexo" name="sexo">
+                                    </div>
+                                </div>
+                                <div class="pt-3">
+                                    <label class="form-label fw-semibold" for="altura">Altura</label>
+                                    <div class="input-group input-group-sm">
+                                        <input class="form-control" type="number" id="altura" name="altura">
+                                    </div>
+                                </div>
+                                <div class="pt-3 text-end">
+                                    <button type="submit" id="btn-salvarDadosDoPerfil" class="btn btn-light"
+                                        style="background-color: #FED233;">Salvar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col ">
+        <div class="col-12 col-sm-7 pt-3 pt-sm-0">
             <div class="card shadow">
                 <div class="card-body">
-                    <canvas id="myChart"></canvas>
+                    <h6 class="card-title" style="color:  #FED233;">Alterar Senha</h6>
+                    <form id="formulario-alterar-senha">
+                        <div class="pt-3">
+                            <label class="form-label fw-semibold" for="senha-atual">Senha Atual</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="password" id="senha-atual" name="senha-atual"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="pt-3">
+                            <label class="form-label fw-semibold" for="nova-senha">Nova Senha</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="password" id="nova-senha" name="nova-senha" required>
+                            </div>
+                        </div>
+                        <div class="pt-3 text-end">
+                            <button type="submit" id="btn-alterarSenha" class="btn btn-light"
+                                style="background-color: #FED233;">Alterar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div>
+<!-- <div>
     <div>
         <div>
             <img id="foto-perfil" src="#" height="32" width="32">
@@ -93,8 +134,8 @@
             </div>
             <br>
             <div>
-                <button type="submit" id="btn-alterar-senha">Alterar</button>
+                <button type="submit" id="btn-alterarSenha">Alterar</button>
             </div>
         </form>
     </div>
-</div>
+</div> -->

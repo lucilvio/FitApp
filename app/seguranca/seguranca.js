@@ -1,4 +1,5 @@
 const chaveToken = "fitapp_token";
+const chaveNomeUsuario = "fitapp_nome_usuario";
 
 export function tokenValido() {
     const token = pegarToken();
@@ -16,6 +17,7 @@ export function tokenValido() {
 
 export function gravarToken(token) {
     localStorage.setItem(chaveToken, token);
+    localStorage.setItem(chaveNomeUsuario, pegarUsuarioDoToken().nome);
 }
 
 export function pegarToken() {
@@ -39,6 +41,14 @@ export function pegarUsuarioDoToken() {
     }
 }
 
+export function atualizarNomeUsuarioLogado(nome) {
+    localStorage.setItem(chaveNomeUsuario, nome);
+}
+
+export function pegarNomeDoUsuario() {
+    return localStorage.getItem(chaveNomeUsuario);
+}
+
 function decodificarToken(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -59,3 +69,4 @@ function tokenExpirado(token) {
 
     return false;
 }
+
