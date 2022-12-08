@@ -1,10 +1,14 @@
 export function tratarErro(error) {
-    if(!error.erro)
-    {
+    if (!error.erro) {
         console.error(error);
     }
-    else
-    {
+    else {
+        const elementoToast = document.querySelector("#toast");
+        const toast = new bootstrap.Toast(elementoToast);
+
+        document.querySelector("#toast-body").innerHTML = error.erro;
+        toast.show();
+
         console.error(error.erro);
     }
 } 

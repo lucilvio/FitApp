@@ -2,7 +2,7 @@ import * as servicos from "./servicosDaHome.js";
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    const planosAtivos = await buscarNutricionistasAtivos();
+    const planosAtivos = await servicos.buscarPlanosAtivos();
 
     planosAtivos.forEach(plano => {
         preencherCaixaPlanoHtml(plano);
