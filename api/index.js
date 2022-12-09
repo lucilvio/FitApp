@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const servidor = require('./servidor');
 const autenticacaoMiddleware = require('./middlewares/autenticacaoMiddleware');
 const swaggerUi = require('swagger-ui-express');
@@ -18,9 +19,11 @@ const cors = require('cors');
 
 //middlewares
 servidor.app.use(cors());
-servidor.app.use(express.json());
-
+servidor.app.use(express.urlencoded({ limit: "50mb", extended: true}));
+servidor.app.use(express.json({ limit: "50mb", extended: true }));
+servidor.app.use(fileUpload({ createParentPath: true }));
 servidor.app.use(autenticacaoMiddleware.autenticar);
+servidor.app.use("/publico", express.static("imagens"));
 
 servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
@@ -28,7 +31,7 @@ servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 //Geral
 servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuarios', usuariosController.redefinirSenha);
-
+servidor.app.post('/usuarios/foto', usuariosController.alterarFoto)
 servidor.app.get('/planos', geralController.buscarPlanos);
 servidor.app.get('/planos/:idPlano', geralController.buscarPlanoPorId);
 

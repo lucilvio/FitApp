@@ -19,6 +19,10 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     // adiciona o nome do usuario no cabeçalho
     paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = seguranca.pegarNomeDoUsuario();
 
+    if(seguranca.pegarFotoDoUsuario()) {
+        paginaMestraHtml.querySelector("#cabecalho-foto-perfil").src = "http://localhost:3000/" + seguranca.pegarFotoDoUsuario();
+    }
+
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
     paginaMestraHtml.querySelector("#container-conteudo").innerHTML = conteudoPaginaInterna;
 

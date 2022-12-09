@@ -15,6 +15,11 @@ function buscarUsuarioPorId(idUsuario) {
     return base.dados.usuarios.find(usuario => usuario.idUsuario == idUsuario);
 }
 
+function salvarFotoUsuario(idUsuario, foto) {
+    const usuarioEncontrado = buscarUsuarioPorId(idUsuario);
+    usuarioEncontrado.imagem = foto;
+}
+
 function salvarMensagens(usuario) {
     let usuarioEncontrado = buscarUsuarioPorId(usuario.idUsuario);
     usuarioEncontrado = usuario;
@@ -29,6 +34,7 @@ module.exports = {
     buscarUsuarioPorLogin: buscarUsuarioPorLogin,
     criarUsuario: criarUsuario,
     buscarUsuarioPorId: buscarUsuarioPorId,
+    salvarFotoUsuario: salvarFotoUsuario,
     salvarMensagens: salvarMensagens,
     buscarAdmin: buscarAdmin
 };

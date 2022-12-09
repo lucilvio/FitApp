@@ -1,5 +1,6 @@
 const chaveToken = "fitapp_token";
 const chaveNomeUsuario = "fitapp_nome_usuario";
+const chaveFotoUsuario = "fitapp_foto_usuario";
 
 export function tokenValido() {
     const token = pegarToken();
@@ -18,6 +19,7 @@ export function tokenValido() {
 export function gravarToken(token) {
     localStorage.setItem(chaveToken, token);
     localStorage.setItem(chaveNomeUsuario, pegarUsuarioDoToken().nome);
+    localStorage.setItem(chaveFotoUsuario, pegarUsuarioDoToken().imagem);
 }
 
 export function pegarToken() {
@@ -37,7 +39,8 @@ export function pegarUsuarioDoToken() {
         idUsuario: tokenDecodificado.idUsuario,
         nome: tokenDecodificado.nome,
         email: tokenDecodificado.email,
-        perfil: tokenDecodificado.perfil
+        perfil: tokenDecodificado.perfil,
+        imagem: tokenDecodificado.imagem
     }
 }
 
@@ -45,8 +48,16 @@ export function atualizarNomeUsuarioLogado(nome) {
     localStorage.setItem(chaveNomeUsuario, nome);
 }
 
+export function atualizarFotoUsuarioLogado(foto) {
+    localStorage.setItem(chaveFotoUsuario, foto);
+}
+
 export function pegarNomeDoUsuario() {
     return localStorage.getItem(chaveNomeUsuario);
+}
+
+export function pegarFotoDoUsuario() {
+    return localStorage.getItem(chaveFotoUsuario);
 }
 
 function decodificarToken(token) {

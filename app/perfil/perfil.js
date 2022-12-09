@@ -12,6 +12,7 @@ window.onload = aoCarregarPagina;
 async function aoCarregarPagina() {
     await paginaMestra.carregar("perfil/perfil-conteudo.html", "Perfil");
 
+    document.querySelector("#foto-perfil").onclick = alterarFoto;
     document.querySelector("#btn-salvarDadosDoPerfil").onclick = salvarDadosDoPerfil;
     document.querySelector("#btn-alterarSenha").onclick = alterarSenhaDeAcesso;
     await buscarDadosDoPerfil();
@@ -19,10 +20,13 @@ async function aoCarregarPagina() {
 
 async function buscarDadosDoPerfil() {
     try {
+        if(seguranca.pegarFotoDoUsuario()) {
+            document.querySelector("#foto-perfil").setAttribute("src", "http://localhost:3000/" + seguranca.pegarFotoDoUsuario());
+        }
+
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token);
-
-        document.querySelector("#foto-perfil").setAttribute("src", "../../documentacao/imagens/elizeu-dias-2EGNqazbAMk-unsplash.jpg")
+        
         document.querySelector("#email").innerHTML = resposta.email;
         document.querySelector("#nome").value = resposta.nome;
 
@@ -62,7 +66,7 @@ async function salvarDadosDoPerfil(evento) {
         await servicos.salvarDados(token, fotoPerfil, nome, dataNascimento, sexo, altura);
         seguranca.atualizarNomeUsuarioLogado(nome);
         window.location.reload();
-        
+
     } catch (error) {
         erros.tratarErro(error);
     }
@@ -79,9 +83,28 @@ async function alterarSenhaDeAcesso(evento) {
         if (formulario.checkValidity() == false) {
             return false;
         }
-    
+
         evento.preventDefault();
         await servicos.alterarSenha(token, senhaAtual, novaSenha);
+        window.location.reload();
+    } catch (error) {
+        erros.tratarErro(error);
+    }
+}
+
+function alterarFoto() {
+    document.querySelector("#input-foto-perfil").click();
+    document.querySelector("#input-foto-perfil").onchange = gravarFoto;
+}
+
+async function gravarFoto() {
+    try {
+        const token = seguranca.pegarToken();
+        const inputFile = document.querySelector("#input-foto-perfil");
+        const res = await servicos.salvarFoto(token, inputFile.files[0]);
+
+        seguranca.atualizarFotoUsuarioLogado(res.foto);
+
         window.location.reload();
     } catch (error) {
         erros.tratarErro(error);

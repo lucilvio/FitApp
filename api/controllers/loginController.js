@@ -32,7 +32,8 @@ function login(req, res) {
             idUsuario: usuarioEncontrado.idUsuario,
             nome: usuarioEncontrado.nome,
             email: usuarioEncontrado.login,
-            perfil: usuarioEncontrado.perfil
+            perfil: usuarioEncontrado.perfil,
+            imagem: usuarioEncontrado.imagem
         }, 'shhhhh', { expiresIn: 60 * 60 });
 
     res.send({token});

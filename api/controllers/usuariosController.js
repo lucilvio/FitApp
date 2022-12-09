@@ -2,6 +2,7 @@ const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const geradorDeSenha = require('generate-password');
+const fs = require('fs');
 
 function redefinirSenha(req, res) {
     // #swagger.tags = ['Usuário']
@@ -33,7 +34,34 @@ function redefinirSenha(req, res) {
 
 }
 
+function alterarFoto(req, res) {
+    // #swagger.tags = ['Usuário']
+    // #swagger.description = 'endpoint para alterar a foto.'
+    // #swagger.security = [] 
+
+    if(!req.files) {
+        res.status(400).send({ erro: "Não é possível usar uma foto vazia"});
+        return;
+    }
+
+    const tipoDaFoto = req.files.foto.name.split('.').pop();
+    const nomeDaFoto = `${req.usuario.nome}-${req.usuario.idUsuario}.${tipoDaFoto}`;
+
+    fs.writeFile("imagens/foto-perfil/" + nomeDaFoto, req.files.foto.data, (err) => {
+        if(err) {
+            res.status(400).send({ erro: "Erro ao gravar a foto. Tente novamente."});
+        }
+        
+        const caminhoDaFoto = "publico/foto-perfil/" + nomeDaFoto;
+        repositorioDeUsuarios.salvarFotoUsuario(req.usuario.idUsuario, caminhoDaFoto);
+
+        res.send({
+            foto: caminhoDaFoto
+        });
+    });
+}
 
 module.exports = {
     redefinirSenha: redefinirSenha,
+    alterarFoto: alterarFoto
 }
