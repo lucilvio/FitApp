@@ -1,7 +1,4 @@
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
-const servicoDeEmail = require('../servicos/servicoDeEmail');
-const servicoDeMensagens = require('../servicos/servicoDeMensagens');
-const geradorDeSenha = require('generate-password');
 const fs = require('fs');
 
 function redefinirSenha(req, res) {
@@ -9,29 +6,25 @@ function redefinirSenha(req, res) {
     // #swagger.description = 'endpoint para redefinir a senha de login.'
     // #swagger.security = [] 
 
-    if(!req.body.email) {
-        res.status(400).send({ erro: "Não é possível redefinir senha sem e-mail"});
+    if(!req.body.senhaAtual) {
+        res.status(400).send({ erro: "Não é possível redefinir senha sem a senha atual"});
         return;
     }
 
-    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(req.body.email);
+    if(!req.body.novaSenha) {
+        res.status(400).send({ erro: "Não é possível redefinir senha a nova senha"});
+        return;
+    }
+
+    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(req.usuario.email);
     if(!usuarioEncontrado || usuarioEncontrado.perfil == "administrador") {
         res.status(404).send({ erro: "Usuário não encontrado"});
         return;
     }
 
-    const novaSenha = geradorDeSenha.generate({
-        length: 10,
-        numbers: true
-    });
-
-    usuarioEncontrado.senha = novaSenha;
-
-    servicoDeEmail.enviar(req.body.email, 'FitApp - Nova Senha', servicoDeMensagens.gerarMensagemComNovaSenha(usuarioEncontrado.nome, novaSenha));
+    usuarioEncontrado.senha = req.body.novaSenha;
 
     res.send();
-
-
 }
 
 function alterarFoto(req, res) {

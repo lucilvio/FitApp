@@ -26,11 +26,6 @@ function autenticar (req, res, next) {
         return;
     }
 
-    if(req.url == "/usuarios" && req.method == "PATCH") {
-        next();
-        return;
-    }
-
     if( req.url.startsWith("/planos")  && req.method == "GET") {
         next();
         return;
