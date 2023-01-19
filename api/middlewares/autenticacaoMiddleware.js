@@ -11,6 +11,11 @@ function autenticar (req, res, next) {
         return;
     }
     
+    if (req.url == "/esqueciMinhaSenha") {
+        next();
+        return;
+    }
+
     if (req.url == "/login") {
         next();
         return;

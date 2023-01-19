@@ -5,7 +5,7 @@ import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    await paginaMestraSite.carregar("criarConta/criarConta-conteudo.html", "Criar Conta");
+    await paginaMestraSite.carregar("criarConta/criarConta-conteudo.html", "Criar conta");
     document.querySelector("#btn-cadastrarAssinante").onclick = cadastrarAssinante;
 }
 

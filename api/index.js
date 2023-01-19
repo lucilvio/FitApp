@@ -5,6 +5,7 @@ const autenticacaoMiddleware = require('./middlewares/autenticacaoMiddleware');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
 const tratamentoDeErrosMiddleware = require('./middlewares/tratamentoDeErrosMiddleware')
+const esqueciMinhaSenhaController = require('./controllers/esqueciMinhaSenhaController');
 const loginController = require('./controllers/loginController');
 const usuariosController = require('./controllers/usuariosController');
 const administradoresController = require('./controllers/administradoresController');
@@ -29,6 +30,7 @@ servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 
 //Geral
+servidor.app.post('/esqueciMinhaSenha', esqueciMinhaSenhaController.gerarNovaSenha);
 servidor.app.post('/login', loginController.login);
 servidor.app.patch('/usuarios', usuariosController.redefinirSenha);
 servidor.app.post('/usuarios/foto', usuariosController.alterarFoto)

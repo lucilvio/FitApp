@@ -4,11 +4,11 @@
 
 h3 > span {color: #FED233; text-shadow: #454545 0.1em 0.1em 0.2em;}
 
-#card-formularioCriarConta, #card-formularioEntrar {
+#card-formulario {
     background-color: #FED233;
 }
 
-.criar-conta, .entrar {
+.container-formulario {
     width: 90%;
     
 } 
@@ -23,26 +23,26 @@ h3 > span {color: #FED233; text-shadow: #454545 0.1em 0.1em 0.2em;}
 }
 
 @media screen and (min-width: 576px) { 
-    .criar-conta, .entrar {
+    .container-formulario {
         width: 90%;
     }
 }
 
 @media screen and (min-width: 768px) { 
-    .criar-conta, .entrar {
+    .container-formulario {
         width: 50%;
     }
     
 }
 
 @media screen and (min-width: 992px) { 
-    .criar-conta, .entrar {
+    .container-formulario {
         width: 50%;
     }
 }
 
 @media screen and (min-width: 1200px) { 
-    .criar-conta, .entrar {
+    .container-formulario {
         padding-top: 20px;
         padding-bottom: 20px;
       width: 30%;
