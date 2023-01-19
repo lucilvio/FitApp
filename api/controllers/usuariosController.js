@@ -1,9 +1,9 @@
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const fs = require('fs');
 
-function redefinirSenha(req, res) {
+function alterarSenha(req, res) {
     // #swagger.tags = ['Usuário']
-    // #swagger.description = 'endpoint para redefinir a senha de login.'
+    // #swagger.description = 'endpoint para alterar a senha de login.'
     // #swagger.security = [] 
 
     if(!req.body.senhaAtual) {
@@ -16,13 +16,13 @@ function redefinirSenha(req, res) {
         return;
     }
 
-    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(req.usuario.email);
+    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorId(req.usuario.idUsuario);
     if(!usuarioEncontrado || usuarioEncontrado.perfil == "administrador") {
         res.status(404).send({ erro: "Usuário não encontrado"});
         return;
     }
 
-    usuarioEncontrado.senha = req.body.novaSenha;
+    repositorioDeUsuarios.salvarNovaSenha(req.usuario.idUsuario, req.body.novaSenha);
 
     res.send();
 }
@@ -55,6 +55,6 @@ function alterarFoto(req, res) {
 }
 
 module.exports = {
-    redefinirSenha: redefinirSenha,
+    alterarSenha: alterarSenha,
     alterarFoto: alterarFoto
 }

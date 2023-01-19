@@ -1,6 +1,5 @@
 import * as servicos from "./servicosDeEsqueciMinhaSenha.js";
 import * as erros from "../util/tratamentoDeErros.js";
-import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";
 
 window.onload = aoCarregarPagina;
@@ -22,8 +21,8 @@ async function gerarNovaSenha(evento) {
     evento.preventDefault();
 
     try {
-        const resposta = await servicos.gerarNovaSenha(email);
-        
+        await servicos.gerarNovaSenha(email);
+        window.location.href = "../login/entrar.html";
 
     } catch (error) {
         erros.tratarErro(error);

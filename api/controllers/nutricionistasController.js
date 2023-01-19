@@ -42,23 +42,6 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-function alterarSenha(req, res) {
-    // #swagger.tags = ['Nutricionista']
-    // #swagger.description = 'endpoint para alterar senha de login.'
-
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
-
-    if (!nutriEncontrado) {
-        res.status(404).send({ erro: 'Nutricionista não encontrado' });
-        return;
-    }
-
-    nutriEncontrado.alterarSenha(req.body.senha);
-
-    repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado);
-    res.send();
-}
-
 function alterarInformacoesSobreMim(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para alterar informações "Sobre Mim".'
@@ -226,7 +209,6 @@ function alterarDieta(req, res) {
 module.exports = {
     buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
-    alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarPacientes: buscarPacientes,
     buscarPacientePorId: buscarPacientePorId,

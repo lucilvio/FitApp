@@ -32,7 +32,7 @@ servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 //Geral
 servidor.app.post('/esqueciMinhaSenha', esqueciMinhaSenhaController.gerarNovaSenha);
 servidor.app.post('/login', loginController.login);
-servidor.app.patch('/usuarios', usuariosController.redefinirSenha);
+servidor.app.patch('/usuarios/senha', usuariosController.alterarSenha);
 servidor.app.post('/usuarios/foto', usuariosController.alterarFoto)
 servidor.app.get('/planos', geralController.buscarPlanos);
 servidor.app.get('/planos/:idPlano', geralController.buscarPlanoPorId);
@@ -79,7 +79,6 @@ servidor.app.patch('/admin/assinantes/:idAssinante', autorizacao.autorizar(model
 //Nutricionista
 servidor.app.get('/nutricionista/perfil', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarDadosDoPerfil);
 servidor.app.patch('/nutricionista/perfil', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDadosDoPerfil);
-servidor.app.patch('/nutricionista/senha', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarSenha);
 servidor.app.patch('/nutricionista/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim);
 servidor.app.get('/nutricionista/pacientes', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes);
 servidor.app.get('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId);
@@ -91,7 +90,6 @@ servidor.app.patch('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', auto
 //Personal Trainer
 servidor.app.get('/personalTrainer/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarDadosDoPerfil);
 servidor.app.patch('/personalTrainer/perfil', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil);
-servidor.app.patch('/personalTrainer/senha', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarSenha);
 servidor.app.patch('/personalTrainer/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim);
 servidor.app.get('/personalTrainer/alunos', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos);
 servidor.app.get('/personalTrainer/alunos/:idAssinante', autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunoPorId);
@@ -107,7 +105,6 @@ servidor.app.get('/assinante/perfil', autorizacao.autorizar(model.perfil.assinan
 servidor.app.patch('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarDadosDoPerfil);
 servidor.app.get('/assinante/perfil/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoNutri); 
 servidor.app.get('/assinante/perfil/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoPersonal); 
-servidor.app.patch('/assinante/senha', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarSenha);
 servidor.app.get('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDaAssinatura);
 servidor.app.delete('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.cancelarAssinatura);
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura);

@@ -42,23 +42,6 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-function alterarSenha(req, res) {
-    // #swagger.tags = ['Personal Trainer']
-    // #swagger.description = 'endpoint para alterar senha de login.'
-
-    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
-
-    if (!personalEncontrado) {
-        res.status(404).send({ erro: 'Personal Trainer não encontrado' });
-        return;
-    }
-
-    personalEncontrado.alterarSenha(req.body.senha);
-
-    repositorioDePersonalTrainers.salvarAlteracaoDeDados(personalEncontrado);
-    res.send();
-}
-
 function alterarInformacoesSobreMim(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para alterar informações "Sobre Mim".'
@@ -225,7 +208,6 @@ function alterarTreino(req, res) {
 module.exports = {
     buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
-    alterarSenha: alterarSenha,
     alterarInformacoesSobreMim: alterarInformacoesSobreMim,
     buscarAlunos: buscarAlunos,
     buscarAlunoPorId: buscarAlunoPorId,

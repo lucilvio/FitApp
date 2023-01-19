@@ -20,6 +20,11 @@ function salvarFotoUsuario(idUsuario, foto) {
     usuarioEncontrado.imagem = foto;
 }
 
+function salvarNovaSenha(idUsuario, novaSenha) {
+    const usuarioEncontrado = buscarUsuarioPorId(idUsuario);
+    usuarioEncontrado.senha = novaSenha;
+}
+
 function salvarMensagens(usuario) {
     let usuarioEncontrado = buscarUsuarioPorId(usuario.idUsuario);
     usuarioEncontrado = usuario;
@@ -34,6 +39,7 @@ module.exports = {
     buscarUsuarioPorLogin: buscarUsuarioPorLogin,
     criarUsuario: criarUsuario,
     buscarUsuarioPorId: buscarUsuarioPorId,
+    salvarNovaSenha: salvarNovaSenha,
     salvarFotoUsuario: salvarFotoUsuario,
     salvarMensagens: salvarMensagens,
     buscarAdmin: buscarAdmin

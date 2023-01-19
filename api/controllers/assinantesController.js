@@ -127,17 +127,6 @@ function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-function alterarSenha(req, res) {
-    // #swagger.tags = ['Assinante']
-    // #swagger.description = 'endpoint para alterar a senha do login.'
-
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    assinanteEncontrado.alterarSenha(req.body.senhaAtual, req.body.novaSenha);
-    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
-    res.send();
-}
-
 function buscarDadosDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados da Assinatura.'
@@ -359,7 +348,6 @@ module.exports = {
     cadastrarAssinante: cadastrarAssinante,
     buscarDadosDoPerfil: buscarDadosDoPerfil,
     alterarDadosDoPerfil: alterarDadosDoPerfil,
-    alterarSenha: alterarSenha,
     buscarDadosDaAssinatura: buscarDadosDaAssinatura,
     cancelarAssinatura: cancelarAssinatura,
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,

@@ -3,24 +3,24 @@ const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
 
-it('CU-G 04 - deve redefinir senha de acesso', async () => {
+it('CU-G 02 - deve redefinir Senha de acesso', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     const email = `ana_${crypto.randomUUID()}@fitapp.com`;
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .patch('http://localhost:3000/usuarios')
+        .post('http://localhost:3000/esqueciMinhaSenha')
         .withJson({
             "email": email,
         })
         .expectStatus(200);
 });
 
-it('CU-G 04 - Admin não deve redefinir senha', async () => {
+it('CU-G 02 - Admin não deve redefinir senha de acesso', async () => {
 
     await spec()
-        .patch('http://localhost:3000/usuarios')
+        .post('http://localhost:3000/esqueciMinhaSenha')
         .withJson({
             "email": "admin@fitapp.com",
         })
