@@ -1,15 +1,19 @@
 import * as servicos from "./servicosDaHome.js";
+import * as paginaMestraSite from "../app/paginaMestraSite/paginaMestraSite.js";
+
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    const carousel = new bootstrap.Carousel('#myCarousel');
+    await paginaMestraSite.carregar("index-conteudo.html", "Home");
+    const carousel = new Carousel('#myCarousel');
     const planosAtivos = await servicos.buscarPlanosAtivos();
 
     planosAtivos.forEach(plano => {
         preencherCaixaPlanoHtml(plano);
+
+
     });
 }
-
 function preencherCaixaPlanoHtml(plano) {
     const planosAtivos = document.querySelector("#planos-ativos");
     const planoModelo = document.querySelector("#plano-modelo");

@@ -1,0 +1,50 @@
+#container-bannerPrincipal, #container-planos, footer {
+    background-color: #EDEDED;
+}
+
+h3 > span {color: #FED233; text-shadow: #454545 0.1em 0.1em 0.2em;}
+
+#card-formularioCriarConta, #card-formularioEntrar {
+    background-color: #FED233;
+}
+
+.criar-conta, .entrar {
+    width: 90%;
+    
+} 
+
+.btn-social {
+    width: 45%;
+}
+
+.formulario-dados {
+    width: 90%;
+    
+}
+
+@media screen and (min-width: 576px) { 
+    .criar-conta, .entrar {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 768px) { 
+    .criar-conta, .entrar {
+        width: 50%;
+    }
+    
+}
+
+@media screen and (min-width: 992px) { 
+    .criar-conta, .entrar {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1200px) { 
+    .criar-conta, .entrar {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      width: 30%;
+    }
+}

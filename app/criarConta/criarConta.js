@@ -1,9 +1,11 @@
 import * as servicos from "./servicosDeCriacaoDeConta.js";
 import * as erros from "../util/tratamentoDeErros.js";
+import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";
 
 window.onload = aoCarregarPagina;
 
-function aoCarregarPagina() {
+async function aoCarregarPagina() {
+    await paginaMestraSite.carregar("criarConta/criarConta-conteudo.html", "Criar Conta");
     document.querySelector("#btn-cadastrarAssinante").onclick = cadastrarAssinante;
 }
 
