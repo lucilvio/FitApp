@@ -86,7 +86,6 @@ async function alterarSenhaDeAcesso(evento) {
 
         evento.preventDefault();
         await servicos.alterarSenha(token, senhaAtual, novaSenha);
-        window.location.reload();
     } catch (error) {
         erros.tratarErro(error);
     }

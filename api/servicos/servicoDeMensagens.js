@@ -10,7 +10,7 @@ function gerarMensagemDeBoasVindas(nome, senha) {
 function gerarMensagemComNovaSenha(nome, senha) {
     return `Olá ${nome},<br>
     Esta é a sua nova senha de acesso ao FitApp: ${senha}<br><br>
-    <button type="button">Entrar</button> <br><br>
+    <a href="http://127.0.0.1:5500/app/login/entrar.html"><button type="button">Entrar</button> <br><br></a>
     Atenciosamente, <br> 
     Equipe FitApp`
 }

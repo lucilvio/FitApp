@@ -22,6 +22,11 @@ function alterarSenha(req, res) {
         return;
     }
 
+    if(usuarioEncontrado.senha !== req.body.senhaAtual) {
+        res.status(404).send({ erro: "Senha atual incorreta"});
+        return;
+    }
+
     repositorioDeUsuarios.salvarNovaSenha(req.usuario.idUsuario, req.body.novaSenha);
 
     res.send();

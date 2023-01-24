@@ -55,7 +55,7 @@ export async function salvarFoto(token, foto) {
 }
 
 export async function alterarSenha(token, senhaAtual, novaSenha) {
-    const url = `http://localhost:3000/assinante/senha`;
+    const url = `http://localhost:3000/usuarios/senha`;
 
     const request = new Request(url, {
         method: 'PATCH',
