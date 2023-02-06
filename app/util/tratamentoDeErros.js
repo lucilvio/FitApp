@@ -1,14 +1,11 @@
+import * as mensagens from "./mensagens.js";
+
 export function tratarErro(error) {
     if (!error.erro) {
         console.error(error);
     }
     else {
-        const elementoToast = document.querySelector("#toast");
-        const toast = new bootstrap.Toast(elementoToast);
-
-        document.querySelector("#toast-body").innerHTML = error.erro;
-        toast.show();
-
+        mensagens.mostrarMensagemDeErro(error.erro);
         console.error(error.erro);
     }
 } 

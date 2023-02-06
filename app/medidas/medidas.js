@@ -4,9 +4,7 @@ import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 
-if (!seguranca.tokenValido()) {
-    window.location.href = "/app/login/entrar.html";
-}
+seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 

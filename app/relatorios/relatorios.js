@@ -5,9 +5,7 @@ import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 let chart;
 
-if (!seguranca.tokenValido()) {
-    window.location.href = "/app/login/entrar.html";
-}
+seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 

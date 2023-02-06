@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="pt-3">
                                     <label class="form-label fw-semibold" for="sexo">Sexo</label>
-                                    <div class="input-group input-group-sm" >
+                                    <div class="input-group input-group-sm">
                                         <select class="form-select" id="sexo">
                                             <option selected>---</option>
                                             <option value="Feminino">Feminino</option>
@@ -92,9 +92,24 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="modal" id="modal-alterarSenha" tabindex="-1" aria-labelledby="modal-alterarSenhaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-alterarSenhaLabel">Alterar Senha</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja alterar a senha?
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-confirmarAlteracaoDeSenha" type="button" class="btn btn-light" style="background-color: #FED233;">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- <div>
+    <!-- <div>
     <div>
         <div>
             <img id="foto-perfil" src="#" height="32" width="32">

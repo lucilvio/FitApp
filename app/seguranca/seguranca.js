@@ -2,6 +2,13 @@ const chaveToken = "fitapp_token";
 const chaveNomeUsuario = "fitapp_nome_usuario";
 const chaveFotoUsuario = "fitapp_foto_usuario";
 
+export function deslogarSeTokenEstiverExpirado(paginaParaRedirecionar) {
+    if (!seguranca.tokenValido()) {
+        seguranca.removerDadosDoUsuario();
+        window.location.href = paginaParaRedirecionar;
+    }
+}
+
 export function tokenValido() {
     const token = pegarToken();
 
@@ -58,6 +65,12 @@ export function pegarNomeDoUsuario() {
 
 export function pegarFotoDoUsuario() {
     return localStorage.getItem(chaveFotoUsuario);
+}
+
+export function removerDadosDoUsuario() {
+    localStorage.removeItem(chaveNomeUsuario);
+    localStorage.removeItem(chaveFotoUsuario);
+    localStorage.removeItem(chaveToken);
 }
 
 function decodificarToken(token) {
