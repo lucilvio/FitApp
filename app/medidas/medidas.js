@@ -2,6 +2,7 @@ import * as servicos from "./servicosDeMedidas.js";
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
+import * as mensagens from "../util/mensagens.js";
 
 
 seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
@@ -12,6 +13,7 @@ async function aoCarregarPagina() {
     await paginaMestra.carregar("medidas/medidas-conteudo.html", "Medidas");
     await buscarMedidas();
     document.querySelector("#btn-salvarMedidas").onclick = inserirMedidas;
+    mensagens.exibirMensagemAoCarregarAPagina();
 
 }
 
@@ -78,6 +80,7 @@ async function inserirMedidas(evento) {
 
     try {
         await servicos.salvarMedidas(token, peso, pescoco, cintura, quadril);
+        mensagens.mostrarMensagemDeSucesso("Medidas inseridas com sucesso!", true);
         window.location.reload();
     } catch (error) {
         erros.tratarErro(error);
@@ -89,6 +92,7 @@ async function excluirMedidas(evento) {
     const token = seguranca.pegarToken();
     try {
         await servicos.excluirMedidas(token, idMedida);
+        mensagens.mostrarMensagemDeSucesso("Medidas excluídas com sucesso!", true);
         window.location.reload();
     } catch (error) {
         erros.tratarErro(error);

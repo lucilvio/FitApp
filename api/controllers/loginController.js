@@ -26,17 +26,18 @@ function login(req, res) {
         res.status(400).send({ erro: "login ou senha incorreto" });
         return;
     }
-
-    var token = jwt.sign(
+    const segredo = "shhhhh";
+    const tempoDeExpiracaoEmMinutos = 60 * 60;
+    const token = jwt.sign(
         {
             idUsuario: usuarioEncontrado.idUsuario,
             nome: usuarioEncontrado.nome,
             email: usuarioEncontrado.login,
             perfil: usuarioEncontrado.perfil,
             imagem: usuarioEncontrado.imagem
-        }, 'shhhhh', { expiresIn: 30 });
+        }, segredo, { expiresIn: tempoDeExpiracaoEmMinutos });
 
-    res.send({token});
+    res.send({ token });
 
 }
 

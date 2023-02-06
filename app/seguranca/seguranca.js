@@ -3,8 +3,8 @@ const chaveNomeUsuario = "fitapp_nome_usuario";
 const chaveFotoUsuario = "fitapp_foto_usuario";
 
 export function deslogarSeTokenEstiverExpirado(paginaParaRedirecionar) {
-    if (!seguranca.tokenValido()) {
-        seguranca.removerDadosDoUsuario();
+    if (!tokenValido()) {
+        removerDadosDoUsuario();
         window.location.href = paginaParaRedirecionar;
     }
 }

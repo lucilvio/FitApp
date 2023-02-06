@@ -5,16 +5,19 @@ window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
     await paginaMestraSite.carregar("index-conteudo.html", "Home");
-    const carousel = new Carousel('#myCarousel');
+    
     const planosAtivos = await servicos.buscarPlanosAtivos();
 
-    planosAtivos.forEach(plano => {
-        preencherCaixaPlanoHtml(plano);
+    // planosAtivos.forEach(plano => {
+    //     preencherCaixaPlanoHtml(plano);
 
 
-    });
+    // });
+
+    const carousel = new bootstrap.Carousel('#myCarousel')
 }
 function preencherCaixaPlanoHtml(plano) {
+    
     const planosAtivos = document.querySelector("#planos-ativos");
     const planoModelo = document.querySelector("#plano-modelo");
 
