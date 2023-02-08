@@ -1,14 +1,14 @@
-const mySql = require('mySql2');
+const mySql = require('mysql2/promise');
+const bluebird = require('bluebird');
 
-function abrirConexao () {
-    const conexao = mySql.createConnection({
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'admin',
-        database: 'FitApp'
+async function abrirConexao () {
+    const conexao = await mySql.createConnection({
+        host: 'localhost',
+        user: 'fitapp_user',
+        password: '4542',
+        database: 'db_fitapp',
+        Promise: bluebird
     });
-
-    conexao.connect();
 
     return conexao;
 }

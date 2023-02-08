@@ -1,9 +1,17 @@
 const base = require('../dados');
 const { perfil } = require('../model/perfis');
+const baseDeDados = require('../conexao');
 
-function buscarUsuarioPorLogin(login) {
-    return base.dados.usuarios.find(usuario => usuario.login.toLowerCase() == login.toLowerCase());
+async function buscarUsuarioPorLogin(login) {
+    const conexao = await baseDeDados.abrirConexao();
 
+    const [rows, fields] = await conexao.execute(
+        `select id_usuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where login = ?`, [login]);
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
 }
 
 function criarUsuario(novoUsuario) {
@@ -11,7 +19,7 @@ function criarUsuario(novoUsuario) {
 }
 
 
-function buscarUsuarioPorId(idUsuario) {
+async function buscarUsuarioPorId(idUsuario) {
     return base.dados.usuarios.find(usuario => usuario.idUsuario == idUsuario);
 }
 

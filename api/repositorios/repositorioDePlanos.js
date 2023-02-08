@@ -1,4 +1,6 @@
 const base = require('../dados');
+const baseDeDados = require('../conexao');
+
 
 function buscarPlanosAtivos() {
     return base.dados.planos.filter(plano => plano.bloqueado == false);
@@ -20,8 +22,16 @@ function buscarPlanosPorFiltro(nome) {
     }
 }
 
-function buscarPlanoPorId(id) {
-    return base.dados.planos.find(plano => plano.idPlano == id);
+async function buscarPlanoPorId(id) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select id_plano, nome, valor, duracao, descricao, bloqueado from planos where id_plano = ?`, [id]);
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
 }
 
 function salvarAlteracaoDeDados(plano) {

@@ -2,7 +2,7 @@ const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const jwt = require('jsonwebtoken');
 
 
-function login(req, res) {
+async function login(req, res) {
     // #swagger.tags = ['Usuário']
     // #swagger.description = 'endpoint para fazer login.'
     // #swagger.security = [] 
@@ -10,7 +10,7 @@ function login(req, res) {
     const login = req.body.email;
     const senha = req.body.senha;
 
-    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(login);
+    const usuarioEncontrado = await repositorioDeUsuarios.buscarUsuarioPorLogin(login);
 
     if (!usuarioEncontrado) {
         res.status(400).send({ erro: "login ou senha incorreto" });
