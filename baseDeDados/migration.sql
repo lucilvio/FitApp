@@ -147,3 +147,21 @@ values (
 false
 );
 
+replace into nutricionistas (id_nutricionista, nome, email, telefone, registro_profissional)
+values (
+'cdb6531c-0bc4-48b2-b317-dece78f5349e',
+'nutricionista',
+'nutri@fitapp.com',
+999999999,
+'crn123'
+);
+
+replace into personal_trainers (id_personal, nome, email, telefone, registro_profissional)
+values (
+'355049aa-1742-45d2-934d-278db5a6c224',
+'personal',
+'personal@fitapp.com',
+999999999,
+'cre123'
+);
+

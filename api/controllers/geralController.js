@@ -69,7 +69,8 @@ function buscarNutriPorId(req, res) {
     res.send({
         idNutri: nutriEncontrado.idNutri,
         nome: nutriEncontrado.nome,
-        imagem: nutriEncontrado.usuario.imagem,
+        //comentado devido a migracao para bd - verificar
+        //imagem: nutriEncontrado.usuario.imagem,
         sobreMim: nutriEncontrado.sobreMim
     });
 }
@@ -89,7 +90,7 @@ function buscarPersonalPorId(req, res) {
     res.send({
         idPersonal: PersonalEncontrado.idPersonal,
         nome: PersonalEncontrado.nome,
-        imagem: PersonalEncontrado.usuario.imagem,
+       // imagem: PersonalEncontrado.usuario.imagem,
         sobreMim: PersonalEncontrado.sobreMim
     });
 }

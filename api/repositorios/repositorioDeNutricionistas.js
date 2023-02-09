@@ -1,4 +1,5 @@
 const base = require('../dados');
+const baseDeDados = require('../conexao');
 
 function buscarNutricionistasAtivos() {
     return base.dados.nutricionistas.filter(nutri => nutri.usuario.bloqueado == false);
@@ -23,8 +24,16 @@ function buscarNutricionistasPorFiltro(nome) {
     }
 }
 
-function buscarNutriPorId(idNutri) {
-    return base.dados.nutricionistas.find(nutri => nutri.idNutri == idNutri);
+async function buscarNutriPorId(idNutri) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select id_nutricionista, nome, email, telefone, registro_profissional from nutricionistas where id_nutricionista = ?`, [idNutri]);
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
 }
 
 function salvarAlteracaoDeDados(nutricionista) {

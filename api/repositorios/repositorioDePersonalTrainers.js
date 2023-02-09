@@ -1,4 +1,5 @@
 const base = require('../dados');
+const baseDeDados = require('../conexao');
 
 function buscarPersonalTrainersAtivos() {
     return base.dados.personalTrainers.filter(personal => personal.usuario.bloqueado == false);
@@ -23,8 +24,16 @@ function buscarPersonalTrainersPorFiltro(nome) {
     }
 }
 
-function buscarPersonalPorId(idPersonal) {
-    return base.dados.personalTrainers.find(personal => personal.idPersonal == idPersonal);
+async function buscarPersonalPorId(idPersonal) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select id_personal, nome, email, telefone, registro_profissional from personal_trainers where id_personal = ?`, [idPersonal]);
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
 }
 
 function salvarAlteracaoDeDados(personal) {
