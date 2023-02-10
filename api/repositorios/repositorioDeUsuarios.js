@@ -8,6 +8,8 @@ async function buscarUsuarioPorLogin(login) {
     const [rows, fields] = await conexao.execute(
         `select id_usuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where login = ?`, [login]);
 
+    await conexao.end();
+
     if (rows.length <= 0)
         return;
 
@@ -39,8 +41,16 @@ function salvarMensagens(usuario) {
 
 }
 
-function buscarAdmin() {
-    return base.dados.usuarios.find(usuario => usuario.perfil == perfil.administrador)
+async function buscarAdmin() {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select id_usuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where perfil = ?`, ['administrador']);
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
 }
 
 module.exports = {

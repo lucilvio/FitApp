@@ -13,39 +13,39 @@ const Medidas = require('../model/medidas');
 const Mensagem = require('../model/mensagem');
 
 
-function cadastrarAssinante(req, res) {
+async function cadastrarAssinante(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para cadastrar Assinante.'
-
-    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
+new Assinante();
+    const planoEncontrado = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
     if (!planoEncontrado) {
         res.status(400).send({ erro: "Plano não encontrado" });
         return;
     }
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.body.idNutri);
+    const nutriEncontrado = await repositorioDeNutricionistas.buscarNutriPorId(req.body.idNutri);
     if (!nutriEncontrado) {
         res.status(400).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
-    const personalEncontrado = repositorioDePersonal.buscarPersonalPorId(req.body.idPersonal);
+    const personalEncontrado = await repositorioDePersonal.buscarPersonalPorId(req.body.idPersonal);
     if (!personalEncontrado) {
         res.status(400).send({ erro: "Personal não encontrado" });
         return;
     }
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssianantePorEmail(req.body.email);
+    const assinanteEncontrado = await repositorioDeAssinantes.verificarSeAssinanteJaTemCadastro(req.body.email);
     if (!assinanteEncontrado) {
         const novoAssinante = new Assinante(req.body.nome, req.body.email, planoEncontrado, req.body.idNutri, req.body.idPersonal);
 
-        repositorioDeAssinantes.criarAssinante(novoAssinante);
+        await repositorioDeAssinantes.criarAssinante(novoAssinante);
+        
+        // servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
 
-        servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
-
-        const admin = repositorioDeUsuarios.buscarAdmin();
-        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.usuario.login, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
-        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.usuario.login, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
+        // const admin = await repositorioDeUsuarios.buscarAdmin();
+        // repositorioDeMensagens.salvarMensagem(new Mensagem(admin.id_usuario, admin.login, nutriEncontrado.id_nutricionista, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
+        // repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, personalEncontrado.id_personal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
         res.send({
             idAssinante: novoAssinante.idAssinante
         });
