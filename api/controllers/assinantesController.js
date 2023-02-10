@@ -16,7 +16,7 @@ const Mensagem = require('../model/mensagem');
 async function cadastrarAssinante(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para cadastrar Assinante.'
-new Assinante();
+
     const planoEncontrado = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
     if (!planoEncontrado) {
         res.status(400).send({ erro: "Plano não encontrado" });
@@ -41,11 +41,11 @@ new Assinante();
 
         await repositorioDeAssinantes.criarAssinante(novoAssinante);
         
-        // servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
+        servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
 
-        // const admin = await repositorioDeUsuarios.buscarAdmin();
-        // repositorioDeMensagens.salvarMensagem(new Mensagem(admin.id_usuario, admin.login, nutriEncontrado.id_nutricionista, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
-        // repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, personalEncontrado.id_personal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
+        const admin = await repositorioDeUsuarios.buscarAdmin();
+        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.id_usuario, admin.login, nutriEncontrado.id_nutricionista, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
+        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.id_usuario, admin.login, personalEncontrado.id_personal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
         res.send({
             idAssinante: novoAssinante.idAssinante
         });
