@@ -6,7 +6,7 @@ async function buscarUsuarioPorLogin(login) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
-        `select id_usuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where login = ?`, [login]);
+        `select idUsuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where login = ?`, [login]);
 
     await conexao.end();
 
@@ -45,7 +45,7 @@ async function buscarAdmin() {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
-        `select id_usuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where perfil = ?`, ['administrador']);
+        `select idUsuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where perfil = ?`, ['administrador']);
 
     if (rows.length <= 0)
         return;

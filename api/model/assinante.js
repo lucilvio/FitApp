@@ -30,10 +30,10 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.dataNascimento = '';
     this.sexo = '';
     this.altura = 0;
-    this.assinaturas = [];
     this.nutricionista = idNutri;
     this.personalTrainer = idPersonal;
     this.objetivo = '';
+    this.assinaturas = [];
     this.dietas = [];
     this.treinos = [];
     this.medidas = [];
@@ -71,16 +71,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         const alturaConvertida = (this.altura * this.altura) / 100;
 
         return medidas.peso / alturaConvertida;
-    }
-
-    this.idade = function () {
-        if (!this.dataNascimento) {
-            return 0;
-        }
-
-        const dataAtual = new Date().getTime();
-        const dataSubtraidaEmMilessegundos = dataAtual - this.dataNascimento
-        return Math.floor(dataSubtraidaEmMilessegundos / 31536000000);
     }
 
     this.alterarStatus = function (novoStatus) {
@@ -123,6 +113,9 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         }
     }
 
+    this.buscarAssinaturaAtiva = function () {
+        return this.assinaturas.find(assinatura => !assinatura.bloqueado);
+    }
 
     this.cancelarAssinatura = function (idAssinatura) {
         const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);

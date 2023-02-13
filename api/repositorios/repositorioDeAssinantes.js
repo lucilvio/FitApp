@@ -35,18 +35,68 @@ async function criarAssinante(novoAssinante) {
         novoAssinante.email
     ]
 
+    const assinatura = novoAssinante.buscarAssinaturaAtiva();
+
+    const parametrosDaAssinatura = [
+        assinatura.idAssinatura,
+        assinatura.idAssinante,
+        assinatura.idPlano,
+        assinatura.dataInicio,
+        assinatura.dataFim,
+        assinatura.bloqueado
+    ]
+
     await conexao.beginTransaction();
-    
+
     await conexao.execute(
-        `insert into usuarios (id_usuario, perfil, nome, login, senha, bloqueado) 
-        values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
+        `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
+         values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
     await conexao.execute(
-        `insert into assinantes (id_assinante, id_nutricionista, id_personal, nome, email) 
-        values (?, ?, ?, ?, ?);`, parametrosDoAssinante);
+        `insert into assinantes (idAssinante, idNutri, idPersonal, nome, email) 
+         values (?, ?, ?, ?, ?);`, parametrosDoAssinante);
+    await conexao.execute(
+        `insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado) 
+         values (?, ?, ?, ?, ?, ?);`, parametrosDaAssinatura);
 
     await conexao.commit();
 
     await conexao.end();
+}
+
+async function buscarDadosDoDashboardNaBaseDeDados(idUsuario) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select a.imagem,
+                b.idAssinante, b.nome, b.altura, b.dataNascimento
+        from usuarios as a
+        inner join assinantes as b on a.idUsuario = b.idAssinante
+        where a.idUsuario = ?`, [idUsuario]);
+
+    const [pesos, fieldsPesos] = await conexao.execute(
+        `select peso, data
+            from medidas
+            where idAssinante = ?`, [idUsuario]);
+
+
+    await conexao.end();
+
+    let pesoAtual = 0;
+
+    if (rows.length <= 0)
+        return;
+
+    if (pesos.length > 0) {
+        const dataDoUltimoPeso = Math.max(...pesos.map(peso => new Date(peso.data)));
+        pesoAtual = pesos.find(peso => peso.data.getTime() == dataDoUltimoPeso).peso;
+    }
+
+
+    return {
+        dados: rows[0],
+        historicoDePeso: pesos[0],
+        pesoAtual: pesoAtual
+    }
 }
 
 function buscarAssinantePorFiltro(nome) {
@@ -57,8 +107,22 @@ function buscarAssinantePorFiltro(nome) {
     }
 }
 
-function buscarAssinantePorId(idAssinante) {
-    return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
+async function buscarAssinantePorId(idAssinante) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select a.idAssinante, a.idNutri, a.idPersonal, a.nome, a.email, a.dataNascimento, a.idSexo, a.altura, a.objetivos, 
+        b.idAssinatura, b.idPlano, b.dataInicio, b.dataFim, b.bloqueado 
+        from assinantes as a
+        inner join assinaturas as b on a.idAssinante = b.idAssinante
+        where a.idAssinante = ?`, [idAssinante]);
+
+    await conexao.end();
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
 }
 
 function salvarAlteracaoDeDados(assinante) {
@@ -138,6 +202,7 @@ function salvarMedidas(assinante) {
 module.exports = {
     verificarSeAssinanteJaTemCadastro: verificarSeAssinanteJaTemCadastro,
     criarAssinante: criarAssinante,
+    buscarDadosDoDashboardNaBaseDeDados: buscarDadosDoDashboardNaBaseDeDados,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,

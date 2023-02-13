@@ -26,7 +26,7 @@ async function buscarPlanoPorId(id) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
-        `select id_plano, nome, valor, duracao, descricao, bloqueado from planos where id_plano = ?`, [id]);
+        `select idPlano, nome, valor, duracao, descricao, bloqueado from planos where idPlano = ?`, [id]);
 
     if (rows.length <= 0)
         return;

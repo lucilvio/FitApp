@@ -55,67 +55,67 @@ servidor.app.post('/mensagens/:idMensagem', async (req, res) => await tratarErro
 
 
 //Administrador
-servidor.app.post('/admin/planos', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.cadastrarPlano));
-servidor.app.get('/admin/planos', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarPlanos));
-servidor.app.get('/admin/planos/:idPlano', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarPlanoPorId));
-servidor.app.patch('/admin/planos/:idPlano', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarDadosDoPlano));
+servidor.app.post('/admin/planos', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.cadastrarPlano));
+servidor.app.get('/admin/planos', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPlanos));
+servidor.app.get('/admin/planos/:idPlano', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPlanoPorId));
+servidor.app.patch('/admin/planos/:idPlano', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarDadosDoPlano));
 
-servidor.app.post('/admin/nutricionistas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.cadastrarNutricionista));
-servidor.app.get('/admin/nutricionistas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarNutricionistas));
-servidor.app.get('/admin/nutricionistas/:idNutri', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarNutriPorId));
-servidor.app.patch('/admin/nutricionistas/:idNutri', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarDadosDoNutricionista));
+servidor.app.post('/admin/nutricionistas', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.cadastrarNutricionista));
+servidor.app.get('/admin/nutricionistas', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarNutricionistas));
+servidor.app.get('/admin/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarNutriPorId));
+servidor.app.patch('/admin/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarDadosDoNutricionista));
 
-servidor.app.post('/admin/personalTrainers', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.cadastrarPersonal));
-servidor.app.get('/admin/personalTrainers', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarPersonalTrainers));
-servidor.app.get('/admin/personalTrainers/:idPersonal', async (req, res) => await tratarErros(req, res, administradoresController.buscarPersonalPorId));
-servidor.app.patch('/admin/personalTrainers/:idPersonal', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarDadosDoPersonal));
+servidor.app.post('/admin/personalTrainers', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.cadastrarPersonal));
+servidor.app.get('/admin/personalTrainers', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPersonalTrainers));
+servidor.app.get('/admin/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPersonalPorId));
+servidor.app.patch('/admin/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarDadosDoPersonal));
 
 
-servidor.app.get('/admin/assinantes', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarAssinantes));
-servidor.app.get('/admin/assinantes/:idAssinante', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.buscarAssinantePorId));
-servidor.app.patch('/admin/assinantes/:idAssinante', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.administrador), administradoresController.alterarStatusDoAssinante));
+servidor.app.get('/admin/assinantes', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarAssinantes));
+servidor.app.get('/admin/assinantes/:idAssinante', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarAssinantePorId));
+servidor.app.patch('/admin/assinantes/:idAssinante', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarStatusDoAssinante));
 
 
 //Nutricionista
-servidor.app.get('/nutricionista/perfil', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarDadosDoPerfil));
-servidor.app.patch('/nutricionista/perfil', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDadosDoPerfil));
-servidor.app.patch('/nutricionista/sobreMim', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarInformacoesSobreMim));
-servidor.app.get('/nutricionista/pacientes', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientes));
-servidor.app.get('/nutricionista/pacientes/:idAssinante', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarPacientePorId));
-servidor.app.get('/nutricionista/pacientes/:idAssinante/medidas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarMedidasDoPaciente));
-servidor.app.post('/nutricionista/pacientes/:idAssinante/dietas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.criarDieta));
-servidor.app.get('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.buscarDietaPorId));
-servidor.app.patch('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.nutricionista), nutricionistasController.alterarDieta));
+servidor.app.get('/nutricionista/perfil', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.buscarDadosDoPerfil));
+servidor.app.patch('/nutricionista/perfil', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.alterarDadosDoPerfil));
+servidor.app.patch('/nutricionista/sobreMim', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.alterarInformacoesSobreMim));
+servidor.app.get('/nutricionista/pacientes', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.buscarPacientes));
+servidor.app.get('/nutricionista/pacientes/:idAssinante', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.buscarPacientePorId));
+servidor.app.get('/nutricionista/pacientes/:idAssinante/medidas', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.buscarMedidasDoPaciente));
+servidor.app.post('/nutricionista/pacientes/:idAssinante/dietas', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.criarDieta));
+servidor.app.get('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.buscarDietaPorId));
+servidor.app.patch('/nutricionista/pacientes/:idAssinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.nutricionista), async (req, res) => await tratarErros(req, res, nutricionistasController.alterarDieta));
 
 //Personal Trainer
-servidor.app.get('/personalTrainer/perfil', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarDadosDoPerfil));
-servidor.app.patch('/personalTrainer/perfil', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarDadosDoPerfil));
-servidor.app.patch('/personalTrainer/sobreMim', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarInformacoesSobreMim));
-servidor.app.get('/personalTrainer/alunos', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunos));
-servidor.app.get('/personalTrainer/alunos/:idAssinante', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarAlunoPorId));
-servidor.app.get('/personalTrainer/alunos/:idAssinante/medidas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarMedidasDoAluno));
-servidor.app.post('/personalTrainer/alunos/:idAssinante/treinos', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.criarTreino));
-servidor.app.get('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.buscarTreinoPorId));
-servidor.app.patch('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.personalTrainer), personalTrainersController.alterarTreino));
+servidor.app.get('/personalTrainer/perfil', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.buscarDadosDoPerfil));
+servidor.app.patch('/personalTrainer/perfil', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.alterarDadosDoPerfil));
+servidor.app.patch('/personalTrainer/sobreMim', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.alterarInformacoesSobreMim));
+servidor.app.get('/personalTrainer/alunos', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.buscarAlunos));
+servidor.app.get('/personalTrainer/alunos/:idAssinante', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.buscarAlunoPorId));
+servidor.app.get('/personalTrainer/alunos/:idAssinante/medidas', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.buscarMedidasDoAluno));
+servidor.app.post('/personalTrainer/alunos/:idAssinante/treinos', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.criarTreino));
+servidor.app.get('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.buscarTreinoPorId));
+servidor.app.patch('/personalTrainer/alunos/:idAssinante/treinos/:idTreino', autorizacao.autorizar(model.perfil.personalTrainer), async (req, res) => await tratarErros(req, res, personalTrainersController.alterarTreino));
 
 //Assinante
 servidor.app.post('/assinantes', async (req, res) => await tratarErros(req, res, assinantesController.cadastrarAssinante));
-servidor.app.get('/assinante/dashboard', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoDashboard)); 
-servidor.app.get('/assinante/perfil', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoPerfil)); 
-servidor.app.patch('/assinante/perfil', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarDadosDoPerfil));
-servidor.app.get('/assinante/perfil/nutricionistas/:idNutri', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoNutri)); 
-servidor.app.get('/assinante/perfil/personalTrainers/:idPersonal', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDoPersonal)); 
-servidor.app.get('/assinante/assinaturas/:idAssinatura', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDadosDaAssinatura));
-servidor.app.delete('/assinante/assinaturas/:idAssinatura', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.cancelarAssinatura));
-servidor.app.patch('/assinante/assinaturas/:idAssinatura', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura));
-servidor.app.patch('/assinante/assinaturas/:idAssinatura', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.alterarPlanoDaAssinatura));
-servidor.app.post('/assinante/medidas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.inserirMedidas));
-servidor.app.get('/assinante/medidas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarMedidas));
-servidor.app.delete('/assinante/medidas/:idMedida', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.excluirMedidas));
-servidor.app.get('/assinante/dietas', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDietas));
-servidor.app.get('/assinante/dietas/:idDieta', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarDietaPorId));
-servidor.app.get('/assinante/treinos', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarTreinos));
-servidor.app.get('/assinante/treino/:idTreino', async (req, res) => await tratarErros(req, res, autorizacao.autorizar(model.perfil.assinante), assinantesController.buscarTreinoPorId));
+servidor.app.get('/assinante/dashboard', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDadosDoDashboard)); 
+servidor.app.get('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDadosDoPerfil)); 
+servidor.app.patch('/assinante/perfil', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.alterarDadosDoPerfil));
+servidor.app.get('/assinante/perfil/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDadosDoNutri)); 
+servidor.app.get('/assinante/perfil/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDadosDoPersonal)); 
+servidor.app.get('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDadosDaAssinatura));
+servidor.app.delete('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.cancelarAssinatura));
+servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.alterarPlanoDaAssinatura));
+servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.alterarPlanoDaAssinatura));
+servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.inserirMedidas));
+servidor.app.get('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarMedidas));
+servidor.app.delete('/assinante/medidas/:idMedida', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.excluirMedidas));
+servidor.app.get('/assinante/dietas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDietas));
+servidor.app.get('/assinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDietaPorId));
+servidor.app.get('/assinante/treinos', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarTreinos));
+servidor.app.get('/assinante/treino/:idTreino', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarTreinoPorId));
 
 
 

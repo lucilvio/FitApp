@@ -28,7 +28,7 @@ async function buscarNutriPorId(idNutri) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
-        `select id_nutricionista, nome, email, telefone, registro_profissional from nutricionistas where id_nutricionista = ?`, [idNutri]);
+        `select idNutri, nome, email, telefone, registroProfissional from nutricionistas where idNutri = ?`, [idNutri]);
 
     if (rows.length <= 0)
         return;

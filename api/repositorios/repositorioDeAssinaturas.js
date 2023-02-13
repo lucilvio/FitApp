@@ -1,8 +1,23 @@
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
+const baseDeDados = require('../conexao');
 
-function buscarAssinaturaAtiva(idAssinante) {
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(idAssinante);
-    return assinanteEncontrado.assinaturas.find(assinatura => assinatura.bloqueado == false)
+
+async function buscarAssinaturaAtiva(idAssinante) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select idAssinatura 
+        from assinaturas 
+        where idAssinante = ? and bloqueado = 0`, [idAssinante]);
+
+    await conexao.end();
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
+    // const assinanteEncontrado = await repositorioDeAssinantes.buscarAssinantePorId(idAssinante);
+    // return assinanteEncontrado.assinaturas.find(assinatura => assinatura.bloqueado == false)
 }
 
 function buscarAssinaturaPorId(idAssinante, idAssinatura) {

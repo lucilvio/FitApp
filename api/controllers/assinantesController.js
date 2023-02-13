@@ -11,6 +11,8 @@ const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const Assinante = require('../model/assinante');
 const Medidas = require('../model/medidas');
 const Mensagem = require('../model/mensagem');
+const Idade = require('../model/idade');
+const Imc = require('../model/imc');
 
 
 async function cadastrarAssinante(req, res) {
@@ -44,8 +46,8 @@ async function cadastrarAssinante(req, res) {
         servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
 
         const admin = await repositorioDeUsuarios.buscarAdmin();
-        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.id_usuario, admin.login, nutriEncontrado.id_nutricionista, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
-        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.id_usuario, admin.login, personalEncontrado.id_personal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
+        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
+        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
         res.send({
             idAssinante: novoAssinante.idAssinante
         });
@@ -55,35 +57,24 @@ async function cadastrarAssinante(req, res) {
 
 }
 
-function buscarDadosDoDashboard(req, res) {
+async function buscarDadosDoDashboard(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do daskboard do assinante.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
-
-    if (!assinaturaEncontrada) {
-        res.status(404).send({ erro: "Assinante não tem assinatura ativa" });
-        return;
-    }
-    const dietaAtual = assinanteEncontrado.dietaAtual();
-    const treinoAtual = assinanteEncontrado.treinoAtual();
-    const medidasAtuais = assinanteEncontrado.medidasAtuais();
-
+    const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoDashboardNaBaseDeDados(req.usuario.idUsuario);
+      
     res.send({
-        idAssinante: assinanteEncontrado.idAssinante,
-        imagem: assinanteEncontrado.usuario.imagem,
-        nome: assinanteEncontrado.nome,
-        altura: assinanteEncontrado.altura,
-        peso: !medidasAtuais ? 0 : medidasAtuais.peso,
-        idade: assinanteEncontrado.idade(),
-        imc: assinanteEncontrado.imc(),
-        idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
-        idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
-        medidas: assinanteEncontrado.medidas
+        idAssinante: dadosDoAssinante.dados.idAssinante,
+        imagem: dadosDoAssinante.dados.imagem,
+        nome: dadosDoAssinante.dados.nome,
+        altura: dadosDoAssinante.dados.altura,
+        idade: new Idade(dadosDoAssinante.dataNascimento).valor,
+        peso: dadosDoAssinante.pesoAtual,
+        imc: new Imc(dadosDoAssinante.pesoAtual, dadosDoAssinante.dados.altura).valor,
+        medidas: dadosDoAssinante.historicoDePeso
+        // idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
+        // idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
     })
-
 }
 
 function buscarDadosDoPerfil(req, res) {

@@ -28,7 +28,7 @@ async function buscarPersonalPorId(idPersonal) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
-        `select id_personal, nome, email, telefone, registro_profissional from personal_trainers where id_personal = ?`, [idPersonal]);
+        `select idPersonal, nome, email, telefone, registroProfissional from personal_trainers where idPersonal = ?`, [idPersonal]);
 
     if (rows.length <= 0)
         return;
