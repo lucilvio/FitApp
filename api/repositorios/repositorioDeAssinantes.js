@@ -99,6 +99,28 @@ async function buscarDadosDoDashboardNaBaseDeDados(idUsuario) {
     }
 }
 
+async function buscarDadosDoPerfilNaBaseDeDados(idUsuario) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select a.imagem, a.login,a.nome, 
+		        b.idAssinante, b.altura, b.dataNascimento, b.idSexo, b.idNutri, b.idPersonal, 
+                c.idAssinatura, c.idPlano
+        from usuarios as a
+        inner join assinantes as b on a.idUsuario = b.idAssinante
+        inner join assinaturas as c on a.idUsuario = c.idAssinante
+        where a.idUsuario = ?`, [idUsuario]);
+
+    await conexao.end();
+
+    if (rows.length <= 0)
+        return;
+
+    return rows[0];
+    
+}
+
+
 function buscarAssinantePorFiltro(nome) {
     if (!nome) {
         return base.dados.assinantes;
@@ -203,6 +225,7 @@ module.exports = {
     verificarSeAssinanteJaTemCadastro: verificarSeAssinanteJaTemCadastro,
     criarAssinante: criarAssinante,
     buscarDadosDoDashboardNaBaseDeDados: buscarDadosDoDashboardNaBaseDeDados,
+    buscarDadosDoPerfilNaBaseDeDados: buscarDadosDoPerfilNaBaseDeDados,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,

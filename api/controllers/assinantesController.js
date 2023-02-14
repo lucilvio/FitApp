@@ -42,7 +42,7 @@ async function cadastrarAssinante(req, res) {
         const novoAssinante = new Assinante(req.body.nome, req.body.email, planoEncontrado, req.body.idNutri, req.body.idPersonal);
 
         await repositorioDeAssinantes.criarAssinante(novoAssinante);
-        
+
         servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
 
         const admin = await repositorioDeUsuarios.buscarAdmin();
@@ -62,7 +62,7 @@ async function buscarDadosDoDashboard(req, res) {
     // #swagger.description = 'endpoint para buscar dados do daskboard do assinante.'
 
     const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoDashboardNaBaseDeDados(req.usuario.idUsuario);
-      
+
     res.send({
         idAssinante: dadosDoAssinante.dados.idAssinante,
         imagem: dadosDoAssinante.dados.imagem,
@@ -77,31 +77,24 @@ async function buscarDadosDoDashboard(req, res) {
     })
 }
 
-function buscarDadosDoPerfil(req, res) {
+async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do perfil do assinante.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.usuario.idUsuario);
-
-    if (!assinaturaEncontrada) {
-        res.status(404).send({ erro: "Assinante não tem assinatura ativa" });
-        return;
-    }
+    const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoPerfilNaBaseDeDados(req.usuario.idUsuario);
 
     res.send({
-        idAssinante: assinanteEncontrado.idAssinante,
-        idAssinatura: assinaturaEncontrada.idAssinatura,
-        idPlano: assinaturaEncontrada.idPlano,
-        idNutri: assinanteEncontrado.nutricionista,
-        idPersonal: assinanteEncontrado.personalTrainer,
-        imagem: assinanteEncontrado.usuario.imagem,
-        email: assinanteEncontrado.usuario.login,
-        nome: assinanteEncontrado.usuario.nome,
-        dataNascimento: assinanteEncontrado.dataNascimento,
-        sexo: assinanteEncontrado.sexo,
-        altura: assinanteEncontrado.altura,
+        idAssinante: dadosDoAssinante.idAssinante,
+        imagem: dadosDoAssinante.imagem,
+        email: dadosDoAssinante.login,
+        nome: dadosDoAssinante.nome,
+        dataNascimento: dadosDoAssinante.dataNascimento,
+        sexo: dadosDoAssinante.sexo,
+        altura: dadosDoAssinante.altura,
+        idNutri: dadosDoAssinante.nutricionista,
+        idPersonal: dadosDoAssinante.personalTrainer,
+        idAssinatura: dadosDoAssinante.idAssinatura,
+        idPlano: dadosDoAssinante.idPlano
     })
 
 }

@@ -16,8 +16,6 @@ async function buscarAssinaturaAtiva(idAssinante) {
         return;
 
     return rows[0];
-    // const assinanteEncontrado = await repositorioDeAssinantes.buscarAssinantePorId(idAssinante);
-    // return assinanteEncontrado.assinaturas.find(assinatura => assinatura.bloqueado == false)
 }
 
 function buscarAssinaturaPorId(idAssinante, idAssinatura) {
