@@ -24,9 +24,9 @@ async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
     const [rows, fields] = await conexao.execute(
         `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
         b.nome, b.valor, b.duracao, b.descricao, b.bloqueado
-from assinaturas as a
-inner join planos as b on a.idPlano = b.idPlano 
-where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
+        from assinaturas as a
+        inner join planos as b on a.idPlano = b.idPlano 
+        where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
 
     await conexao.end();
 
@@ -39,5 +39,5 @@ where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
 module.exports = {
     buscarAssinaturaAtiva: buscarAssinaturaAtiva,
     buscarAssinaturaPorId: buscarAssinaturaPorId,
-    
+
 }

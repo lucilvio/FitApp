@@ -109,40 +109,64 @@ async function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
-function buscarDadosDaAssinatura(req, res) {
+function inserirMedidas(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para inserir medidas.'
+
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+    assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
+    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
+
+    res.send({ idMedida: assinanteEncontrado.medidasAtuais().idMedida });
+}
+
+function buscarMedidas(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para buscar medidas.'
+
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+
+    const medidasOrdenadasPorData = assinanteEncontrado.medidas.sort(function (a, b) {
+        if (a.data.getTime() < b.data.getTime()) {
+            return 1;
+        }
+        if (a.data.getTime() > b.data.getTime()) {
+            return -1;
+        }
+
+        return 0;
+    });
+
+    res.send({
+        historicoMedidas: medidasOrdenadasPorData,
+        medidasAtuais: assinanteEncontrado.medidasAtuais()
+    });
+}
+
+function excluirMedidas(req, res) {
+    // #swagger.tags = ['Assinante']
+    // #swagger.description = 'endpoint para excluir medidas.'
+
+    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+    assinanteEncontrado.excluirMedidas(req.params.idMedida);
+    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
+    res.send();
+}
+
+
+async function buscarDadosDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados da Assinatura.'
 
-    const dadosDaAssinatura = repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
-
-    if (!dadosDaAssinatura) {
-        res.status(404).send({ erro: "Assinatura não encontrada" });
-        return;
-    }
-
-    if (dadosDaAssinatura.bloqueado == true) {
-        res.status(400).send({ erro: "Assinatura cancelada" });
-        return;
-    }
-
-    if (req.usuario.idUsuario != dadosDaAssinatura.idAssinante) {
-        res.status(401).send({ erro: 'Não autorizado' });
-        return;
-    }
-
-    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(dadosDaAssinatura.idPlano);
-    if (!planoEncontrado) {
-        res.status(404).send({ erro: "Plano não encontrado" });
-        return;
-    }
+    const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     res.send({
         dataInicio: dadosDaAssinatura.dataInicio,
         dataFim: dadosDaAssinatura.dataFim,
         idPlano: dadosDaAssinatura.idPlano,
-        nome: planoEncontrado.nome,
-        valor: planoEncontrado.valor,
-        descricao: planoEncontrado.descricao,
+        nome: dadosDaAssinatura.nome,
+        valor: dadosDaAssinatura.valor,
+        descricao: dadosDaAssinatura.descricao,
         
     });
 }
@@ -281,49 +305,7 @@ function buscarTreinoPorId(req, res) {
     });
 }
 
-function inserirMedidas(req, res) {
-    // #swagger.tags = ['Assinante']
-    // #swagger.description = 'endpoint para inserir medidas.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
-    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
-
-    res.send({ idMedida: assinanteEncontrado.medidasAtuais().idMedida });
-}
-
-function buscarMedidas(req, res) {
-    // #swagger.tags = ['Assinante']
-    // #swagger.description = 'endpoint para buscar medidas.'
-
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    const medidasOrdenadasPorData = assinanteEncontrado.medidas.sort(function (a, b) {
-        if (a.data.getTime() < b.data.getTime()) {
-            return 1;
-        }
-        if (a.data.getTime() > b.data.getTime()) {
-            return -1;
-        }
-
-        return 0;
-    });
-
-    res.send({
-        historicoMedidas: medidasOrdenadasPorData,
-        medidasAtuais: assinanteEncontrado.medidasAtuais()
-    });
-}
-
-function excluirMedidas(req, res) {
-    // #swagger.tags = ['Assinante']
-    // #swagger.description = 'endpoint para excluir medidas.'
-
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    assinanteEncontrado.excluirMedidas(req.params.idMedida);
-    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
-    res.send();
-}
 
 
 module.exports = {
