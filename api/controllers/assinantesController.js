@@ -61,7 +61,7 @@ async function buscarDadosDoDashboard(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do daskboard do assinante.'
 
-    const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoDashboardNaBaseDeDados(req.usuario.idUsuario);
+    const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoDashboardDoAssinantePorId(req.usuario.idUsuario);
 
     res.send({
         idAssinante: dadosDoAssinante.dados.idAssinante,
@@ -81,7 +81,7 @@ async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do perfil do assinante.'
 
-    const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoPerfilNaBaseDeDados(req.usuario.idUsuario);
+    const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoPerfilDoAssinantePorId(req.usuario.idUsuario);
 
     res.send({
         idAssinante: dadosDoAssinante.idAssinante,
@@ -99,15 +99,13 @@ async function buscarDadosDoPerfil(req, res) {
 
 }
 
-function alterarDadosDoPerfil(req, res) {
+async function alterarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para alterar os dados do perfil.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    assinanteEncontrado.alterarDadosDoPerfil(req.body.nome, req.body.imagem, req.body.dataNascimento, req.body.sexo, req.body.altura);
-
-    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    Assinante.validarAlteracaoDoPerfil(req.body.nome);
+    await repositorioDeAssinantes.salvarAlteracaoDeDadosDoPerfil(req.usuario.idUsuario, req.body.nome, req.body.imagem, req.body.dataNascimento, req.body.idSexo, req.body.altura);
+    
     res.send();
 }
 
@@ -115,36 +113,37 @@ function buscarDadosDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados da Assinatura.'
 
-    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
+    const dadosDaAssinatura = repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
-    if (!assinaturaEncontrada) {
+    if (!dadosDaAssinatura) {
         res.status(404).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
-    if (assinaturaEncontrada.bloqueado == true) {
+    if (dadosDaAssinatura.bloqueado == true) {
         res.status(400).send({ erro: "Assinatura cancelada" });
         return;
     }
 
-    if (req.usuario.idUsuario != assinaturaEncontrada.idAssinante) {
+    if (req.usuario.idUsuario != dadosDaAssinatura.idAssinante) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
-    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(assinaturaEncontrada.idPlano);
+    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(dadosDaAssinatura.idPlano);
     if (!planoEncontrado) {
         res.status(404).send({ erro: "Plano não encontrado" });
         return;
     }
 
     res.send({
-        idPlano: assinaturaEncontrada.idPlano,
+        dataInicio: dadosDaAssinatura.dataInicio,
+        dataFim: dadosDaAssinatura.dataFim,
+        idPlano: dadosDaAssinatura.idPlano,
         nome: planoEncontrado.nome,
         valor: planoEncontrado.valor,
         descricao: planoEncontrado.descricao,
-        dataInicio: assinaturaEncontrada.dataInicio,
-        dataFim: assinaturaEncontrada.dataFim,
+        
     });
 }
 

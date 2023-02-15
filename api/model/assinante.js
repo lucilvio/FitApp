@@ -1,6 +1,5 @@
 const Usuario = require('./usuario');
 const Assinatura = require('./assinatura');
-const Medidas = require('./medidas');
 
 function Assinante(nome, email, plano, idNutri, idPersonal) {
     if (!nome) {
@@ -24,7 +23,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
 
     this.usuario = new Usuario(nome, email, 'assinante');
     this.idAssinante = this.usuario.idUsuario;
-    this.imagem = this.usuario.imagem;
     this.nome = nome;
     this.email = email;
     this.dataNascimento = '';
@@ -48,31 +46,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         return this.treinos.find(treino => treino.ativo == true);
     }
 
-    this.medidasAtuais = function () {
-        if (this.medidas.length == 0) {
-            return new Medidas(0, 0, 0, 0);
-        }
-
-        const dataDaUltimaMedida = Math.max(...this.medidas.map(medida => new Date(medida.data)));
-        return this.medidas.find(medida => medida.data.getTime() == dataDaUltimaMedida);
-    }
-
-    this.imc = function () {
-        const medidas = this.medidasAtuais();
-
-        if (medidas.peso == 0) {
-            return 0;
-        }
-
-        if (this.altura == 0) {
-            return 0;
-        }
-
-        const alturaConvertida = (this.altura * this.altura) / 100;
-
-        return medidas.peso / alturaConvertida;
-    }
-
     this.alterarStatus = function (novoStatus) {
 
         if (typeof (novoStatus) == 'boolean') {
@@ -80,28 +53,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         }
     }
 
-    this.alterarDadosDoPerfil = function (nome, imagem, dataNascimento, sexo, altura) {
-        if (nome != undefined && nome != null && nome != "") {
-            this.usuario.nome = nome;
-            this.nome = nome;
-        }
-
-        if (imagem != undefined && imagem != null && imagem != "") {
-            this.usuario.imagem = imagem;
-        }
-
-        if (dataNascimento != undefined && dataNascimento != null && dataNascimento != "") {
-            this.dataNascimento = Date.parse(dataNascimento);
-        }
-
-        if (sexo != undefined && sexo != null && sexo != "") {
-            this.sexo = sexo;
-        }
-
-        if (altura != undefined && altura != null && altura != "") {
-            this.altura = altura;
-        }
-    }
+    
 
     this.alterarSenha = function (senhaAtual, novaSenha) {
         if (senhaAtual == this.usuario.senha) {
@@ -199,5 +151,14 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
 
 }
 
-module.exports = Assinante
+function validarAlteracaoDoPerfil (nome) {
+    if (!nome) {
+        throw { mensagem: "O nome do assinante precisa ser definido", interna: true };
+    }
+}
+
+module.exports = {
+    Assinante: Assinante,
+    validarAlteracaoDoPerfil: validarAlteracaoDoPerfil
+}
 

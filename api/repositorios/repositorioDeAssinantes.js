@@ -1,5 +1,6 @@
 const base = require('../dados');
 const baseDeDados = require('../conexao');
+const Assinante = require('../model/assinante');
 
 async function verificarSeAssinanteJaTemCadastro(email) {
     const conexao = await baseDeDados.abrirConexao();
@@ -21,7 +22,7 @@ async function criarAssinante(novoAssinante) {
     const parametrosDoUsuario = [
         novoAssinante.usuario.idUsuario,
         novoAssinante.usuario.perfil,
-        novoAssinante.usuario.nome,
+        novoAssinante.usuario.nome.toLowerCase(),
         novoAssinante.usuario.login,
         novoAssinante.usuario.senha,
         novoAssinante.usuario.bloqueado
@@ -31,7 +32,7 @@ async function criarAssinante(novoAssinante) {
         novoAssinante.idAssinante,
         novoAssinante.nutricionista,
         novoAssinante.personalTrainer,
-        novoAssinante.nome,
+        novoAssinante.nome.toLowerCase(),
         novoAssinante.email
     ]
 
@@ -63,7 +64,7 @@ async function criarAssinante(novoAssinante) {
     await conexao.end();
 }
 
-async function buscarDadosDoDashboardNaBaseDeDados(idUsuario) {
+async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
@@ -99,7 +100,7 @@ async function buscarDadosDoDashboardNaBaseDeDados(idUsuario) {
     }
 }
 
-async function buscarDadosDoPerfilNaBaseDeDados(idUsuario) {
+async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
@@ -117,7 +118,6 @@ async function buscarDadosDoPerfilNaBaseDeDados(idUsuario) {
         return;
 
     return rows[0];
-    
 }
 
 
@@ -145,6 +145,24 @@ async function buscarAssinantePorId(idAssinante) {
         return;
 
     return rows[0];
+}
+
+async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, imagem, dataNascimento, idSexo, altura) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    await conexao.beginTransaction();
+    await conexao.execute(
+        `update usuarios
+        set nome = ?, imagem = ?
+        where idUsuario = ?`, [nome.toLowerCase(), imagem, idUsuario]);
+
+    await conexao.execute(
+        `update assinantes
+            set nome = ?, dataNascimento = ?, idSexo = ?, altura = ?
+            where idAssinante = ?`, [nome.toLowerCase(), new Date(dataNascimento), idSexo, altura, idUsuario]);
+
+    await conexao.commit();
+    await conexao.end();
 }
 
 function salvarAlteracaoDeDados(assinante) {
@@ -224,10 +242,11 @@ function salvarMedidas(assinante) {
 module.exports = {
     verificarSeAssinanteJaTemCadastro: verificarSeAssinanteJaTemCadastro,
     criarAssinante: criarAssinante,
-    buscarDadosDoDashboardNaBaseDeDados: buscarDadosDoDashboardNaBaseDeDados,
-    buscarDadosDoPerfilNaBaseDeDados: buscarDadosDoPerfilNaBaseDeDados,
+    buscarDadosDoDashboardDoAssinantePorId: buscarDadosDoDashboardDoAssinantePorId,
+    buscarDadosDoPerfilDoAssinantePorId: buscarDadosDoPerfilDoAssinantePorId,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
+    salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
     salvarDieta: salvarDieta,
     salvarTreino: salvarTreino,
