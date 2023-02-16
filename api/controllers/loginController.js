@@ -1,4 +1,5 @@
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
 const jwt = require('jsonwebtoken');
 
 
@@ -34,7 +35,7 @@ async function login(req, res) {
             nome: usuarioEncontrado.nome,
             email: usuarioEncontrado.login,
             perfil: usuarioEncontrado.perfil,
-            imagem: usuarioEncontrado.imagem
+            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(usuarioEncontrado.imagem)
         }, segredo, { expiresIn: tempoDeExpiracaoEmMinutos });
 
     res.send({ token });

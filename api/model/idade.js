@@ -5,7 +5,7 @@ function Idade(dataNascimento) {
     }
 
     const dataAtual = new Date().getTime();
-    const dataSubtraidaEmMilessegundos = dataAtual - this.dataNascimento
+    const dataSubtraidaEmMilessegundos = dataAtual - dataNascimento
     this.valor = Math.floor(dataSubtraidaEmMilessegundos / 31536000000);
 }
 

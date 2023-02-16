@@ -36,7 +36,15 @@ function validarAlteracaoDeSenha(senhaAtual, novaSenha) {
     }
 }
 
+function validarAlteracaoDaImagem(files) {
+    if(!files) {
+        res.status(400).send({ erro: "Não é possível usar uma foto vazia"});
+        return;
+    }
+}
+
 module.exports = {
     Usuario: Usuario,
-    validarAlteracaoDeSenha: validarAlteracaoDeSenha
+    validarAlteracaoDeSenha: validarAlteracaoDeSenha,
+    validarAlteracaoDaImagem: validarAlteracaoDaImagem
 };

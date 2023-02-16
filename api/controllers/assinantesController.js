@@ -1,5 +1,6 @@
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const servicoDeEmail = require('../servicos/servicoDeEmail');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePersonal = require('../repositorios/repositorioDePersonalTrainers');
@@ -67,7 +68,7 @@ async function buscarDadosDoDashboard(req, res) {
         imagem: dadosDoAssinante.dados.imagem,
         nome: dadosDoAssinante.dados.nome,
         altura: dadosDoAssinante.dados.altura,
-        idade: new Idade(dadosDoAssinante.dataNascimento).valor,
+        idade: new Idade(dadosDoAssinante.dados.dataNascimento).valor,
         peso: dadosDoAssinante.pesoAtual,
         imc: new Imc(dadosDoAssinante.pesoAtual, dadosDoAssinante.dados.altura).valor,
         medidas: dadosDoAssinante.historicoDePeso
@@ -84,11 +85,11 @@ async function buscarDadosDoPerfil(req, res) {
 
     res.send({
         idAssinante: dadosDoAssinante.idAssinante,
-        imagem: dadosDoAssinante.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoAssinante.imagem),
         email: dadosDoAssinante.login,
         nome: dadosDoAssinante.nome,
         dataNascimento: dadosDoAssinante.dataNascimento,
-        sexo: dadosDoAssinante.sexo,
+        sexo: dadosDoAssinante.idSexo,
         altura: dadosDoAssinante.altura,
         idNutri: dadosDoAssinante.nutricionista,
         idPersonal: dadosDoAssinante.personalTrainer,

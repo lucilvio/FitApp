@@ -22,7 +22,7 @@ export async function salvarDados(token, fotoPerfil, nome, dataNascimento, sexo,
                 imagem: fotoPerfil,
                 nome: nome,
                 dataNascimento: dataNascimento,
-                sexo: sexo,
+                idSexo: sexo,
                 altura: altura
             }),
         headers: {

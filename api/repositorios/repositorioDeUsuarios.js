@@ -5,42 +5,84 @@ const baseDeDados = require('../conexao');
 async function buscarUsuarioPorLogin(login) {
     const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select idUsuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where login = ?`, [login]);
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select idUsuario, perfil, nome, login, senha, bloqueado, imagem 
+        from usuarios 
+        where login = ?`, [login]);
+        if (rows.length <= 0)
+            return;
 
-    await conexao.end();
+        return rows[0];
 
-    if (rows.length <= 0)
-        return;
-
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function buscarDadosDoUsuarioPorId(idUsuario) {
     const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select perfil, nome, login, senha, bloqueado, imagem 
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select perfil, nome, login, senha, bloqueado, imagem 
         from usuarios 
         where idUsuario = ?`, [idUsuario]);
+        if (rows.length <= 0)
+            return;
 
-    await conexao.end();
+        return rows[0];
 
-    if (rows.length <= 0)
-        return;
-
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function salvarNovaSenha(idUsuario, novaSenha) {
     const conexao = await baseDeDados.abrirConexao();
 
-    await conexao.execute(
-        `UPDATE usuarios
+    try {
+        await conexao.execute(
+            `UPDATE usuarios
         SET senha = ?
         WHERE idUsuario = ?`, [novaSenha, idUsuario]);
 
-    await conexao.end();
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function salvarImagemDoUsuario(idUsuario, imagem) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        await conexao.execute(
+            `UPDATE usuarios
+            SET imagem = ?
+            WHERE idUsuario = ?`, [imagem, idUsuario]);
+
+    } finally {
+        await conexao.end();
+    }
+
+
+}
+
+async function buscarAdmin() {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select idUsuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where perfil = ?`, ['administrador']);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 function criarUsuario(novoUsuario) {
@@ -52,10 +94,6 @@ function buscarDadosDoUsuario(idUsuario) {
     return base.dados.usuarios.find(usuario => usuario.idUsuario == idUsuario);
 }
 
-function salvarFotoUsuario(idUsuario, foto) {
-    const usuarioEncontrado = buscarDadosDoUsuario(idUsuario);
-    usuarioEncontrado.imagem = foto;
-}
 
 
 
@@ -65,25 +103,13 @@ function salvarMensagens(usuario) {
 
 }
 
-async function buscarAdmin() {
-    const conexao = await baseDeDados.abrirConexao();
-
-    const [rows, fields] = await conexao.execute(
-        `select idUsuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where perfil = ?`, ['administrador']);
-
-    if (rows.length <= 0)
-        return;
-
-    return rows[0];
-}
-
 module.exports = {
     buscarUsuarioPorLogin: buscarUsuarioPorLogin,
-    buscarDadosDoUsuarioPorId:buscarDadosDoUsuarioPorId,
+    buscarDadosDoUsuarioPorId: buscarDadosDoUsuarioPorId,
     criarUsuario: criarUsuario,
     buscarDadosDoUsuario: buscarDadosDoUsuario,
     salvarNovaSenha: salvarNovaSenha,
-    salvarFotoUsuario: salvarFotoUsuario,
+    salvarImagemDoUsuario: salvarImagemDoUsuario,
     salvarMensagens: salvarMensagens,
     buscarAdmin: buscarAdmin
 };
