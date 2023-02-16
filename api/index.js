@@ -111,7 +111,7 @@ servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.alterarPlanoDaAssinatura));
 servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.inserirMedidas));
 servidor.app.get('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarMedidas));
-servidor.app.delete('/assinante/medidas/:idMedida', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.excluirMedidas));
+servidor.app.delete('/assinante/medidas/:idMedidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.excluirMedidas));
 servidor.app.get('/assinante/dietas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDietas));
 servidor.app.get('/assinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDietaPorId));
 servidor.app.get('/assinante/treinos', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarTreinos));

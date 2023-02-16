@@ -132,13 +132,12 @@ async function buscarMedidas(req, res) {
     });
 }
 
-function excluirMedidas(req, res) {
+async function excluirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para excluir medidas.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    assinanteEncontrado.excluirMedidas(req.params.idMedida);
-    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
+        await repositorioDeAssinantes.excluirMedidasDoAssinante(req.usuario.idUsuario, req.params.idMedidas);
+    
     res.send();
 }
 

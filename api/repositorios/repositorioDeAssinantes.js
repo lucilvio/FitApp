@@ -194,6 +194,16 @@ async function buscarMedidasDoAssinante(idAssinante) {
     return rows;
 }
 
+async function excluirMedidasDoAssinante(idAssinante, idMedidas) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    await conexao.execute(
+        `delete from medidas
+        where idAssinante = ? and idMedidas = ?`, [idAssinante, idMedidas]);
+
+    await conexao.end();
+}
+
 function buscarAssinantePorFiltro(nome) {
     if (!nome) {
         return base.dados.assinantes;
@@ -278,9 +288,12 @@ module.exports = {
     criarAssinante: criarAssinante,
     buscarDadosDoDashboardDoAssinantePorId: buscarDadosDoDashboardDoAssinantePorId,
     buscarDadosDoPerfilDoAssinantePorId: buscarDadosDoPerfilDoAssinantePorId,
+    salvarMedidas: salvarMedidas,
+    buscarMedidasDoAssinante: buscarMedidasDoAssinante,
+    excluirMedidasDoAssinante: excluirMedidasDoAssinante,
+    salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
-    salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
     salvarDieta: salvarDieta,
     salvarTreino: salvarTreino,
@@ -288,6 +301,5 @@ module.exports = {
     buscarDietaPorId: buscarDietaPorId,
     buscarTreinosPorFiltro: buscarTreinosPorFiltro,
     buscarTreinoPorId: buscarTreinoPorId,
-    salvarMedidas: salvarMedidas,
-    buscarMedidasDoAssinante: buscarMedidasDoAssinante
+    
 }
