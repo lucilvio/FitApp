@@ -27,7 +27,7 @@ async function buscarMedidas() {
         document.querySelector("#cintura").innerHTML = resposta.medidasAtuais.cintura;
         document.querySelector("#quadril").innerHTML = resposta.medidasAtuais.quadril;
 
-        if (resposta.historicoMedidas.length == 0) {
+        if (resposta.historicoDeMedidas.length == 0) {
             document.querySelector("#historico-medidas").innerHTML =
                 `<tr>
                 <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
@@ -37,7 +37,7 @@ async function buscarMedidas() {
                 <td><i class="bi bi-dash-lg"></i><i class="bi bi-dash-lg"></i></td>
                 </tr>`;
         } else {
-            resposta.historicoMedidas.forEach(medida => {
+            resposta.historicoDeMedidas.forEach(medida => {
                 document.querySelector("#historico-medidas").innerHTML = document.querySelector("#historico-medidas").innerHTML +
                     `<tr>
                 <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
@@ -45,7 +45,7 @@ async function buscarMedidas() {
                 <td>${medida.pescoco} cm</td>
                 <td>${medida.cintura} cm</td>
                 <td>${medida.quadril} cm</td>
-                <td><i class="bi bi-trash3 btn-excluirMedidas" data-idmedida=${medida.idMedida}></i></td>
+                <td><i class="bi bi-trash3 btn-excluirMedidas" data-idmedida=${medida.idMedidas}></i></td>
                 </tr>`;
             });
         }
@@ -88,10 +88,10 @@ async function inserirMedidas(evento) {
 }
 
 async function excluirMedidas(evento) {
-    const idMedida = evento.target.dataset.idmedida;
+    const idMedidas = evento.target.dataset.idmedida;
     const token = seguranca.pegarToken();
     try {
-        await servicos.excluirMedidas(token, idMedida);
+        await servicos.excluirMedidas(token, idMedidas);
         mensagens.mostrarMensagemDeSucesso("Medidas excluídas com sucesso!", true);
         window.location.reload();
     } catch (error) {

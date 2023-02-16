@@ -69,8 +69,8 @@ async function buscarDadosDoDashboard(req, res) {
         nome: dadosDoAssinante.dados.nome,
         altura: dadosDoAssinante.dados.altura,
         idade: new Idade(dadosDoAssinante.dados.dataNascimento).valor,
-        peso: dadosDoAssinante.pesoAtual,
-        imc: new Imc(dadosDoAssinante.pesoAtual, dadosDoAssinante.dados.altura).valor,
+        peso: dadosDoAssinante.pesoAtual.peso,
+        imc: new Imc(dadosDoAssinante.pesoAtual.peso, dadosDoAssinante.dados.altura).valor,
         medidas: dadosDoAssinante.historicoDePeso
         // idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
         // idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,

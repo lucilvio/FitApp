@@ -23,7 +23,7 @@ async function criarAssinante(novoAssinante) {
         const parametrosDoUsuario = [
             novoAssinante.usuario.idUsuario,
             novoAssinante.usuario.perfil,
-            novoAssinante.usuario.nome.toLowerCase(),
+            novoAssinante.usuario.nome,
             novoAssinante.usuario.login,
             novoAssinante.usuario.senha,
             novoAssinante.usuario.bloqueado
@@ -33,7 +33,7 @@ async function criarAssinante(novoAssinante) {
             novoAssinante.idAssinante,
             novoAssinante.nutricionista,
             novoAssinante.personalTrainer,
-            novoAssinante.nome.toLowerCase(),
+            novoAssinante.nome,
             novoAssinante.email
         ]
 
@@ -61,7 +61,7 @@ async function criarAssinante(novoAssinante) {
             values (?, ?, ?, ?, ?, ?);`, parametrosDaAssinatura);
 
         await conexao.commit();
-        
+
     } finally {
         await conexao.end();
     }
@@ -81,23 +81,18 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
         const [pesos, fieldsPesos] = await conexao.execute(
             `select peso, data
             from medidas
-            where idAssinante = ?`, [idUsuario]);
-
-        let pesoAtual = 0;
+            where idAssinante = ?
+            order by data desc`, [idUsuario]);
 
         if (rows.length <= 0)
             return;
 
-        if (pesos.length > 0) {
-            const dataDoUltimoPeso = Math.max(...pesos.map(peso => new Date(peso.data)));
-            pesoAtual = pesos.find(peso => peso.data.getTime() == dataDoUltimoPeso).peso;
-        }
-
         return {
             dados: rows[0],
-            historicoDePeso: pesos[0],
-            pesoAtual: pesoAtual
+            historicoDePeso: pesos,
+            pesoAtual:pesos[0]
         }
+
     } finally {
         await conexao.end();
     }
@@ -156,7 +151,7 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
         await conexao.execute(
             `update usuarios
             set nome = ?
-            where idUsuario = ?`, [nome.toLowerCase(), idUsuario]);
+            where idUsuario = ?`, [nome, idUsuario]);
 
         await conexao.execute(
             `update assinantes
