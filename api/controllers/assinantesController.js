@@ -120,26 +120,15 @@ async function inserirMedidas(req, res) {
     res.send();
 }
 
-function buscarMedidas(req, res) {
+async function buscarMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar medidas.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    const medidasOrdenadasPorData = assinanteEncontrado.medidas.sort(function (a, b) {
-        if (a.data.getTime() < b.data.getTime()) {
-            return 1;
-        }
-        if (a.data.getTime() > b.data.getTime()) {
-            return -1;
-        }
-
-        return 0;
-    });
+    const medidasOrdenadasPorData = await repositorioDeAssinantes.buscarMedidasDoAssinante(req.usuario.idUsuario);    
 
     res.send({
-        historicoMedidas: medidasOrdenadasPorData,
-        medidasAtuais: assinanteEncontrado.medidasAtuais()
+        historicoDeMedidas: medidasOrdenadasPorData,
+        medidasAtuais: medidasOrdenadasPorData[0]
     });
 }
 

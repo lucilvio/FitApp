@@ -177,6 +177,23 @@ async function salvarMedidas(idUsuario, medidas) {
     await conexao.end();
 }
 
+async function buscarMedidasDoAssinante(idAssinante) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const [rows, fields] = await conexao.execute(
+        `select data, idMedidas, peso, pescoco, cintura, quadril 
+        from medidas
+        where idAssinante = ?
+        order by data desc`, [idAssinante]);
+
+    await conexao.end();
+
+    if (rows.length <= 0)
+        return;
+
+    return rows;
+}
+
 function buscarAssinantePorFiltro(nome) {
     if (!nome) {
         return base.dados.assinantes;
@@ -272,4 +289,5 @@ module.exports = {
     buscarTreinosPorFiltro: buscarTreinosPorFiltro,
     buscarTreinoPorId: buscarTreinoPorId,
     salvarMedidas: salvarMedidas,
+    buscarMedidasDoAssinante: buscarMedidasDoAssinante
 }
