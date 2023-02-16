@@ -24,4 +24,19 @@ function Usuario(nome, login, perfil){
     this.mensagens = [];
 }
 
-module.exports = Usuario;
+function validarAlteracaoDeSenha(senhaAtual, novaSenha) {
+    if(!senhaAtual) {
+        res.status(400).send({ erro: "Não é possível redefinir senha sem a senha atual"});
+        return;
+    }
+
+    if(!novaSenha) {
+        res.status(400).send({ erro: "Não é possível redefinir senha a nova senha"});
+        return;
+    }
+}
+
+module.exports = {
+    Usuario: Usuario,
+    validarAlteracaoDeSenha: validarAlteracaoDeSenha
+};

@@ -7,7 +7,7 @@ function enviarMensagem(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para enviar mensagem.'
 
-    const remetenteEncontrado = repositorioDeUsuarios.buscarUsuarioPorId(req.usuario.idUsuario);
+    const remetenteEncontrado = repositorioDeUsuarios.buscarDadosDoUsuarioPorId(req.usuario.idUsuario);
     if (!remetenteEncontrado) {
         res.status(404).send({ erro: "Remetente não encontrado" });
         return;

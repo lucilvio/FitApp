@@ -17,7 +17,7 @@ function PersonalTrainer(nome, email, telefone, registroProfissional) {
         throw { mensagem: "Não é possível cadastrar Personal Trainer sem o Registro Profissional", interna: true };
     }
 
-    this.usuario = new Usuario(nome, email, 'personalTrainer');
+    this.usuario = new Usuario.Usuario(nome, email, 'personalTrainer');
     this.idPersonal = this.usuario.idUsuario;
     this.imagem = this.usuario.imagem;
     this.nome = nome;

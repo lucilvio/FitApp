@@ -1,33 +1,26 @@
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const fs = require('fs');
+const Usuario = require('../model/usuario');
 
-function alterarSenha(req, res) {
+async function alterarSenha(req, res) {
     // #swagger.tags = ['Usuário']
     // #swagger.description = 'endpoint para alterar a senha de login.'
     // #swagger.security = [] 
 
-    if(!req.body.senhaAtual) {
-        res.status(400).send({ erro: "Não é possível redefinir senha sem a senha atual"});
-        return;
-    }
+    Usuario.validarAlteracaoDeSenha(req.body.senhaAtual, req.body.novaSenha);
 
-    if(!req.body.novaSenha) {
-        res.status(400).send({ erro: "Não é possível redefinir senha a nova senha"});
-        return;
-    }
-
-    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorId(req.usuario.idUsuario);
-    if(!usuarioEncontrado || usuarioEncontrado.perfil == "administrador") {
+    const dadosDoUsuario = await repositorioDeUsuarios.buscarDadosDoUsuarioPorId(req.usuario.idUsuario);
+    if(!dadosDoUsuario || dadosDoUsuario.perfil == "administrador") {
         res.status(404).send({ erro: "Usuário não encontrado"});
         return;
     }
 
-    if(usuarioEncontrado.senha !== req.body.senhaAtual) {
+    if(dadosDoUsuario.senha !== req.body.senhaAtual) {
         res.status(404).send({ erro: "Senha atual incorreta"});
         return;
     }
 
-    repositorioDeUsuarios.salvarNovaSenha(req.usuario.idUsuario, req.body.novaSenha);
+    await repositorioDeUsuarios.salvarNovaSenha(req.usuario.idUsuario, req.body.novaSenha);
 
     res.send();
 }

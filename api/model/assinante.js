@@ -21,7 +21,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         throw { mensagem: "Não é possível cadastrar Assinante sem personal trainer", interna: true };
     }
 
-    this.usuario = new Usuario(nome, email, 'assinante');
+    this.usuario = new Usuario.Usuario(nome, email, 'assinante');
     this.idAssinante = this.usuario.idUsuario;
     this.nome = nome;
     this.email = email;

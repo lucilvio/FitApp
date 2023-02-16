@@ -4,7 +4,7 @@ const Nutricionista = require('./model/nutricionista');
 const Personal = require('./model/personalTrainer');
 const Assinante = require('./model/assinante');
 
-const usuarioAdmin = new Usuario('Administrador', 'admin@fitapp.com', 'administrador');
+const usuarioAdmin = new Usuario.Usuario('Administrador', 'admin@fitapp.com', 'administrador');
 usuarioAdmin.idUsuario = "e7c17d74-f067-46ca-9734-1c232ba0ea18";
 usuarioAdmin.senha = 'admin123';
 

@@ -17,7 +17,7 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
         throw { mensagem: "Não é possível cadastrar Nutricionista sem o Registro Profissional", interna: true };
     }
 
-    this.usuario = new Usuario(nome, email, 'nutricionista');
+    this.usuario = new Usuario.Usuario(nome, email, 'nutricionista');
     this.idNutri = this.usuario.idUsuario;
     this.imagem = this.usuario.imagem;
     this.nome = nome;
