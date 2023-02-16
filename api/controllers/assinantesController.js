@@ -54,7 +54,6 @@ async function cadastrarAssinante(req, res) {
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
     }
-
 }
 
 async function buscarDadosDoDashboard(req, res) {
@@ -104,20 +103,21 @@ async function alterarDadosDoPerfil(req, res) {
     // #swagger.description = 'endpoint para alterar os dados do perfil.'
 
     Assinante.validarAlteracaoDoPerfil(req.body.nome);
-    await repositorioDeAssinantes.salvarAlteracaoDeDadosDoPerfil(req.usuario.idUsuario, req.body.nome, req.body.imagem, req.body.dataNascimento, req.body.idSexo, req.body.altura);
+    await repositorioDeAssinantes.salvarAlteracaoDeDadosDoPerfil(req.usuario.idUsuario, req.body.nome, req.body.dataNascimento, req.body.idSexo, req.body.altura);
     
     res.send();
 }
 
-function inserirMedidas(req, res) {
+async function inserirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para inserir medidas.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-    assinanteEncontrado.inserirMedidas(new Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril));
-    repositorioDeAssinantes.salvarMedidas(assinanteEncontrado);
+    Medidas.validarInsercaoDeMedidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
+    const medidas = new Medidas.Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
+    
+    await repositorioDeAssinantes.salvarMedidas(req.usuario.idUsuario, medidas);
 
-    res.send({ idMedida: assinanteEncontrado.medidasAtuais().idMedida });
+    res.send();
 }
 
 function buscarMedidas(req, res) {

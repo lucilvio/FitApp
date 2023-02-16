@@ -120,15 +120,6 @@ async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
     return rows[0];
 }
 
-
-function buscarAssinantePorFiltro(nome) {
-    if (!nome) {
-        return base.dados.assinantes;
-    } else {
-        return base.dados.assinantes.filter(assinante => assinante.nome.toLowerCase() == nome.toLowerCase());
-    }
-}
-
 async function buscarAssinantePorId(idAssinante) {
     const conexao = await baseDeDados.abrirConexao();
 
@@ -147,14 +138,14 @@ async function buscarAssinantePorId(idAssinante) {
     return rows[0];
 }
 
-async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, imagem, dataNascimento, idSexo, altura) {
+async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, idSexo, altura) {
     const conexao = await baseDeDados.abrirConexao();
 
     await conexao.beginTransaction();
     await conexao.execute(
         `update usuarios
-        set nome = ?, imagem = ?
-        where idUsuario = ?`, [nome.toLowerCase(), imagem, idUsuario]);
+        set nome = ?
+        where idUsuario = ?`, [nome.toLowerCase(), idUsuario]);
 
     await conexao.execute(
         `update assinantes
@@ -163,6 +154,35 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, imagem, dataNasci
 
     await conexao.commit();
     await conexao.end();
+}
+
+async function salvarMedidas(idUsuario, medidas) {
+
+    const conexao = await baseDeDados.abrirConexao();
+
+    const parametrosDeMedidas = [
+        idUsuario,
+        medidas.idMedidas,
+        medidas.data,
+        medidas.peso,
+        medidas.pescoco,
+        medidas.cintura,
+        medidas.quadril
+    ]
+
+    await conexao.execute(
+        `insert into medidas (idAssinante, idMedidas, data, peso, pescoco, cintura, quadril)
+        values (?, ?, ?, ?, ?, ?, ?)`, parametrosDeMedidas);
+
+    await conexao.end();
+}
+
+function buscarAssinantePorFiltro(nome) {
+    if (!nome) {
+        return base.dados.assinantes;
+    } else {
+        return base.dados.assinantes.filter(assinante => assinante.nome.toLowerCase() == nome.toLowerCase());
+    }
 }
 
 function salvarAlteracaoDeDados(assinante) {
@@ -234,10 +254,7 @@ function buscarTreinoPorId(idAssinante, idTreino) {
     return assinanteEncontrado.treinos.find(treino => treino.idTreino == idTreino);
 }
 
-function salvarMedidas(assinante) {
-    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
-    assinanteEncontrado = assinante;
-}
+
 
 module.exports = {
     verificarSeAssinanteJaTemCadastro: verificarSeAssinanteJaTemCadastro,

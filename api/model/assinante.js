@@ -65,10 +65,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         }
     }
 
-    this.buscarAssinaturaAtiva = function () {
-        return this.assinaturas.find(assinatura => !assinatura.bloqueado);
-    }
-
+    
     this.cancelarAssinatura = function (idAssinatura) {
         const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
 
@@ -97,35 +94,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         assinaturaEncontrada.alterarPlano(novoPlano);
     }
 
-    this.inserirMedidas = function (medidas) {
-        const medidasAtuais = this.medidasAtuais();
-
-        if (!medidas) {
-            throw { mensagem: "Medidas não definidas", interna: true };
-        }
-
-        if (!medidas.peso) {
-            medidas.peso = medidasAtuais.peso;
-        }
-
-        if (!medidas.pescoco) {
-            medidas.pescoco = medidasAtuais.pescoco;
-        }
-
-        if (!medidas.cintura) {
-            medidas.cintura = medidasAtuais.cintura;
-        }
-
-        if (!medidas.quadril) {
-            medidas.quadril = medidasAtuais.quadril;
-        }
-
-        if(medidas.peso == 0 && medidas.pescoco == 0 && medidas.cintura == 0 && medidas.quadril == 0) {
-            throw { mensagem: "Pelo menos uma das medidas deve ser informada", interna: true };
-        }
-
-        this.medidas.push(medidas);
-    }
 
     this.inserirDieta = function (dieta) {
         this.dietas.forEach(dieta => dieta.ativo = false);
@@ -156,6 +124,8 @@ function validarAlteracaoDoPerfil (nome) {
         throw { mensagem: "O nome do assinante precisa ser definido", interna: true };
     }
 }
+
+
 
 module.exports = {
     Assinante: Assinante,

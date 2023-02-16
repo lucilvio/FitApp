@@ -1,4 +1,3 @@
-const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const baseDeDados = require('../conexao');
 
 
