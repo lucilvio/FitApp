@@ -68,7 +68,25 @@ async function buscarPlanosPorFiltro(nome) {
         await conexao.end();
     }
 
+}
 
+async function buscarPlanoPorId(idPlano) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            from planos 
+            where idPlano = ?`, [idPlano]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 function buscarPlanosPorNome(nome) {
@@ -85,17 +103,7 @@ function buscarPlanosAtivos() {
 
 
 
-async function buscarPlanoPorId(id) {
-    const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select idPlano, nome, valor, duracao, descricao, bloqueado from planos where idPlano = ?`, [id]);
-
-    if (rows.length <= 0)
-        return;
-
-    return rows[0];
-}
 
 function salvarAlteracaoDeDados(plano) {
     let planoEncontrado = buscarPlanoPorId(plano.idPlano);

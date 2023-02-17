@@ -9,7 +9,7 @@ const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 
-
+// O administrador cadastra plano
 async function cadastrarPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar um Plano.'
@@ -30,6 +30,7 @@ async function cadastrarPlano(req, res) {
     }
 }
 
+// O administrador busca todos os planos ou filtra por nome
 async function buscarPlanos(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar planos - todos ou por nome.'
@@ -50,11 +51,11 @@ async function buscarPlanos(req, res) {
 }
 
 // O administrador busca plano por Id
-function buscarPlanoPorId(req, res) {
+async function buscarPlanoPorId(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar plano por Id.'
 
-    let planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
+    let planoEncontrado = await repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
     if (!planoEncontrado) {
         res.status(404).send({ erro: "Plano não encontrado" });
