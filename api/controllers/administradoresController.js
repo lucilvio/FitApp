@@ -30,11 +30,11 @@ async function cadastrarPlano(req, res) {
     }
 }
 
-function buscarPlanos(req, res) {
+async function buscarPlanos(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar planos - todos ou por nome.'
 
-    let planos = repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
+    let planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
 
     res.send(planos.map(function (plano) {
         return {

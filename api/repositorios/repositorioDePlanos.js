@@ -26,7 +26,7 @@ async function criarPlano(novoPlano) {
     try {
         const parametrosDoPlano = [
             novoPlano.idPlano,
-            novoPlano.nome,
+            novoPlano.nome.toLowerCase(),
             novoPlano.valor,
             novoPlano.duracao,
             novoPlano.descricao,
@@ -42,23 +42,48 @@ async function criarPlano(novoPlano) {
     }
 }
 
+async function buscarPlanosPorFiltro(nome) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        if (!nome) {
+            const [rows, fields] = await conexao.execute(
+                `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            from planos`);
+
+            return rows;
+        }
+
+
+        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            from planos 
+            where nome = ?`, [nome.toLowerCase()]);
+
+
+        return rowsComFiltro;
+
+
+    } finally {
+        await conexao.end();
+    }
+
+
+}
+
+function buscarPlanosPorNome(nome) {
+    return base.dados.planos.find(plano => plano.nome.toLowerCase() == nome.toLowerCase());
+}
+
 function buscarPlanosAtivos() {
     return base.dados.planos.filter(plano => plano.bloqueado == false);
 }
 
 
 
-function buscarPlanosPorNome(nome) {
-    return base.dados.planos.find(plano => plano.nome.toLowerCase() == nome.toLowerCase());
-}
 
-function buscarPlanosPorFiltro(nome) {
-    if (!nome) {
-        return base.dados.planos;
-    } else {
-        return base.dados.planos.filter(plano => plano.nome.toLowerCase() == nome.toLowerCase());
-    }
-}
+
+
 
 async function buscarPlanoPorId(id) {
     const conexao = await baseDeDados.abrirConexao();
