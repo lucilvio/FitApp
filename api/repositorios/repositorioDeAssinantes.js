@@ -4,16 +4,19 @@ const Assinante = require('../model/assinante');
 
 async function verificarSeAssinanteJaTemCadastro(email) {
     const conexao = await baseDeDados.abrirConexao();
+    
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select email from assinantes where email = ?`, [email.toLowerCase()]);
 
-    const [rows, fields] = await conexao.execute(
-        `select email from assinantes where email = ?`, [email.toLowerCase()]);
+        if (rows.length <= 0)
+            return;
 
-    await conexao.end();
+        return rows[0];
 
-    if (rows.length <= 0)
-        return;
-
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function criarAssinante(novoAssinante) {
@@ -88,7 +91,7 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
         return {
             dados: rows[0],
             historicoDePeso: pesos,
-            pesoAtual:pesos[0]
+            pesoAtual: pesos[0]
         }
 
     } finally {

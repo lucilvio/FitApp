@@ -10,16 +10,16 @@ const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 
 
-function cadastrarPlano(req, res) {
+async function cadastrarPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar um Plano.'
 
-    const planoEncontrado = repositorioDePlanos.buscarPlanosPorNome(req.body.nome);
+    const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(req.body.nome);
 
     if (!planoEncontrado) {
         const novoPlano = new Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
 
-        repositorioDePlanos.criarPlano(novoPlano);
+        await repositorioDePlanos.criarPlano(novoPlano);
 
         res.send({
             idPlano: novoPlano.idPlano
