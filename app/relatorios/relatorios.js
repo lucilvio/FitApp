@@ -22,7 +22,7 @@ async function buscarMedidas() {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token);
 
-        criarRelatorio(resposta.historicoMedidas);
+        criarRelatorio(resposta.historicoDeMedidas);
 
     } catch (error) {
         erros.tratarErro(error);
