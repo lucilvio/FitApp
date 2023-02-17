@@ -4,14 +4,14 @@ const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 
 
-function gerarNovaSenha(req, res) {
+async function gerarNovaSenha(req, res) {
     // #swagger.tags = ['Usuário']
     // #swagger.description = 'endpoint para gerar nova senha.'
     // #swagger.security = [] 
 
     const login = req.body.email;
     
-    const usuarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(login);
+    const usuarioEncontrado = await repositorioDeUsuarios.buscarUsuarioPorLogin(login);
 
     if(!usuarioEncontrado || usuarioEncontrado.perfil == "administrador") {
         res.status(404).send({ erro: "Usuário não encontrado"});
@@ -28,7 +28,7 @@ function gerarNovaSenha(req, res) {
         numbers: true
     });
 
-    usuarioEncontrado.senha = novaSenha;
+    await repositorioDeUsuarios.salvarNovaSenha(usuarioEncontrado.idUsuario, novaSenha)
 
     servicoDeEmail.enviar(req.body.email, 'FitApp - Nova Senha', servicoDeMensagens.gerarMensagemComNovaSenha(usuarioEncontrado.nome, novaSenha));
 

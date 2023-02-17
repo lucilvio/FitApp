@@ -12,11 +12,11 @@ export function deslogarSeTokenEstiverExpirado(paginaParaRedirecionar) {
 export function tokenValido() {
     const token = pegarToken();
 
-    if(!token) {
+    if (!token) {
         return false;
     }
 
-    if(tokenExpirado(token) == true) {
+    if (tokenExpirado(token) == true) {
         return false;
     }
 
@@ -26,7 +26,13 @@ export function tokenValido() {
 export function gravarToken(token) {
     localStorage.setItem(chaveToken, token);
     localStorage.setItem(chaveNomeUsuario, pegarUsuarioDoToken().nome);
-    localStorage.setItem(chaveFotoUsuario, pegarUsuarioDoToken().imagem);
+
+    const imagem = pegarUsuarioDoToken().imagem;
+    
+    if (imagem) {
+        localStorage.setItem(chaveFotoUsuario, imagem);
+    }
+
 }
 
 export function pegarToken() {
@@ -87,7 +93,7 @@ function tokenExpirado(token) {
     const tokenDecodificado = decodificarToken(token);
     const dataAtual = new Date().getTime() / 1000;
 
-    if(dataAtual > tokenDecodificado.exp) {
+    if (dataAtual > tokenDecodificado.exp) {
         return true;
     }
 

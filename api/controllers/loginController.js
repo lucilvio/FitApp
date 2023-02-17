@@ -35,7 +35,7 @@ async function login(req, res) {
             nome: usuarioEncontrado.nome,
             email: usuarioEncontrado.login,
             perfil: usuarioEncontrado.perfil,
-            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(usuarioEncontrado.imagem)
+            imagem: !usuarioEncontrado.imagem ? null : servicoDeArquivosEstaticos.construirCaminhoParaImagem(usuarioEncontrado.imagem)
         }, segredo, { expiresIn: tempoDeExpiracaoEmMinutos });
 
     res.send({ token });

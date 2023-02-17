@@ -40,7 +40,7 @@ async function cadastrarAssinante(req, res) {
 
     const assinanteEncontrado = await repositorioDeAssinantes.verificarSeAssinanteJaTemCadastro(req.body.email);
     if (!assinanteEncontrado) {
-        const novoAssinante = new Assinante(req.body.nome, req.body.email, planoEncontrado, req.body.idNutri, req.body.idPersonal);
+        const novoAssinante = new Assinante.Assinante(req.body.nome, req.body.email, planoEncontrado, req.body.idNutri, req.body.idPersonal);
 
         await repositorioDeAssinantes.criarAssinante(novoAssinante);
 
@@ -63,14 +63,17 @@ async function buscarDadosDoDashboard(req, res) {
 
     const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoDashboardDoAssinantePorId(req.usuario.idUsuario);
 
+    const altura = !dadosDoAssinante.dados.altura ? 0 : dadosDoAssinante.dados.altura;
+    const peso = !dadosDoAssinante.pesoAtual ? 0 : dadosDoAssinante.pesoAtual.peso;
+
     res.send({
         idAssinante: dadosDoAssinante.dados.idAssinante,
         imagem: dadosDoAssinante.dados.imagem,
         nome: dadosDoAssinante.dados.nome,
-        altura: dadosDoAssinante.dados.altura,
+        altura: altura,
         idade: new Idade(dadosDoAssinante.dados.dataNascimento).valor,
-        peso: dadosDoAssinante.pesoAtual.peso,
-        imc: new Imc(dadosDoAssinante.pesoAtual.peso, dadosDoAssinante.dados.altura).valor,
+        peso: peso,
+        imc: new Imc(peso, altura).valor,
         medidas: dadosDoAssinante.historicoDePeso
         // idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
         // idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
@@ -105,7 +108,7 @@ async function alterarDadosDoPerfil(req, res) {
 
     Assinante.validarAlteracaoDoPerfil(req.body.nome);
     await repositorioDeAssinantes.salvarAlteracaoDeDadosDoPerfil(req.usuario.idUsuario, req.body.nome, req.body.dataNascimento, req.body.idSexo, req.body.altura);
-    
+
     res.send();
 }
 
@@ -115,7 +118,7 @@ async function inserirMedidas(req, res) {
 
     Medidas.validarInsercaoDeMedidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
     const medidas = new Medidas.Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
-    
+
     await repositorioDeAssinantes.salvarMedidas(req.usuario.idUsuario, medidas);
 
     res.send();
@@ -125,11 +128,24 @@ async function buscarMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar medidas.'
 
-    const medidasOrdenadasPorData = await repositorioDeAssinantes.buscarMedidasDoAssinante(req.usuario.idUsuario);    
+    const medidasOrdenadasPorData = await repositorioDeAssinantes.buscarMedidasDoAssinante(req.usuario.idUsuario);
+
+    let medidasAtuais;
+    
+    if (!medidasOrdenadasPorData) {
+        medidasAtuais = {
+            peso : 0,
+            pescoco : 0,
+            cintura : 0,
+            quadril : 0
+        }
+    } else {
+        medidasAtuais = medidasOrdenadasPorData[0]
+    }
 
     res.send({
         historicoDeMedidas: medidasOrdenadasPorData,
-        medidasAtuais: medidasOrdenadasPorData[0]
+        medidasAtuais: medidasAtuais
     });
 }
 
@@ -137,8 +153,8 @@ async function excluirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para excluir medidas.'
 
-        await repositorioDeAssinantes.excluirMedidasDoAssinante(req.usuario.idUsuario, req.params.idMedidas);
-    
+    await repositorioDeAssinantes.excluirMedidasDoAssinante(req.usuario.idUsuario, req.params.idMedidas);
+
     res.send();
 }
 
@@ -156,7 +172,7 @@ async function buscarDadosDaAssinatura(req, res) {
         nome: dadosDaAssinatura.nome,
         valor: dadosDaAssinatura.valor,
         descricao: dadosDaAssinatura.descricao,
-        
+
     });
 }
 

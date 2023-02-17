@@ -37,15 +37,13 @@ async function criarAssinante(novoAssinante) {
             novoAssinante.email
         ]
 
-        const assinatura = novoAssinante.buscarAssinaturaAtiva();
-
         const parametrosDaAssinatura = [
-            assinatura.idAssinatura,
-            assinatura.idAssinante,
-            assinatura.idPlano,
-            assinatura.dataInicio,
-            assinatura.dataFim,
-            assinatura.bloqueado
+            novoAssinante.assinatura.idAssinatura,
+            novoAssinante.assinatura.idAssinante,
+            novoAssinante.assinatura.idPlano,
+            novoAssinante.assinatura.dataInicio,
+            novoAssinante.assinatura.dataFim,
+            novoAssinante.assinatura.bloqueado
         ]
 
         await conexao.beginTransaction();
@@ -156,7 +154,7 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
         await conexao.execute(
             `update assinantes
             set nome = ?, dataNascimento = ?, idSexo = ?, altura = ?
-            where idAssinante = ?`, [nome.toLowerCase(), !dataNascimento ? null : new Date(dataNascimento), !idSexo ? null : idSexo, !altura ? null : altura, idUsuario]);
+            where idAssinante = ?`, [nome, !dataNascimento ? null : new Date(dataNascimento), !idSexo ? null : idSexo, !altura ? null : altura, idUsuario]);
 
         await conexao.commit();
 

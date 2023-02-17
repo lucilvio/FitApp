@@ -31,23 +31,23 @@ const assinanteTeste = new Assinante.Assinante('Assinante', 'assinante@fitapp.co
 assinanteTeste.idAssinante = "idAssinante"
 assinanteTeste.usuario.idUsuario = "idAssinante";
 assinanteTeste.usuario.senha = "assinante123";
-assinanteTeste.assinaturas[0].idAssinatura = "idAssinatura";
-assinanteTeste.assinaturas[0].idAssinante = "idAssinante";
+assinanteTeste.assinatura.idAssinatura = "idAssinatura";
+assinanteTeste.assinatura.idAssinante = "idAssinante";
 
 const assinanteBloqueadoTeste = new Assinante.Assinante('AssinanteBloqueado', 'assinantebloqueado@fitapp.com', planoGratuitoTeste, 'idNutri', 'idPersonal');
 assinanteBloqueadoTeste.idAssinante = "idAssinanteBloqueado"
 assinanteBloqueadoTeste.usuario.idUsuario = "idAssinanteBloqueado";
 assinanteBloqueadoTeste.usuario.bloqueado = true;
 assinanteBloqueadoTeste.usuario.senha = "assinante123";
-assinanteBloqueadoTeste.assinaturas[0].idAssinatura = "idAssinaturaBloqueada";
-assinanteBloqueadoTeste.assinaturas[0].idAssinante = "idAssinanteBloqueado";
+assinanteBloqueadoTeste.assinatura.idAssinatura = "idAssinaturaBloqueada";
+assinanteBloqueadoTeste.assinatura.idAssinante = "idAssinanteBloqueado";
 
 const assinanteAssinaturaTeste = new Assinante.Assinante('AssinanteAssinaturaTeste', 'assinanteassinaturateste@fitapp.com', planoGratuitoTeste, 'idNutri', 'idPersonal');
 assinanteAssinaturaTeste.idAssinante = "idAssinanteAssinaturaTeste"
 assinanteAssinaturaTeste.usuario.idUsuario = "idAssinanteAssinaturaTeste";
 assinanteAssinaturaTeste.usuario.senha = "assinante123";
-assinanteAssinaturaTeste.assinaturas[0].idAssinatura = "idAssinaturaTeste";
-assinanteAssinaturaTeste.assinaturas[0].idAssinante = "idAssinanteAssinaturaTeste";
+assinanteAssinaturaTeste.assinatura.idAssinatura = "idAssinaturaTeste";
+assinanteAssinaturaTeste.assinatura.idAssinante = "idAssinanteAssinaturaTeste";
 
 
 

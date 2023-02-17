@@ -31,12 +31,12 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.nutricionista = idNutri;
     this.personalTrainer = idPersonal;
     this.objetivo = '';
-    this.assinaturas = [];
+    this.assinatura = new Assinatura(this.idAssinante, plano);
     this.dietas = [];
     this.treinos = [];
     this.medidas = [];
 
-    this.assinaturas.push(new Assinatura(this.idAssinante, plano));
+   // this.assinaturas.push(new Assinatura(this.idAssinante, plano));
 
     this.dietaAtual = function () {
         return this.dietas.find(dieta => dieta.ativo == true);
