@@ -17,7 +17,7 @@ async function cadastrarPlano(req, res) {
     const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(req.body.nome);
 
     if (!planoEncontrado) {
-        const novoPlano = new Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
+        const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
 
         await repositorioDePlanos.criarPlano(novoPlano);
 
@@ -72,30 +72,23 @@ async function buscarPlanoPorId(req, res) {
     })
 }
 
-function alterarDadosDoPlano(req, res) {
+async function alterarDadosDoPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar dados do plano.'
 
-    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
+    Plano.validarAlteracaoDoPlano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
 
-    if (!planoEncontrado) {
-        res.status(404).send({ erro: "Plano não encontrado" });
+    const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(req.body.nome);
+
+    if (planoEncontrado) {
+        res.status(400).send({ erro: "Já existe Plano com esse nome" });
         return;
     }
 
+    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
 
-    if (planoEncontrado.nome != req.body.nome) {
-        const planoEncontradoPeloNome = repositorioDePlanos.buscarPlanosPorFiltro(req.body.nome);
-
-        if (planoEncontradoPeloNome.nome == req.body.nome) {
-            res.status(400).send({ erro: "Já existe Plano com esse nome" });
-            return;
-        }
-    }
-
-    planoEncontrado.alterarDadosDoPlano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
-    repositorioDePlanos.salvarAlteracaoDeDados(planoEncontrado);
     res.send();
+
 }
 
 function cadastrarNutricionista(req, res) {

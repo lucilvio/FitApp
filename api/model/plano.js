@@ -24,27 +24,33 @@ function Plano(nome, valor, duracao, descricao) {
     this.descricao = descricao;
     this.bloqueado = false;
 
-    this.alterarDadosDoPlano = function (novoNome, novoValor,novaDuracao, novaDescricao, novoStatus) {
-        if (novoNome != undefined && novoNome != null && novoNome != "") {
-            this.nome = novoNome;
-        }
-
-        if (novoValor != undefined && novoValor != null && novoValor != "" && novoValor >= 0) {
-            this.valor = novoValor;
-        }
-
-        if (novaDuracao != undefined && novaDuracao != null && novaDuracao != "" && novaDuracao >= 0) {
-            this.duracao = novaDuracao;
-        }
-
-        if (novaDescricao != undefined && novaDescricao != null && novaDescricao != "") {
-            this.descricao = novaDescricao;
-        }
-
-        if (typeof (novoStatus) == 'boolean') {
-            this.bloqueado = novoStatus;
-        }
-    }
 }
 
-module.exports = Plano
+function validarAlteracaoDoPlano(nome, valor, duracao, descricao, bloqueado) {
+
+    if (!nome) {
+        throw { mensagem: "O nome do plano precisa ser definido", interna: true };
+    }
+
+    if (!valor) {
+        throw { mensagem: "O valor do plano precisa ser definido", interna: true };
+    }
+
+    if (!duracao) {
+        throw { mensagem: "A duracao do plano precisa ser definido", interna: true };
+    }
+
+    if (!descricao) {
+        throw { mensagem: "A descricao do plano precisa ser definido", interna: true };
+    }
+
+    if (typeof(bloqueado) != 'boolean') {
+        throw { mensagem: "O status do plano precisa ser definido", interna: true };
+    }
+
+}
+
+module.exports = {
+    Plano: Plano,
+    validarAlteracaoDoPlano: validarAlteracaoDoPlano
+}

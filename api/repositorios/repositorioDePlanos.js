@@ -89,33 +89,46 @@ async function buscarPlanoPorId(idPlano) {
     }
 }
 
-function buscarPlanosPorNome(nome) {
-    return base.dados.planos.find(plano => plano.nome.toLowerCase() == nome.toLowerCase());
+async function salvarAlteracaoDeDados(idPlano, nome, valor, duracao, descricao, bloqueado) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `update planos
+            set nome = ?, valor = ?, duracao = ?,  descricao = ?,  bloqueado = ? 
+            where idPlano = ?`, [nome, valor, duracao, descricao, bloqueado, idPlano]);
+
+        
+    } finally {
+        await conexao.end();
+    }
 }
 
-function buscarPlanosAtivos() {
-    return base.dados.planos.filter(plano => plano.bloqueado == false);
+
+async function buscarPlanosAtivos() {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            from planos 
+            where bloqueado = false`);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
 }
 
-
-
-
-
-
-
-
-
-function salvarAlteracaoDeDados(plano) {
-    let planoEncontrado = buscarPlanoPorId(plano.idPlano);
-
-    planoEncontrado = plano;
-}
 
 module.exports = {
     verificarSeJaExistePlanoCadastradoPeloNome: verificarSeJaExistePlanoCadastradoPeloNome,
     buscarPlanosAtivos: buscarPlanosAtivos,
     criarPlano: criarPlano,
-    verificarSeJaExistePlanoCadastradoPeloNome: buscarPlanosPorNome,
     buscarPlanosPorFiltro: buscarPlanosPorFiltro,
     buscarPlanoPorId: buscarPlanoPorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados

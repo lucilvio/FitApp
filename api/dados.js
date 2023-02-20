@@ -8,13 +8,13 @@ const usuarioAdmin = new Usuario.Usuario('Administrador', 'admin@fitapp.com', 'a
 usuarioAdmin.idUsuario = "e7c17d74-f067-46ca-9734-1c232ba0ea18";
 usuarioAdmin.senha = 'admin123';
 
-const planoGratuitoTeste = new Plano('Gratuito', 0, 15, 'Experimente por 15 dias');
+const planoGratuitoTeste = new Plano.Plano('Gratuito', 0, 15, 'Experimente por 15 dias');
 planoGratuitoTeste.idPlano = "idPlano";
 
-const planoMensalTeste = new Plano('Mensal', 100, 30, 'Experimente por 30 dias');
+const planoMensalTeste = new Plano.Plano('Mensal', 100, 30, 'Experimente por 30 dias');
 planoMensalTeste.idPlano = "idMensal";
 
-const planoAnualTeste = new Plano('Trimestral', 250, 90, 'Experimente por 90 dias');
+const planoAnualTeste = new Plano.Plano('Trimestral', 250, 90, 'Experimente por 90 dias');
 planoAnualTeste.idPlano = "idAnual";
 
 const nutriTeste = new Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
