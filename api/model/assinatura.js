@@ -16,12 +16,6 @@ function Assinatura(idAssinante, plano) {
     this.dataFim = new Date();
     this.dataFim.setDate(this.dataInicio.getDate() + plano.duracao);
 
-    this.alterarPlano = function (novoPlano) {
-        this.idPlano = novoPlano.idPlano;
-        this.dataInicio = new Date();
-        this.dataFim = new Date();
-        this.dataFim.setDate(this.dataInicio.getDate() + novoPlano.duracao);
-    }
 
 }
 

@@ -11,6 +11,7 @@ const repositorioDeMensagens = require('../repositorios/repositorioDeMensagens')
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
 const Assinante = require('../model/assinante');
+const Assinatura = require('../model/assinatura');
 const Medidas = require('../model/medidas');
 const Mensagem = require('../model/mensagem');
 const Idade = require('../model/idade');
@@ -191,7 +192,7 @@ async function buscarDadosDaAssinatura(req, res) {
         nome: dadosDaAssinatura.nome,
         valor: dadosDaAssinatura.valor,
         descricao: dadosDaAssinatura.descricao,
-
+        bloqueado: dadosDaAssinatura.bloqueado
     });
 }
 
@@ -207,22 +208,39 @@ async function cancelarAssinatura(req, res) {
         return;
     }
 
+    if(dadosDaAssinatura.bloqueado == true) {
+        res.status(400).send({ erro: "Assinatura já está cancelada" });
+        return;
+    }
+
     await repositorioDeAssinaturas.cancelarAssinatura(req.usuario.idUsuario, req.params.idAssinatura);
     res.send();
 }
 
 //O Assinante altera dados da assinatura
-function alterarPlanoDaAssinatura(req, res) {
+async function alterarPlanoDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para alterar o Plano da Assinatura.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
+    const assinaturaEncontrada = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario ,req.params.idAssinatura);
+    if(!assinaturaEncontrada) {
+        res.status(400).send({ erro: "Assinatura não localizada" });
+        return;
+    }
 
-    const planoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
+    const dadosDoNovoPlano = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
+    if(!dadosDoNovoPlano) {
+        res.status(400).send({ erro: "Plano não localizado" });
+        return;
+    }
 
-    assinanteEncontrado.alterarPlanoDaAssinatura(req.params.idAssinatura, planoEncontrado);
-    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
-    res.send();
+    const novaAssinatura = new Assinatura(req.usuario.idUsuario, dadosDoNovoPlano);
+
+    await repositorioDeAssinaturas.alterarPlanoDaAssinatura(req.usuario.idUsuario, novaAssinatura);
+    
+    res.send({
+        idAssinatura: novaAssinatura.idAssinatura
+    });
 }
 
 
