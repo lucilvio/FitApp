@@ -325,6 +325,12 @@ async function alterarStatusDoAssinante(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar o status do Assinante.'
 
+    const assinanteEncontrado = await repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
+    if (!assinanteEncontrado) {
+        res.status(404).send({ erro: "Assinante não encontrado" });
+        return;
+    }
+
     Assinante.validarAlteracaoDeStatus(req.body.bloqueado);
 
     await repositorioDeAssinantes.salvarAlteracaoDestatus(req.params.idAssinante, req.body.bloqueado);

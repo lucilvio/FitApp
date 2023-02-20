@@ -101,7 +101,6 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
     }
 }
 
-
 async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
     const conexao = await baseDeDados.abrirConexao();
 
@@ -173,62 +172,11 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
     }
 }
 
-async function salvarMedidas(idUsuario, medidas) {
-    const conexao = await baseDeDados.abrirConexao();
 
-    try {
-        const parametrosDeMedidas = [
-            idUsuario,
-            medidas.idMedidas,
-            medidas.data,
-            medidas.peso,
-            medidas.pescoco,
-            medidas.cintura,
-            medidas.quadril
-        ]
 
-        await conexao.execute(
-            `insert into medidas (idAssinante, idMedidas, data, peso, pescoco, cintura, quadril)
-            values (?, ?, ?, ?, ?, ?, ?)`, parametrosDeMedidas);
 
-    } finally {
-        await conexao.end();
-    }
-}
 
-async function buscarMedidasDoAssinante(idAssinante) {
-    const conexao = await baseDeDados.abrirConexao();
 
-    try {
-        const [rows, fields] = await conexao.execute(
-            `select data, idMedidas, peso, pescoco, cintura, quadril 
-            from medidas
-            where idAssinante = ?
-            order by data desc`, [idAssinante]);
-
-        if (rows.length <= 0)
-            return;
-
-        return rows;
-
-    } finally {
-        await conexao.end();
-    }
-
-}
-
-async function excluirMedidasDoAssinante(idAssinante, idMedidas) {
-    const conexao = await baseDeDados.abrirConexao();
-
-    try {
-        await conexao.execute(
-            `delete from medidas
-            where idAssinante = ? and idMedidas = ?`, [idAssinante, idMedidas]);
-
-    } finally {
-        await conexao.end();
-    }
-}
 
 async function buscarAssinantePorFiltro(nome) {
     const conexao = await baseDeDados.abrirConexao();
@@ -343,9 +291,6 @@ module.exports = {
     criarAssinante: criarAssinante,
     buscarDadosDoDashboardDoAssinantePorId: buscarDadosDoDashboardDoAssinantePorId,
     buscarDadosDoPerfilDoAssinantePorId: buscarDadosDoPerfilDoAssinantePorId,
-    salvarMedidas: salvarMedidas,
-    buscarMedidasDoAssinante: buscarMedidasDoAssinante,
-    excluirMedidasDoAssinante: excluirMedidasDoAssinante,
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,

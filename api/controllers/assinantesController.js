@@ -9,6 +9,7 @@ const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinatur
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 const repositorioDeMensagens = require('../repositorios/repositorioDeMensagens');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
+const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
 const Assinante = require('../model/assinante');
 const Medidas = require('../model/medidas');
 const Mensagem = require('../model/mensagem');
@@ -123,7 +124,7 @@ async function inserirMedidas(req, res) {
     Medidas.validarInsercaoDeMedidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
     const medidas = new Medidas.Medidas(req.body.peso, req.body.pescoco, req.body.cintura, req.body.quadril);
 
-    await repositorioDeAssinantes.salvarMedidas(req.usuario.idUsuario, medidas);
+    await repositorioDeMedidas.salvarMedidas(req.usuario.idUsuario, medidas);
 
     res.send();
 }
@@ -133,7 +134,7 @@ async function buscarMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar medidas.'
 
-    const medidasOrdenadasPorData = await repositorioDeAssinantes.buscarMedidasDoAssinante(req.usuario.idUsuario);
+    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.usuario.idUsuario);
 
     let medidasAtuais;
     
@@ -159,7 +160,14 @@ async function excluirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para excluir medidas.'
 
-    await repositorioDeAssinantes.excluirMedidasDoAssinante(req.usuario.idUsuario, req.params.idMedidas);
+    const medidaEncontrada = await repositorioDeMedidas.buscarMedidaPorId(req.usuario.idUsuario, req.params.idMedidas);
+
+    if(!medidaEncontrada) {
+        res.status(400).send({ erro: "Medidas não localizada" });
+        return;
+    }
+
+    await repositorioDeMedidas.excluirMedidas(req.usuario.idUsuario, req.params.idMedidas);
 
     res.send();
 }
@@ -170,6 +178,11 @@ async function buscarDadosDaAssinatura(req, res) {
     // #swagger.description = 'endpoint para buscar dados da Assinatura.'
 
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
+
+    if(!dadosDaAssinatura) {
+        res.status(400).send({ erro: "Assinatura não localizada" });
+        return;
+    }
 
     res.send({
         dataInicio: dadosDaAssinatura.dataInicio,
@@ -193,7 +206,7 @@ async function cancelarAssinatura(req, res) {
         res.status(400).send({ erro: "Assinatura não localizada" });
         return;
     }
-    
+
     await repositorioDeAssinaturas.cancelarAssinatura(req.usuario.idUsuario, req.params.idAssinatura);
     res.send();
 }
