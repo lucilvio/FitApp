@@ -35,8 +35,23 @@ async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
     return rows[0];
 }
 
+async function cancelarAssinatura(idUsuario, idAssinatura) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        await conexao.execute(
+            `update assinaturas
+            set bloqueado = true
+            where idAssinante = ? and idAssinatura = ?`, [idUsuario, idAssinatura]);
+
+    } finally {
+        await conexao.end();
+    }
+}
+
 module.exports = {
     buscarAssinaturaAtiva: buscarAssinaturaAtiva,
     buscarAssinaturaPorId: buscarAssinaturaPorId,
+    cancelarAssinatura: cancelarAssinatura
 
 }

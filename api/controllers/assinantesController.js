@@ -15,7 +15,7 @@ const Mensagem = require('../model/mensagem');
 const Idade = require('../model/idade');
 const Imc = require('../model/imc');
 
-
+//O Assinante faz cadastro
 async function cadastrarAssinante(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para cadastrar Assinante.'
@@ -57,6 +57,7 @@ async function cadastrarAssinante(req, res) {
     }
 }
 
+//O sistema busca os dados da Dashboard do Assinante
 async function buscarDadosDoDashboard(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do daskboard do assinante.'
@@ -80,6 +81,7 @@ async function buscarDadosDoDashboard(req, res) {
     })
 }
 
+//O sistema busca os dados do perfil do Assinante
 async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados do perfil do assinante.'
@@ -102,6 +104,7 @@ async function buscarDadosDoPerfil(req, res) {
 
 }
 
+//O Assinante altera dados do perfil
 async function alterarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para alterar os dados do perfil.'
@@ -112,6 +115,7 @@ async function alterarDadosDoPerfil(req, res) {
     res.send();
 }
 
+//O Assinante insere medidas
 async function inserirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para inserir medidas.'
@@ -124,6 +128,7 @@ async function inserirMedidas(req, res) {
     res.send();
 }
 
+//O Assinante busca historico de medidas
 async function buscarMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar medidas.'
@@ -149,6 +154,7 @@ async function buscarMedidas(req, res) {
     });
 }
 
+//O Assinante exclui medidas
 async function excluirMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para excluir medidas.'
@@ -158,7 +164,7 @@ async function excluirMedidas(req, res) {
     res.send();
 }
 
-
+//O Assinante busca dados da assinatura
 async function buscarDadosDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dados da Assinatura.'
@@ -176,17 +182,23 @@ async function buscarDadosDaAssinatura(req, res) {
     });
 }
 
-function cancelarAssinatura(req, res) {
+//O Assinante cancela assinatura
+async function cancelarAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para cancelar Assinatura.'
+   
+    const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.usuario.idUsuario);
-
-    assinanteEncontrado.cancelarAssinatura(req.params.idAssinatura);
-    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    if(!dadosDaAssinatura) {
+        res.status(400).send({ erro: "Assinatura não localizada" });
+        return;
+    }
+    
+    await repositorioDeAssinaturas.cancelarAssinatura(req.usuario.idUsuario, req.params.idAssinatura);
     res.send();
 }
 
+//O Assinante altera dados da assinatura
 function alterarPlanoDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para alterar o Plano da Assinatura.'

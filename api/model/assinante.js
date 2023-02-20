@@ -36,7 +36,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.treinos = [];
     this.medidas = [];
 
-    // this.assinaturas.push(new Assinatura(this.idAssinante, plano));
+   
 
     this.dietaAtual = function () {
         return this.dietas.find(dieta => dieta.ativo == true);
@@ -61,17 +61,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     }
 
 
-    this.cancelarAssinatura = function (idAssinatura) {
-        const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
-
-        if (!assinaturaEncontrada) {
-
-            throw { mensagem: "Assinatura não encontrada", interna: true };
-        }
-
-        assinaturaEncontrada.bloqueado = true;
-        this.usuario.bloqueado = true;
-    }
+    
 
     this.alterarPlanoDaAssinatura = function (idAssinatura, novoPlano) {
         if (!novoPlano) {
@@ -125,6 +115,8 @@ function validarAlteracaoDeStatus(novoStatus) {
         throw { mensagem: "O status do assinante precisa ser definido", interna: true };
     }
 }
+
+
 
 
 
