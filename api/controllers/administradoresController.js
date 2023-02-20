@@ -8,6 +8,7 @@ const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
+const Assinante = require('../model/assinante');
 
 // O administrador cadastra plano
 async function cadastrarPlano(req, res) {
@@ -200,7 +201,7 @@ async function cadastrarPersonal(req, res) {
         servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
 
         res.send({
-            idPersonal: novoPersonal.idPersonal
+            idAssinante: novoPersonal.idPersonal
         });
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
@@ -271,61 +272,62 @@ async function alterarDadosDoPersonal(req, res) {
     }
 }
 
-function buscarAssinantes(req, res) {
+// O administrador busca todos os Assinantes ou filtra por nome
+async function buscarAssinantes(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar assinantes cadastrados - todos ou por nome.'
 
-    const assinantes = repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
+    const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
+
+    if (assinantes.length <= 0) {
+        res.status(400).send({ erro: "Assinante não localizado" });
+        return;
+    }
 
     res.send(assinantes.map(function (assinante) {
         return {
             idAssinante: assinante.idAssinante,
             nome: assinante.nome,
             email: assinante.email,
-            bloqueado: assinante.usuario.bloqueado,
+            telefone: assinante.telefone,
+            bloqueado: assinante.bloqueado
         }
     }));
 
 }
 
-function buscarAssinantePorId(req, res) {
+// O administrador busca assinantes por Id
+async function buscarAssinantePorId(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar assinantes por Id.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
+    const assinanteEncontrado = await repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
 
     if (!assinanteEncontrado) {
         res.status(404).send({ erro: "Assinante não encontrado" });
         return;
     }
-
-    const assinaturaEncontrada = repositorioDeAssinaturas.buscarAssinaturaAtiva(req.params.idAssinante)
 
     res.send({
         idAssinante: assinanteEncontrado.idAssinante,
         nome: assinanteEncontrado.nome,
         email: assinanteEncontrado.email,
-        bloqueado: assinanteEncontrado.usuario.bloqueado,
-        idPlano: assinaturaEncontrada.idPlano,
-        nomePlano: assinaturaEncontrada.nome,
-        valo: assinaturaEncontrada.valor
+        bloqueado: assinanteEncontrado.bloqueado,
+        idPlano: assinanteEncontrado.idPlano,
+        nomePlano:assinanteEncontrado.nomePlano,
+        valor: assinanteEncontrado.valor
     });
+   
 }
 
-function alterarStatusDoAssinante(req, res) {
+// O administrador altera o status do Assinante
+async function alterarStatusDoAssinante(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar o status do Assinante.'
 
-    const assinanteEncontrado = repositorioDeAssinantes.buscarAssinantePorId(req.params.idAssinante);
+    Assinante.validarAlteracaoDeStatus(req.body.bloqueado);
 
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: "Assinante não encontrado" });
-        return;
-    }
-
-    assinanteEncontrado.alterarStatus(req.body.bloqueado);
-
-    repositorioDeAssinantes.salvarAlteracaoDeDados(assinanteEncontrado);
+    await repositorioDeAssinantes.salvarAlteracaoDestatus(req.params.idAssinante, req.body.bloqueado);
 
     res.send();
 }

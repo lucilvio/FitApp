@@ -36,7 +36,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.treinos = [];
     this.medidas = [];
 
-   // this.assinaturas.push(new Assinatura(this.idAssinante, plano));
+    // this.assinaturas.push(new Assinatura(this.idAssinante, plano));
 
     this.dietaAtual = function () {
         return this.dietas.find(dieta => dieta.ativo == true);
@@ -46,14 +46,9 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         return this.treinos.find(treino => treino.ativo == true);
     }
 
-    this.alterarStatus = function (novoStatus) {
 
-        if (typeof (novoStatus) == 'boolean') {
-            this.usuario.bloqueado = novoStatus;
-        }
-    }
 
-    
+
 
     this.alterarSenha = function (senhaAtual, novaSenha) {
         if (senhaAtual == this.usuario.senha) {
@@ -65,7 +60,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
         }
     }
 
-    
+
     this.cancelarAssinatura = function (idAssinatura) {
         const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
 
@@ -119,16 +114,24 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
 
 }
 
-function validarAlteracaoDoPerfil (nome) {
+function validarAlteracaoDoPerfil(nome) {
     if (!nome) {
         throw { mensagem: "O nome do assinante precisa ser definido", interna: true };
     }
 }
 
+function validarAlteracaoDeStatus(novoStatus) {
+    if (typeof (novoStatus) != 'boolean') {
+        throw { mensagem: "O status do assinante precisa ser definido", interna: true };
+    }
+}
+
+
 
 
 module.exports = {
     Assinante: Assinante,
-    validarAlteracaoDoPerfil: validarAlteracaoDoPerfil
+    validarAlteracaoDoPerfil: validarAlteracaoDoPerfil,
+    validarAlteracaoDeStatus: validarAlteracaoDeStatus
 }
 

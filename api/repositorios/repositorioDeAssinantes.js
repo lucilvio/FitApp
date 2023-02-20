@@ -131,9 +131,13 @@ async function buscarAssinantePorId(idAssinante) {
     try {
         const [rows, fields] = await conexao.execute(
             `select a.idAssinante, a.idNutri, a.idPersonal, a.nome, a.email, a.dataNascimento, a.idSexo, a.altura, a.objetivos, 
-                b.idAssinatura, b.idPlano, b.dataInicio, b.dataFim, b.bloqueado 
+                b.idAssinatura, b.idPlano, b.dataInicio, b.dataFim, b.bloqueado,
+                c.imagem, c.bloqueado,
+                d.nome as nomePlano, d.valor 
             from assinantes as a
             inner join assinaturas as b on a.idAssinante = b.idAssinante
+            inner join usuarios as c on a.idAssinante = c.idUsuario
+            inner join planos as d on b.idPlano = d.idPlano
             where a.idAssinante = ?`, [idAssinante]);
 
         if (rows.length <= 0)
@@ -226,17 +230,46 @@ async function excluirMedidasDoAssinante(idAssinante, idMedidas) {
     }
 }
 
-function buscarAssinantePorFiltro(nome) {
-    if (!nome) {
-        return base.dados.assinantes;
-    } else {
-        return base.dados.assinantes.filter(assinante => assinante.nome.toLowerCase() == nome.toLowerCase());
+async function buscarAssinantePorFiltro(nome) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        if (!nome) {
+            const [rows, fields] = await conexao.execute(
+                `select a.idAssinante, a.nome, a.email,
+                b.bloqueado 
+                from assinantes as a
+                inner join usuarios as b on a.idAssinante = b.idUsuario`);
+
+            return rows;
+        }
+
+        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+            `select a.idAssinante, a.nome, a.email,
+                b.bloqueado 
+                from assinantes as a
+                inner join usuarios as b on a.idAssinante = b.idUsuario
+                where a.nome = ?`, [nome.toLowerCase()]);
+
+        return rowsComFiltro;
+
+    } finally {
+        await conexao.end();
     }
 }
 
-function salvarAlteracaoDeDados(assinante) {
-    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
-    assinanteEncontrado = assinante;
+async function salvarAlteracaoDestatus(idAssinante, novoStatus) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        await conexao.execute(
+            `update usuarios
+            set bloqueado = ?
+            where idUsuario = ?`, [novoStatus, idAssinante]);
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 function salvarDieta(assinante) {
@@ -316,7 +349,7 @@ module.exports = {
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
-    salvarAlteracaoDeDados: salvarAlteracaoDeDados,
+    salvarAlteracaoDestatus: salvarAlteracaoDestatus,
     salvarDieta: salvarDieta,
     salvarTreino: salvarTreino,
     buscarDietasPorFiltro: buscarDietasPorFiltro,
