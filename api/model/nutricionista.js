@@ -26,30 +26,7 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
     this.registroProfissional = registroProfissional;
     this.sobreMim = "";
 
-    this.alterarDadosDeCadastro = function (nome, email, telefone, registroProfissional, bloqueado) {
-        if (nome != undefined && nome != null && nome != "") {
-            this.nome = nome;
-            this.usuario.nome = nome;
-        }
-
-        if (email != undefined && email != null && email != "") {
-            this.email = email;
-            this.usuario.login = email;
-        }
-
-        if (telefone != undefined && telefone != null && telefone != "") {
-            this.telefone = telefone;
-        }
-
-        if (registroProfissional != undefined && registroProfissional != null && registroProfissional != "") {
-            this.registroProfissional = registroProfissional;
-        }
-
-        if (typeof (bloqueado) == 'boolean') {
-            this.usuario.bloqueado = bloqueado;
-        }
-    }
-
+    
     this.alterarDadosDoPerfil = function (telefone, imagem) {
         if (imagem != undefined && imagem != null && imagem != "") {
             this.usuario.imagem = imagem;
@@ -74,4 +51,8 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
 
 }
 
-module.exports = Nutricionista;
+
+
+module.exports = {
+    Nutricionista: Nutricionista
+}

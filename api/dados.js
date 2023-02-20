@@ -17,7 +17,7 @@ planoMensalTeste.idPlano = "idMensal";
 const planoAnualTeste = new Plano.Plano('Trimestral', 250, 90, 'Experimente por 90 dias');
 planoAnualTeste.idPlano = "idAnual";
 
-const nutriTeste = new Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
+const nutriTeste = new Nutricionista.Nutricionista('Nutricionista', 'nutri@fitapp.com', '999999999', 'CRN 123');
 nutriTeste.idNutri = "idNutri";
 nutriTeste.usuario.idUsuario = "idNutri";
 nutriTeste.usuario.senha = "nutri123";

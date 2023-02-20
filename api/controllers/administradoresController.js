@@ -35,7 +35,12 @@ async function buscarPlanos(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar planos - todos ou por nome.'
 
-    let planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
+    const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
+
+    if (planos <= 0) {
+        res.status(400).send({ erro: "Plano não localizado" });
+        return;
+    }
 
     res.send(planos.map(function (plano) {
         return {
@@ -91,16 +96,16 @@ async function alterarDadosDoPlano(req, res) {
 
 }
 
-function cadastrarNutricionista(req, res) {
+async function cadastrarNutricionista(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar Nutricionista.'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutricionistaPorEmail(req.body.email);
+    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.body.email);
 
     if (!nutriEncontrado) {
-        const novoNutricionista = new Nutricionista(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
+        const novoNutricionista = new Nutricionista.Nutricionista(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
 
-        repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
+        await repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
 
         servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoNutricionista.usuario.senha));
 
@@ -112,11 +117,16 @@ function cadastrarNutricionista(req, res) {
     }
 }
 
-function buscarNutricionistas(req, res) {
+async function buscarNutricionistas(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar Nutricionistas cadastrados - todos ou por nome.'
 
-    let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
+    const nutricionistas = await repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
+
+    if (nutricionistas.length <= 0) {
+        res.status(400).send({ erro: "Nutricionista não localizado" });
+        return;
+    }
 
     res.send(nutricionistas.map(function (nutri) {
         return {
@@ -125,16 +135,16 @@ function buscarNutricionistas(req, res) {
             email: nutri.email,
             telefone: nutri.telefone,
             registro: nutri.registro,
-            bloqueado: nutri.usuario.bloqueado
+            bloqueado: nutri.bloqueado
         }
     }));
 }
 
-function buscarNutriPorId(req, res) {
+async function buscarNutriPorId(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar Nutricionistas por Id.'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
+    const nutriEncontrado = await repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
     if (!nutriEncontrado) {
         res.status(404).send({ erro: "Nutricionista não encontrado" });
@@ -147,27 +157,27 @@ function buscarNutriPorId(req, res) {
         email: nutriEncontrado.email,
         telefone: nutriEncontrado.telefone,
         registro: nutriEncontrado.registroProfissional,
-        bloqueado: nutriEncontrado.usuario.bloqueado,
-        imagem: nutriEncontrado.usuario.imagem,
-        sobreMim: nutriEncontrado.sobreMim
+        sobreMim: nutriEncontrado.sobreMim,
+        imagem: nutriEncontrado.imagem,
+        bloqueado: nutriEncontrado.bloqueado
     });
 }
 
-function alterarDadosDoNutricionista(req, res) {
+async function alterarDadosDoNutricionista(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar dados cadastrais do Nutricionista.'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
-    if (!nutriEncontrado) {
-        res.status(404).send({ erro: 'Nutricionista não encontrado' });
-        return;
+    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.body.email);
+
+    if (!nutriEncontrado || nutriEncontrado.idNutri == req.params.idNutri) {
+        await repositorioDeNutricionistas.salvarAlteracaoDeDados(req.params.idNutri, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
+
+        res.send();
+    } else {
+        res.status(400).send({ erro: "Já existe Nutricionista cadastrado com esse email" });
     }
 
-    nutriEncontrado.alterarDadosDeCadastro(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
-
-    repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado);
-    res.send();
 }
 
 

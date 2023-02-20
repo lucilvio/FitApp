@@ -5,52 +5,140 @@ function buscarNutricionistasAtivos() {
     return base.dados.nutricionistas.filter(nutri => nutri.usuario.bloqueado == false);
 }
 
-function buscarNutricionistaPorEmail(email) {
-    return base.dados.nutricionistas.find(nutri => nutri.email.toLowerCase() == email.toLowerCase());
+async function verificarSeNutriJaTemCadastro(email) {
+    const conexao = await baseDeDados.abrirConexao();
 
-}
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select idNutri, email 
+            from nutricionistas 
+            where email = ?`, [email.toLowerCase()]);
 
-function criarNutricionista(novoNutricionista) {
-    base.dados.usuarios.push(novoNutricionista.usuario);
-    base.dados.nutricionistas.push(novoNutricionista);
-}
+        if (rows.length <= 0)
+            return;
 
-function buscarNutricionistasPorFiltro(nome) {
-    if (!nome) {
-        return base.dados.nutricionistas;
-    } else {
-        return base.dados.nutricionistas.filter(nutri => nutri.nome.toLowerCase() == nome.toLowerCase());
+        return rows[0];
 
+    } finally {
+        await conexao.end();
     }
+
+}
+
+async function criarNutricionista(novoNutricionista) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const parametrosDoUsuario = [
+            novoNutricionista.usuario.idUsuario,
+            novoNutricionista.usuario.perfil,
+            novoNutricionista.usuario.nome,
+            novoNutricionista.usuario.login,
+            novoNutricionista.usuario.senha,
+            novoNutricionista.usuario.bloqueado
+        ]
+
+        const parametrosDoNutricionista = [
+            novoNutricionista.idNutri,
+            novoNutricionista.nome,
+            novoNutricionista.email,
+            novoNutricionista.telefone,
+            novoNutricionista.registroProfissional
+        ]
+
+        await conexao.beginTransaction();
+
+        await conexao.execute(
+            `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
+        await conexao.execute(
+            `insert into nutricionistas (idNutri, nome, email, telefone, registroProfissional) 
+            values (?, ?, ?, ?, ?);`, parametrosDoNutricionista);
+
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function buscarNutricionistasPorFiltro(nome) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        if (!nome) {
+            const [rows, fields] = await conexao.execute(
+                `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                b.bloqueado 
+                from nutricionistas as a
+                inner join usuarios as b on a.idNutri = b.idUsuario`);
+
+            return rows;
+        }
+
+        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+            `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                b.bloqueado 
+                from nutricionistas as a
+                inner join usuarios as b on a.idNutri = b.idUsuario
+                where a.nome = ?`, [nome.toLowerCase()]);
+
+        return rowsComFiltro;
+
+    } finally {
+        await conexao.end();
+    }
+
 }
 
 async function buscarNutriPorId(idNutri) {
     const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
-        `select idNutri, nome, email, telefone, registroProfissional from nutricionistas where idNutri = ?`, [idNutri]);
-
+        `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                b.imagem, b.bloqueado 
+        from nutricionistas as a
+        inner join usuarios as b on a.idNutri = b.idUsuario
+        where a.idNutri = ?`, [idNutri]);
     if (rows.length <= 0)
         return;
 
     return rows[0];
 }
 
-function salvarAlteracaoDeDados(nutricionista) {
-    let nutriEncontrado = buscarNutriPorId(nutricionista.idNutri);
+async function salvarAlteracaoDeDados(idNutri, nome, email, telefone, registroProfissional, bloqueado) {
+    const conexao = await baseDeDados.abrirConexao();
 
-    nutriEncontrado = nutricionista;
+    try {
+
+        await conexao.beginTransaction();
+
+        await conexao.execute(
+            `update usuarios
+            set nome = ?, login = ?, bloqueado = ?
+            where idUsuario = ?`, [nome, email, bloqueado, idNutri]);
+
+        await conexao.execute(
+            `update nutricionistas
+            set nome = ?, email = ?, telefone = ?, registroProfissional = ?
+            where idNutri = ?`, [nome, email, telefone, registroProfissional, idNutri]);
+
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 function buscarPacientesPorFiltro(nome, emailNutri) {
     const nutricionista = buscarNutricionistaPorEmail(emailNutri);
 
-    if(!nutricionista) {
+    if (!nutricionista) {
         res.status(404).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
-    if(!nome) {
+    if (!nome) {
         return base.dados.assinantes.filter(assinante => assinante.nutricionista == nutricionista.idNutri);
     } else {
         return base.dados.assinantes.filter(assinante => assinante.nutricionista == nutricionista.idNutri && assinante.nome.toLowerCase() == nome.toLowerCase());
@@ -75,12 +163,12 @@ function salvarAlteracoesDaDieta(dieta) {
 
 module.exports = {
     buscarNutricionistasAtivos: buscarNutricionistasAtivos,
-    buscarNutricionistaPorEmail: buscarNutricionistaPorEmail,
+    verificarSeNutriJaTemCadastro: verificarSeNutriJaTemCadastro,
     criarNutricionista: criarNutricionista,
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,
     buscarNutriPorId: buscarNutriPorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
-    buscarPacientesPorFiltro:  buscarPacientesPorFiltro,
+    buscarPacientesPorFiltro: buscarPacientesPorFiltro,
     buscarPacientePorId: buscarPacientePorId,
     buscarDietaPorId: buscarDietaPorId,
     salvarAlteracoesDaDieta: salvarAlteracoesDaDieta,
