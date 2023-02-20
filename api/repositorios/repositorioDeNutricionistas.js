@@ -10,9 +10,9 @@ async function verificarSeNutriJaTemCadastro(email) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select idNutri, email 
-            from nutricionistas 
-            where email = ?`, [email.toLowerCase()]);
+            `select idUsuario, login 
+            from usuarios 
+            where login = ?`, [email.toLowerCase()]);
 
         if (rows.length <= 0)
             return;
@@ -94,16 +94,22 @@ async function buscarNutricionistasPorFiltro(nome) {
 async function buscarNutriPorId(idNutri) {
     const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                b.imagem, b.bloqueado 
-        from nutricionistas as a
-        inner join usuarios as b on a.idNutri = b.idUsuario
-        where a.idNutri = ?`, [idNutri]);
-    if (rows.length <= 0)
-        return;
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                    b.imagem, b.bloqueado 
+            from nutricionistas as a
+            inner join usuarios as b on a.idNutri = b.idUsuario
+            where a.idNutri = ?`, [idNutri]);
 
-    return rows[0];
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function salvarAlteracaoDeDados(idNutri, nome, email, telefone, registroProfissional, bloqueado) {

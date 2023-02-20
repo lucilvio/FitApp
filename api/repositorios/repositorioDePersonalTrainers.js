@@ -5,52 +5,145 @@ function buscarPersonalTrainersAtivos() {
     return base.dados.personalTrainers.filter(personal => personal.usuario.bloqueado == false);
 }
 
-function buscarPersonalPorEmail(email) {
-    return base.dados.personalTrainers.find(personal => personal.email.toLowerCase() == email.toLowerCase());
+async function verificarSePersonalJaTemCadastro(email) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select idUsuario, login 
+            from usuarios 
+            where login = ?`, [email.toLowerCase()]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
 
 }
 
-function criarPersonal(novoPersonal) {
-    base.dados.usuarios.push(novoPersonal.usuario);
-    base.dados.personalTrainers.push(novoPersonal);
+async function criarPersonal(novoPersonal) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const parametrosDoUsuario = [
+            novoPersonal.usuario.idUsuario,
+            novoPersonal.usuario.perfil,
+            novoPersonal.usuario.nome,
+            novoPersonal.usuario.login,
+            novoPersonal.usuario.senha,
+            novoPersonal.usuario.bloqueado
+        ]
+
+        const parametrosDoPersonal = [
+            novoPersonal.idPersonal,
+            novoPersonal.nome,
+            novoPersonal.email,
+            novoPersonal.telefone,
+            novoPersonal.registroProfissional
+        ]
+
+        await conexao.beginTransaction();
+
+        await conexao.execute(
+            `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
+        await conexao.execute(
+            `insert into personal_trainers (idPersonal, nome, email, telefone, registroProfissional) 
+            values (?, ?, ?, ?, ?);`, parametrosDoPersonal);
+
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
 }
 
-function buscarPersonalTrainersPorFiltro(nome) {
-    if (!nome) {
-        return base.dados.personalTrainers;
-    } else {
-        return base.dados.personalTrainers.filter(personal => personal.nome.toLowerCase() == nome.toLowerCase());
+async function buscarPersonalTrainersPorFiltro(nome) {
+    const conexao = await baseDeDados.abrirConexao();
 
+    try {
+        if (!nome) {
+            const [rows, fields] = await conexao.execute(
+                `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                b.bloqueado 
+                from personal_trainers as a
+                inner join usuarios as b on a.idPersonal = b.idUsuario`);
+
+            return rows;
+        }
+
+        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+            `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                b.bloqueado 
+                from personal_trainers as a
+                inner join usuarios as b on a.idPersonal = b.idUsuario
+                where a.nome = ?`, [nome.toLowerCase()]);
+
+        return rowsComFiltro;
+
+    } finally {
+        await conexao.end();
     }
 }
 
 async function buscarPersonalPorId(idPersonal) {
     const conexao = await baseDeDados.abrirConexao();
+    try {
 
-    const [rows, fields] = await conexao.execute(
-        `select idPersonal, nome, email, telefone, registroProfissional from personal_trainers where idPersonal = ?`, [idPersonal]);
+        const [rows, fields] = await conexao.execute(
+            `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
+                b.imagem, b.bloqueado 
+        from personal_trainers as a
+        inner join usuarios as b on a.idPersonal = b.idUsuario
+        where a.idPersonal = ?`, [idPersonal]);
 
-    if (rows.length <= 0)
-        return;
+        if (rows.length <= 0)
+            return;
 
-    return rows[0];
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
 }
 
-function salvarAlteracaoDeDados(personal) {
-    let personalEncontrado = buscarPersonalPorId(personal.idPersonal);
+async function salvarAlteracaoDeDados(idPersonal, nome, email, telefone, registroProfissional, bloqueado) {
+    const conexao = await baseDeDados.abrirConexao();
 
-    personalEncontrado = personal;
+    try {
+        await conexao.beginTransaction();
+
+        await conexao.execute(
+            `update usuarios
+            set nome = ?, login = ?, bloqueado = ?
+            where idUsuario = ?`, [nome, email, bloqueado, idPersonal]);
+
+        await conexao.execute(
+            `update personal_trainers
+            set nome = ?, email = ?, telefone = ?, registroProfissional = ?
+            where idPersonal = ?`, [nome, email, telefone, registroProfissional, idPersonal]);
+
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
 }
+
 
 function buscarAlunosPorFiltro(nome, emailPersonal) {
     const personal = buscarPersonalPorEmail(emailPersonal);
 
-    if(!personal) {
+    if (!personal) {
         res.status(404).send({ erro: "Personal Trainer não encontrado" });
         return;
     }
 
-    if(!nome) {
+    if (!nome) {
         return base.dados.assinantes.filter(assinante => assinante.personalTrainer == personal.idPersonal);
     } else {
         return base.dados.assinantes.filter(assinante => assinante.personalTrainer == personal.idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
@@ -81,12 +174,12 @@ function salvarAlteracoesDoTreino(treino) {
 
 module.exports = {
     buscarPersonalTrainersAtivos: buscarPersonalTrainersAtivos,
-    buscarPersonalPorEmail: buscarPersonalPorEmail,
+    verificarSePersonalJaTemCadastro: verificarSePersonalJaTemCadastro,
     criarPersonal: criarPersonal,
     buscarPersonalTrainersPorFiltro: buscarPersonalTrainersPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
-    buscarAlunosPorFiltro:  buscarAlunosPorFiltro,
+    buscarAlunosPorFiltro: buscarAlunosPorFiltro,
     buscarAlunoPorId: buscarAlunoPorId,
     buscarTreinoPorId: buscarTreinoPorId,
     salvarTreino: salvarTreino,

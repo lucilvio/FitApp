@@ -4,10 +4,12 @@ const Assinante = require('../model/assinante');
 
 async function verificarSeAssinanteJaTemCadastro(email) {
     const conexao = await baseDeDados.abrirConexao();
-    
+
     try {
         const [rows, fields] = await conexao.execute(
-            `select email from assinantes where email = ?`, [email.toLowerCase()]);
+            `select email 
+            from usuarios 
+            where login = ?`, [email.toLowerCase()]);
 
         if (rows.length <= 0)
             return;

@@ -22,7 +22,7 @@ nutriTeste.idNutri = "idNutri";
 nutriTeste.usuario.idUsuario = "idNutri";
 nutriTeste.usuario.senha = "nutri123";
 
-const personalTeste = new Personal('Personal', 'personal@fitapp.com', '999999999', 'CRN 123');
+const personalTeste = new Personal.PersonalTrainer('Personal', 'personal@fitapp.com', '999999999', 'CRN 123');
 personalTeste.idPersonal = "idPersonal";
 personalTeste.usuario.idUsuario = "idPersonal";
 personalTeste.usuario.senha = "personal123";
