@@ -109,6 +109,7 @@ async function buscarPlanosAtivos() {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
+
         const [rows, fields] = await conexao.execute(
             `select idPlano, nome, valor, duracao, descricao, bloqueado 
             from planos 
@@ -117,7 +118,7 @@ async function buscarPlanosAtivos() {
         if (rows.length <= 0)
             return;
 
-        return rows[0];
+        return rows;
 
     } finally {
         await conexao.end();

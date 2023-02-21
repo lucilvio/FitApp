@@ -1,8 +1,25 @@
 const base = require('../dados');
 const baseDeDados = require('../conexao');
 
-function buscarPersonalTrainersAtivos() {
-    return base.dados.personalTrainers.filter(personal => personal.usuario.bloqueado == false);
+async function buscarPersonalTrainersAtivos() {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select a.idPersonal, a.nome, a.sobreMim,
+                    b.imagem 
+            from personal_trainers as a
+            inner join usuarios as b on a.idPersonal = b.idUsuario
+            where b.bloqueado = false`);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows;
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function verificarSePersonalJaTemCadastro(email) {

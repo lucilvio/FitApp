@@ -1,8 +1,25 @@
 const base = require('../dados');
 const baseDeDados = require('../conexao');
 
-function buscarNutricionistasAtivos() {
-    return base.dados.nutricionistas.filter(nutri => nutri.usuario.bloqueado == false);
+async function buscarNutricionistasAtivos() {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select a.idNutri, a.nome, a.sobreMim,
+                    b.imagem 
+            from nutricionistas as a
+            inner join usuarios as b on a.idNutri = b.idUsuario
+            where b.bloqueado = false`);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows;
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function verificarSeNutriJaTemCadastro(email) {

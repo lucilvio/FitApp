@@ -2,12 +2,12 @@ const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutric
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 
-function buscarPlanos(req, res) {
+async function buscarPlanos(req, res) {
     // #swagger.tags = ['Geral']
     // #swagger.description = 'endpoint para buscar planos ativos ao carregar a pagina do site.'
     // #swagger.security = [] 
 
-    let planos = repositorioDePlanos.buscarPlanosAtivos();
+    const planos = await repositorioDePlanos.buscarPlanosAtivos();
 
     res.send(planos.map(function (plano) {
         return {
@@ -20,99 +20,98 @@ function buscarPlanos(req, res) {
     }));
 }
 
-function buscarNutricionistas(req, res) {
+async function buscarNutricionistas(req, res) {
     // #swagger.tags = ['Geral']
     // #swagger.description = 'endpoint para buscar Nutricionistas ativos ao carregar a pagina do site.'
     // #swagger.security = [] 
 
-    let nutricionistas = repositorioDeNutricionistas.buscarNutricionistasAtivos();
+    const nutricionistas = await repositorioDeNutricionistas.buscarNutricionistasAtivos();
 
     res.send(nutricionistas.map(function (nutri) {
         return {
             idNutri: nutri.idNutri,
             nome: nutri.nome,
-            imagem: nutri.usuario.imagem,
+            imagem: nutri.imagem,
             sobreMim: nutri.sobreMim
         }
     }));
 }
 
-function buscarPersonalTrainers(req, res) {
+async function buscarPersonalTrainers(req, res) {
     // #swagger.tags = ['Geral']
     // #swagger.description = 'endpoint para buscar buscar Personal Trainers ativos ao carregar a pagina do site.'
     // #swagger.security = [] 
 
-    let personalTrainers = repositorioDePersonalTrainers.buscarPersonalTrainersAtivos();
+    const personalTrainers = await repositorioDePersonalTrainers.buscarPersonalTrainersAtivos();
 
     res.send(personalTrainers.map(function (personal) {
         return {
             idPersonal: personal.idPersonal,
             nome: personal.nome,
-            imagem: personal.usuario.imagem,
+            imagem: personal.imagem,
             sobreMim: personal.sobreMim
         }
     }));
 }
 
-function buscarNutriPorId(req, res) {
+async function buscarNutriPorId(req, res) {
     // #swagger.tags = ['Geral']
     // #swagger.description = 'endpoint para buscar Nutricionista por Id na pagina do site.'
     // #swagger.security = [] 
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
+    const dadosDoNutri = await repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
-    if (!nutriEncontrado) {
+    if (!dadosDoNutri) {
         res.status(404).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
     res.send({
-        idNutri: nutriEncontrado.idNutri,
-        nome: nutriEncontrado.nome,
-        //comentado devido a migracao para bd - verificar
-        //imagem: nutriEncontrado.usuario.imagem,
-        sobreMim: nutriEncontrado.sobreMim
+        idNutri: dadosDoNutri.idNutri,
+        nome: dadosDoNutri.nome,
+        imagem: dadosDoNutri.imagem,
+        sobreMim: dadosDoNutri.sobreMim
     });
 }
 
-function buscarPersonalPorId(req, res) {
+async function buscarPersonalPorId(req, res) {
     // #swagger.tags = ['Geral']
     // #swagger.description = 'endpoint para buscar Personal trainer por Id na pagina do site.'
     // #swagger.security = [] 
 
-    const PersonalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
+    const dadosDoPersonal = await repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
-    if (!PersonalEncontrado) {
+    if (!dadosDoPersonal) {
         res.status(404).send({ erro: "Personal Trainer não encontrado" });
         return;
     }
 
     res.send({
-        idPersonal: PersonalEncontrado.idPersonal,
-        nome: PersonalEncontrado.nome,
-       // imagem: PersonalEncontrado.usuario.imagem,
-        sobreMim: PersonalEncontrado.sobreMim
+        idPersonal: dadosDoPersonal.idPersonal,
+        nome: dadosDoPersonal.nome,
+       imagem: dadosDoPersonal.imagem,
+        sobreMim: dadosDoPersonal.sobreMim
     });
 }
 
-function buscarPlanoPorId(req, res) {
+async function buscarPlanoPorId(req, res) {
     // #swagger.tags = ['Geral']
     // #swagger.description = 'endpoint para buscar Plano por Id na pagina do site.'
     // #swagger.security = [] 
 
-    const PlanoEncontrado = repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
+    const dadosDoPlano = await repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
-    if (!PlanoEncontrado) {
+    if (!dadosDoPlano) {
         res.status(404).send({ erro: "Plano não encontrado" });
         return;
     }
 
     res.send({
-        idPlano: PlanoEncontrado.idPlano,
-        nome: PlanoEncontrado.nome,
-        valor: PlanoEncontrado.valor,
-        duracao: PlanoEncontrado.duracao,
-        descricao: PlanoEncontrado.descricao
+        idPlano: dadosDoPlano.idPlano,
+        nome: dadosDoPlano.nome,
+        valor: dadosDoPlano.valor,
+        duracao: dadosDoPlano.duracao,
+        descricao: dadosDoPlano.descricao
     });
 }
 
