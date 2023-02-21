@@ -2,23 +2,27 @@ const baseDeDados = require('../conexao');
 
 
 async function buscarAssinaturaAtiva(idAssinante) {
-    const conexao = await baseDeDados.abrirConexao();
+    try {
+        const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select idAssinatura 
+        const [rows, fields] = await conexao.execute(
+            `select idAssinatura 
         from assinaturas 
         where idAssinante = ? and bloqueado = 0`, [idAssinante]);
 
-    await conexao.end();
+        if (rows.length <= 0)
+            return;
 
-    if (rows.length <= 0)
-        return;
+        return rows[0];
 
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
-    const conexao = await baseDeDados.abrirConexao();
+    try {
+        const conexao = await baseDeDados.abrirConexao();
 
     const [rows, fields] = await conexao.execute(
         `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
@@ -27,18 +31,21 @@ async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
         inner join planos as b on a.idPlano = b.idPlano 
         where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
 
-    await conexao.end();
+        if (rows.length <= 0)
+            return;
 
-    if (rows.length <= 0)
-        return;
+        return rows[0];
 
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function cancelarAssinatura(idUsuario, idAssinatura) {
-    const conexao = await baseDeDados.abrirConexao();
 
     try {
+        const conexao = await baseDeDados.abrirConexao();
+
         await conexao.execute(
             `update assinaturas
             set bloqueado = true
@@ -82,6 +89,8 @@ async function alterarPlanoDaAssinatura(idUsuario, novaAssinatura) {
 module.exports = {
     buscarAssinaturaAtiva: buscarAssinaturaAtiva,
     buscarAssinaturaPorId: buscarAssinaturaPorId,
+    cancelarAssinatura: cancelarAssinatura,
+    alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
     cancelarAssinatura: cancelarAssinatura,
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura
 
