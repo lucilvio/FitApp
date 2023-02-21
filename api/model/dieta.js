@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-function Dieta(idAssinante, idNutricionista, nomeDieta, dataInicio, dataFim, objetivo, itens) {
+function Dieta(idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, itens) {
     if (!nomeDieta) {
         throw { mensagem: "Não é possível criar dieta sem nome", interna: true };
     }
@@ -19,7 +19,7 @@ function Dieta(idAssinante, idNutricionista, nomeDieta, dataInicio, dataFim, obj
 
     this.idDieta = crypto.randomUUID();
     this.idAssinante = idAssinante;
-    this.idNutricionista = idNutricionista;
+    this.idNutri = idNutri;
     this.ativo = true;
     this.nomeDieta = nomeDieta;
     this.dataInicio = dataInicio;

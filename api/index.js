@@ -119,7 +119,7 @@ servidor.app.get('/assinante/treino/:idTreino', autorizacao.autorizar(model.perf
 
 
 
-servidor.app.use(tratamentoDeErrosMiddleware.tratarErros);
+// servidor.app.use(tratamentoDeErrosMiddleware.tratarErros);
 
 async function tratarErros(req, res, action) {
     try {

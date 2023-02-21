@@ -7,107 +7,160 @@ GRANT ALL PRIVILEGES ON `db_fitapp`.* TO 'fitapp_user'@'localhost';
 FLUSH PRIVILEGES; 
 
 CREATE TABLE  IF NOT EXISTS `usuarios` (
-  `id_usuario` varchar(36) NOT NULL, 
+  `idUsuario` varchar(36) NOT NULL, 
   `perfil` varchar(32) NOT NULL,
   `nome` varchar(128) NOT NULL,
   `login` varchar(128) NOT NULL,
   `senha` varchar(64) NOT NULL,
   `bloqueado` tinyint NOT NULL,
   `imagem` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`id_usuario`),
+  PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `login_usuario_UNIQUE` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE  IF NOT EXISTS `nutricionistas` (
-  `id_nutricionista` varchar(36) NOT NULL,
+  `idNutri` varchar(36) NOT NULL,
   `nome` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `telefone` varchar(32) NOT NULL,
-  `registro_profissional` varchar(30) NOT NULL,
-  `sobre_mim` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`id_nutricionista`),
-  CONSTRAINT `fk_nutricionista_idUsuario` FOREIGN KEY (`id_nutricionista`) REFERENCES `usuarios` (`id_usuario`)
+  `registroProfissional` varchar(30) NOT NULL,
+  `sobreMim` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`idNutri`),
+  CONSTRAINT `fk_nutricionista_idUsuario` FOREIGN KEY (`idNutri`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE  IF NOT EXISTS `personal_trainers` (
-  `id_personal` varchar(36) NOT NULL,
+  `idPersonal` varchar(36) NOT NULL,
   `nome` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `telefone` varchar(32) NOT NULL,
-  `registro_profissional` varchar(30) NOT NULL,
-  `sobre_mim` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`id_personal`),
-  CONSTRAINT `fk_personal_idUsuario` FOREIGN KEY (`id_personal`) REFERENCES `usuarios` (`id_usuario`)
+  `registroProfissional` varchar(30) NOT NULL,
+  `sobreMim` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`idPersonal`),
+  CONSTRAINT `fk_personal_idUsuario` FOREIGN KEY (`idPersonal`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE  IF NOT EXISTS `sexos` (
-  `id_sexo` int NOT NULL,
+  `idSexo` int NOT NULL,
   `descricao` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`id_sexo`)
+  PRIMARY KEY (`idSexo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE  IF NOT EXISTS `assinantes` (
-  `id_assinante` varchar(36) NOT NULL,
-  `id_nutricionista` varchar(36) NOT NULL,
-  `id_personal` varchar(36) NOT NULL,
+  `idAssinante` varchar(36) NOT NULL,
+  `idNutri` varchar(36) NOT NULL,
+  `idPersonal` varchar(36) NOT NULL,
   `nome` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
-  `data_nascimento` datetime DEFAULT NULL,
-  `id_sexo` int DEFAULT NULL,
+  `dataNascimento` datetime DEFAULT NULL,
+  `idSexo` int DEFAULT NULL,
   `altura` int DEFAULT NULL,
   `objetivos` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`id_assinante`),
-  KEY `fk_assinante_idNutricionista_idx` (`id_nutricionista`),
-  KEY `fk_assinante_idPersonal_idx` (`id_personal`),
-  KEY `fk_assinante_idSexo_idx` (`id_sexo`),
-  CONSTRAINT `fk_assinante_idNutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionistas` (`id_nutricionista`),
-  CONSTRAINT `fk_assinante_idPersonal` FOREIGN KEY (`id_personal`) REFERENCES `personal_trainers` (`id_personal`),
-  CONSTRAINT `fk_assinante_idSexo` FOREIGN KEY (`id_sexo`) REFERENCES `sexos` (`id_sexo`),
-  CONSTRAINT `fk_assinante_idUsuario` FOREIGN KEY (`id_assinante`) REFERENCES `usuarios` (`id_usuario`)
+  PRIMARY KEY (`idAssinante`),
+  KEY `fk_assinante_idNutricionista_idx` (`idNutri`),
+  KEY `fk_assinante_idPersonal_idx` (`idPersonal`),
+  KEY `fk_assinante_idSexo_idx` (`idSexo`),
+  CONSTRAINT `fk_assinante_idNutricionista` FOREIGN KEY (`idNutri`) REFERENCES `nutricionistas` (`idNutri`),
+  CONSTRAINT `fk_assinante_idPersonal` FOREIGN KEY (`idPersonal`) REFERENCES `personal_trainers` (`idPersonal`),
+  CONSTRAINT `fk_assinante_idSexo` FOREIGN KEY (`idSexo`) REFERENCES `sexos` (`idSexo`),
+  CONSTRAINT `fk_assinante_idUsuario` FOREIGN KEY (`idAssinante`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE  IF NOT EXISTS `medidas` (
-  `id_medidas` varchar(36) NOT NULL,
-  `id_assinante` varchar(36) NOT NULL,
+  `idMedidas` varchar(36) NOT NULL,
+  `idAssinante` varchar(36) NOT NULL,
   `peso` int DEFAULT NULL,
   `pescoco` int DEFAULT NULL,
   `cintura` int DEFAULT NULL,
   `quadril` int DEFAULT NULL,
-  PRIMARY KEY (`id_medidas`),
-  KEY `fk_medidas_idAssinante_idx` (`id_assinante`),
-  CONSTRAINT `fk_medidas_idAssinante` FOREIGN KEY (`id_assinante`) REFERENCES `assinantes` (`id_assinante`)
+  `data` datetime NOT NULL,
+  PRIMARY KEY (`idMedidas`),
+  KEY `fk_medidas_idAssinante_idx` (`idAssinante`),
+  CONSTRAINT `fk_medidas_idAssinante` FOREIGN KEY (`idAssinante`) REFERENCES `assinantes` (`idAssinante`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE  IF NOT EXISTS `planos` (
-  `id_plano` varchar(36) NOT NULL,
+  `idPlano` varchar(36) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `valor` decimal(5,2) NOT NULL,
   `duracao` int NOT NULL,
   `descricao` varchar(256) NOT NULL,
   `bloqueado` tinyint NOT NULL,
-  PRIMARY KEY (`id_plano`),
+  PRIMARY KEY (`idPlano`),
   UNIQUE KEY `nome_plano_UNIQUE` (`nome`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE  IF NOT EXISTS `assinaturas` (
-  `id_assinatura` varchar(36) NOT NULL,
-  `id_assinante` varchar(36) NOT NULL,
-  `id_plano` varchar(36) NOT NULL,
-  `data_inicio` datetime NOT NULL,
-  `data_fim` datetime NOT NULL,
+  `idAssinatura` varchar(36) NOT NULL,
+  `idAssinante` varchar(36) NOT NULL,
+  `idPlano` varchar(36) NOT NULL,
+  `dataInicio` datetime NOT NULL,
+  `dataFim` datetime NOT NULL,
   `bloqueado` tinyint NOT NULL,
-  PRIMARY KEY (`id_assinatura`),
-  KEY `fk_idAssinante_idx` (`id_assinante`),
-  KEY `fk_assinatura_idPlano_idx` (`id_plano`),
-  CONSTRAINT `fk_assinatura_idAssinante` FOREIGN KEY (`id_assinante`) REFERENCES `assinantes` (`id_assinante`),
-  CONSTRAINT `fk_assinatura_idPlano` FOREIGN KEY (`id_plano`) REFERENCES `planos` (`id_plano`)
+  PRIMARY KEY (`idAssinatura`),
+  KEY `fk_idAssinante_idx` (`idAssinante`),
+  KEY `fk_assinatura_idPlano_idx` (`idPlano`),
+  CONSTRAINT `fk_assinatura_idAssinante` FOREIGN KEY (`idAssinante`) REFERENCES `assinantes` (`idAssinante`),
+  CONSTRAINT `fk_assinatura_idPlano` FOREIGN KEY (`idPlano`) REFERENCES `planos` (`idPlano`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-replace into sexos (id_sexo, descricao) values(1, 'feminino');
-replace into sexos (id_sexo, descricao) values(2, 'masculino');
+CREATE TABLE IF NOT EXISTS `dietas` (
+  `idDieta` VARCHAR(36) NOT NULL,
+  `idAssinante` VARCHAR(36) NOT NULL,
+  `idNutri` VARCHAR(36) NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `objetivo` VARCHAR(126) NOT NULL,
+  `dataInicio` DATETIME NOT NULL,
+  `dataFim` DATETIME NOT NULL,
+  `data` DATETIME NOT NULL,
+  PRIMARY KEY (`idDieta`),
+  INDEX `fk_dietas_idAssinante_idx` (`idAssinante` ASC) VISIBLE,
+  INDEX `fk_dietas_idNutri_idx` (`idNutri` ASC) VISIBLE,
+  CONSTRAINT `fk_dietas_idAssinante` FOREIGN KEY (`idAssinante`) REFERENCES `db_fitapp`.`assinantes` (`idAssinante`),
+  CONSTRAINT `fk_dietas_idNutri` FOREIGN KEY (`idNutri`) REFERENCES `db_fitapp`.`nutricionistas` (`idNutri`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-replace into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+CREATE TABLE IF NOT EXISTS `treinos` (
+  `idTreino` VARCHAR(36) NOT NULL,
+  `idAssinante` VARCHAR(36) NOT NULL,
+  `idPersonal` VARCHAR(36) NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `objetivo` VARCHAR(126) NOT NULL,
+  `dataInicio` DATETIME NOT NULL,
+  `dataFim` DATETIME NOT NULL,
+  `data` DATETIME NOT NULL,
+  PRIMARY KEY (`idTreino`),
+  INDEX `fk_treinos_idAssinante_idx` (`idAssinante` ASC) VISIBLE,
+  INDEX `fk_treinos_idPersonal_idx` (`idPersonal` ASC) VISIBLE,
+  CONSTRAINT `fk_treinos_idAssinante` FOREIGN KEY (`idAssinante`) REFERENCES `db_fitapp`.`assinantes` (`idAssinante`),
+  CONSTRAINT `fk_treinos_idTreino` FOREIGN KEY (`idPersonal`) REFERENCES `db_fitapp`.`personal_trainers` (`idPersonal`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    
+CREATE TABLE IF NOT EXISTS `itens_dieta` (
+  `idItemDieta` VARCHAR(36) NOT NULL,
+  `idDieta` VARCHAR(36) NOT NULL,
+  `descricao` VARCHAR(256) NOT NULL,
+  `refeicao` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`idItemDieta`),
+  INDEX `fk_itensDieta_idDieta_idx` (`idDieta` ASC) VISIBLE,
+  CONSTRAINT `fk_itensDieta_idDieta` FOREIGN KEY (`idDieta`) REFERENCES `db_fitapp`.`dietas` (`idDieta`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `exercicios` (
+  `idExercicio` VARCHAR(36) NOT NULL,
+  `idTreino` VARCHAR(36) NOT NULL,
+  `descricao` VARCHAR(256) NOT NULL,
+  `diaDoTreino` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`idExercicio`),
+  INDEX `fk_exercicios_idTreino_idx` (`idTreino` ASC) VISIBLE,
+  CONSTRAINT `fk_exercicios_idTreino` FOREIGN KEY (`idTreino`) REFERENCES `db_fitapp`.`treinos` (`idTreino`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+replace into sexos (idSexo, descricao) values(1, 'feminino');
+replace into sexos (idSexo, descricao) values(2, 'masculino');
+
+INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'e7c17d74-f067-46ca-9734-1c232ba0ea18',
 'administrador',
@@ -115,9 +168,10 @@ values (
 'admin@fitapp.com',
 'admin123',
 false
-);
+)
+ON DUPLICATE KEY UPDATE idUsuario = 'e7c17d74-f067-46ca-9734-1c232ba0ea18';
 
-replace into planos (id_plano, nome, valor, duracao, descricao, bloqueado)
+replace into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
 values(
 '57408fdd-8ccc-441a-953f-555dec2005bc',
 'gratuito',
@@ -127,7 +181,7 @@ values(
 false
 );
 
-replace into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
 'nutricionista',
@@ -135,9 +189,10 @@ values (
 'nutri@fitapp.com',
 'nutri123',
 false
-);
+)
+ON DUPLICATE KEY UPDATE idUsuario = 'cdb6531c-0bc4-48b2-b317-dece78f5349e';
 
-replace into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
 'personal',
@@ -145,23 +200,26 @@ values (
 'personal@fitapp.com',
 'personal123',
 false
-);
+)
+ON DUPLICATE KEY UPDATE idUsuario = '355049aa-1742-45d2-934d-278db5a6c224';
 
-replace into nutricionistas (id_nutricionista, nome, email, telefone, registro_profissional)
+INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
 'nutricionista',
 'nutri@fitapp.com',
 999999999,
 'crn123'
-);
+)
+ON DUPLICATE KEY UPDATE idNutri = 'cdb6531c-0bc4-48b2-b317-dece78f5349e';
 
-replace into personal_trainers (id_personal, nome, email, telefone, registro_profissional)
+INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
 'personal',
 'personal@fitapp.com',
 999999999,
 'cre123'
-);
+)
+ON DUPLICATE KEY UPDATE idPersonal = '355049aa-1742-45d2-934d-278db5a6c224';
 

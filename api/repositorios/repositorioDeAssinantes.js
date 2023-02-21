@@ -7,7 +7,7 @@ async function verificarSeAssinanteJaTemCadastro(email) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select email 
+            `select login 
             from usuarios 
             where login = ?`, [email.toLowerCase()]);
 
@@ -172,12 +172,6 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
     }
 }
 
-
-
-
-
-
-
 async function buscarAssinantePorFiltro(nome) {
     const conexao = await baseDeDados.abrirConexao();
 
@@ -230,32 +224,9 @@ function salvarTreino(assinante) {
     assinanteEncontrado = assinante;
 }
 
-function buscarDietasPorFiltro(nome, idAssinante) {
-    const assinanteEncontrado = buscarAssinantePorId(idAssinante);
 
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: "Assinante não encontrado" });
-        return;
-    }
 
-    if (!nome) {
-        return assinanteEncontrado.dietas;
-    } else {
-        return assinanteEncontrado.dietas.filter(dieta => dieta.nomeNome == nome);
-    }
 
-}
-
-function buscarDietaPorId(idAssinante, idDieta) {
-    const assinanteEncontrado = buscarAssinantePorId(idAssinante);
-
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: "Assinante não encontrado" });
-        return;
-    }
-
-    return assinanteEncontrado.dietas.find(dieta => dieta.idDieta == idDieta);
-}
 
 function buscarTreinosPorFiltro(nome, idAssinante) {
     const assinanteEncontrado = buscarAssinantePorId(idAssinante);
@@ -297,8 +268,6 @@ module.exports = {
     salvarAlteracaoDestatus: salvarAlteracaoDestatus,
     salvarDieta: salvarDieta,
     salvarTreino: salvarTreino,
-    buscarDietasPorFiltro: buscarDietasPorFiltro,
-    buscarDietaPorId: buscarDietaPorId,
     buscarTreinosPorFiltro: buscarTreinosPorFiltro,
     buscarTreinoPorId: buscarTreinoPorId,
 

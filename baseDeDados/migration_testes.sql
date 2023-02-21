@@ -1,4 +1,4 @@
-insert into planos (id_plano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
 values(
 'idPlano',
 'gratuito',
@@ -8,7 +8,7 @@ values(
 false
 );
 
-insert into planos (id_plano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
 values(
 'idMensal',
 'mensal',
@@ -18,7 +18,7 @@ values(
 false
 );
 
-insert into planos (id_plano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
 values(
 'idAnual',
 'anual',
@@ -28,7 +28,7 @@ values(
 false
 );
 
-insert into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'idNutri',
 'nutricionista',
@@ -38,7 +38,7 @@ values (
 false
 );
 
-insert into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'idPersonal',
 'personal',
@@ -48,7 +48,7 @@ values (
 false
 );
 
-insert into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'idAssinante',
 'assinante',
@@ -58,7 +58,7 @@ values (
 false
 );
 
-insert into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'idAssinanteBloqueado',
 'assinante',
@@ -68,7 +68,7 @@ values (
 false
 );
 
-insert into usuarios (id_usuario, perfil, nome, login, senha, bloqueado)
+insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'idAssinanteAssinaturateste',
 'assinante',
@@ -78,7 +78,7 @@ values (
 false
 );
 
-insert into nutricionistas (id_nutricionista, nome, email, telefone, registro_profissional)
+insert into nutricionistas (idNutri, nome, email, telefone, registroProfissional)
 values (
 'idNutri',
 'nutricionista',
@@ -87,7 +87,7 @@ values (
 'crn123'
 );
 
-insert into personal_trainers (id_personal, nome, email, telefone, registro_profissional)
+insert into personal_trainers (idPersonal, nome, email, telefone, registroProfissional)
 values (
 'idPersonal',
 'personal',
@@ -96,7 +96,7 @@ values (
 'cre123'
 );
 
-insert into assinantes (id_assinante, id_nutricionista, id_personal, nome, email)
+insert into assinantes (idAssinante, idNutri, idPersonal, nome, email)
 values (
 'idAssinante',
 'idNutri',
@@ -105,7 +105,7 @@ values (
 'assinante@fitapp.com'
 );
 
-insert into assinantes (id_assinante, id_nutricionista, id_personal, nome, email)
+insert into assinantes (idAssinante, idNutri, idPersonal, nome, email)
 values (
 'idAssinanteBloqueado',
 'idNutri',
@@ -113,7 +113,7 @@ values (
 'assinanteBloqueado',
 'assinantebloqueado@fitapp.com'
 );
-insert into assinantes (id_assinante, id_nutricionista, id_personal, nome, email)
+insert into assinantes (idAssinante, idNutri, idPersonal, nome, email)
 values (
 'idAssinanteAssinaturaTeste',
 'idNutri',
@@ -122,7 +122,7 @@ values (
 'assinanteassinaturateste@fitapp.com'
 );
 
-insert into assinaturas (id_assinatura, id_assinante, id_plano, data_inicio, data_fim, bloqueado)
+insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado)
 values (
 'idAssinatura',
 'idAssinante',
@@ -132,7 +132,7 @@ date_add(now(),interval 15 day),
 false
 );
 
-insert into assinaturas (id_assinatura, id_assinante, id_plano, data_inicio, data_fim, bloqueado)
+insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado)
 values (
 'idAssinaturaBloqueada',
 'idAssinanteBloqueado',
@@ -142,7 +142,7 @@ date_add(now(),interval 15 day),
 true
 );
 
-insert into assinaturas (id_assinatura, id_assinante, id_plano, data_inicio, data_fim, bloqueado)
+insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado)
 values (
 'idAssinaturaTeste',
 'idAssinanteAssinaturaTeste',

@@ -32,65 +32,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.personalTrainer = idPersonal;
     this.objetivo = '';
     this.assinatura = new Assinatura(this.idAssinante, plano);
-    this.dietas = [];
-    this.treinos = [];
-    this.medidas = [];
-
-   
-
-    this.dietaAtual = function () {
-        return this.dietas.find(dieta => dieta.ativo == true);
-    }
-
-    this.treinoAtual = function () {
-        return this.treinos.find(treino => treino.ativo == true);
-    }
-
-
-
-
-
-    this.alterarSenha = function (senhaAtual, novaSenha) {
-        if (senhaAtual == this.usuario.senha) {
-            if (novaSenha != undefined && novaSenha != null && novaSenha != '') {
-                this.usuario.senha = novaSenha;
-            }
-        } else {
-            throw { mensagem: "Senha atual incorreta", interna: true };
-        }
-    }
-
-
-    
-
-    this.alterarPlanoDaAssinatura = function (idAssinatura, novoPlano) {
-        if (!novoPlano) {
-
-            throw { mensagem: "Plano não definido", interna: true };
-        }
-
-        const assinaturaEncontrada = this.assinaturas.find(assinatura => assinatura.idAssinatura == idAssinatura);
-
-        if (!assinaturaEncontrada) {
-
-            throw { mensagem: "Assinatura não encontrada", interna: true };
-        }
-
-        assinaturaEncontrada.alterarPlano(novoPlano);
-    }
-
-
-    this.inserirDieta = function (dieta) {
-        this.dietas.forEach(dieta => dieta.ativo = false);
-
-        this.dietas.push(dieta);
-    }
-
-    this.inserirTreino = function (treino) {
-        this.treinos.forEach(treino => treino.ativo = false);
-        this.treinos.push(treino);
-    }
-
 
 }
 

@@ -10,6 +10,8 @@ const repositorioDePersonalTrainers = require('../repositorios/repositorioDePers
 const repositorioDeMensagens = require('../repositorios/repositorioDeMensagens');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
+const repositorioDeDietas = require('../repositorios/repositorioDeDietas');
+const repositorioDeTreinos = require('../repositorios/repositorioDeTreinos');
 const Assinante = require('../model/assinante');
 const Assinatura = require('../model/assinatura');
 const Medidas = require('../model/medidas');
@@ -138,13 +140,13 @@ async function buscarMedidas(req, res) {
     const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.usuario.idUsuario);
 
     let medidasAtuais;
-    
+
     if (!medidasOrdenadasPorData) {
         medidasAtuais = {
-            peso : 0,
-            pescoco : 0,
-            cintura : 0,
-            quadril : 0
+            peso: 0,
+            pescoco: 0,
+            cintura: 0,
+            quadril: 0
         }
     } else {
         medidasAtuais = medidasOrdenadasPorData[0]
@@ -163,7 +165,7 @@ async function excluirMedidas(req, res) {
 
     const medidaEncontrada = await repositorioDeMedidas.buscarMedidaPorId(req.usuario.idUsuario, req.params.idMedidas);
 
-    if(!medidaEncontrada) {
+    if (!medidaEncontrada) {
         res.status(400).send({ erro: "Medidas não localizada" });
         return;
     }
@@ -180,7 +182,7 @@ async function buscarDadosDaAssinatura(req, res) {
 
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
-    if(!dadosDaAssinatura) {
+    if (!dadosDaAssinatura) {
         res.status(400).send({ erro: "Assinatura não localizada" });
         return;
     }
@@ -200,15 +202,15 @@ async function buscarDadosDaAssinatura(req, res) {
 async function cancelarAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para cancelar Assinatura.'
-   
+
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
-    if(!dadosDaAssinatura) {
+    if (!dadosDaAssinatura) {
         res.status(400).send({ erro: "Assinatura não localizada" });
         return;
     }
 
-    if(dadosDaAssinatura.bloqueado == true) {
+    if (dadosDaAssinatura.bloqueado == true) {
         res.status(400).send({ erro: "Assinatura já está cancelada" });
         return;
     }
@@ -222,14 +224,14 @@ async function alterarPlanoDaAssinatura(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para alterar o Plano da Assinatura.'
 
-    const assinaturaEncontrada = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario ,req.params.idAssinatura);
-    if(!assinaturaEncontrada) {
+    const assinaturaEncontrada = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
+    if (!assinaturaEncontrada) {
         res.status(400).send({ erro: "Assinatura não localizada" });
         return;
     }
 
     const dadosDoNovoPlano = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
-    if(!dadosDoNovoPlano) {
+    if (!dadosDoNovoPlano) {
         res.status(400).send({ erro: "Plano não localizado" });
         return;
     }
@@ -237,54 +239,56 @@ async function alterarPlanoDaAssinatura(req, res) {
     const novaAssinatura = new Assinatura(req.usuario.idUsuario, dadosDoNovoPlano);
 
     await repositorioDeAssinaturas.alterarPlanoDaAssinatura(req.usuario.idUsuario, novaAssinatura);
-    
+
     res.send({
         idAssinatura: novaAssinatura.idAssinatura
     });
 }
 
-
-function buscarDadosDoNutri(req, res) {
+//O Assinante busca dados do nutricionista
+async function buscarDadosDoNutri(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar informações do Nutricionista.'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
+    const dadosDoNutricionista = await repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
-    if (!nutriEncontrado) {
+    if (!dadosDoNutricionista) {
         res.status(404).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
     res.send({
-        imagem: nutriEncontrado.imagem,
-        nome: nutriEncontrado.nome,
-        sobreMim: nutriEncontrado.sobreMim
+        imagem: dadosDoNutricionista.imagem,
+        nome: dadosDoNutricionista.nome,
+        sobreMim: dadosDoNutricionista.sobreMim
     })
 }
 
-function buscarDadosDoPersonal(req, res) {
+//O Assinante busca dados do personal trainer
+async function buscarDadosDoPersonal(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar informações do Personal Trainer.'
 
-    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
+    const dadosDoPersonal = await repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
-    if (!personalEncontrado) {
+    if (!dadosDoPersonal) {
         res.status(404).send({ erro: "Personal Trainer não encontrado" });
         return;
     }
 
     res.send({
-        imagem: personalEncontrado.imagem,
-        nome: personalEncontrado.nome,
-        sobreMim: personalEncontrado.sobreMim
+        imagem: dadosDoPersonal.imagem,
+        nome: dadosDoPersonal.nome,
+        sobreMim: dadosDoPersonal.sobreMim
     })
 }
 
-function buscarDietas(req, res) {
+// O Assinante busca todas as dietas ou por nome
+async function buscarDietas(req, res) {
     // #swagger.tags = ['Assinante']
-    // #swagger.description = 'endpoint para buscar dietas.'
-
-    const dietas = repositorioDeAssinantes.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
+    // #swagger.description = 'endpoint para buscar todas as dietas ou filtra por nome.'
+    
+    const dietas = await repositorioDeDietas.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     res.send(dietas.map(function (dieta) {
         return {
@@ -297,36 +301,37 @@ function buscarDietas(req, res) {
     }));
 }
 
-
-function buscarDietaPorId(req, res) {
+// O assinante busca dieta por id
+async function buscarDietaPorId(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar dieta por Id.'
 
-    const dietaEncontrada = repositorioDeAssinantes.buscarDietaPorId(req.usuario.idUsuario, req.params.idDieta);
+    const dadosDaDieta = await repositorioDeDietas.buscarDietaPorId(req.usuario.idUsuario, req.params.idDieta);
 
-    if (!dietaEncontrada) {
+    if (!dadosDaDieta) {
         res.status(404).send({ erro: "Dieta não encontrada" });
         return;
     }
 
     res.send({
-        idDieta: dietaEncontrada.idDieta,
-        nome: dietaEncontrada.nomeDieta,
-        objetivo: dietaEncontrada.objetivo,
-        itens: dietaEncontrada.itens
+        idDieta: req.params.idDieta,
+        nome: dadosDaDieta.dieta.nome,
+        objetivo: dadosDaDieta.dieta.objetivo,
+        itens: dadosDaDieta.itensDaDieta
     });
 }
 
-function buscarTreinos(req, res) {
+// O assinante buscar todos os treinos ou filtra por nome
+async function buscarTreinos(req, res) {
     // #swagger.tags = ['Assinante']
-    // #swagger.description = 'endpoint para buscar Treinos.'
+    // #swagger.description = 'endpoint para buscar todos os Treinos ou filtra por nome.'
 
-    const treinos = repositorioDeAssinantes.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
+    const treinos = await repositorioDeTreinos.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     res.send(treinos.map(function (treino) {
         return {
             idTreino: treino.idTreino,
-            nome: treino.nomeTreino,
+            nome: treino.nome,
             objetivo: treino.objetivo,
             dataInicio: treino.dataInicio,
             dataFim: treino.dataFim
@@ -334,22 +339,23 @@ function buscarTreinos(req, res) {
     }));
 }
 
-function buscarTreinoPorId(req, res) {
+// O assinante busca treino por id
+async function buscarTreinoPorId(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar treino por Id.'
 
-    const treinoEncontrado = repositorioDeAssinantes.buscarTreinoPorId(req.usuario.idUsuario, req.params.idTreino);
+    const dadosDoTreino = await repositorioDeTreinos.buscarTreinoPorId(req.usuario.idUsuario, req.params.idTreino);
 
-    if (!treinoEncontrado) {
+    if (!dadosDoTreino) {
         res.status(404).send({ erro: "Treino não encontrado" });
         return;
     }
 
     res.send({
-        idTreino: treinoEncontrado.idTreino,
-        nome: treinoEncontrado.nomeTreino,
-        objetivo: treinoEncontrado.objetivo,
-        exercicios: treinoEncontrado.exercicios
+        idTreino: req.params.idTreino,
+        nome: dadosDoTreino.nome,
+        objetivo: dadosDoTreino.objetivo,
+        exercicios: dadosDoTreino.exercicios
     });
 }
 
