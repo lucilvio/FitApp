@@ -6,9 +6,10 @@ function buscarNutricionistasAtivos() {
 }
 
 async function verificarSeNutriJaTemCadastro(email) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select idUsuario, login 
             from usuarios 
@@ -26,9 +27,10 @@ async function verificarSeNutriJaTemCadastro(email) {
 }
 
 async function criarNutricionista(novoNutricionista) {
-    const conexao = await baseDeDados.abrirConexao();
 
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const parametrosDoUsuario = [
             novoNutricionista.usuario.idUsuario,
             novoNutricionista.usuario.perfil,
@@ -63,9 +65,10 @@ async function criarNutricionista(novoNutricionista) {
 }
 
 async function buscarNutricionistasPorFiltro(nome) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         if (!nome) {
             const [rows, fields] = await conexao.execute(
                 `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
@@ -92,9 +95,10 @@ async function buscarNutricionistasPorFiltro(nome) {
 }
 
 async function buscarNutriPorId(idNutri) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
                     b.imagem, b.bloqueado 
@@ -113,9 +117,9 @@ async function buscarNutriPorId(idNutri) {
 }
 
 async function salvarAlteracaoDeDados(idNutri, nome, email, telefone, registroProfissional, bloqueado) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
 
         await conexao.beginTransaction();
 

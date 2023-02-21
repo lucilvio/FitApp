@@ -1,9 +1,10 @@
 const baseDeDados = require('../conexao');
 
 async function buscarMedidaPorId(idAssinante, idMedidas) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select data, peso, pescoco, cintura, quadril 
             from medidas 
@@ -20,9 +21,10 @@ async function buscarMedidaPorId(idAssinante, idMedidas) {
 }
 
 async function salvarMedidas(idUsuario, medidas) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const parametrosDeMedidas = [
             idUsuario,
             medidas.idMedidas,
@@ -43,9 +45,10 @@ async function salvarMedidas(idUsuario, medidas) {
 }
 
 async function buscarMedidas(idAssinante) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select data, idMedidas, peso, pescoco, cintura, quadril 
             from medidas
@@ -64,9 +67,10 @@ async function buscarMedidas(idAssinante) {
 }
 
 async function excluirMedidas(idAssinante, idMedidas) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         await conexao.execute(
             `delete from medidas
             where idAssinante = ? and idMedidas = ?`, [idAssinante, idMedidas]);

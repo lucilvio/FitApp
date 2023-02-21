@@ -6,9 +6,10 @@ function buscarPersonalTrainersAtivos() {
 }
 
 async function verificarSePersonalJaTemCadastro(email) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select idUsuario, login 
             from usuarios 
@@ -26,9 +27,10 @@ async function verificarSePersonalJaTemCadastro(email) {
 }
 
 async function criarPersonal(novoPersonal) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const parametrosDoUsuario = [
             novoPersonal.usuario.idUsuario,
             novoPersonal.usuario.perfil,
@@ -63,9 +65,10 @@ async function criarPersonal(novoPersonal) {
 }
 
 async function buscarPersonalTrainersPorFiltro(nome) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         if (!nome) {
             const [rows, fields] = await conexao.execute(
                 `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
@@ -91,8 +94,9 @@ async function buscarPersonalTrainersPorFiltro(nome) {
 }
 
 async function buscarPersonalPorId(idPersonal) {
-    const conexao = await baseDeDados.abrirConexao();
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
 
         const [rows, fields] = await conexao.execute(
             `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
@@ -112,9 +116,10 @@ async function buscarPersonalPorId(idPersonal) {
 }
 
 async function salvarAlteracaoDeDados(idPersonal, nome, email, telefone, registroProfissional, bloqueado) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         await conexao.beginTransaction();
 
         await conexao.execute(

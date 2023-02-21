@@ -3,9 +3,10 @@ const { perfil } = require('../model/perfis');
 const baseDeDados = require('../conexao');
 
 async function buscarUsuarioPorLogin(login) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select idUsuario, perfil, nome, login, senha, bloqueado, imagem 
         from usuarios 
@@ -21,9 +22,10 @@ async function buscarUsuarioPorLogin(login) {
 }
 
 async function buscarDadosDoUsuarioPorId(idUsuario) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select perfil, nome, login, senha, bloqueado, imagem 
         from usuarios 
@@ -39,9 +41,10 @@ async function buscarDadosDoUsuarioPorId(idUsuario) {
 }
 
 async function salvarNovaSenha(idUsuario, novaSenha) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         await conexao.execute(
             `UPDATE usuarios
         SET senha = ?
@@ -53,9 +56,10 @@ async function salvarNovaSenha(idUsuario, novaSenha) {
 }
 
 async function salvarImagemDoUsuario(idUsuario, imagem) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         await conexao.execute(
             `UPDATE usuarios
             SET imagem = ?
@@ -69,9 +73,10 @@ async function salvarImagemDoUsuario(idUsuario, imagem) {
 }
 
 async function buscarAdmin() {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select idUsuario, perfil, nome, login, senha, bloqueado, imagem from usuarios where perfil = ?`, ['administrador']);
 

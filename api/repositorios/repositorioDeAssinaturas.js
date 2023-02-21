@@ -2,43 +2,50 @@ const baseDeDados = require('../conexao');
 
 
 async function buscarAssinaturaAtiva(idAssinante) {
-    const conexao = await baseDeDados.abrirConexao();
+    try {
+        const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select idAssinatura 
+        const [rows, fields] = await conexao.execute(
+            `select idAssinatura 
         from assinaturas 
         where idAssinante = ? and bloqueado = 0`, [idAssinante]);
 
-    await conexao.end();
+        if (rows.length <= 0)
+            return;
 
-    if (rows.length <= 0)
-        return;
+        return rows[0];
 
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
-    const conexao = await baseDeDados.abrirConexao();
+    try {
+        const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
+        const [rows, fields] = await conexao.execute(
+            `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
         b.nome, b.valor, b.duracao, b.descricao
         from assinaturas as a
         inner join planos as b on a.idPlano = b.idPlano 
         where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
 
-    await conexao.end();
+        if (rows.length <= 0)
+            return;
 
-    if (rows.length <= 0)
-        return;
+        return rows[0];
 
-    return rows[0];
+    } finally {
+        await conexao.end();
+    }
 }
 
 async function cancelarAssinatura(idUsuario, idAssinatura) {
-    const conexao = await baseDeDados.abrirConexao();
 
     try {
+        const conexao = await baseDeDados.abrirConexao();
+
         await conexao.execute(
             `update assinaturas
             set bloqueado = true
@@ -51,18 +58,19 @@ async function cancelarAssinatura(idUsuario, idAssinatura) {
 
 
 async function alterarPlanoDaAssinatura(idUsuario, novaAssinatura) {
-    const conexao = await baseDeDados.abrirConexao();
-
-    const parametrosDaAssinatura = [
-        novaAssinatura.idAssinatura,
-        novaAssinatura.idAssinante,
-        novaAssinatura.idPlano,
-        novaAssinatura.dataInicio,
-        novaAssinatura.dataFim,
-        novaAssinatura.bloqueado
-    ];
 
     try {
+
+        const conexao = await baseDeDados.abrirConexao();
+
+        const parametrosDaAssinatura = [
+            novaAssinatura.idAssinatura,
+            novaAssinatura.idAssinante,
+            novaAssinatura.idPlano,
+            novaAssinatura.dataInicio,
+            novaAssinatura.dataFim,
+            novaAssinatura.bloqueado
+        ];
         await conexao.beginTransaction();
         await conexao.execute(
             `update assinaturas

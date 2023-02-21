@@ -3,9 +3,10 @@ const baseDeDados = require('../conexao');
 const Assinante = require('../model/assinante');
 
 async function verificarSeAssinanteJaTemCadastro(email) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select email 
             from usuarios 
@@ -22,9 +23,10 @@ async function verificarSeAssinanteJaTemCadastro(email) {
 }
 
 async function criarAssinante(novoAssinante) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const parametrosDoUsuario = [
             novoAssinante.usuario.idUsuario,
             novoAssinante.usuario.perfil,
@@ -71,9 +73,10 @@ async function criarAssinante(novoAssinante) {
 }
 
 async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select a.imagem,
                 b.idAssinante, b.nome, b.altura, b.dataNascimento
@@ -102,9 +105,10 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
 }
 
 async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select a.imagem, a.login,a.nome, 
 		        b.idAssinante, b.altura, b.dataNascimento, b.idSexo, b.idNutri, b.idPersonal, 
@@ -125,9 +129,10 @@ async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
 }
 
 async function buscarAssinantePorId(idAssinante) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         const [rows, fields] = await conexao.execute(
             `select a.idAssinante, a.idNutri, a.idPersonal, a.nome, a.email, a.dataNascimento, a.idSexo, a.altura, a.objetivos, 
                 b.idAssinatura, b.idPlano, b.dataInicio, b.dataFim, b.bloqueado,
@@ -150,9 +155,10 @@ async function buscarAssinantePorId(idAssinante) {
 }
 
 async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, idSexo, altura) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         await conexao.beginTransaction();
         await conexao.execute(
             `update usuarios
@@ -172,16 +178,11 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
     }
 }
 
-
-
-
-
-
-
 async function buscarAssinantePorFiltro(nome) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         if (!nome) {
             const [rows, fields] = await conexao.execute(
                 `select a.idAssinante, a.nome, a.email,
@@ -207,9 +208,10 @@ async function buscarAssinantePorFiltro(nome) {
 }
 
 async function salvarAlteracaoDestatus(idAssinante, novoStatus) {
-    const conexao = await baseDeDados.abrirConexao();
-
+    
     try {
+        const conexao = await baseDeDados.abrirConexao();
+        
         await conexao.execute(
             `update usuarios
             set bloqueado = ?
