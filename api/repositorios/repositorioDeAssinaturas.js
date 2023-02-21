@@ -22,7 +22,7 @@ async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
 
     const [rows, fields] = await conexao.execute(
         `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
-        b.nome, b.valor, b.duracao, b.descricao, b.bloqueado
+        b.nome, b.valor, b.duracao, b.descricao
         from assinaturas as a
         inner join planos as b on a.idPlano = b.idPlano 
         where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
@@ -49,9 +49,40 @@ async function cancelarAssinatura(idUsuario, idAssinatura) {
     }
 }
 
+
+async function alterarPlanoDaAssinatura(idUsuario, novaAssinatura) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    const parametrosDaAssinatura = [
+        novaAssinatura.idAssinatura,
+        novaAssinatura.idAssinante,
+        novaAssinatura.idPlano,
+        novaAssinatura.dataInicio,
+        novaAssinatura.dataFim,
+        novaAssinatura.bloqueado
+    ];
+
+    try {
+        await conexao.beginTransaction();
+        await conexao.execute(
+            `update assinaturas
+            set bloqueado = true
+            where idAssinante = ?`, [idUsuario]);
+
+        await conexao.execute(
+            `insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDaAssinatura)
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
+}
+
 module.exports = {
     buscarAssinaturaAtiva: buscarAssinaturaAtiva,
     buscarAssinaturaPorId: buscarAssinaturaPorId,
-    cancelarAssinatura: cancelarAssinatura
+    cancelarAssinatura: cancelarAssinatura,
+    alterarPlanoDaAssinatura: alterarPlanoDaAssinatura
 
 }
