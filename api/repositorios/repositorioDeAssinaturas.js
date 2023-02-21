@@ -2,8 +2,9 @@ const baseDeDados = require('../conexao');
 
 
 async function buscarAssinaturaAtiva(idAssinante) {
+    const conexao = await baseDeDados.abrirConexao();
+
     try {
-        const conexao = await baseDeDados.abrirConexao();
 
         const [rows, fields] = await conexao.execute(
             `select idAssinatura 
@@ -21,11 +22,12 @@ async function buscarAssinaturaAtiva(idAssinante) {
 }
 
 async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
-    try {
-        const conexao = await baseDeDados.abrirConexao();
+    const conexao = await baseDeDados.abrirConexao();
 
-    const [rows, fields] = await conexao.execute(
-        `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
+    try {
+
+        const [rows, fields] = await conexao.execute(
+            `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
         b.nome, b.valor, b.duracao, b.descricao
         from assinaturas as a
         inner join planos as b on a.idPlano = b.idPlano 
@@ -42,9 +44,9 @@ async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
 }
 
 async function cancelarAssinatura(idUsuario, idAssinatura) {
+    const conexao = await baseDeDados.abrirConexao();
 
     try {
-        const conexao = await baseDeDados.abrirConexao();
 
         await conexao.execute(
             `update assinaturas
