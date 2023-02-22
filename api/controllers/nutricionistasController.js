@@ -1,172 +1,181 @@
-const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
-const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const Dieta = require('../model/dieta');
+const Imc = require('../model/imc');
+const ItemDaDieta = require('../model/itemDaDieta');
+const Nutricionista = require('../model/nutricionista');
+const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
+const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
+const repositorioDeDietas = require('../repositorios/repositorioDeDietas');
 
-function buscarDadosDoPerfil(req, res) {
+async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para buscar dados do perfil.'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
+    const dadosDoNutri = await repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
 
-    if (!nutriEncontrado) {
-        res.status(404).send({ erro: 'Nutricionista não encontrado' });
-        return;
-    }
 
     res.send({
-        idNutri: nutriEncontrado.idNutri,
-        imagem: nutriEncontrado.usuario.imagem,
-        email: nutriEncontrado.usuario.login,
-        nome: nutriEncontrado.nome,
-        registroProfissional: nutriEncontrado.registroProfissional,
-        telefone: nutriEncontrado.telefone,
-        sobreMim: nutriEncontrado.sobreMim
+        idNutri: dadosDoNutri.idNutri,
+        imagem: dadosDoNutri.imagem,
+        email: dadosDoNutri.email,
+        nome: dadosDoNutri.nome,
+        registroProfissional: dadosDoNutri.registroProfissional,
+        telefone: dadosDoNutri.telefone,
+        sobreMim: dadosDoNutri.sobreMim
     })
 
 }
 
-function alterarDadosDoPerfil(req, res) {
+async function alterarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para alterar dados do perfil.'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
+    Nutricionista.validarAlteracaoDoPerfil(req.body.nome);
+    await repositorioDeNutricionistas.salvarAlteracaoDeDadosDoPerfil(req.usuario.idUsuario, req.body.nome, req.body.telefone);
 
-    if (!nutriEncontrado) {
-        res.status(404).send({ erro: 'Nutricionista não encontrado' });
-        return;
-    }
-
-    nutriEncontrado.alterarDadosDoPerfil(req.body.telefone, req.body.imagem);
-
-    repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado);
     res.send();
 }
 
-function alterarInformacoesSobreMim(req, res) {
+
+async function alterarInformacoesSobreMim(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para alterar informações "Sobre Mim".'
 
-    const nutriEncontrado = repositorioDeNutricionistas.buscarNutriPorId(req.usuario.idUsuario);
+    await repositorioDeNutricionistas.salvarAlteracaoSobreMim(req.usuario.idUsuario, req.body.texto);
 
-    if (!nutriEncontrado) {
-        res.status(404).send({ erro: 'Nutricionista não encontrado' });
-        return;
-    }
-
-    nutriEncontrado.alterarSobreMim(req.body.texto);
-
-    repositorioDeNutricionistas.salvarAlteracaoDeDados(nutriEncontrado);
     res.send();
 }
 
-function buscarPacientes(req, res) {
+async function buscarPacientes(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para buscar pacientes - todos ou por nome.'
 
-    const pacientes = repositorioDeNutricionistas.buscarPacientesPorFiltro(req.query.nome, req.usuario.email);
+    const pacientes = await repositorioDeNutricionistas.buscarPacientesPorFiltro(req.usuario.idUsuario, req.query.nome);
+
+    if (!pacientes || pacientes.length <= 0) {
+        res.status(404).send({ erro: "Paciente não encontrado" });
+        return;
+    }
 
     res.send(pacientes.map(function (paciente) {
         return {
             idAssinante: paciente.idAssinante,
             nome: paciente.nome,
             objetivo: paciente.objetivo,
-            dietas: paciente.dietas
+
         }
     }));
 }
 
-function buscarPacientePorId(req, res) {
+async function buscarPacientePorId(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para buscar paciente por Id.'
 
-    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+    const pacienteEncontrado = await repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
-    
-    if (req.usuario.idUsuario != pacienteEncontrado.nutricionista) {
+
+    if (req.usuario.idUsuario != pacienteEncontrado.dados.idNutri) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
-   
+
 
     res.send({
-        nome: pacienteEncontrado.nome,
-        objetivo: pacienteEncontrado.objetivo,
-        dataNascimento: pacienteEncontrado.dataNascimento,
-        sexo: pacienteEncontrado.sexo,
-        altura: pacienteEncontrado.altura,
-        dietas: pacienteEncontrado.dietas
-
+        nome: pacienteEncontrado.dados.nome,
+        objetivo: !pacienteEncontrado.dietas || pacienteEncontrado.dietas.length <= 0 ? null : pacienteEncontrado.dietas[0].objetivo,
+        dataNascimento: pacienteEncontrado.dados.dataNascimento,
+        sexo: pacienteEncontrado.dados.idSexo,
+        altura: !pacienteEncontrado.dados.altura ? 0 : pacienteEncontrado.dados.altura,
+        dietas: !pacienteEncontrado.dietas ? [] : pacienteEncontrado.dietas,
+        peso: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.peso,
+        pescoco: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.pescoco,
+        cintura: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.cintura,
+        quadril: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.quadril,
+        imc: new Imc(!pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.peso, pacienteEncontrado.dados.altura).valor,
     });
-
 }
 
-function buscarMedidasDoPaciente (req, res) {
+async function buscarMedidasDoPaciente(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para buscar medidas do paciente.'
 
-    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+    const pacienteEncontrado = await repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
-    
-    if (req.usuario.idUsuario != pacienteEncontrado.nutricionista) {
+
+    if (req.usuario.idUsuario != pacienteEncontrado.dados.idNutri) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
-   
+
+    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
+
+    let medidasAtuais;
+
+    if (!medidasOrdenadasPorData) {
+        medidasAtuais = {
+            peso: 0,
+            pescoco: 0,
+            cintura: 0,
+            quadril: 0
+        }
+    } else {
+        medidasAtuais = medidasOrdenadasPorData[0]
+    }
 
     res.send({
-        medidas: pacienteEncontrado.medidas
+        historicoDeMedidas: medidasOrdenadasPorData,
+        medidasAtuais: medidasAtuais
     });
 }
 
-function criarDieta(req, res) {
+async function criarDieta(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para criar dieta.'
 
-    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+    const pacienteEncontrado = await repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: 'Paciente não encontrado' });
         return;
     }
 
-    if (req.usuario.idUsuario == pacienteEncontrado.nutricionista) {
+    if (req.usuario.idUsuario == pacienteEncontrado.dados.idNutri) {
 
-        const dieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
-        pacienteEncontrado.inserirDieta(dieta);
-        repositorioDeAssinantes.salvarDieta(pacienteEncontrado);
+        const novaDieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
 
-        res.send({ idDieta: dieta.idDieta });
+        await repositorioDeDietas.salvarDieta(req.params.idAssinante, novaDieta);
+
+        res.send({ idDieta: novaDieta.idDieta });
 
     } else {
         res.status(400).send({ erro: "Não é possivel criar dieta " })
     }
 }
 
-function buscarDietaPorId(req, res) {
+async function buscarDietaPorId(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para buscar dieta por Id.'
 
-    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+    const pacienteEncontrado = await repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
 
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
 
-    if (req.usuario.idUsuario != pacienteEncontrado.nutricionista) {
+    if (req.usuario.idUsuario != pacienteEncontrado.dados.idNutri) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
-    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
+    const dietaEncontrada = await repositorioDeDietas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
 
     if (!dietaEncontrada) {
         res.status(404).send({ erro: "Dieta não encontrada" });
@@ -177,31 +186,54 @@ function buscarDietaPorId(req, res) {
 
 }
 
-function alterarDieta(req, res) {
+async function alterarDieta(req, res) {
     // #swagger.tags = ['Nutricionista']
     // #swagger.description = 'endpoint para alterar dieta.'
 
-    const pacienteEncontrado = repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+    const pacienteEncontrado = await repositorioDeNutricionistas.buscarPacientePorId(req.params.idAssinante);
+
     if (!pacienteEncontrado) {
         res.status(404).send({ erro: "Paciente não encontrado" });
         return;
     }
 
-    const dietaEncontrada = repositorioDeNutricionistas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
+    const dietaEncontrada = await repositorioDeDietas.buscarDietaPorId(req.params.idAssinante, req.params.idDieta);
+
     if (!dietaEncontrada) {
         res.status(404).send({ erro: "Dieta não encontrada" });
         return;
     }
 
-    if (req.usuario.idUsuario == pacienteEncontrado.nutricionista) {
-        dietaEncontrada.alterarDadosDaDieta(req.params.idDieta, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
-    
-        repositorioDeNutricionistas.salvarAlteracoesDaDieta(dietaEncontrada);
-    
+    let itens = [];
+
+    if (req.usuario.idUsuario == pacienteEncontrado.dados.idNutri) {
+
+        Dieta.validarAlteracaoDaDieta(
+            req.params.idDieta,
+            req.body.nomeDieta,
+            req.body.dataInicio,
+            req.body.dataFim,
+            req.body.objetivo,
+            req.body.itens
+        );
+
+        req.body.itens.forEach(item => {
+            itens.push(new ItemDaDieta.ItemDaDieta(req.params.idDieta, item.descricao, item.refeicao));
+        });
+
+        await repositorioDeDietas.salvarAlteracoesDaDieta(
+            req.params.idDieta,
+            req.body.nomeDieta,
+            req.body.dataInicio,
+            req.body.dataFim,
+            req.body.objetivo,
+            itens
+        );
+
         res.send();
 
-    }else {
-        res.status(400).send({ erro: "Não é possivel alterar dieta " })
+    } else {
+        res.status(400).send({ erro: "Não é possivel alterar dieta" })
     }
 
 }

@@ -25,34 +25,18 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
     this.telefone = telefone;
     this.registroProfissional = registroProfissional;
     this.sobreMim = "";
-
     
-    this.alterarDadosDoPerfil = function (telefone, imagem) {
-        if (imagem != undefined && imagem != null && imagem != "") {
-            this.usuario.imagem = imagem;
-        }
+}
 
-        if (telefone != undefined && telefone != null && telefone != '') {
-            this.telefone = telefone;
-        }
+function validarAlteracaoDoPerfil(nome) {
+    if (!nome) {
+        throw { mensagem: "O nome do assinante precisa ser definido", interna: true };
     }
-
-    this.alterarSenha = function (senha) {
-        if (senha != undefined && senha != null && senha != '') {
-            this.usuario.senha = senha;
-        }
-
-    }
-
-    this.alterarSobreMim = function (texto) {
-        this.sobreMim = texto;
-    }
-
-
 }
 
 
 
 module.exports = {
-    Nutricionista: Nutricionista
+    Nutricionista: Nutricionista,
+    validarAlteracaoDoPerfil: validarAlteracaoDoPerfil
 }

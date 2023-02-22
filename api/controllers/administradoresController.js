@@ -177,7 +177,7 @@ async function alterarDadosDoNutricionista(req, res) {
     const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.body.email);
 
     if (!nutriEncontrado || nutriEncontrado.idNutri == req.params.idNutri) {
-        await repositorioDeNutricionistas.salvarAlteracaoDeDados(req.params.idNutri, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
+        await repositorioDeNutricionistas.salvarAlteracaoDeDadosDoPerfil(req.params.idNutri, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
 
         res.send();
     } else {

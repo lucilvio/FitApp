@@ -55,7 +55,6 @@ CREATE TABLE  IF NOT EXISTS `assinantes` (
   `dataNascimento` datetime DEFAULT NULL,
   `idSexo` int DEFAULT NULL,
   `altura` int DEFAULT NULL,
-  `objetivos` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`idAssinante`),
   KEY `fk_assinante_idNutricionista_idx` (`idNutri`),
   KEY `fk_assinante_idPersonal_idx` (`idPersonal`),

@@ -30,7 +30,6 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.altura = 0;
     this.nutricionista = idNutri;
     this.personalTrainer = idPersonal;
-    this.objetivo = '';
     this.assinatura = new Assinatura(this.idAssinante, plano);
 
 }

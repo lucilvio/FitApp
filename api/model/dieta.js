@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const ItemDaDieta = require('../model/itemDaDieta');
 
 function Dieta(idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, itens) {
     if (!nomeDieta) {
@@ -17,71 +18,59 @@ function Dieta(idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, i
         throw { mensagem: "Não é possível criar dieta sem o objetivo", interna: true };
     }
 
+    if (!itens || itens.length <= 0) {
+        throw { mensagem: "Não é possível criar dieta sem itens", interna: true };
+    }
+
     this.idDieta = crypto.randomUUID();
     this.idAssinante = idAssinante;
     this.idNutri = idNutri;
     this.ativo = true;
     this.nomeDieta = nomeDieta;
-    this.dataInicio = dataInicio;
-    this.dataFim = dataFim;
+    this.dataInicio = new Date(dataInicio);
+    this.dataFim = new Date(dataFim);
     this.objetivo = objetivo;
-    this.itens = [];
     this.data = new Date();
+    this.itens = [];
+
 
     itens.forEach(item => {
-        this.itens.push(new ItemDaDieta(this.idDieta, item.descricao, item.refeicao));
+        this.itens.push(new ItemDaDieta.ItemDaDieta(this.idDieta, item.descricao, item.refeicao));
     });
 
-
-    this.alterarDadosDaDieta = function (idDieta, nomeDieta, dataInicio, dataFim, objetivo, itens) {
-        this.itens = [];
-        
-        if (!idDieta) {
-            throw { mensagem: "Não é possível adicionar item sem o id da dieta", interna: true };
-        }
-        
-        if (nomeDieta != undefined && nomeDieta != null && nomeDieta != "") {
-            this.nomeDieta = nomeDieta;
-        }
-
-        if (dataInicio != undefined && dataInicio != null && dataInicio != "") {
-            this.dataInicio = dataInicio;
-        }
-
-        if (dataFim != undefined && dataFim != null && dataFim != "") {
-            this.dataFim = dataFim;
-        }
-
-        if (objetivo != undefined && objetivo != null && objetivo != "") {
-            this.objetivo = objetivo;
-        }
-
-        if (itens != undefined && itens != null && itens != "") {
-            itens.forEach(item => {
-                this.itens.push(new ItemDaDieta(idDieta, item.descricao, item.refeicao));
-            });
-           
-        }
-
-    }
 }
 
-function ItemDaDieta(idDieta, descricao, refeicao) {
+
+
+function validarAlteracaoDaDieta(idDieta, nomeDieta, dataInicio, dataFim, objetivo, itens) {
+
     if (!idDieta) {
         throw { mensagem: "Não é possível adicionar item sem o id da dieta", interna: true };
     }
 
-    if (!descricao) {
-        throw { mensagem: "Não é possível adicionar item sem descrição", interna: true };
+    if (!nomeDieta) {
+        throw { mensagem: "Não é possível alterar dieta sem o nome", interna: true };
     }
 
-    if (!refeicao) {
-        throw { mensagem: "Não é possível adicionar item sem a refeição", interna: true };
+    if (!dataInicio) {
+        throw { mensagem: "Não é possível alterar dieta sem a data de inicio", interna: true };
     }
 
-    this.idDieta = idDieta;
-    this.descricao = descricao;
-    this.refeicao = refeicao;
+    if (!dataFim) {
+        throw { mensagem: "Não é possível alterar dieta sem a data do fim", interna: true };
+    }
+
+    if (!objetivo) {
+        throw { mensagem: "Não é possível alterar dieta sem o objetivo", interna: true };
+    }
+
+    if (!itens || itens.length <= 0) {
+        throw { mensagem: "Não é possível alterar dieta sem itens", interna: true };
+    }
+
 }
 
-module.exports = Dieta
+module.exports = {
+    Dieta: Dieta,
+    validarAlteracaoDaDieta: validarAlteracaoDaDieta
+}

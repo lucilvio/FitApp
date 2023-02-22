@@ -17,8 +17,8 @@ async function buscarDietasPorFiltro(nome, idAssinante) {
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
             `select idDieta, nome, objetivo, dataInicio, dataFim, data  
             from dietas 
-            where nome = ? and idAssinante = ?
-            order by data desc`, [nome.toLowerCase(), idAssinante]);
+            where nome like ? and idAssinante = ?
+            order by data desc`, [`%${nome}%`, idAssinante]);
 
         return rowsComFiltro;
     }
@@ -55,8 +55,83 @@ async function buscarDietaPorId(idAssinante, idDieta) {
     }
 }
 
+async function salvarDieta(idAssinante, novaDieta) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const parametrosDaDieta = [
+            idAssinante,
+            novaDieta.idDieta,
+            novaDieta.idNutri,
+            novaDieta.objetivo,
+            novaDieta.nomeDieta,
+            novaDieta.dataInicio,
+            novaDieta.dataFim,
+            novaDieta.data
+        ]
+
+        await conexao.beginTransaction();
+        await conexao.execute(
+            `insert into dietas (idAssinante, idDieta, idNutri, objetivo, nome, dataInicio, dataFim, data)
+            values (?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDaDieta);
+
+
+        novaDieta.itens.forEach(async item => {
+            const parametrosDoItem = [
+                item.idItemDieta,
+                item.idDieta,
+                item.descricao,
+                item.refeicao
+            ]
+
+            await conexao.execute(
+                `insert into itens_dieta (idItemDieta, idDieta, descricao, refeicao) 
+                values (?, ?, ?, ?)`, parametrosDoItem);
+
+        });
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function salvarAlteracoesDaDieta(idDieta, nomeDieta, dataInicio, dataFim, objetivo, itens) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        await conexao.beginTransaction();
+
+        await conexao.execute(
+            `update dietas
+            set nome = ?, objetivo = ?, dataInicio = ?, dataFim = ?
+            where idDieta = ?`, [nomeDieta, objetivo, new Date(dataInicio), new Date(dataFim), idDieta]);
+
+        itens.forEach(async item => {
+            const parametrosDoItem = [
+                item.idItemDieta,
+                item.idDieta,
+                item.descricao,
+                item.refeicao
+            ]
+
+            await conexao.execute(
+                `replace into itens_dieta (idItemDieta, idDieta, descricao, refeicao)
+                values (?, ?, ?, ?)`, parametrosDoItem);
+        });
+
+        await conexao.commit();
+
+    }
+    finally {
+        await conexao.end();
+    }
+
+}
 
 module.exports = {
     buscarDietasPorFiltro: buscarDietasPorFiltro,
-    buscarDietaPorId: buscarDietaPorId
+    buscarDietaPorId: buscarDietaPorId,
+    salvarDieta: salvarDieta,
+    salvarAlteracoesDaDieta: salvarAlteracoesDaDieta
 }
