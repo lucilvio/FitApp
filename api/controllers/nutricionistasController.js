@@ -148,7 +148,7 @@ async function criarDieta(req, res) {
 
     if (req.usuario.idUsuario == pacienteEncontrado.dados.idNutri) {
 
-        const novaDieta = new Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
+        const novaDieta = new Dieta.Dieta(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeDieta, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.itens);
 
         await repositorioDeDietas.salvarDieta(req.params.idAssinante, novaDieta);
 

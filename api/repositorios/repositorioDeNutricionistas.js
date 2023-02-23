@@ -203,8 +203,8 @@ async function buscarPacientesPorFiltro(idUsuario, nome) {
                 from assinantes as a
                     left join dietas as b on b.idNutri = a.idNutri 
                         and b.data = (select max(b.data) data 
-                        from  dietas b where b.idNutri = 'cdb6531c-0bc4-48b2-b317-dece78f5349e' and b.idAssinante = a.IdAssinante)
-                where a.idNutri = ?`, [idUsuario]);
+                        from  dietas b where b.idNutri = ? and b.idAssinante = a.IdAssinante)
+                where a.idNutri = ?`, [idUsuario, idUsuario]);
 
             return rows;
         }
@@ -215,8 +215,8 @@ async function buscarPacientesPorFiltro(idUsuario, nome) {
             from assinantes as a
                 left join dietas as b on b.idNutri = a.idNutri 
                     and b.data = (select max(b.data) data 
-                    from  dietas b where b.idNutri = 'cdb6531c-0bc4-48b2-b317-dece78f5349e' and b.idAssinante = a.IdAssinante)
-            where a.idNutri = ? and a.nome like ?`, [idUsuario, `%${nome}%`]);
+                    from  dietas b where b.idNutri = ? and b.idAssinante = a.IdAssinante)
+            where a.idNutri = ? and a.nome like ?`, [idUsuario, idUsuario `%${nome}%`]);
 
         return rowsComFiltro;
 

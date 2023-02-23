@@ -151,42 +151,113 @@ async function salvarAlteracaoDeDados(idPersonal, nome, email, telefone, registr
     }
 }
 
+async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, telefone) {
+    const conexao = await baseDeDados.abrirConexao();
 
-function buscarAlunosPorFiltro(nome, emailPersonal) {
-    const personal = buscarPersonalPorEmail(emailPersonal);
+    try {
+        await conexao.beginTransaction();
+        await conexao.execute(
+            `update usuarios
+            set nome = ?
+            where idUsuario = ?`, [nome, idUsuario]);
 
-    if (!personal) {
-        res.status(404).send({ erro: "Personal Trainer não encontrado" });
-        return;
+        await conexao.execute(
+            `update personal_trainers
+            set nome = ?, telefone = ?
+            where idPersonal = ?`, [nome, telefone, idUsuario]);
+
+        await conexao.commit();
+
     }
-
-    if (!nome) {
-        return base.dados.assinantes.filter(assinante => assinante.personalTrainer == personal.idPersonal);
-    } else {
-        return base.dados.assinantes.filter(assinante => assinante.personalTrainer == personal.idPersonal && assinante.nome.toLowerCase() == nome.toLowerCase());
+    finally {
+        await conexao.end();
     }
 }
 
-function buscarAlunoPorId(idAssinante) {
-    return base.dados.assinantes.find(assinante => assinante.idAssinante == idAssinante);
+async function salvarAlteracaoSobreMim(idUsuario, texto) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+
+        await conexao.execute(
+            `update personal_trainers
+            set sobreMim = ?
+            where idPersonal = ?`, [texto, idUsuario]);
+
+    }
+    finally {
+        await conexao.end();
+    }
 }
 
-function salvarTreino(treino) {
-    const alunoEncontrado = buscarAlunoPorId(treino.idAssinante);
-    alunoEncontrado.treinos.push(treino);
+async function buscarAlunosPorFiltro(idUsuario, nome) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        if (!nome) {
+            const [rows, fields] = await conexao.execute(
+                `select	a.idAssinante, a.nome, 
+                        b.objetivo	
+                from assinantes as a
+                    left join treinos as b on b.idPersonal = a.idPersonal 
+                        and b.data = (select max(b.data) data 
+                        from treinos as b where b.idPersonal = ? and b.idAssinante = a.IdAssinante)
+                where a.idPersonal = ?`, [idUsuario, idUsuario]);
+
+            return rows;
+        }
+
+        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+            `select	a.idAssinante, a.nome, 
+                    b.objetivo	
+            from assinantes as a
+                left join treinos as b on b.idPersonal = a.idPersonal 
+                    and b.data = (select max(b.data) data 
+                    from treinos as b where b.idPersonal = ? and b.idAssinante = a.IdAssinante)
+            where a.idPersonal = ? and a.nome like ?`, [idUsuario, idUsuario, `%${nome}%`]);
+
+        return rowsComFiltro;
+
+    } finally {
+        await conexao.end();
+    }
 }
 
-function buscarTreinoPorId(idAssinante, idTreino) {
-    const alunoEncontrado = buscarAlunoPorId(idAssinante);
-    return alunoEncontrado.treinos.find(treino => treino.idTreino == idTreino);
-}
+async function buscarAlunoPorId(idAssinante) {
+    const conexao = await baseDeDados.abrirConexao();
 
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select a.imagem,
+                    b.nome, b.idSexo, b.dataNascimento, b.altura, b.idPersonal 
+            from usuarios as a
+            inner join assinantes as b on a.idUsuario = b.idAssinante
+            where a.idUsuario = ?`, [idAssinante]);
 
-function salvarAlteracoesDoTreino(treino) {
-    let treinoEncontrado = buscarTreinoPorId(treino.idAssinante, treino.idTreino);
+        if (rows.length <= 0)
+            return;
 
-    treinoEncontrado = treino;
+        const [medidasAtuais, fieldsMedidasAtuais] = await conexao.execute(
+            `select peso, pescoco, cintura, quadril
+            from medidas
+            where idAssinante = ?
+            order by data desc limit 1`, [idAssinante]);
 
+        const [treinos, fieldsTreinos] = await conexao.execute(
+            `select idTreino, dataInicio, dataFim, objetivo
+                from treinos
+                where idAssinante = ?
+                order by data desc`, [idAssinante]);
+
+        return {
+            dados: rows[0],
+            medidasAtuais: medidasAtuais[0],
+            treinos: treinos
+        }
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 module.exports = {
@@ -196,9 +267,8 @@ module.exports = {
     buscarPersonalTrainersPorFiltro: buscarPersonalTrainersPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,
     salvarAlteracaoDeDados: salvarAlteracaoDeDados,
+    salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
+    salvarAlteracaoSobreMim: salvarAlteracaoSobreMim,
     buscarAlunosPorFiltro: buscarAlunosPorFiltro,
-    buscarAlunoPorId: buscarAlunoPorId,
-    buscarTreinoPorId: buscarTreinoPorId,
-    salvarTreino: salvarTreino,
-    salvarAlteracoesDoTreino: salvarAlteracoesDoTreino,
+    buscarAlunoPorId: buscarAlunoPorId
 };

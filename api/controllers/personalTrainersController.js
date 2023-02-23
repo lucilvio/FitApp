@@ -1,171 +1,196 @@
-const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
-const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
 const Treino = require('../model/treino');
+const Imc = require('../model/imc');
+const Exercicio = require('../model/exercicioDoTreino');
+const PersonalTrainer = require('../model/personalTrainer');
+const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
+const repositorioDeTreinos = require('../repositorios/repositorioDeTreinos');
+const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 
-function buscarDadosDoPerfil(req, res) {
+
+async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para buscar dados do perfil.'
 
-    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
+    const dadosDoPersonal = await repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
 
-    if (!personalEncontrado) {
+    if (!dadosDoPersonal) {
         res.status(404).send({ erro: 'Personal Trainer não encontrado' });
         return;
     }
 
     res.send({
-        idPersonal: personalEncontrado.idPersonal,
-        imagem: personalEncontrado.usuario.imagem,
-        email: personalEncontrado.usuario.login,
-        nome: personalEncontrado.nome,
-        registroProfissional: personalEncontrado.registroProfissional,
-        telefone: personalEncontrado.telefone,
-        sobreMim: personalEncontrado.sobreMim
+        idPersonal: dadosDoPersonal.idPersonal,
+        imagem: dadosDoPersonal.imagem,
+        email: dadosDoPersonal.login,
+        nome: dadosDoPersonal.nome,
+        registroProfissional: dadosDoPersonal.registroProfissional,
+        telefone: dadosDoPersonal.telefone,
+        sobreMim: dadosDoPersonal.sobreMim
     })
 
 }
 
-function alterarDadosDoPerfil(req, res) {
+async function alterarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para alterar dados do perfil.'
 
-    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
+    PersonalTrainer.validarAlteracaoDoPerfil(req.body.nome);
 
-    if (!personalEncontrado) {
-        res.status(404).send({ erro: 'Personal Trainer não encontrado' });
-        return;
-    }
+    await repositorioDePersonalTrainers.salvarAlteracaoDeDadosDoPerfil(req.usuario.idUsuario, req.body.nome, req.body.telefone);
 
-    personalEncontrado.alterarDadosDoPerfil(req.body.telefone, req.body.imagem);
-
-    repositorioDePersonalTrainers.salvarAlteracaoDeDados(personalEncontrado);
     res.send();
 }
 
-function alterarInformacoesSobreMim(req, res) {
+async function alterarInformacoesSobreMim(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para alterar informações "Sobre Mim".'
 
-    const personalEncontrado = repositorioDePersonalTrainers.buscarPersonalPorId(req.usuario.idUsuario);
+    await repositorioDePersonalTrainers.salvarAlteracaoSobreMim(req.usuario.idUsuario, req.body.texto);
 
-    if (!personalEncontrado) {
-        res.status(404).send({ erro: 'Personal Trainer não encontrado' });
-        return;
-    }
-
-    personalEncontrado.alterarSobreMim(req.body.texto);
-
-    repositorioDePersonalTrainers.salvarAlteracaoDeDados(personalEncontrado);
     res.send();
 }
 
-function buscarAlunos(req, res) {
+async function buscarAlunos(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para buscar alunos.'
 
-    const alunos = repositorioDePersonalTrainers.buscarAlunosPorFiltro(req.query.nome, req.usuario.email);
+    const alunos = await repositorioDePersonalTrainers.buscarAlunosPorFiltro(req.usuario.idUsuario, req.query.nome);
+
+    if (!alunos || alunos.length <= 0) {
+        res.status(404).send({ erro: "Aluno não encontrado" });
+        return;
+    }
 
     res.send(alunos.map(function (aluno) {
         return {
             idAssinante: aluno.idAssinante,
             nome: aluno.nome,
             objetivo: aluno.objetivo,
-            treinos: aluno.treinos
+
         }
     }));
+
 }
 
-function buscarAlunoPorId(req, res) {
+async function buscarAlunoPorId(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para buscar aluno por Id.'
 
-    const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+    const alunoEncontrado = await repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
         return;
     }
 
-    if (req.usuario.idUsuario != alunoEncontrado.personalTrainer) {
+    if (req.usuario.idUsuario != alunoEncontrado.dados.idPersonal) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
     res.send({
-        nome: alunoEncontrado.nome,
-        objetivo: alunoEncontrado.objetivo,
-        dataNascimento: alunoEncontrado.dataNascimento,
-        sexo: alunoEncontrado.sexo,
-        altura: alunoEncontrado.altura,
-        treinos: alunoEncontrado.treinos
-
+        nome: alunoEncontrado.dados.nome,
+        objetivo: !alunoEncontrado.treinos || alunoEncontrado.treinos.length <= 0 ? null : alunoEncontrado.treinos[0].objetivo,
+        dataNascimento: alunoEncontrado.dados.dataNascimento,
+        sexo: alunoEncontrado.dados.idSexo,
+        altura: !alunoEncontrado.dados.altura ? 0 : alunoEncontrado.dados.altura,
+        dietas: !alunoEncontrado.treinos ? [] : alunoEncontrado.treinos,
+        peso: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso,
+        pescoco: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.pescoco,
+        cintura: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.cintura,
+        quadril: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.quadril,
+        imc: new Imc(!alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso, alunoEncontrado.dados.altura).valor,
     });
 
 }
 
-function buscarMedidasDoAluno(req, res) {
+async function buscarMedidasDoAluno(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para buscar medidas do aluno.'
 
-    const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+    const alunoEncontrado = await repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
         return;
     }
 
-    if (req.usuario.idUsuario != alunoEncontrado.personalTrainer) {
+    if (req.usuario.idUsuario != alunoEncontrado.dados.idPersonal) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
+    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
+
+    let medidasAtuais;
+
+    if (!medidasOrdenadasPorData) {
+        medidasAtuais = {
+            peso: 0,
+            pescoco: 0,
+            cintura: 0,
+            quadril: 0
+        }
+    } else {
+        medidasAtuais = medidasOrdenadasPorData[0]
+    }
+
     res.send({
-        medidas: alunoEncontrado.medidas,
+        historicoDeMedidas: medidasOrdenadasPorData,
+        medidasAtuais: medidasAtuais
     });
 
 }
 
-function criarTreino(req, res) {
+async function criarTreino(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para criar treino.'
 
-    const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+    const alunoEncontrado = await repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: 'Aluno não encontrado' });
         return;
     }
 
-    if (req.usuario.idUsuario == alunoEncontrado.personalTrainer) {
+    if (req.usuario.idUsuario == alunoEncontrado.dados.idPersonal) {
 
-        const treino = new Treino(req.params.idAssinante, req.usuario.idUsuario, req.body.nomeTreino, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.exercicios);
-        alunoEncontrado.inserirTreino(treino);
-        repositorioDeAssinantes.salvarTreino(treino);
+        const novoTreino = new Treino.Treino(
+            req.params.idAssinante,
+            req.usuario.idUsuario,
+            req.body.nomeTreino,
+            req.body.dataInicio,
+            req.body.dataFim,
+            req.body.objetivo,
+            req.body.exercicios
+        );
 
-        res.send({ idTreino: treino.idTreino });
+        await repositorioDeTreinos.salvarTreino(req.params.idAssinante, novoTreino);
+
+        res.send({ idTreino: novoTreino.idTreino });
 
     } else {
-        res.status(400).send({ erro: "Não é possivel criar treino " })
+        res.status(400).send({ erro: "Não é possivel criar treino" })
     }
 }
 
-function buscarTreinoPorId(req, res) {
+async function buscarTreinoPorId(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para buscar treino por Id.'
 
-    const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+    const alunoEncontrado = await repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
 
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
         return;
     }
 
-    if (req.usuario.idUsuario != alunoEncontrado.personalTrainer) {
+    if (req.usuario.idUsuario != alunoEncontrado.dados.idPersonal) {
         res.status(401).send({ erro: 'Não autorizado' });
         return;
     }
 
-    const treinoEncontrado = repositorioDePersonalTrainers.buscarTreinoPorId(req.params.idAssinante, req.params.idTreino);
+    const treinoEncontrado = await repositorioDeTreinos.buscarTreinoPorId(req.params.idAssinante, req.params.idTreino);
 
     if (!treinoEncontrado) {
         res.status(404).send({ erro: "Treino não encontrado" });
@@ -176,30 +201,54 @@ function buscarTreinoPorId(req, res) {
 
 }
 
-function alterarTreino(req, res) {
+async function alterarTreino(req, res) {
     // #swagger.tags = ['Personal Trainer']
     // #swagger.description = 'endpoint para alterar treino.'
 
-    const alunoEncontrado = repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+    const alunoEncontrado = await repositorioDePersonalTrainers.buscarAlunoPorId(req.params.idAssinante);
+
     if (!alunoEncontrado) {
         res.status(404).send({ erro: "Aluno não encontrado" });
         return;
     }
 
-    const treinoEncontrado = repositorioDePersonalTrainers.buscarTreinoPorId(req.params.idAssinante, req.params.idTreino);
+    const treinoEncontrado = await repositorioDeTreinos.buscarTreinoPorId(req.params.idAssinante, req.params.idTreino);
+
     if (!treinoEncontrado) {
         res.status(404).send({ erro: "Treino não encontrado" });
         return;
     }
 
-    if (req.usuario.idUsuario == alunoEncontrado.personalTrainer) {
-        treinoEncontrado.alterarDadosDoTreino(req.params.idTreino, req.body.nomeTreino, req.body.dataInicio, req.body.dataFim, req.body.objetivo, req.body.exercicios);
+    let exercicios = [];
 
-        repositorioDePersonalTrainers.salvarAlteracoesDoTreino(treinoEncontrado);
+    if (req.usuario.idUsuario == alunoEncontrado.dados.idPersonal) {
+
+        Treino.validarAlteracaoDoTreino(
+            req.params.idTreino,
+            req.body.nomeTreino,
+            req.body.dataInicio,
+            req.body.dataFim,
+            req.body.objetivo,
+            req.body.exercicios
+        );
+
+        req.body.exercicios.forEach(exercicio => {
+            exercicios.push(new Exercicio.ExercicioDoTreino(req.params.idTreino, exercicio.descricao, exercicio.diaDoTreino));
+        });
+
+        await repositorioDeTreinos.salvarAlteracaoDoTreino(
+            req.params.idTreino,
+            req.body.nomeTreino,
+            req.body.dataInicio,
+            req.body.dataFim,
+            req.body.objetivo,
+            exercicios
+        );
 
         res.send();
+
     } else {
-        res.status(401).send({ erro: 'Não autorizado' });
+        res.status(400).send({ erro: "Não é possivel alterar treino" })
     }
 
 

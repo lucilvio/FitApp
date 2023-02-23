@@ -25,33 +25,16 @@ function PersonalTrainer(nome, email, telefone, registroProfissional) {
     this.telefone = telefone;
     this.registroProfissional = registroProfissional;
     this.sobreMim = "";
-
-
-
-    this.alterarDadosDoPerfil = function (telefone, imagem) {
-        if (imagem != undefined && imagem != null && imagem != "") {
-            this.usuario.imagem = imagem;
-        }
-
-        if (telefone != undefined && telefone != null && telefone != '') {
-            this.telefone = telefone;
-        }
-    }
-
-    this.alterarSenha = function (senha) {
-        if (senha != undefined && senha != null && senha != '') {
-            this.usuario.senha = senha;
-        }
-
-    }
-
-    this.alterarSobreMim = function (texto) {
-        this.sobreMim = texto;
-    }
-
-
 }
 
+function validarAlteracaoDoPerfil(nome) {
+    if (!nome) {
+        throw { mensagem: "O nome do personal trainer precisa ser definido", interna: true };
+    }
+}
+
+
 module.exports = {
-    PersonalTrainer: PersonalTrainer
+    PersonalTrainer: PersonalTrainer,
+    validarAlteracaoDoPerfil: validarAlteracaoDoPerfil
 }

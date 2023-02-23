@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const ExercicioDoTreino = require('./exercicioDoTreino');
 
 function Treino(idAssinante, idPersonal, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
     if (!nomeTreino) {
@@ -22,66 +23,49 @@ function Treino(idAssinante, idPersonal, nomeTreino, dataInicio, dataFim, objeti
     this.idPersonal = idPersonal;
     this.ativo = true;
     this.nomeTreino = nomeTreino;
-    this.dataInicio = dataInicio;
-    this.dataFim = dataFim;
+    this.dataInicio = new Date(dataInicio);
+    this.dataFim = new Date(dataFim);
     this.objetivo = objetivo;
-    this.exercicios = [];
     this.data = new Date();
+    this.exercicios = [];
 
     exercicios.forEach(exercicio => {
-        this.exercicios.push(new ExercicioDoTreino(this.idTreino, exercicio.descricao, exercicio.diaDoTreino));
+        this.exercicios.push(new ExercicioDoTreino.ExercicioDoTreino(this.idTreino, exercicio.descricao, exercicio.diaDoTreino));
     });
 
-
-    this.alterarDadosDoTreino = function (idTreino, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
-        this.exercicios = [];
-
-        if (!idTreino) {
-            throw { mensagem: "Não é possível adicionar exercicio sem o id da dieta", interna: true };
-        }
-
-        if (nomeTreino != undefined && nomeTreino != null && nomeTreino != "") {
-            this.nomeTreino = nomeTreino;
-        }
-
-        if (dataInicio != undefined && dataInicio != null && dataInicio != "") {
-            this.dataInicio = dataInicio;
-        }
-
-        if (dataFim != undefined && dataFim != null && dataFim != "") {
-            this.dataFim = dataFim;
-        }
-
-        if (objetivo != undefined && objetivo != null && objetivo != "") {
-            this.objetivo = objetivo;
-        }
-
-        if (exercicios != undefined && exercicios != null && exercicios != "") {
-            exercicios.forEach(exercicio => {
-                this.exercicios.push(new ExercicioDoTreino(idTreino, exercicio.descricao, exercicio.diaDoTreino));
-            });
-           
-        }
-
-    }
 }
 
-function ExercicioDoTreino(idTreino, descricao, diaDoTreino) {
+function validarAlteracaoDoTreino(idTreino, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
+
     if (!idTreino) {
-        throw { mensagem: "Não é possível adicionar exercício sem o id do treino", interna: true };
+        throw { mensagem: "Não é possível adicionar exercicio sem o id do treino", interna: true };
     }
 
-    if (!descricao) {
-        throw { mensagem: "Não é possível adicionar exercício sem descrição", interna: true };
+    if (!nomeTreino) {
+        throw { mensagem: "Não é possível alterar treino sem o nome", interna: true };
     }
 
-    if (!diaDoTreino) {
-        throw { mensagem: "Não é possível adicionar exercício sem o dia do treino", interna: true };
+    if (!dataInicio) {
+        throw { mensagem: "Não é possível alterar treino sem a data de inicio", interna: true };
     }
 
-    this.idTreino = idTreino;
-    this.descricao = descricao;
-    this.diaDoTreino = diaDoTreino;
+    if (!dataFim) {
+        throw { mensagem: "Não é possível alterar treino sem a data do fim", interna: true };
+    }
+
+    if (!objetivo) {
+        throw { mensagem: "Não é possível alterar treino sem o objetivo", interna: true };
+    }
+
+    if (!exercicios || exercicios.length <= 0) {
+        throw { mensagem: "Não é possível alterar treino sem exercicios", interna: true };
+    }
+
 }
 
-module.exports = Treino
+
+
+module.exports = {
+    Treino: Treino,
+    validarAlteracaoDoTreino: validarAlteracaoDoTreino
+}

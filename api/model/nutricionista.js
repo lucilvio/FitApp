@@ -30,7 +30,7 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
 
 function validarAlteracaoDoPerfil(nome) {
     if (!nome) {
-        throw { mensagem: "O nome do assinante precisa ser definido", interna: true };
+        throw { mensagem: "O nome do nutricionista precisa ser definido", interna: true };
     }
 }
 
