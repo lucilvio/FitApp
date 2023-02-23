@@ -1,36 +1,49 @@
+const Mensagem = require('../model/mensagem');
 const repositorioDeUsuarios = require('../repositorios/repositorioDeUsuarios');
 const repositorioDeMensagem = require('../repositorios/repositorioDeMensagens');
-const Mensagem = require('../model/mensagem');
 
 
-function enviarMensagem(req, res) {
+async function enviarMensagem(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para enviar mensagem.'
 
-    const remetenteEncontrado = repositorioDeUsuarios.buscarDadosDoUsuarioPorId(req.usuario.idUsuario);
+    const remetenteEncontrado = await repositorioDeUsuarios.buscarDadosDoUsuarioPorId(req.usuario.idUsuario);
     if (!remetenteEncontrado) {
         res.status(404).send({ erro: "Remetente não encontrado" });
         return;
     }
 
-    const destinatarioEncontrado = repositorioDeUsuarios.buscarUsuarioPorLogin(req.body.destinatario);
+    const destinatarioEncontrado = await repositorioDeUsuarios.buscarUsuarioPorLogin(req.body.destinatario);
     if (!destinatarioEncontrado) {
         res.status(404).send({ erro: "Destinatario não encontrado" });
         return;
     }
 
-    const mensagem = new Mensagem(remetenteEncontrado.idUsuario, remetenteEncontrado.login, destinatarioEncontrado.idUsuario,destinatarioEncontrado.login,  req.body.assunto, req.body.texto);
-    repositorioDeMensagem.salvarMensagem(mensagem);
+    const mensagem = new Mensagem.Mensagem(
+        req.usuario.idUsuario,
+        remetenteEncontrado.login,
+        destinatarioEncontrado.idUsuario,
+        destinatarioEncontrado.login,
+        req.body.assunto,
+        req.body.texto
+    );
 
-    res.send({idMensagem: mensagem.idMensagem})
+    await repositorioDeMensagem.salvarMensagem(mensagem);
+
+    res.send({ idMensagem: mensagem.idMensagem })
 
 }
 
-function buscarMensagensRecebidas(req, res) {
+async function buscarMensagensRecebidas(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para buscar mensagens recebidas.'
 
-    const mensagens = repositorioDeMensagem.buscarMensagensRecebidas(req.usuario.idUsuario);
+    const mensagens = await repositorioDeMensagem.buscarMensagensRecebidas(req.usuario.idUsuario);
+
+    if (!mensagens || mensagens.length <= 0) {
+        res.status(404).send({ erro: "Não há mensagens recebidas" });
+        return;
+    }
 
     res.send(mensagens.map(function (mensagem) {
         return {
@@ -43,11 +56,16 @@ function buscarMensagensRecebidas(req, res) {
     }))
 }
 
-function buscarMensagensEnviadas(req, res) {
+async function buscarMensagensEnviadas(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para buscar mensagens enviadas.'
 
-    const mensagens = repositorioDeMensagem.buscarMensagensEnviadas(req.usuario.idUsuario);
+    const mensagens = await repositorioDeMensagem.buscarMensagensEnviadas(req.usuario.idUsuario);
+
+    if (!mensagens || mensagens.length <= 0) {
+        res.status(404).send({ erro: "Não há mensagens enviadas" });
+        return;
+    }
 
     res.send(mensagens.map(function (mensagem) {
         return {
@@ -60,11 +78,17 @@ function buscarMensagensEnviadas(req, res) {
         }
     }))
 }
-function buscarMensagensExcluidas(req, res) {
+
+async function buscarMensagensExcluidas(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para buscar mensagens excluídas.'
 
-    const mensagens = repositorioDeMensagem.buscarMensagensExcluidas(req.usuario.idUsuario);
+    const mensagens = await repositorioDeMensagem.buscarMensagensExcluidas(req.usuario.idUsuario);
+
+    if (!mensagens || mensagens.length <= 0) {
+        res.status(404).send({ erro: "Não há mensagens excluidas" });
+        return;
+    }
 
     res.send(mensagens.map(function (mensagem) {
         return {
@@ -77,7 +101,7 @@ function buscarMensagensExcluidas(req, res) {
     }))
 }
 
-function buscarMensagemPorId(req, res) {
+async function buscarMensagemPorId(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para buscar mensagem por Id.'
 
@@ -86,7 +110,8 @@ function buscarMensagemPorId(req, res) {
         return;
     }
 
-    let mensagem = repositorioDeMensagem.buscarMensagemPorId(req.usuario.idUsuario, req.params.idMensagem);
+    const mensagem = await repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
+
     if (!mensagem) {
         res.status(404).send({ erro: "Mensagem não encontrada" });
         return;
@@ -102,7 +127,7 @@ function buscarMensagemPorId(req, res) {
     })
 }
 
-function excluirMensagem(req, res) {
+async function excluirMensagem(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para excluir mensagem.'
 
@@ -111,12 +136,20 @@ function excluirMensagem(req, res) {
         return;
     }
 
-    repositorioDeMensagem.excluirMensagem(req.usuario.idUsuario, req.params.idMensagem)
+    const mensagem = await repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
+
+    if (!mensagem) {
+        res.status(404).send({ erro: "Mensagem não encontrada" });
+        return;
+    }
+
+    await repositorioDeMensagem.excluirMensagem(req.usuario.idUsuario, req.params.idMensagem);
+
     res.send();
 
 }
 
-function responderMensagem(req, res) {
+async function responderMensagem(req, res) {
     // #swagger.tags = ['Mensagem']
     // #swagger.description = 'endpoint para responder mensagem.'
 
@@ -125,21 +158,21 @@ function responderMensagem(req, res) {
         return;
     }
 
-    const mensagem = repositorioDeMensagem.buscarMensagemPorId(req.usuario.idUsuario, req.params.idMensagem);
+    const mensagem = await repositorioDeMensagem.buscarMensagemPorId(req.params.idMensagem);
 
     if (!mensagem) {
         res.status(404).send({ erro: "Mensagem não encontrada" });
         return;
     }
 
-    const resposta = new Mensagem (req.usuario.idUsuario, req.usuario.email, mensagem.idUsuarioRemetente,mensagem.emailRemetente, mensagem.assunto, req.body.texto);
+    const mensagemResposta = new Mensagem.Mensagem(req.usuario.idUsuario, req.usuario.email, mensagem.idUsuarioRemetente, mensagem.emailRemetente, mensagem.assunto, req.body.texto);
 
-    mensagem.idMensagemResposta = resposta.idMensagem;
+    mensagem.idMensagemResposta = mensagemResposta.idMensagem;
 
-    repositorioDeMensagem.salvarMensagem(mensagem);
-    repositorioDeMensagem.salvarMensagem(resposta);
+    await repositorioDeMensagem.salvarRespostaDaMensagem(mensagem, mensagemResposta);
+   
 
-    res.send({idMensagemResposta: resposta.idMensagem});
+    res.send({ idMensagemResposta: mensagemResposta.idMensagem });
 }
 
 

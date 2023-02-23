@@ -50,7 +50,7 @@ servidor.app.get('/mensagem/recebidas', async (req, res) => await tratarErros(re
 servidor.app.get('/mensagem/enviadas', async (req, res) => await tratarErros(req, res, mensagensController.buscarMensagensEnviadas));
 servidor.app.get('/mensagem/excluidas', async (req, res) => await tratarErros(req, res, mensagensController.buscarMensagensExcluidas));
 servidor.app.get('/mensagens/:idMensagem', async (req, res) => await tratarErros(req, res, mensagensController.buscarMensagemPorId));
-servidor.app.delete('/mensagens/:idMensagem', async (req, res) => await tratarErros(req, res, mensagensController.excluirMensagem));
+servidor.app.patch('/mensagens/:idMensagem', async (req, res) => await tratarErros(req, res, mensagensController.excluirMensagem));
 servidor.app.post('/mensagens/:idMensagem', async (req, res) => await tratarErros(req, res, mensagensController.responderMensagem));
 
 

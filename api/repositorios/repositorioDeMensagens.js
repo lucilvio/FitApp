@@ -1,33 +1,198 @@
 const base = require('../dados');
+const baseDeDados = require('../conexao');
 
-function buscarMensagensRecebidas(idUsuario) {
-    return base.dados.mensagens.filter(mensagem => mensagem.idUsuarioDestinatario == idUsuario && mensagem.excluida == false);
-}
+async function salvarMensagem(mensagem) {
+    const conexao = await baseDeDados.abrirConexao();
 
-function buscarMensagensEnviadas(idUsuario) {
-    return base.dados.mensagens.filter(mensagem => mensagem.idUsuarioRemetente == idUsuario);
-}
+    try {
+        const parametrosDaMensagem = [
+            mensagem.data,
+            mensagem.idMensagem,
+            mensagem.idMensagemResposta,
+            mensagem.idUsuarioRemetente,
+            mensagem.idUsuarioDestinatario,
+            mensagem.assunto,
+            mensagem.texto,
+            mensagem.excluidaRemetente,
+            mensagem.excluidaDestinatario
+        ]
 
-function buscarMensagensExcluidas(idUsuario) {
-    return base.dados.mensagens.filter(mensagem => mensagem.idUsuarioDestinatario == idUsuario && mensagem.excluida == true);
-}
+        await conexao.execute(
+            `insert into mensagens (
+                data, 
+                idMensagem, 
+                idMensagemResposta, 
+                idUsuarioRemetente, 
+                idUsuarioDestinatario, 
+                assunto, 
+                texto, 
+                excluidaRemetente,
+                excluidaDestinatario
+            ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDaMensagem);
 
-function buscarMensagemPorId(idUsuario, idMensagem) {
-    return base.dados.mensagens.find(mensagem => mensagem.idMensagem == idMensagem);
-}
-
-function salvarMensagem(mensagem) {
-    base.dados.mensagens.push(mensagem);
-}
-
-function excluirMensagem(idUsuario, idMensagem) {
-    const mensagemEncontrada = buscarMensagemPorId(idUsuario, idMensagem);
-
-    if(!mensagemEncontrada) {
-        throw { mensagem: "Mensagem não encontrada", interna: true };
+    } finally {
+        await conexao.end();
     }
+}
 
-    mensagemEncontrada.excluida = true;
+async function buscarMensagensRecebidas(idUsuario) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioRemetente, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
+                    rem.login as emailRemetente
+            from mensagens as mensagem
+            inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
+            where mensagem.idUsuarioDestinatario = ? and mensagem.excluidaDestinatario = false`, [idUsuario]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows;
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function buscarMensagensEnviadas(idUsuario) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioDestinatario, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
+                    dest.login as emailDestinatario, rem.login as emailRemetente
+            from mensagens as mensagem
+                inner join usuarios as dest on mensagem.idUsuarioDestinatario = dest.idUsuario
+                inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
+            where mensagem.idUsuarioRemetente = ? and mensagem.excluidaRemetente = false`, [idUsuario]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows;
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function buscarMensagensExcluidas(idUsuario) {
+
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioRemetente, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
+                    rem.login as emailRemetente
+            from mensagens as mensagem
+                inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
+            where mensagem.idUsuarioRemetente = ? and mensagem.excluidaRemetente = true`, [idUsuario]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows;
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function buscarMensagemPorId(idMensagem) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select 
+                mensagem.idMensagem, 
+                mensagem.data, 
+                mensagem.idUsuarioRemetente, 
+                mensagem.idUsuarioDestinatario, 
+                mensagem.assunto, mensagem.texto, 
+                mensagem.idMensagemResposta,
+                mensagem.excluidaRemetente,
+                mensagem.excluidaDestinatario,
+                dest.login as emailDestinatario, rem.login as emailRemetente
+            from mensagens as mensagem
+                inner join usuarios as dest on mensagem.idUsuarioDestinatario = dest.idUsuario
+                inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
+             where mensagem.idMensagem = ?`, [idMensagem]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function excluirMensagem(idUsuario, idMensagem) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        await conexao.execute(
+            `UPDATE mensagens
+            SET excluidaRemetente = true
+            WHERE idUsuarioRemetente = ? and idMensagem = ?`, [idUsuario, idMensagem]);
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function salvarRespostaDaMensagem(mensagem, mensagemResposta) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const parametrosDaMensagem = [
+            mensagem.idMensagemResposta,
+            mensagem.idMensagem
+        ]
+
+        const parametrosDaMensagemResposta = [
+            mensagemResposta.data,
+            mensagemResposta.idMensagem,
+            mensagemResposta.idMensagemResposta,
+            mensagemResposta.idUsuarioRemetente,
+            mensagemResposta.idUsuarioDestinatario,
+            mensagemResposta.assunto,
+            mensagemResposta.texto,
+            mensagemResposta.excluidaRemetente,
+            mensagemResposta.excluidaDestinatario
+        ]
+
+
+        await conexao.beginTransaction();
+
+        await conexao.execute(
+            `insert into mensagens (
+                data,
+                idMensagem,
+                idMensagemResposta,
+                idUsuarioRemetente,
+                idUsuarioDestinatario,
+                assunto,
+                texto,
+                excluidaRemetente,
+                excluidaDestinatario
+            ) 
+                values (?, ?, ?, ?, ?, ?, ?, ?, ?);`, parametrosDaMensagemResposta);
+
+        await conexao.execute(
+            `update mensagens
+            set idMensagemResposta = ?
+            where idMensagem = ?`, parametrosDaMensagem);
+
+
+        await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
 }
 
 module.exports = {
@@ -37,5 +202,6 @@ module.exports = {
     buscarMensagemPorId: buscarMensagemPorId,
     salvarMensagem: salvarMensagem,
     excluirMensagem: excluirMensagem,
+    salvarRespostaDaMensagem: salvarRespostaDaMensagem
 
 }

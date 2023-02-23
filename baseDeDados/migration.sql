@@ -156,6 +156,39 @@ CREATE TABLE IF NOT EXISTS `exercicios` (
   CONSTRAINT `fk_exercicios_idTreino` FOREIGN KEY (`idTreino`) REFERENCES `db_fitapp`.`treinos` (`idTreino`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+set foreign_key_checks = 0;
+
+CREATE TABLE IF NOT EXISTS `mensagens` (
+  `idMensagem` VARCHAR(36) NOT NULL,
+  `data` DATETIME NOT NULL,
+  `idUsuarioRemetente` VARCHAR(36) NOT NULL,
+  `idUsuarioDestinatario` VARCHAR(36) NOT NULL,
+  `assunto` VARCHAR(128) NOT NULL,
+  `texto` VARCHAR(2048) NOT NULL,
+  `excluidaRemetente` TINYINT NOT NULL,
+  `excluidaDestinatario` TINYINT NOT NULL,
+  `idMensagemResposta` VARCHAR(36) NULL,
+  PRIMARY KEY (`idMensagem`),
+  INDEX `fk_mensagens_idUsuarioRemetente_idx` (`idUsuarioRemetente` ASC) VISIBLE,
+  INDEX `fk_mensagens_idUsuarioDestinatario_idx` (`idUsuarioDestinatario` ASC) VISIBLE,
+  CONSTRAINT `fk_mensagens_idUsuarioRemetente`
+    FOREIGN KEY (`idUsuarioRemetente`)
+    REFERENCES `db_fitapp`.`usuarios` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mensagens_idUsuarioDestinatario`
+    FOREIGN KEY (`idUsuarioDestinatario`)
+    REFERENCES `db_fitapp`.`usuarios` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+CONSTRAINT `fk_mensagens_idMensagemResposta`
+    FOREIGN KEY (`idMensagemResposta`)
+    REFERENCES `db_fitapp`.`mensagens` (`idMensagem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+set foreign_key_checks = 1;
+
 replace into sexos (idSexo, descricao) values(1, 'feminino');
 replace into sexos (idSexo, descricao) values(2, 'masculino');
 
@@ -170,7 +203,7 @@ false
 )
 ON DUPLICATE KEY UPDATE idUsuario = 'e7c17d74-f067-46ca-9734-1c232ba0ea18';
 
-replace into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
 values(
 '57408fdd-8ccc-441a-953f-555dec2005bc',
 'gratuito',
@@ -178,7 +211,8 @@ values(
 365,
 'experimente por 15 dias.',
 false
-);
+)
+ON DUPLICATE KEY UPDATE idPlano = '57408fdd-8ccc-441a-953f-555dec2005bc';
 
 INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
@@ -194,7 +228,7 @@ ON DUPLICATE KEY UPDATE idUsuario = 'cdb6531c-0bc4-48b2-b317-dece78f5349e';
 INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
-'personal',
+'personalTrainer',
 'personal',
 'personal@fitapp.com',
 'personal123',

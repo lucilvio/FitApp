@@ -26,17 +26,20 @@ function Mensagem (idUsuarioRemetente, emailRemetente, idUsuarioDestinatario, em
         throw { mensagem: "Não é possível enviar mensagem sem texto", interna: true };
     }
 
+    this.data = new Date();
     this.idMensagem = crypto.randomUUID();
     this.idMensagemResposta = null;
     this.idUsuarioRemetente = idUsuarioRemetente;
     this.emailRemetente = emailRemetente;
     this.idUsuarioDestinatario = idUsuarioDestinatario;
     this.emailDestinatario = emailDestinatario;
-    this.data = new Date();
     this.assunto = assunto;
     this.texto = texto;
-    this.excluida = false;
+    this.excluidaRemetente = false;
+    this.excluidaDestinatario = false;
 }
 
-module.exports = Mensagem;
+module.exports = {
+    Mensagem: Mensagem
+}
 
