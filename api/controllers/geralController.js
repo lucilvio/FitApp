@@ -9,6 +9,11 @@ async function buscarPlanos(req, res) {
 
     const planos = await repositorioDePlanos.buscarPlanosAtivos();
 
+    if (!planos || planos <= 0) {
+        res.status(400).send({ erro: "Planos não encontrado" });
+        return;
+    }
+
     res.send(planos.map(function (plano) {
         return {
             idPlano: plano.idPlano,
@@ -27,6 +32,11 @@ async function buscarNutricionistas(req, res) {
 
     const nutricionistas = await repositorioDeNutricionistas.buscarNutricionistasAtivos();
 
+    if (!nutricionistas || nutricionistas <= 0) {
+        res.status(400).send({ erro: "Nutricionistas não encontrado" });
+        return;
+    }
+
     res.send(nutricionistas.map(function (nutri) {
         return {
             idNutri: nutri.idNutri,
@@ -43,6 +53,11 @@ async function buscarPersonalTrainers(req, res) {
     // #swagger.security = [] 
 
     const personalTrainers = await repositorioDePersonalTrainers.buscarPersonalTrainersAtivos();
+
+    if (!personalTrainers || personalTrainers <= 0) {
+        res.status(400).send({ erro: "Personal Trainers não encontrado" });
+        return;
+    }
 
     res.send(personalTrainers.map(function (personal) {
         return {

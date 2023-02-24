@@ -8,8 +8,8 @@ async function buscarAssinaturaAtiva(idAssinante) {
 
         const [rows, fields] = await conexao.execute(
             `select idAssinatura 
-        from assinaturas 
-        where idAssinante = ? and bloqueado = 0`, [idAssinante]);
+            from assinaturas 
+            where idAssinante = ? and bloqueado = 0`, [idAssinante]);
 
         if (rows.length <= 0)
             return;
@@ -27,11 +27,11 @@ async function buscarAssinaturaPorId(idUsuario, idAssinatura) {
     try {
 
         const [rows, fields] = await conexao.execute(
-            `select a.idPlano, a.dataInicio, a.dataFim, a.bloqueado,
-        b.nome, b.valor, b.duracao, b.descricao
-        from assinaturas as a
-        inner join planos as b on a.idPlano = b.idPlano 
-        where a.idAssinante = ? and a.idAssinatura = ?`, [idUsuario, idAssinatura]);
+            `select assinatura.idPlano, assinatura.dataInicio, assinatura.dataFim, assinatura.bloqueado,
+                    plano.nome, plano.valor, plano.duracao, plano.descricao
+            from assinaturas as assinatura
+                inner join planos as plano on assinatura.idPlano = plano.idPlano 
+            where assinatura.idAssinante = ? and assinatura.idAssinatura = ?`, [idUsuario, idAssinatura]);
 
         if (rows.length <= 0)
             return;

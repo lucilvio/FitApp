@@ -2,13 +2,13 @@ const base = require('../dados');
 const baseDeDados = require('../conexao');
 
 
-async function verificarSeJaExistePlanoCadastradoPeloNome(nome) {
+async function verificarSeJaExistePlanoCadastradoPeloNome(idPlano, nome) {
     const conexao = await baseDeDados.abrirConexao();
     try {
         const [rows, fields] = await conexao.execute(
-            `select nome 
+            `select idPlano, nome 
             from planos 
-            where nome = ?`, [nome]);
+            where nome = ? and idPlano != idPlano`, [nome, idPlano]);
 
         if (rows.length <= 0)
             return;
@@ -49,20 +49,17 @@ async function buscarPlanosPorFiltro(nome) {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
                 `select idPlano, nome, valor, duracao, descricao, bloqueado 
-            from planos`);
+                from planos`);
 
             return rows;
         }
 
-
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
             `select idPlano, nome, valor, duracao, descricao, bloqueado 
             from planos 
-            where nome = ?`, [nome.toLowerCase()]);
-
+            where nome like ?`, [`%${nome}%`]);
 
         return rowsComFiltro;
-
 
     } finally {
         await conexao.end();

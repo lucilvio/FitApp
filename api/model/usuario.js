@@ -1,6 +1,6 @@
 const geradorDeSenha = require('generate-password');
 const crypto = require('crypto');
-const Mensagem = require('./mensagem');
+
 
 function Usuario(nome, login, perfil){
 
@@ -26,20 +26,20 @@ function Usuario(nome, login, perfil){
 
 function validarAlteracaoDeSenha(senhaAtual, novaSenha) {
     if(!senhaAtual) {
-        res.status(400).send({ erro: "Não é possível redefinir senha sem a senha atual"});
-        return;
+
+        throw { mensagem: "Não é possível redefinir senha sem a senha atual", interna: true }
     }
 
     if(!novaSenha) {
-        res.status(400).send({ erro: "Não é possível redefinir senha a nova senha"});
-        return;
+
+        throw { mensagem: "Não é possível redefinir senha a nova senha", interna: true }
     }
 }
 
 function validarAlteracaoDaImagem(files) {
     if(!files) {
-        res.status(400).send({ erro: "Não é possível usar uma foto vazia"});
-        return;
+        
+        throw { mensagem: "Não é possível usar uma foto vazia", interna: true }
     }
 }
 

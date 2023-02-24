@@ -1,4 +1,3 @@
-const base = require('../dados');
 const baseDeDados = require('../conexao');
 
 async function buscarPersonalTrainersAtivos() {
@@ -6,11 +5,11 @@ async function buscarPersonalTrainersAtivos() {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.idPersonal, a.nome, a.sobreMim,
-                    b.imagem 
-            from personal_trainers as a
-            inner join usuarios as b on a.idPersonal = b.idUsuario
-            where b.bloqueado = false`);
+            `select personal.idPersonal, personal.nome, personal.sobreMim,
+                    usuario.imagem 
+            from personal_trainers as personal
+                inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario
+            where usuario.bloqueado = false`);
 
         if (rows.length <= 0)
             return;
@@ -22,14 +21,14 @@ async function buscarPersonalTrainersAtivos() {
     }
 }
 
-async function verificarSePersonalJaTemCadastro(email) {
+async function verificarSePersonalJaTemCadastro(idPersonal, email) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
         const [rows, fields] = await conexao.execute(
             `select idUsuario, login 
             from usuarios 
-            where login = ?`, [email.toLowerCase()]);
+            where login = ? and idUsuario != ?`, [email.toLowerCase(), idPersonal]);
 
         if (rows.length <= 0)
             return;
@@ -85,20 +84,20 @@ async function buscarPersonalTrainersPorFiltro(nome) {
     try {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
-                `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                b.bloqueado 
-                from personal_trainers as a
-                inner join usuarios as b on a.idPersonal = b.idUsuario`);
+                `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim,
+                        usuario.bloqueado 
+                from personal_trainers as personal
+                inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario`);
 
             return rows;
         }
 
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                b.bloqueado 
-                from personal_trainers as a
-                inner join usuarios as b on a.idPersonal = b.idUsuario
-                where a.nome = ?`, [nome.toLowerCase()]);
+            `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim,
+                    usuario.bloqueado 
+                from personal_trainers as personal
+                inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario
+                where personal.nome like ?`, [`%${nome}%`]);
 
         return rowsComFiltro;
 
@@ -112,11 +111,11 @@ async function buscarPersonalPorId(idPersonal) {
     try {
 
         const [rows, fields] = await conexao.execute(
-            `select a.idPersonal, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                b.imagem, b.bloqueado 
-        from personal_trainers as a
-        inner join usuarios as b on a.idPersonal = b.idUsuario
-        where a.idPersonal = ?`, [idPersonal]);
+            `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim,
+                    usuario.imagem, usuario.bloqueado 
+            from personal_trainers as personal
+                inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario
+            where personal.idPersonal = ?`, [idPersonal]);
 
         if (rows.length <= 0)
             return;
@@ -156,6 +155,7 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, telefone) {
 
     try {
         await conexao.beginTransaction();
+
         await conexao.execute(
             `update usuarios
             set nome = ?
@@ -196,25 +196,27 @@ async function buscarAlunosPorFiltro(idUsuario, nome) {
     try {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
-                `select	a.idAssinante, a.nome, 
-                        b.objetivo	
-                from assinantes as a
-                    left join treinos as b on b.idPersonal = a.idPersonal 
-                        and b.data = (select max(b.data) data 
-                        from treinos as b where b.idPersonal = ? and b.idAssinante = a.IdAssinante)
-                where a.idPersonal = ?`, [idUsuario, idUsuario]);
+                `select	assinante.idAssinante, assinante.nome, 
+                        treino.objetivo	
+                from assinantes as assinante
+                    left join treinos as treino on treino.idPersonal = assinante.idPersonal 
+                            and treino.data = (select max(treino.data) data 
+                        from treinos as treino 
+                        where treino.idPersonal = ? and treino.idAssinante = assinante.IdAssinante)
+                where assinante.idPersonal = ?`, [idUsuario, idUsuario]);
 
             return rows;
         }
 
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select	a.idAssinante, a.nome, 
-                    b.objetivo	
-            from assinantes as a
-                left join treinos as b on b.idPersonal = a.idPersonal 
-                    and b.data = (select max(b.data) data 
-                    from treinos as b where b.idPersonal = ? and b.idAssinante = a.IdAssinante)
-            where a.idPersonal = ? and a.nome like ?`, [idUsuario, idUsuario, `%${nome}%`]);
+            `select	assinante.idAssinante, assinante.nome, 
+                    treino.objetivo	
+            from assinantes as assinante
+                left join treinos as treino on treino.idPersonal = assinante.idPersonal 
+                        and treino.data = (select max(treino.data) data 
+                    from treinos as treino 
+                    where treino.idPersonal = ? and treino.idAssinante = assinante.IdAssinante)
+            where assinante.idPersonal = ? and assinante.nome like ?`, [idUsuario, idUsuario, `%${nome}%`]);
 
         return rowsComFiltro;
 
@@ -228,11 +230,11 @@ async function buscarAlunoPorId(idAssinante) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.imagem,
-                    b.nome, b.idSexo, b.dataNascimento, b.altura, b.idPersonal 
-            from usuarios as a
-            inner join assinantes as b on a.idUsuario = b.idAssinante
-            where a.idUsuario = ?`, [idAssinante]);
+            `select usuario.imagem,
+                    assinante.nome, assinante.idSexo, assinante.dataNascimento, assinante.altura, assinante.idPersonal 
+            from usuarios as usuario
+                inner join assinantes as assinante on usuario.idUsuario = assinante.idAssinante
+            where usuario.idUsuario = ?`, [idAssinante]);
 
         if (rows.length <= 0)
             return;
@@ -245,9 +247,9 @@ async function buscarAlunoPorId(idAssinante) {
 
         const [treinos, fieldsTreinos] = await conexao.execute(
             `select idTreino, dataInicio, dataFim, objetivo
-                from treinos
-                where idAssinante = ?
-                order by data desc`, [idAssinante]);
+            from treinos
+            where idAssinante = ?
+            order by data desc`, [idAssinante]);
 
         return {
             dados: rows[0],

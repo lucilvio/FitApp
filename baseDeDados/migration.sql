@@ -180,8 +180,8 @@ CREATE TABLE IF NOT EXISTS `mensagens` (
     FOREIGN KEY (`idUsuarioDestinatario`)
     REFERENCES `db_fitapp`.`usuarios` (`idUsuario`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-CONSTRAINT `fk_mensagens_idMensagemResposta`
+    ON UPDATE NO ACTION, 
+    CONSTRAINT `fk_mensagens_idMensagemResposta`
     FOREIGN KEY (`idMensagemResposta`)
     REFERENCES `db_fitapp`.`mensagens` (`idMensagem`)
     ON DELETE NO ACTION
@@ -189,8 +189,11 @@ CONSTRAINT `fk_mensagens_idMensagemResposta`
     
 set foreign_key_checks = 1;
 
-replace into sexos (idSexo, descricao) values(1, 'feminino');
-replace into sexos (idSexo, descricao) values(2, 'masculino');
+insert into sexos (idSexo, descricao) values(1, 'feminino')
+ON DUPLICATE KEY UPDATE idSexo = 1;
+
+insert into sexos (idSexo, descricao) values(2, 'masculino')
+ON DUPLICATE KEY UPDATE idSexo = 2;
 
 INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (

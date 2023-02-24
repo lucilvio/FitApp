@@ -30,7 +30,7 @@ function Assinante(nome, email, plano, idNutri, idPersonal) {
     this.altura = 0;
     this.nutricionista = idNutri;
     this.personalTrainer = idPersonal;
-    this.assinatura = new Assinatura(this.idAssinante, plano);
+    this.assinatura = new Assinatura.Assinatura(this.idAssinante, plano);
 
 }
 
@@ -45,11 +45,6 @@ function validarAlteracaoDeStatus(novoStatus) {
         throw { mensagem: "O status do assinante precisa ser definido", interna: true };
     }
 }
-
-
-
-
-
 
 module.exports = {
     Assinante: Assinante,

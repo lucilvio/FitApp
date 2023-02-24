@@ -19,4 +19,6 @@ function Assinatura(idAssinante, plano) {
 
 }
 
-module.exports = Assinatura;
+module.exports = {
+    Assinatura: Assinatura
+}

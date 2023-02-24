@@ -7,9 +7,9 @@ async function buscarTreinosPorFiltro(nome, idAssinante) {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
                 `select idTreino, nome, objetivo, dataInicio, dataFim, data 
-            from treinos
-            where idAssinante = ?
-            order by data desc`, [idAssinante]);
+                from treinos
+                where idAssinante = ?
+                order by data desc`, [idAssinante]);
 
             return rows;
         }
@@ -17,8 +17,8 @@ async function buscarTreinosPorFiltro(nome, idAssinante) {
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
             `select idTreino, nome, objetivo, dataInicio, dataFim, data  
             from treinos 
-            where nome = ? and idAssinante = ?
-            order by data desc`, [nome.toLowerCase(), idAssinante]);
+            where nome like ? and idAssinante = ?
+            order by data desc`, [`%${nome}%`, idAssinante]);
 
         return rowsComFiltro;
     }
@@ -37,13 +37,13 @@ async function buscarTreinoPorId(idAssinante, idTreino) {
             from treinos
             where idTreino = ? and idAssinante = ?`, [idTreino, idAssinante]);
 
+        if (rows.length <= 0)
+            return;
+
         const [exercicios, fieldsItens] = await conexao.execute(
             `select idExercicio, descricao, diaDoTreino
             from exercicios
             where idTreino = ?`, [idTreino]);
-
-        if (rows.length <= 0)
-            return;
 
         return {
             treino: rows[0],
@@ -71,10 +71,10 @@ async function salvarTreino(idAssinante, novoTreino) {
         ]
 
         await conexao.beginTransaction();
+
         await conexao.execute(
             `insert into treinos (idAssinante, idTreino, idPersonal, objetivo, nome, dataInicio, dataFim, data)
             values (?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDoTreino);
-
 
         novoTreino.exercicios.forEach(async exercicio => {
             const parametrosDoExercicio = [

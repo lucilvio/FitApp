@@ -51,8 +51,10 @@ async function cadastrarAssinante(req, res) {
         servicoDeEmail.enviar(novoAssinante.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoAssinante.nome, novoAssinante.usuario.senha));
 
         const admin = await repositorioDeUsuarios.buscarAdmin();
-        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
-        repositorioDeMensagens.salvarMensagem(new Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
+
+        repositorioDeMensagens.salvarMensagem(new Mensagem.Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
+        repositorioDeMensagens.salvarMensagem(new Mensagem.Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
+       
         res.send({
             idAssinante: novoAssinante.idAssinante
         });
@@ -76,9 +78,9 @@ async function buscarDadosDoDashboard(req, res) {
         imagem: dadosDoAssinante.dados.imagem,
         nome: dadosDoAssinante.dados.nome,
         altura: altura,
-        idade: new Idade(dadosDoAssinante.dados.dataNascimento).valor,
+        idade: new Idade.Idade(dadosDoAssinante.dados.dataNascimento).valor,
         peso: peso,
-        imc: new Imc(peso, altura).valor,
+        imc: new Imc.Imc(peso, altura).valor,
         medidas: dadosDoAssinante.historicoDePeso
         // idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
         // idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
@@ -139,6 +141,11 @@ async function buscarMedidas(req, res) {
 
     const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.usuario.idUsuario);
 
+    if (medidasOrdenadasPorData <= 0) {
+        res.status(400).send({ erro: "Medidas não encontrada" });
+        return;
+    }
+
     let medidasAtuais;
 
     if (!medidasOrdenadasPorData) {
@@ -166,7 +173,7 @@ async function excluirMedidas(req, res) {
     const medidaEncontrada = await repositorioDeMedidas.buscarMedidaPorId(req.usuario.idUsuario, req.params.idMedidas);
 
     if (!medidaEncontrada) {
-        res.status(400).send({ erro: "Medidas não localizada" });
+        res.status(400).send({ erro: "Medidas não encontrada" });
         return;
     }
 
@@ -183,7 +190,7 @@ async function buscarDadosDaAssinatura(req, res) {
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!dadosDaAssinatura) {
-        res.status(400).send({ erro: "Assinatura não localizada" });
+        res.status(400).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
@@ -206,7 +213,7 @@ async function cancelarAssinatura(req, res) {
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!dadosDaAssinatura) {
-        res.status(400).send({ erro: "Assinatura não localizada" });
+        res.status(400).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
@@ -226,17 +233,17 @@ async function alterarPlanoDaAssinatura(req, res) {
 
     const assinaturaEncontrada = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
     if (!assinaturaEncontrada) {
-        res.status(400).send({ erro: "Assinatura não localizada" });
+        res.status(400).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
     const dadosDoNovoPlano = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
     if (!dadosDoNovoPlano) {
-        res.status(400).send({ erro: "Plano não localizado" });
+        res.status(400).send({ erro: "Plano não encontrado" });
         return;
     }
 
-    const novaAssinatura = new Assinatura(req.usuario.idUsuario, dadosDoNovoPlano);
+    const novaAssinatura = new Assinatura.Assinatura(req.usuario.idUsuario, dadosDoNovoPlano);
 
     await repositorioDeAssinaturas.alterarPlanoDaAssinatura(req.usuario.idUsuario, novaAssinatura);
 
@@ -290,6 +297,11 @@ async function buscarDietas(req, res) {
     
     const dietas = await repositorioDeDietas.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
 
+    if (dietas <= 0) {
+        res.status(400).send({ erro: "Dietas não encontrada" });
+        return;
+    }
+
     res.send(dietas.map(function (dieta) {
         return {
             idDieta: dieta.idDieta,
@@ -327,6 +339,11 @@ async function buscarTreinos(req, res) {
     // #swagger.description = 'endpoint para buscar todos os Treinos ou filtra por nome.'
 
     const treinos = await repositorioDeTreinos.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
+
+    if (treinos <= 0) {
+        res.status(400).send({ erro: "Treinos não encontrado" });
+        return;
+    }
 
     res.send(treinos.map(function (treino) {
         return {

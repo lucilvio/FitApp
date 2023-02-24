@@ -1,5 +1,5 @@
-function Imc (peso, altura) {
-    
+function Imc(peso, altura) {
+
     if (peso == 0) {
         this.valor = 0
         return;
@@ -15,4 +15,6 @@ function Imc (peso, altura) {
     this.valor = peso / alturaConvertida;
 }
 
-module.exports = Imc;
+module.exports = {
+    Imc: Imc
+};

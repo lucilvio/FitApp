@@ -43,7 +43,7 @@ async function buscarMensagensRecebidas(idUsuario) {
             `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioRemetente, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
                     rem.login as emailRemetente
             from mensagens as mensagem
-            inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
+                inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
             where mensagem.idUsuarioDestinatario = ? and mensagem.excluidaDestinatario = false`, [idUsuario]);
 
         if (rows.length <= 0)

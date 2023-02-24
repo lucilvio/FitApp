@@ -8,6 +8,7 @@ async function enviarMensagem(req, res) {
     // #swagger.description = 'endpoint para enviar mensagem.'
 
     const remetenteEncontrado = await repositorioDeUsuarios.buscarDadosDoUsuarioPorId(req.usuario.idUsuario);
+
     if (!remetenteEncontrado) {
         res.status(404).send({ erro: "Remetente não encontrado" });
         return;
@@ -41,7 +42,7 @@ async function buscarMensagensRecebidas(req, res) {
     const mensagens = await repositorioDeMensagem.buscarMensagensRecebidas(req.usuario.idUsuario);
 
     if (!mensagens || mensagens.length <= 0) {
-        res.status(404).send({ erro: "Não há mensagens recebidas" });
+        res.status(404).send({ erro: "Mensagens não encontrada" });
         return;
     }
 
@@ -63,7 +64,7 @@ async function buscarMensagensEnviadas(req, res) {
     const mensagens = await repositorioDeMensagem.buscarMensagensEnviadas(req.usuario.idUsuario);
 
     if (!mensagens || mensagens.length <= 0) {
-        res.status(404).send({ erro: "Não há mensagens enviadas" });
+        res.status(404).send({ erro: "Mensagens não encontrada" });
         return;
     }
 
@@ -86,7 +87,7 @@ async function buscarMensagensExcluidas(req, res) {
     const mensagens = await repositorioDeMensagem.buscarMensagensExcluidas(req.usuario.idUsuario);
 
     if (!mensagens || mensagens.length <= 0) {
-        res.status(404).send({ erro: "Não há mensagens excluidas" });
+        res.status(404).send({ erro: "Mensagens não encontrada" });
         return;
     }
 

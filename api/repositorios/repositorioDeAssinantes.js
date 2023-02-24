@@ -1,6 +1,4 @@
-const base = require('../dados');
 const baseDeDados = require('../conexao');
-const Assinante = require('../model/assinante');
 
 async function verificarSeAssinanteJaTemCadastro(email) {
     const conexao = await baseDeDados.abrirConexao();
@@ -75,20 +73,20 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.imagem,
-                b.idAssinante, b.nome, b.altura, b.dataNascimento
-            from usuarios as a
-            inner join assinantes as b on a.idUsuario = b.idAssinante
-            where a.idUsuario = ?`, [idUsuario]);
+            `select usuario.imagem,
+                assinante.idAssinante, assinante.nome, assinante.altura, assinante.dataNascimento
+            from usuarios as usuario
+            inner join assinantes as assinante on usuario.idUsuario = assinante.idAssinante
+            where usuario.idUsuario = ?`, [idUsuario]);
+
+        if (rows.length <= 0)
+            return;
 
         const [pesos, fieldsPesos] = await conexao.execute(
             `select peso, data
             from medidas
             where idAssinante = ?
             order by data desc`, [idUsuario]);
-
-        if (rows.length <= 0)
-            return;
 
         return {
             dados: rows[0],
@@ -106,13 +104,13 @@ async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.imagem, a.login,a.nome, 
-		        b.idAssinante, b.altura, b.dataNascimento, b.idSexo, b.idNutri, b.idPersonal, 
-                c.idAssinatura, c.idPlano
-            from usuarios as a
-            inner join assinantes as b on a.idUsuario = b.idAssinante
-            inner join assinaturas as c on a.idUsuario = c.idAssinante
-            where a.idUsuario = ?`, [idUsuario]);
+            `select usuario.imagem, usuario.login,usuario.nome, 
+		        assinante.idAssinante, assinante.altura, assinante.dataNascimento, assinante.idSexo, assinante.idNutri, assinante.idPersonal, 
+                assinatura.idAssinatura, assinatura.idPlano
+            from usuarios as usuario
+                inner join assinantes as assinante on usuario.idUsuario = assinante.idAssinante
+                inner join assinaturas as assinatura on usuario.idUsuario = assinatura.idAssinante
+            where usuario.idUsuario = ?`, [idUsuario]);
 
         if (rows.length <= 0)
             return;
@@ -129,15 +127,26 @@ async function buscarAssinantePorId(idAssinante) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.idAssinante, a.idNutri, a.idPersonal, a.nome, a.email, a.dataNascimento, a.idSexo, a.altura, a.objetivos, 
-                b.idAssinatura, b.idPlano, b.dataInicio, b.dataFim, b.bloqueado,
-                c.imagem, c.bloqueado,
-                d.nome as nomePlano, d.valor 
-            from assinantes as a
-            inner join assinaturas as b on a.idAssinante = b.idAssinante
-            inner join usuarios as c on a.idAssinante = c.idUsuario
-            inner join planos as d on b.idPlano = d.idPlano
-            where a.idAssinante = ?`, [idAssinante]);
+            `select assinante.idAssinante, 
+                assinante.idNutri, 
+                assinante.idPersonal, 
+                assinante.nome, 
+                assinante.email, 
+                assinante.dataNascimento, 
+                assinante.idSexo, 
+                assinante.altura, 
+                assinatura.idAssinatura, 
+                assinatura.idPlano, 
+                assinatura.dataInicio, 
+                assinatura.dataFim, 
+                assinatura.bloqueado,
+                usuario.imagem, usuario.bloqueado,
+                plano.nome as nomePlano, plano.valor 
+            from assinantes as assinante
+                inner join assinaturas as assinatura on assinante.idAssinante = assinatura.idAssinante
+                inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario
+                inner join planos as plano on assinatura.idPlano = plano.idPlano
+            where assinante.idAssinante = ?`, [idAssinante]);
 
         if (rows.length <= 0)
             return;
@@ -178,20 +187,20 @@ async function buscarAssinantePorFiltro(nome) {
     try {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
-                `select a.idAssinante, a.nome, a.email,
-                b.bloqueado 
-                from assinantes as a
-                inner join usuarios as b on a.idAssinante = b.idUsuario`);
+                `select assinante.idAssinante, assinante.nome, assinante.email,
+                        usuario.bloqueado 
+                from assinantes as assinante
+                inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario`);
 
             return rows;
         }
 
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select a.idAssinante, a.nome, a.email,
-                b.bloqueado 
-                from assinantes as a
-                inner join usuarios as b on a.idAssinante = b.idUsuario
-                where a.nome = ?`, [nome.toLowerCase()]);
+            `select assinante.idAssinante, assinante.nome, assinante.email,
+                    usuario.bloqueado 
+                from assinantes as assinante
+                    inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario
+                where assinante.nome like ?`, [`%${nome}%`]);
 
         return rowsComFiltro;
 
@@ -200,7 +209,7 @@ async function buscarAssinantePorFiltro(nome) {
     }
 }
 
-async function salvarAlteracaoDestatus(idAssinante, novoStatus) {
+async function salvarAlteracaoDeStatus(idAssinante, novoStatus) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
@@ -214,47 +223,6 @@ async function salvarAlteracaoDestatus(idAssinante, novoStatus) {
     }
 }
 
-function salvarDieta(assinante) {
-    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
-    assinanteEncontrado = assinante;
-}
-
-function salvarTreino(assinante) {
-    let assinanteEncontrado = buscarAssinantePorId(assinante.idAssinante);
-    assinanteEncontrado = assinante;
-}
-
-
-
-
-
-function buscarTreinosPorFiltro(nome, idAssinante) {
-    const assinanteEncontrado = buscarAssinantePorId(idAssinante);
-
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: "Assinante não encontrado" });
-        return;
-    }
-
-    if (!nome) {
-        return assinanteEncontrado.treinos;
-    } else {
-        return assinanteEncontrado.treinos.filter(treino => treino.nomeTreino == nome);
-    }
-
-}
-
-function buscarTreinoPorId(idAssinante, idTreino) {
-    const assinanteEncontrado = buscarAssinantePorId(idAssinante);
-
-    if (!assinanteEncontrado) {
-        res.status(404).send({ erro: "Assinante não encontrado" });
-        return;
-    }
-
-    return assinanteEncontrado.treinos.find(treino => treino.idTreino == idTreino);
-}
-
 
 
 module.exports = {
@@ -265,10 +233,5 @@ module.exports = {
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     buscarAssinantePorFiltro: buscarAssinantePorFiltro,
     buscarAssinantePorId: buscarAssinantePorId,
-    salvarAlteracaoDestatus: salvarAlteracaoDestatus,
-    salvarDieta: salvarDieta,
-    salvarTreino: salvarTreino,
-    buscarTreinosPorFiltro: buscarTreinosPorFiltro,
-    buscarTreinoPorId: buscarTreinoPorId,
-
+    salvarAlteracaoDeStatus: salvarAlteracaoDeStatus,
 }

@@ -7,9 +7,9 @@ async function buscarDietasPorFiltro(nome, idAssinante) {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
                 `select idDieta, nome, objetivo, dataInicio, dataFim, data 
-            from dietas
-            where idAssinante = ?
-            order by data desc`, [idAssinante]);
+                from dietas
+                where idAssinante = ?
+                order by data desc`, [idAssinante]);
 
             return rows;
         }
@@ -37,13 +37,13 @@ async function buscarDietaPorId(idAssinante, idDieta) {
             from dietas
             where idDieta = ? and idAssinante = ?`, [idDieta, idAssinante]);
 
+        if (rows.length <= 0)
+            return;
+
         const [itens, fieldsItens] = await conexao.execute(
             `select idItemDieta, descricao, refeicao
             from itens_dieta
             where idDieta = ?`, [idDieta]);
-
-        if (rows.length <= 0)
-            return;
 
         return {
             dieta: rows[0],

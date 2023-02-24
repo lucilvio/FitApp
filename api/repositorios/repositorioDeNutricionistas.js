@@ -6,11 +6,11 @@ async function buscarNutricionistasAtivos() {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.idNutri, a.nome, a.sobreMim,
-                    b.imagem 
-            from nutricionistas as a
-            inner join usuarios as b on a.idNutri = b.idUsuario
-            where b.bloqueado = false`);
+            `select nutri.idNutri, nutri.nome, nutri.sobreMim,
+                    usuario.imagem 
+            from nutricionistas as nutri
+                inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
+            where usuario.bloqueado = false`);
 
         if (rows.length <= 0)
             return;
@@ -22,14 +22,14 @@ async function buscarNutricionistasAtivos() {
     }
 }
 
-async function verificarSeNutriJaTemCadastro(email) {
+async function verificarSeNutriJaTemCadastro(idNutri, email) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
         const [rows, fields] = await conexao.execute(
             `select idUsuario, login 
             from usuarios 
-            where login = ?`, [email.toLowerCase()]);
+            where login = ? and idUsuario != ?`, [email.toLowerCase(), idNutri]);
 
         if (rows.length <= 0)
             return;
@@ -85,20 +85,20 @@ async function buscarNutricionistasPorFiltro(nome) {
     try {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
-                `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                b.bloqueado 
-                from nutricionistas as a
-                inner join usuarios as b on a.idNutri = b.idUsuario`);
+                `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim,
+                        usuario.bloqueado 
+                from nutricionistas as nutri
+                inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario`);
 
             return rows;
         }
 
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                b.bloqueado 
-                from nutricionistas as a
-                inner join usuarios as b on a.idNutri = b.idUsuario
-                where a.nome = ?`, [nome.toLowerCase()]);
+            `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim,
+                    usuario.bloqueado 
+            from nutricionistas as nutri
+                inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
+            where nutri.nome like ?`, [`%${nome}%`]);
 
         return rowsComFiltro;
 
@@ -113,11 +113,11 @@ async function buscarNutriPorId(idNutri) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.idNutri, a.nome, a.email, a.telefone, a.registroProfissional, a.sobreMim,
-                    b.imagem, b.bloqueado 
-            from nutricionistas as a
-            inner join usuarios as b on a.idNutri = b.idUsuario
-            where a.idNutri = ?`, [idNutri]);
+            `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim,
+                    usuario.imagem, usuario.bloqueado 
+            from nutricionistas as nutri
+            inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
+            where nutri.idNutri = ?`, [idNutri]);
 
         if (rows.length <= 0)
             return;
@@ -198,25 +198,27 @@ async function buscarPacientesPorFiltro(idUsuario, nome) {
     try {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
-                `select	a.idAssinante, a.nome, 
-                        b.objetivo	
-                from assinantes as a
-                    left join dietas as b on b.idNutri = a.idNutri 
-                        and b.data = (select max(b.data) data 
-                        from  dietas b where b.idNutri = ? and b.idAssinante = a.IdAssinante)
-                where a.idNutri = ?`, [idUsuario, idUsuario]);
+                `select	assinante.idAssinante, assinante.nome, 
+                        dieta.objetivo	
+                from assinantes as assinante
+                    left join dietas as dieta on dieta.idNutri = assinante.idNutri 
+                            and dieta.data = (select max(dieta.data) data 
+                        from  dietas as dieta 
+                        where dieta.idNutri = ? and dieta.idAssinante = assinante.idAssinante)
+                where assinante.idNutri = ?`, [idUsuario, idUsuario]);
 
             return rows;
         }
 
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select	a.idAssinante, a.nome, 
-                    b.objetivo	
-            from assinantes as a
-                left join dietas as b on b.idNutri = a.idNutri 
-                    and b.data = (select max(b.data) data 
-                    from  dietas b where b.idNutri = ? and b.idAssinante = a.IdAssinante)
-            where a.idNutri = ? and a.nome like ?`, [idUsuario, idUsuario `%${nome}%`]);
+            `select	assinante.idAssinante, assinante.nome, 
+                    dieta.objetivo	
+            from assinantes as assinante
+                left join dietas as dieta on dieta.idNutri = assinante.idNutri 
+                        and dieta.data = (select max(dieta.data) data 
+                    from  dietas as dieta 
+                    where dieta.idNutri = ? and dieta.idAssinante = assinante.IdAssinante)
+            where assinante.idNutri = ? and assinante.nome like ?`, [idUsuario, idUsuario `%${nome}%`]);
 
         return rowsComFiltro;
 
@@ -230,11 +232,11 @@ async function buscarPacientePorId(idAssinante) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select a.imagem,
-                    b.nome, b.idSexo, b.dataNascimento, b.altura, b.idNutri 
-            from usuarios as a
-            inner join assinantes as b on a.idUsuario = b.idAssinante
-            where a.idUsuario = ?`, [idAssinante]);
+            `select usuario.imagem,
+                    assinante.nome, assinante.idSexo, assinante.dataNascimento, assinante.altura, assinante.idNutri 
+            from usuarios as usuario
+                inner join assinantes as assinante on usuario.idUsuario = assinante.idAssinante
+            where usuario.idUsuario = ?`, [idAssinante]);
 
         if (rows.length <= 0)
             return;
@@ -247,9 +249,9 @@ async function buscarPacientePorId(idAssinante) {
 
         const [dietas, fieldsDietas] = await conexao.execute(
             `select idDieta, dataInicio, dataFim, objetivo
-                from dietas
-                where idAssinante = ?
-                order by data desc`, [idAssinante]);
+            from dietas
+            where idAssinante = ?
+            order by data desc`, [idAssinante]);
 
         return {
             dados: rows[0],

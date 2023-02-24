@@ -7,7 +7,6 @@ const repositorioDePersonalTrainers = require('../repositorios/repositorioDePers
 const servicoDeEmail = require('../servicos/servicoDeEmail');
 const servicoDeMensagens = require('../servicos/servicoDeMensagens');
 const repositorioDeAssinantes = require('../repositorios/repositorioDeAssinantes');
-const repositorioDeAssinaturas = require('../repositorios/repositorioDeAssinaturas');
 const Assinante = require('../model/assinante');
 
 // O administrador cadastra plano
@@ -38,8 +37,8 @@ async function buscarPlanos(req, res) {
 
     const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
 
-    if (planos <= 0) {
-        res.status(400).send({ erro: "Plano não localizado" });
+    if (!planos || planos <= 0) {
+        res.status(400).send({ erro: "Plano não encontrado" });
         return;
     }
 
@@ -83,11 +82,16 @@ async function alterarDadosDoPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar dados do plano.'
 
-    Plano.validarAlteracaoDoPlano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
+    const planoEncontrado = await repositorioDePlanos.buscarPlanoPorId(req.params.idPlano);
 
-    const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(req.body.nome);
+    if (!planoEncontrado) {
+        res.status(404).send({ erro: "Plano não encontrado" });
+        return;
+    }
 
-    if (planoEncontrado) {
+    const planoComMesmoNome = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(req.params.idPlano, req.body.nome);
+
+    if (planoComMesmoNome) {
         res.status(400).send({ erro: "Já existe Plano com esse nome" });
         return;
     }
@@ -127,8 +131,8 @@ async function buscarNutricionistas(req, res) {
 
     const nutricionistas = await repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
 
-    if (nutricionistas.length <= 0) {
-        res.status(400).send({ erro: "Nutricionista não localizado" });
+    if (!nutricionistas || nutricionistas.length <= 0) {
+        res.status(400).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
@@ -173,17 +177,30 @@ async function alterarDadosDoNutricionista(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar dados cadastrais do Nutricionista.'
 
+    const nutriEncontrado = await repositorioDeNutricionistas.buscarNutriPorId(req.params.idNutri);
 
-    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.body.email);
-
-    if (!nutriEncontrado || nutriEncontrado.idNutri == req.params.idNutri) {
-        await repositorioDeNutricionistas.salvarAlteracaoDeDadosDoPerfil(req.params.idNutri, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
-
-        res.send();
-    } else {
-        res.status(400).send({ erro: "Já existe Nutricionista cadastrado com esse email" });
+    if (!nutriEncontrado) {
+        res.status(404).send({ erro: "Nutricionista não encontrado" });
+        return;
     }
 
+    const nutriComMesmoEmail = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.params.idNutri, req.body.email);
+
+    if (nutriComMesmoEmail) {
+        res.status(400).send({ erro: "Já existe Nutricionista cadastrado com esse email" });
+        return;
+    }
+
+    await repositorioDeNutricionistas.salvarAlteracaoDeDadosDoPerfil(
+        req.params.idNutri,
+        req.body.nome,
+        req.body.email,
+        req.body.telefone,
+        req.body.registroProfissional,
+        req.body.bloqueado
+    );
+
+    res.send();
 }
 
 // O administrador cadastra personal trainer
@@ -201,7 +218,7 @@ async function cadastrarPersonal(req, res) {
         servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
 
         res.send({
-            idAssinante: novoPersonal.idPersonal
+            idPersonal: novoPersonal.idPersonal
         });
     } else {
         res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
@@ -215,8 +232,8 @@ async function buscarPersonalTrainers(req, res) {
 
     const personalTrainers = await repositorioDePersonalTrainers.buscarPersonalTrainersPorFiltro(req.query.nome);
 
-    if (personalTrainers.length <= 0) {
-        res.status(400).send({ erro: "Personal Trainer não localizado" });
+    if (!personalTrainers || personalTrainers.length <= 0) {
+        res.status(400).send({ erro: "Personal Trainer não encontrado" });
         return;
     }
 
@@ -261,15 +278,30 @@ async function alterarDadosDoPersonal(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para alterar os dados cadastrais do Personal Trainer.'
 
-    const personalEncontrado = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(req.body.email);
+    const personalEncontrado = await repositorioDePersonalTrainers.buscarPersonalPorId(req.params.idPersonal);
 
-    if (!personalEncontrado || personalEncontrado.idPersonal == req.params.idPersonal) {
-        await repositorioDePersonalTrainers.salvarAlteracaoDeDados(req.params.idPersonal, req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional, req.body.bloqueado);
-
-        res.send();
-    } else {
-        res.status(400).send({ erro: "Já existe Personal Trainer cadastrado com esse email" });
+    if (!personalEncontrado) {
+        res.status(404).send({ erro: "Personal Trainer não encontrado" });
+        return;
     }
+
+    const personalComMesmoEmail = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(req.params.idPersonal, req.body.email);
+
+    if (personalComMesmoEmail) {
+        res.status(400).send({ erro: "Já existe Personal Trainer cadastrado com esse email" });
+        return;
+    }
+
+    await repositorioDePersonalTrainers.salvarAlteracaoDeDadosDoPerfil(
+        req.params.idPersonal,
+        req.body.nome,
+        req.body.email,
+        req.body.telefone,
+        req.body.registroProfissional,
+        req.body.bloqueado
+    );
+
+    res.send();
 }
 
 // O administrador busca todos os Assinantes ou filtra por nome
@@ -279,8 +311,8 @@ async function buscarAssinantes(req, res) {
 
     const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
 
-    if (assinantes.length <= 0) {
-        res.status(400).send({ erro: "Assinante não localizado" });
+    if (!assinantes || assinantes.length <= 0) {
+        res.status(400).send({ erro: "Assinante não encontrado" });
         return;
     }
 
@@ -314,10 +346,10 @@ async function buscarAssinantePorId(req, res) {
         email: assinanteEncontrado.email,
         bloqueado: assinanteEncontrado.bloqueado,
         idPlano: assinanteEncontrado.idPlano,
-        nomePlano:assinanteEncontrado.nomePlano,
+        nomePlano: assinanteEncontrado.nomePlano,
         valor: assinanteEncontrado.valor
     });
-   
+
 }
 
 // O administrador altera o status do Assinante
@@ -333,7 +365,7 @@ async function alterarStatusDoAssinante(req, res) {
 
     Assinante.validarAlteracaoDeStatus(req.body.bloqueado);
 
-    await repositorioDeAssinantes.salvarAlteracaoDestatus(req.params.idAssinante, req.body.bloqueado);
+    await repositorioDeAssinantes.salvarAlteracaoDeStatus(req.params.idAssinante, req.body.bloqueado);
 
     res.send();
 }

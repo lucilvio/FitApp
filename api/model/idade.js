@@ -9,4 +9,6 @@ function Idade(dataNascimento) {
     this.valor = Math.floor(dataSubtraidaEmMilessegundos / 31536000000);
 }
 
-module.exports = Idade;
+module.exports = {
+    Idade: Idade
+};
