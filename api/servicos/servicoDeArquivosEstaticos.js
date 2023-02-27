@@ -1,6 +1,6 @@
 
 function construirCaminhoParaImagem(nomeDaImagem) {
-    return "publico/foto-perfil/" + nomeDaImagem;
+    return "publico/imagem-perfil/" + nomeDaImagem;
 }
 
 module.exports = {

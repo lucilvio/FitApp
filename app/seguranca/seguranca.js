@@ -69,7 +69,7 @@ export function pegarNomeDoUsuario() {
     return localStorage.getItem(chaveNomeUsuario);
 }
 
-export function pegarFotoDoUsuario() {
+export function pegarImagemDoUsuario() {
     return localStorage.getItem(chaveFotoUsuario);
 }
 

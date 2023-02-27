@@ -1,4 +1,4 @@
-import * as util from "../app/util/tratamentoDeRespostaApi.js";
+import * as util from "../util/tratamentoDeRespostaApi.js";
 
 export async function buscarPlanosAtivos() {
     const url = `http://localhost:3000/planos`;

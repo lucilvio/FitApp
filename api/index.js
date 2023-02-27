@@ -33,7 +33,7 @@ servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 servidor.app.post('/esqueciMinhaSenha', async (req, res) => await tratarErros(req, res, esqueciMinhaSenhaController.gerarNovaSenha));
 servidor.app.post('/login', async (req, res) => await tratarErros(req, res, loginController.login));
 servidor.app.patch('/usuarios/senha', async (req, res) => await tratarErros(req, res, usuariosController.alterarSenha));
-servidor.app.post('/usuarios/foto', async (req, res) => await tratarErros(req, res, usuariosController.alterarFoto));
+servidor.app.post('/usuarios/imagem', async (req, res) => await tratarErros(req, res, usuariosController.alterarImagem));
 servidor.app.get('/planos', async (req, res) => await tratarErros(req, res, geralController.buscarPlanos));
 servidor.app.get('/planos/:idPlano', async (req, res) => await tratarErros(req, res, geralController.buscarPlanoPorId));
 

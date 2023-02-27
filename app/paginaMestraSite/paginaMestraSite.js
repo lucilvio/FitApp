@@ -2,11 +2,11 @@
 
 export async function carregar(caminhoPaginaInterna, titulo) {
     //faz fetch da pagina mestra, tranforma a resposta em texto e guarda na const 
-    const paginaMestraSite = await fetch("/app/paginaMestraSite/paginaMestraSite.html");
+    const paginaMestraSite = await fetch("/paginaMestraSite/paginaMestraSite.html");
     const conteudoDaPaginaMestraSite = await paginaMestraSite.text();
 
     //faz fetch da pagina interna(pagina informada no parametro) tranforma a resposta em texto e guarda na const
-    const paginaInterna = await fetch("/app/" + caminhoPaginaInterna);
+    const paginaInterna = await fetch("/" + caminhoPaginaInterna);
     const conteudoPaginaInterna = await paginaInterna.text();
 
     //tranforma o texto da pagina mestra em Html

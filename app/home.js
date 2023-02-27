@@ -1,5 +1,5 @@
 import * as servicos from "./servicosDaHome.js";
-import * as paginaMestraSite from "../app/paginaMestraSite/paginaMestraSite.js";
+import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";
 
 window.onload = aoCarregarPagina;
 

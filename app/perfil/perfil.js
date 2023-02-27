@@ -4,7 +4,7 @@ import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
 
-seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
+seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
@@ -12,7 +12,7 @@ let modal;
 async function aoCarregarPagina() {
     await paginaMestra.carregar("perfil/perfil-conteudo.html", "Perfil");
 
-    document.querySelector("#foto-perfil").onclick = alterarFoto;
+    document.querySelector("#imagem-perfil").onclick = alterarImagem;
     document.querySelector("#btn-salvarDadosDoPerfil").onclick = salvarDadosDoPerfil;
     document.querySelector("#btn-alterarSenha").onclick = alterarSenhaDeAcesso;
     document.querySelector("#btn-confirmarAlteracaoDeSenha").onclick = gravarNovaSenha;
@@ -24,8 +24,8 @@ async function aoCarregarPagina() {
 
 async function buscarDadosDoPerfil() {
     try {
-        if (seguranca.pegarFotoDoUsuario()) {
-            document.querySelector("#foto-perfil").setAttribute("src", "http://localhost:3000/" + seguranca.pegarFotoDoUsuario());
+        if (seguranca.pegarImagemDoUsuario()) {
+            document.querySelector("#imagem-perfil").setAttribute("src", "http://localhost:3000/" + seguranca.pegarImagemDoUsuario());
         }
 
         const token = seguranca.pegarToken();
@@ -54,7 +54,6 @@ async function salvarDadosDoPerfil(evento) {
     try {
         const token = seguranca.pegarToken();
 
-        const fotoPerfil = document.querySelector("#foto-perfil").getAttribute("src", "");
         const nome = document.querySelector("#nome").value;
         const dataNascimento = document.querySelector("#data-nascimento").value;
         const sexo = document.querySelector("#sexo").value;
@@ -67,7 +66,7 @@ async function salvarDadosDoPerfil(evento) {
 
         evento.preventDefault();
 
-        await servicos.salvarDados(token, fotoPerfil, nome, dataNascimento, sexo, altura);
+        await servicos.salvarDados(token, nome, dataNascimento, sexo, altura);
         seguranca.atualizarNomeUsuarioLogado(nome);
         mensagens.mostrarMensagemDeSucesso("Alteração realizada com sucesso!", true);
         window.location.reload();
@@ -108,19 +107,19 @@ async function gravarNovaSenha() {
     }
 }
 
-function alterarFoto() {
-    document.querySelector("#input-foto-perfil").click();
-    document.querySelector("#input-foto-perfil").onchange = gravarFoto;
+function alterarImagem() {
+    document.querySelector("#input-imagem-perfil").click();
+    document.querySelector("#input-imagem-perfil").onchange = gravarImagem;
 }
 
-async function gravarFoto() {
+async function gravarImagem() {
     try {
         const token = seguranca.pegarToken();
-        const inputFile = document.querySelector("#input-foto-perfil");
-        const res = await servicos.salvarFoto(token, inputFile.files[0]);
+        const inputFile = document.querySelector("#input-imagem-perfil");
+        const res = await servicos.salvarImagem(token, inputFile.files[0]);
 
-        seguranca.atualizarFotoUsuarioLogado(res.foto);
-        mensagens.mostrarMensagemDeSucesso("Foto alterada com sucesso!", true);
+        seguranca.atualizarFotoUsuarioLogado(res.imagem);
+        mensagens.mostrarMensagemDeSucesso("Imagem alterada com sucesso!", true);
         window.location.reload();
     } catch (error) {
         erros.tratarErro(error);

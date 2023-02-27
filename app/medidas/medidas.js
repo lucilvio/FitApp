@@ -5,7 +5,7 @@ import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
 
 
-seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
+seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 

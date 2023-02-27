@@ -1,16 +1,16 @@
-import * as servicos from "./servicosDeRelatorios.js"
+import * as servicos from "./servicosDeHistoricoDeMedidasAssinante.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 let chart;
 
-seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
+seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    await paginaMestra.carregar("relatorios/relatorios-conteudo.html", "Relatórios");
+    await paginaMestra.carregar("historicoDeMedidasAssinante/historicoDeMedidasAssinante-conteudo.html", "historicoDeMedidas");
     await buscarMedidas();
     document.querySelector("#opcoes-medidas").onchange = buscarMedidas;
     document.querySelector("#data-inicio").onchange = buscarMedidas;

@@ -26,17 +26,17 @@ async function alterarSenha(req, res) {
     res.send();
 }
 
-async function alterarFoto(req, res) {
+async function alterarImagem(req, res) {
     // #swagger.tags = ['Usuário']
-    // #swagger.description = 'endpoint para alterar a foto.'
+    // #swagger.description = 'endpoint para alterar a imagem.'
     // #swagger.security = [] 
 
     Usuario.validarAlteracaoDaImagem(req.files);
 
-    const tipoDaImagem = req.files.foto.name.split('.').pop();
+    const tipoDaImagem = req.files.imagem.name.split('.').pop();
     const nomeDaImagem = `${req.usuario.nome}-${req.usuario.idUsuario}.${tipoDaImagem}`;
 
-    fs.writeFile("imagens/foto-perfil/" + nomeDaImagem, req.files.foto.data, async (err) => {
+    fs.writeFile("imagens/imagem-perfil/" + nomeDaImagem, req.files.imagem.data, async (err) => {
         if (err) {
             res.status(400).send({ erro: "Erro ao gravar a imagem. Tente novamente." });
         }
@@ -44,12 +44,12 @@ async function alterarFoto(req, res) {
         await repositorioDeUsuarios.salvarImagemDoUsuario(req.usuario.idUsuario, nomeDaImagem);
 
         res.send({
-            foto: servicoDeArquivosEstaticos.construirCaminhoParaImagem(nomeDaImagem)
+            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(nomeDaImagem)
         });
     });
 }
 
 module.exports = {
     alterarSenha: alterarSenha,
-    alterarFoto: alterarFoto
+    alterarImagem: alterarImagem
 }

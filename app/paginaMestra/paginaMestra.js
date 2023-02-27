@@ -2,11 +2,11 @@ import * as seguranca from "../seguranca/seguranca.js";
 
 export async function carregar(caminhoPaginaInterna, titulo) {
     //faz fetch da pagina mestra, tranforma a resposta em texto e guarda na const 
-    const paginaMestra = await fetch("/app/paginaMestra/paginaMestra.html");
+    const paginaMestra = await fetch("/paginaMestra/paginaMestra.html");
     const conteudoDaPaginaMestra = await paginaMestra.text();
 
     //faz fetch da pagina interna(pagina informada no parametro) tranforma a resposta em texto e guarda na const
-    const paginaInterna = await fetch("/app/" + caminhoPaginaInterna);
+    const paginaInterna = await fetch("/" + caminhoPaginaInterna);
     const conteudoPaginaInterna = await paginaInterna.text();
 
     //tranforma o texto da pagina mestra em Html
@@ -19,8 +19,8 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     // adiciona o nome do usuario no cabeçalho
     paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = seguranca.pegarNomeDoUsuario();
 
-    if(seguranca.pegarFotoDoUsuario()) {
-        paginaMestraHtml.querySelector("#cabecalho-foto-perfil").src = "http://localhost:3000/" + seguranca.pegarFotoDoUsuario();
+    if(seguranca.pegarImagemDoUsuario()) {
+        paginaMestraHtml.querySelector("#cabecalho-foto-perfil").src = "http://localhost:3000/" + seguranca.pegarImagemDoUsuario();
     }
 
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
@@ -60,5 +60,5 @@ function carregarScripts() {
 
 function fazerLogout() {
     seguranca.removerToken();
-    window.location.href = "/app/index.html";
+    window.location.href = "/index.html";
 }

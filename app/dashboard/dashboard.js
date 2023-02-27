@@ -3,7 +3,7 @@ import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
-seguranca.deslogarSeTokenEstiverExpirado("/app/login/entrar.html");
+seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina();
 

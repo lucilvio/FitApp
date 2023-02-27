@@ -12,14 +12,13 @@ export async function buscarDados(token) {
     return util.tratarRespostaApi(resposta);
 }
 
-export async function salvarDados(token, fotoPerfil, nome, dataNascimento, sexo, altura) {
+export async function salvarDados(token, nome, dataNascimento, sexo, altura) {
     const url = `http://localhost:3000/assinante/perfil`;
 
     const request = new Request(url, {
         method: 'PATCH',
         body: JSON.stringify(
             {
-                imagem: fotoPerfil,
                 nome: nome,
                 dataNascimento: dataNascimento,
                 idSexo: sexo,
@@ -37,11 +36,11 @@ export async function salvarDados(token, fotoPerfil, nome, dataNascimento, sexo,
     return util.tratarRespostaApi(resposta);
 }
 
-export async function salvarFoto(token, foto) {
-    const url = `http://localhost:3000/usuarios/foto`;
+export async function salvarImagem(token, imagem) {
+    const url = `http://localhost:3000/usuarios/imagem`;
 
     const formData = new FormData();
-    formData.append("foto", foto, foto.name);
+    formData.append("imagem", imagem, imagem.name);
     
     const resposta = await fetch(url, {
         method: 'POST',
