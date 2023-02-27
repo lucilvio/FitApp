@@ -1,7 +1,7 @@
 import * as servicos from "./servicosDoPerfil.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
-import * as paginaMestra from "../paginaMestraAssinante/paginaMestra.js";
+import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");

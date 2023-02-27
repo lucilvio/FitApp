@@ -2,7 +2,7 @@ import * as seguranca from "../seguranca/seguranca.js";
 
 export async function carregar(caminhoPaginaInterna, titulo) {
     //faz fetch da pagina mestra, tranforma a resposta em texto e guarda na const 
-    const paginaMestra = await fetch("/paginaMestraAssinante/paginaMestra.html");
+    const paginaMestra = await fetch("/paginaMestra/paginaMestra.html");
     const conteudoDaPaginaMestra = await paginaMestra.text();
 
     //faz fetch da pagina interna(pagina informada no parametro) tranforma a resposta em texto e guarda na const
