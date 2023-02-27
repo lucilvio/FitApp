@@ -67,7 +67,7 @@ values (
 'assinanteBloqueado_teste',
 'assinantebloqueado_teste@fitapp.com',
 'assinante123',
-false
+true
 ) ON DUPLICATE KEY UPDATE idUsuario = 'idAssinanteBloqueado_teste';
 
 insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)

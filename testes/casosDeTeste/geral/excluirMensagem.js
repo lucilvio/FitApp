@@ -10,7 +10,7 @@ it('Deve excluir mensagem', async () => {
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
     await spec()
-        .delete(`http://localhost:3000/mensagens/${idMensagem}`)
+        .patch(`http://localhost:3000/mensagens/${idMensagem}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectStatus(200);
 });

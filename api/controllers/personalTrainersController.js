@@ -21,7 +21,7 @@ async function buscarDadosDoPerfil(req, res) {
     res.send({
         idPersonal: dadosDoPersonal.idPersonal,
         imagem: dadosDoPersonal.imagem,
-        email: dadosDoPersonal.login,
+        email: dadosDoPersonal.email,
         nome: dadosDoPersonal.nome,
         registroProfissional: dadosDoPersonal.registroProfissional,
         telefone: dadosDoPersonal.telefone,
@@ -99,7 +99,7 @@ async function buscarAlunoPorId(req, res) {
         pescoco: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.pescoco,
         cintura: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.cintura,
         quadril: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.quadril,
-        imc: new Imc(!alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso, alunoEncontrado.dados.altura).valor,
+        imc: new Imc.Imc(!alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso, alunoEncontrado.dados.altura).valor,
     });
 
 }

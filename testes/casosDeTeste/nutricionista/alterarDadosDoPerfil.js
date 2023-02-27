@@ -1,15 +1,18 @@
 const { spec } = require('pactum');
 const usuario = require('../../funcoes/usuario');
+const crypto = require('crypto');
 
 it('CU-N 02 - O Nutricionista deve alterar os dados do perfil', async () => {
-    const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
+    const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
+
+    const telefone = `${crypto.randomUUID()}`;
 
     await spec()
         .patch(`http://localhost:3000/nutricionista/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
-            "imagem": "umaFoto.jpg",
-            "telefone": "555555555",
+            "nome": "nutricionista_teste",
+            "telefone": telefone
         })
         .expectStatus(200);
 
@@ -19,8 +22,7 @@ it('CU-N 02 - O Nutricionista deve alterar os dados do perfil', async () => {
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {
-                idNutri: 'idNutri',
-                imagem: "umaFoto.jpg"
+                "telefone": telefone
             }
         )
         .expectStatus(200);

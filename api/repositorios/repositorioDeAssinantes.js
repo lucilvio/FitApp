@@ -139,8 +139,9 @@ async function buscarAssinantePorId(idAssinante) {
                 assinatura.idPlano, 
                 assinatura.dataInicio, 
                 assinatura.dataFim, 
-                assinatura.bloqueado,
-                usuario.imagem, usuario.bloqueado,
+                assinatura.bloqueado as assinaturaBloqueada,
+                usuario.imagem, 
+                usuario.bloqueado as usuarioBloqueado,
                 plano.nome as nomePlano, plano.valor 
             from assinantes as assinante
                 inner join assinaturas as assinatura on assinante.idAssinante = assinatura.idAssinante

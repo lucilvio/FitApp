@@ -94,7 +94,7 @@ async function buscarPacientePorId(req, res) {
         pescoco: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.pescoco,
         cintura: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.cintura,
         quadril: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.quadril,
-        imc: new Imc(!pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.peso, pacienteEncontrado.dados.altura).valor,
+        imc: new Imc.Imc(!pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.peso, pacienteEncontrado.dados.altura).valor,
     });
 }
 

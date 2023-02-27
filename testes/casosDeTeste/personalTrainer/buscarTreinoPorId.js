@@ -5,15 +5,35 @@ const crypto = require('crypto');
 
 it('CU-P 09 - deve ver os detalhes do Treino', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 3", "01/10/2022", "31/10/2022", "Perda de Peso", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
+
+    const nomeTreino = `treino_teste_${crypto.randomUUID()}`;
+
+    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "idAssinante_teste",
+        nomeTreino,
+        "12/01/2023",
+        "12/31/2023",
+        "Hipertrofia",
+        [
+            {
+                "diaDoTreino": "Segunda",
+                "descricao": "30min Eliptico"
+            },
+            {
+                "diaDoTreino": "Terça",
+                "descricao": "Cadeira Extensora"
+            }
+        ]
+    );
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante/treinos/${idTreino}`)
+        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {
-                idTreino: idTreino
+                "treino": {
+                    "nome": nomeTreino
+                }
             }
         )
         .expectStatus(200);
@@ -22,11 +42,27 @@ it('CU-P 09 - deve ver os detalhes do Treino', async () => {
 
 it('CU-P 09 - não encontra treino quando o id do paciente não existe', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 3", "01/10/2022", "31/10/2022", "Perda de Peso", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
+
+    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "idAssinante_teste",
+        "treino_teste",
+        "12/01/2023",
+        "12/31/2023",
+        "Hipertrofia",
+        [
+            {
+                "diaDoTreino": "Segunda",
+                "descricao": "30min Eliptico"
+            },
+            {
+                "diaDoTreino": "Terça",
+                "descricao": "Cadeira Extensora"
+            }
+        ]
+    );
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/${crypto.randomUUID()}/treinos/${idTreino}`)
+        .get(`http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJson({ erro: "Aluno não encontrado" })
         .expectStatus(404);
@@ -35,10 +71,10 @@ it('CU-P 09 - não encontra treino quando o id do paciente não existe', async (
 
 it('CU-P 09 - não encontra treino quando o id do Treino não existe', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante/treinos/${crypto.randomUUID()}`)
+        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJson({ erro: "Treino não encontrado" })
         .expectStatus(404);

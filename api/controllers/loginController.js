@@ -19,7 +19,7 @@ async function login(req, res) {
     }
 
     if (usuarioEncontrado.bloqueado == true) {
-        res.status(400).send({ erro: "Usuário bloqueado" });
+        res.status(400).send({ erro: "Usuario bloqueado" });
         return;
     }
 

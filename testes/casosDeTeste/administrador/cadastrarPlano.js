@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 it('CU-A 19 - deve cadastrar Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
-    const nomePlano = `Gratuito_${crypto.randomUUID()}`;
+    const nomePlano = `gratuito_${crypto.randomUUID()}`;
 
     await spec()
         .post('http://localhost:3000/admin/planos')
@@ -31,7 +31,7 @@ it('CU-A 19 - deve cadastrar Plano', async () => {
 
 it('CU-A 19 - Não deve cadastrar Plano com  mesmo nome', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
-    const nomePlano = `Gratuito_${crypto.randomUUID()}`;
+    const nomePlano = `gratuito_${crypto.randomUUID()}`;
     const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()

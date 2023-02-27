@@ -94,6 +94,4 @@ module.exports = {
     cancelarAssinatura: cancelarAssinatura,
     alterarPlanoDaAssinatura: alterarPlanoDaAssinatura,
     cancelarAssinatura: cancelarAssinatura,
-    alterarPlanoDaAssinatura: alterarPlanoDaAssinatura
-
 }

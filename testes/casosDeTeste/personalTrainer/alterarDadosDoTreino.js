@@ -5,37 +5,37 @@ const crypto = require('crypto');
 
 it('CU-P 10 - deve alterar dados do Treino', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
-    await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike([
+    const nomeTreino = `treino_teste_${crypto.randomUUID()}`;
+
+    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "idAssinante_teste",
+        nomeTreino,
+        "12/01/2023",
+        "12/31/2023",
+        "Hipertrofia",
+        [
             {
-                idAssinante: 'idAssinante'
-            }
-        ])
-        .expectStatus(200);
-
-    await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike(
+                "diaDoTreino": "Segunda",
+                "descricao": "30min Eliptico"
+            },
             {
-                nome: 'Assinante'
+                "diaDoTreino": "Terça",
+                "descricao": "Cadeira Extensora"
             }
-        )
-        .expectStatus(200);
+        ]
+    );
 
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 4", "01/12/2022", "31/12/2022", "Hipertrofia", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
+    const novoTreinoNome = `treino_teste_${crypto.randomUUID()}`;
 
+    
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/alunos/idAssinante/treinos/${idTreino}`)
+        .patch(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
-            "nomeTreino": "Treino 4",
-            "dataInicio": "01/12/2022",
-            "dataFim": "31/12/2022",
+            "nomeTreino": novoTreinoNome,
+            "dataInicio": "12/01/2023",
+            "dataFim": "12/31/2023",
             "objetivo": "Hipertrofia",
             "exercicios": [
                 {
@@ -51,18 +51,13 @@ it('CU-P 10 - deve alterar dados do Treino', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante/treinos/${idTreino}`)
+        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {
-                idTreino: idTreino,
-                exercicios: [
-                    {
-                        "idTreino": idTreino,
-                        "diaDoTreino": "segunda",
-                        "descricao": "30min de esteira ergometrica"
-                    }
-                ]
+                "treino": {
+                    "nome": novoTreinoNome
+                }
             }
         )
         .expectStatus(200);
@@ -71,12 +66,29 @@ it('CU-P 10 - deve alterar dados do Treino', async () => {
 
 it('CU-P 10 - não altera Treino para quando não encontra o Aluno', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 4", "01/12/2022", "31/12/2022", "Hipertrofia", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
+    const nomeTreino = `treino_teste_${crypto.randomUUID()}`;
+
+    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "idAssinante_teste",
+        nomeTreino,
+        "12/01/2023",
+        "12/31/2023",
+        "Hipertrofia",
+        [
+            {
+                "diaDoTreino": "Segunda",
+                "descricao": "30min Eliptico"
+            },
+            {
+                "diaDoTreino": "Terça",
+                "descricao": "Cadeira Extensora"
+            }
+        ]
+    );
 
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/alunos/${crypto.randomUUID()}/treinos/${idTreino}`)
+        .patch(`http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nomeTreino": "Treino 4",
@@ -101,12 +113,11 @@ it('CU-P 10 - não altera Treino para quando não encontra o Aluno', async () =>
 
 it('CU-P 10 - não altera Treino quando não encontra o Treino', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 4", "01/12/2022", "31/12/2022", "Hipertrofia", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
-
+    
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/alunos/idAssinante/treinos/${crypto.randomUUID()}`)
+        .patch(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nomeTreino": "Treino 4",

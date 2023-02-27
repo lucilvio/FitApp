@@ -6,7 +6,7 @@ async function cadastrarPersonal(token, nome, email, telefone, registroProfissio
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,
-            "email": email,            
+            "email": email,
             "telefone": telefone,
             "registroProfissional": registroProfissional
         })
@@ -17,9 +17,9 @@ async function cadastrarPersonal(token, nome, email, telefone, registroProfissio
 
 
 
-async function criarTreino(tokenPersonal, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
+async function criarTreino(tokenPersonal, idAssinante, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
     return await spec()
-    .post(`http://localhost:3000/personalTrainer/alunos/idAssinante/treinos`)
+    .post(`http://localhost:3000/personalTrainer/alunos/${idAssinante}/treinos`)
     .withHeaders("Authorization", "Bearer " + tokenPersonal)
     .withJson({
         "nomeTreino": nomeTreino,

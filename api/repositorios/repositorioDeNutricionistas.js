@@ -218,7 +218,7 @@ async function buscarPacientesPorFiltro(idUsuario, nome) {
                         and dieta.data = (select max(dieta.data) data 
                     from  dietas as dieta 
                     where dieta.idNutri = ? and dieta.idAssinante = assinante.IdAssinante)
-            where assinante.idNutri = ? and assinante.nome like ?`, [idUsuario, idUsuario `%${nome}%`]);
+            where assinante.idNutri = ? and assinante.nome like ?`, [idUsuario, idUsuario,`%${nome}%`]);
 
         return rowsComFiltro;
 

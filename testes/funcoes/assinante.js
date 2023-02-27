@@ -23,7 +23,7 @@ async function inserirMedidas(tokenAssinante, peso, pescoco, cintura, quadril) {
             "cintura": cintura,
             "quadril": quadril
         })
-        .returns("idMedida");
+        .returns("idMedidas");
 }
 
 

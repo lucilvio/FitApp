@@ -6,7 +6,8 @@ const crypto = require('crypto');
 it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "crm123");
+    const email = `nutri_teste_${crypto.randomUUID()}@fitapp.com`
+    const idNutri = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, email, "99999999", "crm123");
 
     await spec()
         .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
@@ -23,7 +24,7 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",
-            "email": `ana55@fitapp.com`,
+            "email":email,
             "telefone": "55 5555555",
             "registroProfissional": "CRN 123",
             "bloqueado": true

@@ -6,13 +6,18 @@ const usuario = require('../../funcoes/usuario');
 it('o sistema apresenta os Nutricionistas ativos', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idNutri1 = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
-    const idNutri2 = await nutricionista.cadastrarNutri(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
+    const emailNutriBloqueado =  `nutri_teste_${crypto.randomUUID()}@fitapp.com`;
+    const idNutriBloqueado = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, emailNutriBloqueado, "99999999", "crn000");
+    const idNutriAtivo = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, `nutri_teste_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
 
     await spec()
-        .patch(`http://localhost:3000/admin/nutricionistas/${idNutri2}`)
+        .patch(`http://localhost:3000/admin/nutricionistas/${idNutriBloqueado}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
+            "nome": "nutri_bloqueado",
+            "email": emailNutriBloqueado,
+            "telefone": "000000000",
+            "registroProfissional": "CRN 123",
             "bloqueado": true
         })
         .expectStatus(200);
@@ -21,10 +26,10 @@ it('o sistema apresenta os Nutricionistas ativos', async () => {
         .get(`http://localhost:3000/nutricionistas`)
         .expectJsonLike([
             {
-               idNutri: idNutri1
+                idNutri: idNutriAtivo
             }
         ])
         .expectStatus(200);
 
-        
+
 })

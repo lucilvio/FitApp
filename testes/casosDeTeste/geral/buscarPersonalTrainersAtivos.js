@@ -6,13 +6,19 @@ const usuario = require('../../funcoes/usuario');
 it('o sistema apresenta os Personal Trainers ativos', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPersonal1 = await personalTrainers.cadastrarPersonal(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
-    const idPersonal2 = await personalTrainers.cadastrarPersonal(token, "Bruno", `bruno_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
+    const emailPersonalBloqueado =  `nutri_Bloqueado_teste_${crypto.randomUUID()}@fitapp.com`;
+    const idPersonalBloqueado = await personalTrainers.cadastrarPersonal(token, `personal_teste_${crypto.randomUUID()}`, emailPersonalBloqueado, "99999999", "crn000");
+    const idPersonalAtivo = await personalTrainers.cadastrarPersonal(token, `personal_teste_${crypto.randomUUID()}`, `personal_teste_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
+
 
     await spec()
-        .patch(`http://localhost:3000/admin/personalTrainers/${idPersonal2}`)
+        .patch(`http://localhost:3000/admin/personalTrainers/${idPersonalBloqueado}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
+            "nome": "personal_bloqueado",
+            "email": emailPersonalBloqueado,
+            "telefone": "000000000",
+            "registroProfissional": "CRN 123",
             "bloqueado": true
         })
         .expectStatus(200);
@@ -21,7 +27,7 @@ it('o sistema apresenta os Personal Trainers ativos', async () => {
         .get(`http://localhost:3000/personalTrainers`)
         .expectJsonLike([
             {
-               idPersonal: idPersonal1
+               idPersonal: idPersonalAtivo
             }
         ])
         .expectStatus(200);

@@ -7,7 +7,7 @@ const crypto = require('crypto');
 it('CU-A 18 - deve alterar dados do Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, `gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()
         .get(`http://localhost:3000/admin/planos/${idPlano}`)
@@ -19,7 +19,7 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
         )
         .expectStatus(200);
 
-    const nomeNovoPlano =  `Trimestral_${crypto.randomUUID()}`
+    const nomeNovoPlano =  `trimestral_${crypto.randomUUID()}`
 
         await spec()
             .patch(`http://localhost:3000/admin/planos/${idPlano}`)
@@ -27,8 +27,9 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
             .withJson({
                 "nome": nomeNovoPlano,
                 "valor": 0,
+                "duracao": 90,
+                "descricao": "Experimente gratis por 15 dias",
                 "bloqueado": true,
-                "descricao": "Experimente gratis por 15 dias"
             })
             .expectStatus(200);
 
@@ -46,16 +47,17 @@ it('CU-A 18 - deve alterar dados do Plano', async () => {
 it('CU-A 18 - Não altera dados do Plano quando o Id não existe', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, `gratuito_${crypto.randomUUID()}`, 0, "Experimente gratis por 15 dias");
 
     await spec()
         .patch(`http://localhost:3000/admin/planos/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
-            "nome": `Gratuito_55`,
+            "nome": `gratuito_55`,
             "valor": 0,
+            "duracao": 365,
+            "descricao": "Experimente gratis por 15 dias",
             "bloqueado": true,
-            "descricao": "Experimente gratis por 15 dias"
         })
         .expectJson({ erro: "Plano não encontrado" })
         .expectStatus(404);

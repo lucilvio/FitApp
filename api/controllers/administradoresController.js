@@ -14,16 +14,17 @@ async function cadastrarPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar um Plano.'
 
-    const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(req.body.nome);
+    const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
+    
+    const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(novoPlano.idPlano, novoPlano.nome);
 
     if (!planoEncontrado) {
-        const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
-
         await repositorioDePlanos.criarPlano(novoPlano);
 
         res.send({
             idPlano: novoPlano.idPlano
         });
+
     } else {
         res.status(400).send({ erro: "Esse plano já foi cadastrado" });
         return;
@@ -48,7 +49,7 @@ async function buscarPlanos(req, res) {
             nome: plano.nome,
             valor: plano.valor,
             duracao: plano.duracao,
-            bloqueado: plano.bloqueado,
+            bloqueado: Boolean(plano.bloqueado),
             descricao: plano.descricao
         }
 
@@ -73,7 +74,7 @@ async function buscarPlanoPorId(req, res) {
         valor: planoEncontrado.valor,
         duracao: planoEncontrado.duracao,
         descricao: planoEncontrado.descricao,
-        bloqueado: planoEncontrado.bloqueado,
+        bloqueado: Boolean(planoEncontrado.bloqueado),
     })
 }
 
@@ -107,10 +108,11 @@ async function cadastrarNutricionista(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar Nutricionista.'
 
-    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.body.email);
+    const novoNutricionista = new Nutricionista.Nutricionista(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
+    
+    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(novoNutricionista.idNutri, novoNutricionista.email);
 
     if (!nutriEncontrado) {
-        const novoNutricionista = new Nutricionista.Nutricionista(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
 
         await repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
 
@@ -143,7 +145,7 @@ async function buscarNutricionistas(req, res) {
             email: nutri.email,
             telefone: nutri.telefone,
             registro: nutri.registro,
-            bloqueado: nutri.bloqueado
+            bloqueado: Boolean(nutri.bloqueado)
         }
     }));
 }
@@ -168,7 +170,7 @@ async function buscarNutriPorId(req, res) {
         registro: nutriEncontrado.registroProfissional,
         sobreMim: nutriEncontrado.sobreMim,
         imagem: nutriEncontrado.imagem,
-        bloqueado: nutriEncontrado.bloqueado
+        bloqueado: Boolean(nutriEncontrado.bloqueado)
     });
 }
 
@@ -191,7 +193,7 @@ async function alterarDadosDoNutricionista(req, res) {
         return;
     }
 
-    await repositorioDeNutricionistas.salvarAlteracaoDeDadosDoPerfil(
+    await repositorioDeNutricionistas.salvarAlteracaoDeDados(
         req.params.idNutri,
         req.body.nome,
         req.body.email,
@@ -208,10 +210,11 @@ async function cadastrarPersonal(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar Personal Trainer.'
 
-    const personalEncontrado = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(req.body.email);
+    const novoPersonal = new Personal.PersonalTrainer(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
+
+    const personalEncontrado = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(novoPersonal.idPersonal, novoPersonal.email);
 
     if (!personalEncontrado) {
-        const novoPersonal = new Personal.PersonalTrainer(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
 
         await repositorioDePersonalTrainers.criarPersonal(novoPersonal);
 
@@ -244,7 +247,7 @@ async function buscarPersonalTrainers(req, res) {
             email: personal.email,
             telefone: personal.telefone,
             registro: personal.registro,
-            bloqueado: personal.bloqueado
+            bloqueado: Boolean(personal.bloqueado)
         }
     }));
 }
@@ -269,7 +272,7 @@ async function buscarPersonalPorId(req, res) {
         registro: personalEncontrado.registroProfissional,
         sobreMim: personalEncontrado.sobreMim,
         imagem: personalEncontrado.imagem,
-        bloqueado: personalEncontrado.bloqueado
+        bloqueado: Boolean(personalEncontrado.bloqueado) 
     })
 }
 
@@ -292,7 +295,7 @@ async function alterarDadosDoPersonal(req, res) {
         return;
     }
 
-    await repositorioDePersonalTrainers.salvarAlteracaoDeDadosDoPerfil(
+    await repositorioDePersonalTrainers.salvarAlteracaoDeDados(
         req.params.idPersonal,
         req.body.nome,
         req.body.email,
@@ -322,7 +325,7 @@ async function buscarAssinantes(req, res) {
             nome: assinante.nome,
             email: assinante.email,
             telefone: assinante.telefone,
-            bloqueado: assinante.bloqueado
+            bloqueado: Boolean(assinante.bloqueado)
         }
     }));
 
@@ -344,7 +347,7 @@ async function buscarAssinantePorId(req, res) {
         idAssinante: assinanteEncontrado.idAssinante,
         nome: assinanteEncontrado.nome,
         email: assinanteEncontrado.email,
-        bloqueado: assinanteEncontrado.bloqueado,
+        bloqueado: Boolean(assinanteEncontrado.assinaturaBloqueada),
         idPlano: assinanteEncontrado.idPlano,
         nomePlano: assinanteEncontrado.nomePlano,
         valor: assinanteEncontrado.valor

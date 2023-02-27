@@ -3,86 +3,65 @@ const usuario = require('../../funcoes/usuario');
 const personalTrainer = require('../../funcoes/personalTrainer');
 const crypto = require('crypto');
 
+
 it('CU-P 08 - deve criar treino', async () => {
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
-    await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike([
+    const nomeTreino = `treino_teste_${crypto.randomUUID()}`;
+
+    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "idAssinante_teste",
+        nomeTreino,
+        "12/01/2023",
+        "12/31/2023",
+        "Hipertrofia",
+        [
             {
-                idAssinante: 'idAssinante'
-            }
-        ])
-        .expectStatus(200);
-
-    await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike(
+                "diaDoTreino": "Segunda",
+                "descricao": "30min Eliptico"
+            },
             {
-                nome: 'Assinante'
+                "diaDoTreino": "Terça",
+                "descricao": "Cadeira Extensora"
             }
-        )
-        .expectStatus(200);
-
-
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 3", "01/10/2022", "31/10/2022", "Perda de Peso", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
+        ]
+    );
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante`)
+        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {
-                treinos: [
-                    {
-                        idTreino: idTreino
-                    }
-                ]
+                "treino": {
+                    "nome": nomeTreino
+                }
             }
         )
         .expectStatus(200);
-
 });
 
 it('CU-P 08 - não cria treino para aluno não encontrado', async () => {
 
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike([
-            {
-                idAssinante: 'idAssinante'
-            }
-        ])
-        .expectStatus(200);
-
-    await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante`)
-        .withHeaders("Authorization", "Bearer " + tokenPersonal)
-        .expectJsonLike(
-            {
-                nome: 'Assinante'
-            }
-        )
-        .expectStatus(200);
-
-    await spec()
-        .post(`http://localhost:3000/personalTrainer/alunos/${crypto.randomUUID()}/treinos`)
+        .post(`http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
-            "nomeTreino": "Treino 2",
-            "dataInicio": "01/10/2022",
-            "dataFim": "31/10/2022",
+            "nomeTreino": "Treino 1",
+            "dataInicio": "09/30/2022",
+            "dataFim": "10/31/2022",
             "objetivo": "Perda de Peso",
             "exercicios": [
                 {
-                    "diaDoTreino": "segunda",
-                    "descricao": "30min de esteira ergometrica"
+                    "diaDoTreino": "Segunda",
+                    "descricao": "30min Eliptico"
+                },
+                {
+                    "diaDoTreino": "Terça",
+                    "descricao": "Cadeira Extensora"
                 }
-            ],
+            ]
+
         })
         .expectJson({ erro: "Aluno não encontrado" })
         .expectStatus(404);

@@ -6,8 +6,8 @@ const crypto = require('crypto');
 it('CU-G 02 - deve redefinir Senha de acesso', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const email = `ana_${crypto.randomUUID()}@fitapp.com`;
-    const idNutri = await nutricionista.cadastrarNutri(token, "ana", email, "99999999", "BFUDbHJKd");
+    const email = `ana_teste_${crypto.randomUUID()}@fitapp.com`;
+    const idNutri = await nutricionista.cadastrarNutri(token, "ana_teste", email, "99999999", "crm000");
 
     await spec()
         .post('http://localhost:3000/esqueciMinhaSenha')

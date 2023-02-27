@@ -3,10 +3,24 @@ const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 
 it('CU-AS 11 - O Assinante deve ver detalhes da dieta', async () => {
-    const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
-    const idDieta = await nutricionista.criarDieta(tokenNutri, "Dieta 3", "01/10/2022", "31/10/2022", "Perda de Peso", [{ "refeicao": "cafeDaManha", "descricao": "Leite com café" }]);
+    const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
-    const tokenAssinante = await usuario.gerarToken('assinante@fitapp.com', 'assinante123');
+    const idDieta = await nutricionista.criarDieta(tokenNutri, "idAssinante_teste",
+        "dieta_teste",
+        "10/01/2023",
+        "10/31/2023", "perda de peso",
+        [
+            {
+                "refeicao": "cafeDaManha",
+                "descricao": "Iogurte natural"
+            },
+            {
+                "refeicao": "almoço",
+                "descricao": "Frango Grelhado"
+            }
+        ]);
+
+    const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
         .get(`http://localhost:3000/assinante/dietas/${idDieta}`)
@@ -21,15 +35,13 @@ it('CU-AS 11 - O Assinante deve ver detalhes da dieta', async () => {
 });
 
 it('CU-AS 11 - O Assinante não vê detalhes da dieta quando o Id da dieta não existe', async () => {
-    const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
-    const idDieta = await nutricionista.criarDieta(tokenNutri, "Dieta 3", "01/10/2022", "31/10/2022", "Perda de Peso", [{ "refeicao": "cafeDaManha", "descricao": "Leite com café" }]);
-
-    const tokenAssinante = await usuario.gerarToken('assinante@fitapp.com', 'assinante123');
+    
+    const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/dietas/idDieta123`)
+        .get(`http://localhost:3000/assinante/dietas/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
-        .expectJson({erro: "Dieta não encontrada"})
+        .expectJson({ erro: "Dieta não encontrada" })
         .expectStatus(404);
 
 

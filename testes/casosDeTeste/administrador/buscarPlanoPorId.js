@@ -6,7 +6,7 @@ const crypto = require('crypto');
 it('CU-A 17 - deve ver os dados do Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
-    const nomePlano = `Gratuito_${crypto.randomUUID()}`;
+    const nomePlano = `gratuito_${crypto.randomUUID()}`;
     const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()
@@ -24,7 +24,7 @@ it('CU-A 17 - deve ver os dados do Plano', async () => {
 it('CU-A 17 - não encontra plano quando o Id não existe', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
-    const nomePlano = `Gratuito_${crypto.randomUUID()}`;
+    const nomePlano = `gratuito_${crypto.randomUUID()}`;
     const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()

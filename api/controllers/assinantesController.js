@@ -26,19 +26,19 @@ async function cadastrarAssinante(req, res) {
 
     const planoEncontrado = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
     if (!planoEncontrado) {
-        res.status(400).send({ erro: "Plano não encontrado" });
+        res.status(404).send({ erro: "Plano não encontrado" });
         return;
     }
 
     const nutriEncontrado = await repositorioDeNutricionistas.buscarNutriPorId(req.body.idNutri);
     if (!nutriEncontrado) {
-        res.status(400).send({ erro: "Nutricionista não encontrado" });
+        res.status(404).send({ erro: "Nutricionista não encontrado" });
         return;
     }
 
     const personalEncontrado = await repositorioDePersonal.buscarPersonalPorId(req.body.idPersonal);
     if (!personalEncontrado) {
-        res.status(400).send({ erro: "Personal não encontrado" });
+        res.status(404).send({ erro: "Personal não encontrado" });
         return;
     }
 
@@ -131,7 +131,7 @@ async function inserirMedidas(req, res) {
 
     await repositorioDeMedidas.salvarMedidas(req.usuario.idUsuario, medidas);
 
-    res.send();
+    res.send({idMedidas: medidas.idMedidas});
 }
 
 //O Assinante busca historico de medidas
@@ -142,7 +142,7 @@ async function buscarMedidas(req, res) {
     const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.usuario.idUsuario);
 
     if (medidasOrdenadasPorData <= 0) {
-        res.status(400).send({ erro: "Medidas não encontrada" });
+        res.status(404).send({ erro: "Medidas não encontrada" });
         return;
     }
 
@@ -173,7 +173,7 @@ async function excluirMedidas(req, res) {
     const medidaEncontrada = await repositorioDeMedidas.buscarMedidaPorId(req.usuario.idUsuario, req.params.idMedidas);
 
     if (!medidaEncontrada) {
-        res.status(400).send({ erro: "Medidas não encontrada" });
+        res.status(404).send({ erro: "Medidas não encontrada" });
         return;
     }
 
@@ -190,7 +190,7 @@ async function buscarDadosDaAssinatura(req, res) {
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!dadosDaAssinatura) {
-        res.status(400).send({ erro: "Assinatura não encontrada" });
+        res.status(404).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
@@ -201,7 +201,7 @@ async function buscarDadosDaAssinatura(req, res) {
         nome: dadosDaAssinatura.nome,
         valor: dadosDaAssinatura.valor,
         descricao: dadosDaAssinatura.descricao,
-        bloqueado: dadosDaAssinatura.bloqueado
+        bloqueado: Boolean(dadosDaAssinatura.bloqueado)
     });
 }
 
@@ -213,7 +213,7 @@ async function cancelarAssinatura(req, res) {
     const dadosDaAssinatura = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
 
     if (!dadosDaAssinatura) {
-        res.status(400).send({ erro: "Assinatura não encontrada" });
+        res.status(404).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
@@ -233,13 +233,13 @@ async function alterarPlanoDaAssinatura(req, res) {
 
     const assinaturaEncontrada = await repositorioDeAssinaturas.buscarAssinaturaPorId(req.usuario.idUsuario, req.params.idAssinatura);
     if (!assinaturaEncontrada) {
-        res.status(400).send({ erro: "Assinatura não encontrada" });
+        res.status(404).send({ erro: "Assinatura não encontrada" });
         return;
     }
 
     const dadosDoNovoPlano = await repositorioDePlanos.buscarPlanoPorId(req.body.idPlano);
     if (!dadosDoNovoPlano) {
-        res.status(400).send({ erro: "Plano não encontrado" });
+        res.status(404).send({ erro: "Plano não encontrado" });
         return;
     }
 
@@ -298,7 +298,7 @@ async function buscarDietas(req, res) {
     const dietas = await repositorioDeDietas.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     if (dietas <= 0) {
-        res.status(400).send({ erro: "Dietas não encontrada" });
+        res.status(404).send({ erro: "Dietas não encontrada" });
         return;
     }
 
@@ -341,7 +341,7 @@ async function buscarTreinos(req, res) {
     const treinos = await repositorioDeTreinos.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     if (treinos <= 0) {
-        res.status(400).send({ erro: "Treinos não encontrado" });
+        res.status(404).send({ erro: "Treinos não encontrado" });
         return;
     }
 

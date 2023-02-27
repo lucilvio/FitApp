@@ -5,17 +5,35 @@ const crypto = require('crypto');
 
 it('CU-N 10 - deve alterar dados da dieta', async () => {
 
-    const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
+    const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
-    const idDieta = await nutricionista.criarDieta(tokenNutri, "Dieta 4", "01/12/2022", "31/12/2022", "Manutenção de Peso", [{ "refeicao": "almoço", "descricao": "Arroz" }]);
+    const nomeDieta = `dieta_teste_${crypto.randomUUID()}`;
+
+    const idDieta = await nutricionista.criarDieta(tokenNutri, "idAssinante_teste",
+        nomeDieta,
+        "10/01/2022",
+        "10/31/2022",
+        "manutencao de peso",
+        [
+            {
+                "refeicao": "cafeDaManha",
+                "descricao": "Iogurte natural"
+            },
+            {
+                "refeicao": "almoço",
+                "descricao": "Frango Grelhado"
+            }
+        ]);
+
+    const novoNomeDieta = `dieta_teste_${crypto.randomUUID()}`;
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/pacientes/idAssinante/dietas/${idDieta}`)
+        .patch(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
-            "nomeDieta": "Dieta 4",
-            "dataInicio": "01/12/2022",
-            "dataFim": "31/12/2022",
+            "nomeDieta": novoNomeDieta,
+            "dataInicio": "01/01/2023",
+            "dataFim": "01/31/2023",
             "objetivo": "Manutenção de Peso",
             "itens": [
                 {
@@ -31,18 +49,13 @@ it('CU-N 10 - deve alterar dados da dieta', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante/dietas/${idDieta}`)
+        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {
-                idDieta: idDieta,
-                itens: [
-                    {
-                        "idDieta": idDieta,
-                        "refeicao": "cafeDaManha",
-                        "descricao": "Leite com café"
-                    }
-                ]
+                "dieta": {
+                    "nome": novoNomeDieta
+                }
             }
         )
         .expectStatus(200);
@@ -51,12 +64,29 @@ it('CU-N 10 - deve alterar dados da dieta', async () => {
 
 it('CU-N 10 - não altera dieta para quando não encontra o paciente', async () => {
 
-    const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
+    const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
-    const idDieta = await nutricionista.criarDieta(tokenNutri, "Dieta 4", "01/12/2022", "31/12/2022", "Manutenção de Peso", [{ "refeicao": "almoço", "descricao": "Arroz" }]);
+    const nomeDieta = `dieta_teste_${crypto.randomUUID()}`;
+
+    const idDieta = await nutricionista.criarDieta(tokenNutri, "idAssinante_teste",
+        nomeDieta,
+        "10/01/2022",
+        "10/31/2022",
+        "manutencao de peso",
+        [
+            {
+                "refeicao": "cafeDaManha",
+                "descricao": "Iogurte natural"
+            },
+            {
+                "refeicao": "almoço",
+                "descricao": "Frango Grelhado"
+            }
+        ]);
+
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/pacientes/${crypto.randomUUID()}/dietas/${idDieta}`)
+        .patch(`http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "nomeDieta": "Dieta 4",
@@ -81,12 +111,10 @@ it('CU-N 10 - não altera dieta para quando não encontra o paciente', async () 
 
 it('CU-N 10 - não altera dieta quando não encontra a dieta', async () => {
 
-    const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
-
-    const idDieta = await nutricionista.criarDieta(tokenNutri, "Dieta 4", "01/12/2022", "31/12/2022", "Manutenção de Peso", [{ "refeicao": "almoço", "descricao": "Arroz" }]);
+    const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/pacientes/idAssinante/dietas/${crypto.randomUUID()}`)
+        .patch(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "nomeDieta": "Dieta 4",

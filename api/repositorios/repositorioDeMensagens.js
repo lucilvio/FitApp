@@ -40,7 +40,12 @@ async function buscarMensagensRecebidas(idUsuario) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioRemetente, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
+            `select mensagem.idMensagem, 
+                    mensagem.data, 
+                    mensagem.idUsuarioRemetente,
+                     mensagem.assunto, 
+                     mensagem.texto, 
+                     mensagem.idMensagemResposta,
                     rem.login as emailRemetente
             from mensagens as mensagem
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
@@ -61,7 +66,12 @@ async function buscarMensagensEnviadas(idUsuario) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioDestinatario, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
+            `select mensagem.idMensagem, 
+                    mensagem.data, 
+                    mensagem.idUsuarioDestinatario, 
+                    mensagem.assunto, 
+                    mensagem.texto, 
+                    mensagem.idMensagemResposta,
                     dest.login as emailDestinatario, rem.login as emailRemetente
             from mensagens as mensagem
                 inner join usuarios as dest on mensagem.idUsuarioDestinatario = dest.idUsuario
@@ -84,7 +94,12 @@ async function buscarMensagensExcluidas(idUsuario) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select mensagem.idMensagem, mensagem.data, mensagem.idUsuarioRemetente, mensagem.assunto, mensagem.texto, mensagem.idMensagemResposta,
+            `select mensagem.idMensagem, 
+                    mensagem.data, 
+                    mensagem.idUsuarioRemetente, 
+                    mensagem.assunto, 
+                    mensagem.texto, 
+                    mensagem.idMensagemResposta,
                     rem.login as emailRemetente
             from mensagens as mensagem
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario

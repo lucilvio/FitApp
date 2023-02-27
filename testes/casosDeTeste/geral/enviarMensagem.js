@@ -6,8 +6,8 @@ const usuario = require('../../funcoes/usuario');
 it('Deve enviar Mensagem', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const emailNutri = `ana_${crypto.randomUUID()}@fitapp.com`;
-    const idNutri = await nutricionista.cadastrarNutri(token, "ana", emailNutri, "99999999", "BFUDbHJKd");
+    const emailNutri = `nutri_teste_${crypto.randomUUID()}@fitapp.com`;
+    const idNutri = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, emailNutri, "99999999", "crn000");
 
     await spec()
         .post('http://localhost:3000/mensagem')

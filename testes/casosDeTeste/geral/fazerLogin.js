@@ -16,7 +16,7 @@ it('CU-G 01 - Não deve fazer login quando usuario ou senha incorretos', async (
         .post('http://localhost:3000/login')
         .withJson({
             "email": "admin@fitapp.com",
-            "senha": "admin13"
+            "senha": "admin"
         })
         .expectJson({ erro: "login ou senha incorreto"})
         .expectStatus(400);
@@ -26,10 +26,10 @@ it('CU-G 01 - Não deve fazer login quando usuario estiver bloqueado', async () 
     await spec()
         .post('http://localhost:3000/login')
         .withJson({
-            "email": "assinantebloqueado@fitapp.com",
-            "senha": "aassinante123"
+            "email": "assinantebloqueado_teste@fitapp.com",
+            "senha": "assinante123"
         })
-        .expectJson({ erro: "Usuário bloqueado"})
+        .expectJson({ erro: "Usuario bloqueado"})
         .expectStatus(400);
 });
 

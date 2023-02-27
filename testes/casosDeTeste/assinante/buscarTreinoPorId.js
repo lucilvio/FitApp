@@ -3,10 +3,26 @@ const usuario = require('../../funcoes/usuario');
 const personalTrainer = require('../../funcoes/personalTrainer');
 
 it('CU-AS 14 - O Assinante deve ver detalhes do Treino', async () => {
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 4", "01/12/2022", "31/12/2022", "Hipertrofia", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
+    const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
-    const tokenAssinante = await usuario.gerarToken('assinante@fitapp.com', 'assinante123');
+    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "idAssinante_teste",
+        "treino_teste",
+        "12/01/2023",
+        "12/31/2023",
+        "Hipertrofia",
+        [
+            {
+                "diaDoTreino": "Segunda",
+                "descricao": "30min Eliptico"
+            },
+            {
+                "diaDoTreino": "Terça",
+                "descricao": "Cadeira Extensora"
+            }
+        ]
+    );
+
+    const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
         .get(`http://localhost:3000/assinante/treino/${idTreino}`)
@@ -21,13 +37,11 @@ it('CU-AS 14 - O Assinante deve ver detalhes do Treino', async () => {
 });
 
 it('CU-AS 11 - O Assinante não vê detalhes do Treino quando o Id do Treino não existe', async () => {
-    const tokenPersonal = await usuario.gerarToken('personal@fitapp.com', 'personal123');
-    const idTreino = await personalTrainer.criarTreino(tokenPersonal, "Treino 4", "01/12/2022", "31/12/2022", "Hipertrofia", [{ "diaDoTreino": "segunda", "descricao": "30min de esteira ergometrica" }]);
 
-    const tokenAssinante = await usuario.gerarToken('assinante@fitapp.com', 'assinante123');
+    const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/treino/idTreino123`)
+        .get(`http://localhost:3000/assinante/treino/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJson({erro: "Treino não encontrado"})
         .expectStatus(404);

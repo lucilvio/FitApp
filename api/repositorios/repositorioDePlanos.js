@@ -1,4 +1,3 @@
-const base = require('../dados');
 const baseDeDados = require('../conexao');
 
 
@@ -8,7 +7,7 @@ async function verificarSeJaExistePlanoCadastradoPeloNome(idPlano, nome) {
         const [rows, fields] = await conexao.execute(
             `select idPlano, nome 
             from planos 
-            where nome = ? and idPlano != idPlano`, [nome, idPlano]);
+            where nome = ? and idPlano != ?`, [nome, idPlano]);
 
         if (rows.length <= 0)
             return;
@@ -95,7 +94,7 @@ async function salvarAlteracaoDeDados(idPlano, nome, valor, duracao, descricao, 
             set nome = ?, valor = ?, duracao = ?,  descricao = ?,  bloqueado = ? 
             where idPlano = ?`, [nome, valor, duracao, descricao, bloqueado, idPlano]);
 
-        
+
     } finally {
         await conexao.end();
     }
