@@ -1,0 +1,29 @@
+#menu-lateral, .list-group-item, .offcanvas {
+    background-color: #FED233;
+}
+
+body {
+    background-color: #EDEDED;
+}
+
+header {
+    background-color: white;
+}
+
+.medidas-dashboard {
+    color: #FED233;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+    background-color: #c1a12b;
+}
+
+.list-group-item-action:focus, .list-group-item-action:active {
+    background-color: #c1a12b;
+}
+
+a, input, select {
+    cursor: pointer;
+}

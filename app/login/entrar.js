@@ -30,6 +30,9 @@ async function entrar(evento) {
         if(usuario.perfil == "assinante") {
            window.location.href = "../dashboard/dashboard.html" 
         }
+        if(usuario.perfil == "administrador") {
+           window.location.href = "../assinantes/assinantes.html" 
+        }
 
     } catch (error) {
         erros.tratarErro(error);

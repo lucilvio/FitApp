@@ -1,7 +1,7 @@
 import * as servicos from "./servicosDoPerfil.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
-import * as paginaMestra from "../paginaMestra/paginaMestra.js";
+import * as paginaMestra from "../paginaMestraAssinante/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
@@ -10,7 +10,7 @@ window.onload = aoCarregarPagina;
 
 let modal;
 async function aoCarregarPagina() {
-    await paginaMestra.carregar("perfil/perfil-conteudo.html", "Perfil");
+    await paginaMestra.carregar("perfilAssinante/perfil-conteudo.html", "Perfil");
 
     document.querySelector("#imagem-perfil").onclick = alterarImagem;
     document.querySelector("#btn-salvarDadosDoPerfil").onclick = salvarDadosDoPerfil;
