@@ -19,12 +19,8 @@
 <body>
     <div class="d-flex">
         <!--cabecalho - telas maiores -->
-        <div class="col-sm-3 d-none d-sm-block min-vh-100" id="menu-lateral">
-            <div class="py-2 ps-3">
-                <a href="/dashboard/dashboard.html" class="link-dark text-decoration-none d-none d-sm-block">
-                    <span class="fw-bold fs-5"><img src="/img/dumbbell.png" class="me-2"
-                            alt="logo-coracao" width="40" height="40">FitApp</span>
-                </a>
+        <div class="col-sm-3 d-none d-sm-block min-vh-100" id="area-lateral">
+            <div class="py-2 ps-3" id="logo-cabecalho">    
             </div>
 
 
@@ -32,17 +28,7 @@
             <div class="d-none d-sm-block d-flex">
                 <div class="d-flex flex-column">
                     <div class="py-3">
-                        <div class="list-group">
-                            <a href="/dashboard/dashboard.html"
-                                class="list-group-item list-group-item-action border-0 item-menu fw-semibold"><i
-                                    class="bi bi-house-door fs-4 me-2"></i>Início</a>
-                            <a href="/medidas/medidas.html"
-                                class="list-group-item list-group-item-action border-0 item-menu fw-semibold"><img
-                                    src="/img/ruler.png" width="23.89" height="23.89"
-                                    alt="imagem-fita-metrica"> Medidas</a>
-                            <a href="/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html"
-                                class="list-group-item list-group-item-action border-0 item-menu fw-semibold"><i
-                                    class="bi bi-clipboard-data fs-4 me-2"></i></i>Relatórios</a>
+                        <div class="list-group" id="menu-lateral">
                         </div>
                     </div>
                 </div>
@@ -53,8 +39,8 @@
 
         <div class="col col-sm-9">
             <div class="toast-container position-fixed top-0 end-0 p-3">
-                <div id="toast-erro" class="toast align-items-center text-bg-danger border-0" data-bs-animation="true" role="alert"
-                    aria-live="assertive" aria-atomic="true">
+                <div id="toast-erro" class="toast align-items-center text-bg-danger border-0" data-bs-animation="true"
+                    role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div id="toast-body-erro" class="toast-body">
                         </div>
@@ -62,27 +48,25 @@
                             aria-label="Close"></button>
                     </div>
                 </div>
-                <div id="toast-sucesso" class="toast align-items-center text-bg-success border-0" data-bs-animation="true" role="alert"
-                    aria-live="assertive" aria-atomic="true">
+                <div id="toast-sucesso" class="toast align-items-center text-bg-success border-0"
+                    data-bs-animation="true" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div id="toast-body-sucesso" class="toast-body">
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast-sucesso"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                            data-bs-dismiss="toast-sucesso" aria-label="Close"></button>
                     </div>
                 </div>
             </div>
+
             <header class="py-2 border-bottom">
                 <div class="container-fluid px-2 d-flex justify-content-between align-items-center">
                     <!--cabecalho hamburguer/Logo- mobile -->
-                    <div class="d-flex fw-bolder fs-5">
+                    <div class="d-flex fw-bolder fs-5" id="logo-cabecalho-off-canvas">
                         <a class="d-block d-sm-none link-dark text-decoration-none" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvas" aria-controls="offcanvas">
                             <i class="bi bi-list fs-1"></i>
                         </a>
-                        <a href="/dashboard/dashboard.html"
-                            class="d-block d-sm-none link-dark text-decoration-none">FitApp</a>
-
                     </div>
 
                     <!--cabecalho - perfil -->
@@ -91,16 +75,11 @@
                         <div class="flex-shrink-0 dropdown me-3">
                             <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/img/perfil-vazio-cabecalho.png" class="rounded-circle" width="32" height="32" id="cabecalho-foto-perfil" />
+                                <img src="/img/perfil-vazio-cabecalho.png" class="rounded-circle" width="32" height="32" id="cabecalho-imagem-perfil" />
                             </a>
-                            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                                <li><a class="dropdown-item" href="../perfilAssinante/perfil.html"><i
-                                            class="bi bi-person me-2"></i>Meu
-                                        Perfil</a></li>
+                            <ul id="menu-cabecalho" class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                                 <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" id="cabecalho-sair" href="../index.html"><i
+                                    <a class="dropdown-item" id="cabecalho-sair" href="../index.html"><i
                                             class="bi bi-power me-2"></i>Sair</a>
                                 </li>
                             </ul>
@@ -108,6 +87,7 @@
                     </div>
                 </div>
             </header>
+
             <main>
 
                 <!--offCanvas - links lareal esquerda-->
@@ -115,24 +95,15 @@
                     aria-labelledby="offcanvasLabel">
                     <div class="d-flex flex-column">
                         <div class="d-flex justify-content-between py-3">
-                            <span class="link-dark text-decoration-none fw-bolder fs-5"><img
-                                    src="/img/dumbbell.png" class="me-2" alt="logo-coracao" width="40"
-                                    height="40">FitApp</span>
+                            <span class="link-dark text-decoration-none fw-bolder fs-5"><img src="/img/dumbbell.png"
+                                    class="me-2" alt="logo-coracao" width="40" height="40">FitApp</span>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                         </div>
 
-                        <div class="list-group">
-                            <a href="/dashboard/dashboard.html"
-                                class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><i
-                                    class="bi bi-house-door fs-2 me-2"></i>Início</a>
-                            <a href="/medidas/medidas.html"
-                                class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><img
-                                    src="/img/ruler.png" width="29.44" height="29.44"
-                                    alt="imagem-fita-metrica">Medidas</a>
-                            <a href="/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html"
-                                class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold"><i
-                                    class="bi bi-clipboard-data fs-2 me-2"></i></i>Relatórios</a>
+                        <div class="py-3">
+                            <div class="list-group" id="menu-offCanvas">
+                            </div>
                         </div>
 
                     </div>

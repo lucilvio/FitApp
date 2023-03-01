@@ -1,7 +1,7 @@
 import * as util from "../util/tratamentoDeRespostaApi.js"
 
-export async function buscarDados(token) {
-    const url = `http://localhost:3000/admin/assinantes`;
+export async function buscarDados(token, nome) {
+    const url = `http://localhost:3000/admin/assinantes?nome=${nome}`;
 
     const resposta = await fetch(url, {
         headers: {
@@ -11,3 +11,4 @@ export async function buscarDados(token) {
 
     return util.tratarRespostaApi(resposta);
 }
+

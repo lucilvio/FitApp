@@ -315,7 +315,7 @@ async function buscarAssinantes(req, res) {
     const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
 
     if (!assinantes || assinantes.length <= 0) {
-        res.status(400).send({ erro: "Assinante não encontrado" });
+        res.send([]);
         return;
     }
 
@@ -324,7 +324,6 @@ async function buscarAssinantes(req, res) {
             idAssinante: assinante.idAssinante,
             nome: assinante.nome,
             email: assinante.email,
-            telefone: assinante.telefone,
             bloqueado: Boolean(assinante.bloqueado)
         }
     }));
@@ -347,7 +346,11 @@ async function buscarAssinantePorId(req, res) {
         idAssinante: assinanteEncontrado.idAssinante,
         nome: assinanteEncontrado.nome,
         email: assinanteEncontrado.email,
-        bloqueado: Boolean(assinanteEncontrado.assinaturaBloqueada),
+        usuarioBloqueado: Boolean(assinanteEncontrado.usuarioBloqueado), 
+        idAssinatura: assinanteEncontrado.idAssinatura,
+        assinaturaBloqueada: Boolean(assinanteEncontrado.assinaturaBloqueada),
+        dataInicio: assinanteEncontrado.dataInicio,
+        dataFim: assinanteEncontrado.dataFim,
         idPlano: assinanteEncontrado.idPlano,
         nomePlano: assinanteEncontrado.nomePlano,
         valor: assinanteEncontrado.valor

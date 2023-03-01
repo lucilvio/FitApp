@@ -40,13 +40,13 @@ async function buscarMedidas() {
             resposta.historicoDeMedidas.forEach(medida => {
                 document.querySelector("#historico-medidas").innerHTML = document.querySelector("#historico-medidas").innerHTML +
                     `<tr>
-                <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
-                <td>${medida.peso} kg</td>
-                <td>${medida.pescoco} cm</td>
-                <td>${medida.cintura} cm</td>
-                <td>${medida.quadril} cm</td>
-                <td><i class="bi bi-trash3 btn-excluirMedidas" data-idmedida=${medida.idMedidas}></i></td>
-                </tr>`;
+                        <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
+                        <td>${medida.peso} kg</td>
+                        <td>${medida.pescoco} cm</td>
+                        <td>${medida.cintura} cm</td>
+                        <td>${medida.quadril} cm</td>
+                        <td><i class="bi bi-trash3 btn-excluirMedidas" data-idmedida=${medida.idMedidas}></i></td>
+                    </tr>`;
             });
         }
 

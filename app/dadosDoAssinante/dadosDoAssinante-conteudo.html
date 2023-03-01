@@ -1,0 +1,78 @@
+<div>
+    <div class="row py-2">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body row">
+                    <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Assinante</h6>
+                    <div class="col">
+                        <p class="fw-bolder">Nome</p>
+                        <p id="nome-assinante"></p>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bolder">Email</p>
+                        <p id="email-assinante"></p>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bolder">Status</p>
+                        <p id="status-assinante"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row py-2">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body row">
+                <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Plano</h6>
+                <div class="col">
+                    <p class="fw-bolder">Plano</p>
+                    <p id="nome-plano"></p>
+                </div>
+                <div class="col">
+                    <p class="fw-bolder">Valor</p>
+                    <p id="valor-plano"></p>
+                </div>
+                <div class="col">
+                    <p class="fw-bolder">Início</p>
+                    <p id="data-inicio"></p>
+                </div>
+                <div class="col">
+                    <p class="fw-bolder">Fim</p>
+                    <p id="data-fim"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col text-end">
+        <a href="../assinantes/assinantes.html" class="btn btn-light" style="background-color: #FED233;">Voltar</a>
+
+        <button type="button" class="btn btn-light" id="btn-alterar-status" style="background-color: #FED233;"></button>
+    </div>
+</div>
+
+<div class="modal" id="modal-alterar-status" tabindex="-1" aria-labelledby="modal-alterar-status-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-status-label">Alterar Status</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja alterar a o status?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-status" type="button" class="btn btn-light"
+                    style="background-color: #FED233;">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

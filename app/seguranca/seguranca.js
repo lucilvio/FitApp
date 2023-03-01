@@ -1,6 +1,6 @@
 const chaveToken = "fitapp_token";
 const chaveNomeUsuario = "fitapp_nome_usuario";
-const chaveFotoUsuario = "fitapp_foto_usuario";
+const chaveImagemUsuario = "fitapp_imagem_usuario";
 
 export function deslogarSeTokenEstiverExpirado(paginaParaRedirecionar) {
     if (!tokenValido()) {
@@ -30,17 +30,13 @@ export function gravarToken(token) {
     const imagem = pegarUsuarioDoToken().imagem;
     
     if (imagem) {
-        localStorage.setItem(chaveFotoUsuario, imagem);
+        localStorage.setItem(chaveImagemUsuario, imagem);
     }
 
 }
 
 export function pegarToken() {
     return localStorage.getItem(chaveToken);
-}
-
-export function removerToken() {
-    localStorage.removeItem(chaveToken);
 }
 
 export function pegarUsuarioDoToken() {
@@ -61,8 +57,8 @@ export function atualizarNomeUsuarioLogado(nome) {
     localStorage.setItem(chaveNomeUsuario, nome);
 }
 
-export function atualizarFotoUsuarioLogado(foto) {
-    localStorage.setItem(chaveFotoUsuario, foto);
+export function atualizarImagemUsuarioLogado(imagem) {
+    localStorage.setItem(chaveImagemUsuario, imagem);
 }
 
 export function pegarNomeDoUsuario() {
@@ -70,12 +66,12 @@ export function pegarNomeDoUsuario() {
 }
 
 export function pegarImagemDoUsuario() {
-    return localStorage.getItem(chaveFotoUsuario);
+    return localStorage.getItem(chaveImagemUsuario);
 }
 
 export function removerDadosDoUsuario() {
     localStorage.removeItem(chaveNomeUsuario);
-    localStorage.removeItem(chaveFotoUsuario);
+    localStorage.removeItem(chaveImagemUsuario);
     localStorage.removeItem(chaveToken);
 }
 
