@@ -38,6 +38,7 @@ function validarAlteracaoDoPerfil(nome) {
     if (!nome) {
         throw { mensagem: "O nome do assinante precisa ser definido", interna: true };
     }
+
 }
 
 function validarAlteracaoDeStatus(novoStatus) {

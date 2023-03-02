@@ -39,8 +39,9 @@ async function buscarDadosDoPerfil() {
             dataFormatada = "";
         } else {
             const data = new Date(resposta.dataNascimento);
-            const zeroEsquerda = (data.getMonth() + 1) < 10 ? '0' : '';
-            dataFormatada = zeroEsquerda + (data.getMonth() + 1) + '/' + data.getDate() + '/' + data.getFullYear()
+            const zeroEsquerdaMes = (data.getMonth() + 1) < 10 ? '0' : '';
+            const zeroEsquerdaDia = (data.getDate() + 1) < 10 ? '0' : '';
+            dataFormatada =  data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();  
         }
         document.querySelector("#data-nascimento").value = dataFormatada;
         document.querySelector("#sexo").value = resposta.sexo;
@@ -55,7 +56,7 @@ async function salvarDadosDoPerfil(evento) {
         const token = seguranca.pegarToken();
 
         const nome = document.querySelector("#nome").value;
-        const dataNascimento = document.querySelector("#data-nascimento").value;
+        const dataNascimento = new Date(document.querySelector("#data-nascimento").value);
         const sexo = document.querySelector("#sexo").value;
         const altura = document.querySelector("#altura").value;
 
@@ -118,7 +119,7 @@ async function gravarImagem() {
         const inputFile = document.querySelector("#input-imagem-perfil");
         const res = await servicos.salvarImagem(token, inputFile.files[0]);
 
-        seguranca.atualizarFotoUsuarioLogado(res.imagem);
+        seguranca.atualizarImagemUsuarioLogado(res.imagem);
         mensagens.mostrarMensagemDeSucesso("Imagem alterada com sucesso!", true);
         window.location.reload();
     } catch (error) {

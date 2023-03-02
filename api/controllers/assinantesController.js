@@ -94,6 +94,7 @@ async function buscarDadosDoPerfil(req, res) {
 
     const dadosDoAssinante = await repositorioDeAssinantes.buscarDadosDoPerfilDoAssinantePorId(req.usuario.idUsuario);
 
+
     res.send({
         idAssinante: dadosDoAssinante.idAssinante,
         imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoAssinante.imagem),

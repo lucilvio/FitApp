@@ -36,10 +36,15 @@ function validarAlteracaoDeSenha(senhaAtual, novaSenha) {
     }
 }
 
-function validarAlteracaoDaImagem(files) {
+function validarAlteracaoDaImagem(files, tipoDaImagem) {
     if(!files) {
         
         throw { mensagem: "Não é possível usar uma foto vazia", interna: true }
+    }
+
+    if(tipoDaImagem !== "jpg" && tipoDaImagem !== "png" && tipoDaImagem && "gif" && tipoDaImagem !== "jpeg") {
+        
+        throw { mensagem: "Formato da imagem incorreto. Formatos validos: .jpg, .png, .gif e .jpeg", interna: true }
     }
 }
 
