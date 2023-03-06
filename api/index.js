@@ -24,7 +24,7 @@ servidor.app.use(express.urlencoded({ limit: "50mb", extended: true}));
 servidor.app.use(express.json({ limit: "50mb", extended: true }));
 servidor.app.use(fileUpload({ createParentPath: true }));
 servidor.app.use(autenticacaoMiddleware.autenticar);
-servidor.app.use("/publico", express.static("imagens"));
+servidor.app.use("/imagens", express.static("imagens"));
 
 servidor.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 

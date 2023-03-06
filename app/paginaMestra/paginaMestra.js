@@ -32,34 +32,11 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     document.documentElement.setAttribute("lang", "pt-BR");
 
     //substitui o conteudo html da pagina criada pelo conteudo da pagina mestra
-    document.documentElement.innerHTML = paginaMestraHtml.documentElement.innerHTML;
-
-    //funcao para forcar o carregamento dos scripts da pagina mestra
-    carregarScripts();
+    document.documentElement.innerHTML = paginaMestraHtml.documentElement.innerHTML;    
 
     document.querySelector("#cabecalho-sair").onclick = fazerLogout;
 
     configurarPaginaMestraPorPerfil(usuario.perfil);
-}
-
-function carregarScripts() {
-    const scripts = document.querySelectorAll("script");
-
-    scripts.forEach(script => {
-        if (!script.src) {
-            return;
-        }
-        //cria um novo elemento <script> com mesmo src do script encontrado
-        const scriptHtml = document.createElement("script");
-        scriptHtml.src = script.src;
-        scriptHtml.type = "text/javascript";
-
-        //remove o script encontrado da pagina
-        script.remove();
-
-        //adiciona o script criado na pagina
-        document.querySelector("head").append(scriptHtml);
-    });
 }
 
 function fazerLogout() {
@@ -146,6 +123,4 @@ function configurarPaginaMestraPorPerfil(perfil) {
             menuCabecalho.prepend(li);
         });
     }
-
-
 }

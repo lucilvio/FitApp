@@ -41,12 +41,7 @@ async function buscarAssinantes() {
                         <td>${assinante.nome}</td>
                         <td>${assinante.email}</td>
                         <td>${status}</td>
-                        <td>
-                        
-                            <a href="../dadosDoAssinante/dadosDoAssinante.html?idAssinante=${assinante.idAssinante}">
-                            Ver</a>
-                            <i class="bi bi-eye fs-4 me-2></i>
-                        </td>
+                        <td><a href="../dadosDoAssinante/dadosDoAssinante.html?idAssinante=${assinante.idAssinante}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

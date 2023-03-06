@@ -49,7 +49,7 @@ async function buscarMedidas() {
                         <td>${medida.pescoco} cm</td>
                         <td>${medida.cintura} cm</td>
                         <td>${medida.quadril} cm</td>
-                        <td><i class="bi bi-trash3 btn-excluir-medidas" data-idmedida=${medida.idMedidas}></i></td>
+                        <td><i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer" data-idmedida=${medida.idMedidas}></i></td>
                     </tr>`;
             });
         }

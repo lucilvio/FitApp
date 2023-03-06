@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 function autenticar (req, res, next) {
-    if(req.url.startsWith("/publico")) {
+    if(req.url.startsWith("/imagens")) {
         next();
         return;
     }

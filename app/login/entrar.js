@@ -2,12 +2,14 @@ import * as servicos from "./servicosDeLogin.js";
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";
+import * as mensagens from "../util/mensagens.js";
 
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
     await paginaMestraSite.carregar("login/entrar-conteudo.html", "Entrar");
     document.querySelector("#btn-fazerLogin").onclick = entrar;
+    mensagens.exibirMensagemAoCarregarAPagina();
 }
 
 async function entrar(evento) {

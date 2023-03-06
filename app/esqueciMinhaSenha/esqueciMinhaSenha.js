@@ -1,6 +1,7 @@
 import * as servicos from "./servicosDeEsqueciMinhaSenha.js";
 import * as erros from "../util/tratamentoDeErros.js";
 import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";
+import * as mensagens from "../util/mensagens.js";
 
 window.onload = aoCarregarPagina;
 
