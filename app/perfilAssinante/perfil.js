@@ -13,9 +13,9 @@ async function aoCarregarPagina() {
     await paginaMestra.carregar("perfilAssinante/perfil-conteudo.html", "Perfil");
 
     document.querySelector("#imagem-perfil").onclick = alterarImagem;
-    document.querySelector("#btn-salvarDadosDoPerfil").onclick = salvarDadosDoPerfil;
-    document.querySelector("#btn-alterarSenha").onclick = alterarSenhaDeAcesso;
-    document.querySelector("#btn-confirmarAlteracaoDeSenha").onclick = gravarNovaSenha;
+    document.querySelector("#btn-salvar-dados-do-perfil").onclick = salvarDadosDoPerfil;
+    document.querySelector("#btn-alterar-senha").onclick = alterarSenhaDeAcesso;
+    document.querySelector("#btn-confirmar-alteracao-de-senha").onclick = gravarNovaSenha;
 
     await buscarDadosDoPerfil();
 
@@ -86,7 +86,7 @@ async function alterarSenhaDeAcesso(evento) {
     }
     evento.preventDefault();
     if (!modal) {
-        modal = new bootstrap.Modal('#modal-alterarSenha');
+        modal = new bootstrap.Modal('#modal-alterar-senha');
     }
     modal.show();
 }

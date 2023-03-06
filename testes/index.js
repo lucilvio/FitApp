@@ -1,7 +1,15 @@
+const pjr = require('pactum-json-reporter');
+const { reporter } = require('pactum');
+
+before(() => {
+    reporter.add(pjr);
+  });
+
 //Geral
 require('./casosDeTeste/geral/fazerLogin');
 require('./casosDeTeste/geral/esqueciMinhaSenha');
 require('./casosDeTeste/geral/alterarSenha');
+require('./casosDeTeste/geral/alterarImagemDoPerfil');
 require('./casosDeTeste/geral/cadastrarAssinante');
 require('./casosDeTeste/geral/buscarPlanosAtivos');
 require('./casosDeTeste/geral/buscarNutricionistasAtivos');
@@ -28,6 +36,7 @@ require('./casosDeTeste/administrador/buscarPlanos');
 require('./casosDeTeste/administrador/buscarNutricionistas');
 require('./casosDeTeste/administrador/buscarPersonalTrainers');
 require('./casosDeTeste/administrador/buscarAssinantes');
+require('./casosDeTeste/administrador/buscarAssinantePorId');
 require('./casosDeTeste/administrador/buscarPlanoPorId');
 require('./casosDeTeste/administrador/buscarNutriPorId');
 require('./casosDeTeste/administrador/buscarPersonalPorId');
@@ -79,4 +88,6 @@ require('./casosDeTeste/personalTrainer/criarTreino');
 require('./casosDeTeste/personalTrainer/buscarTreinoPorId');
 require('./casosDeTeste/personalTrainer/alterarDadosDoTreino');
 
-
+after(async () => {
+    await reporter.end();
+  });

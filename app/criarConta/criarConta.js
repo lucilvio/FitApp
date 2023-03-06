@@ -24,6 +24,7 @@ async function cadastrarAssinante(evento) {
     evento.preventDefault();
     try {
         await servicos.criarConta(nome, email, plano, nutricionista, personalTrainer);
+        mensagens.mostrarMensagemDeSucesso("Cadastro realizado com sucesso! Verifique seu e-mail.", true);
         window.location.href = "../login/entrar.html";
     } catch (error) {
         erros.tratarErro(error);

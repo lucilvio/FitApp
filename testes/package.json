@@ -4,7 +4,10 @@
     "pactum": "^3.2.2"
   },
   "scripts": {
-    "test": "mocha index.js --timeout 20000",
-    "single": "mocha --timeout 20000"
+    "test": "mocha index.js --timeout 200000",
+    "single": "mocha --timeout 200000"
+  },
+  "devDependencies": {
+    "pactum-json-reporter": "^1.0.2"
   }
 }

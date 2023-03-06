@@ -26,4 +26,21 @@ it('CU-A 01 - deve listar assinantes', async () => {
             }
         ])
         .expectStatus(200);
+
+    
+});
+
+it('CU-A 01 - deve listar assinantes por filtro', async () => {
+    const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
+    
+    await spec()
+        .get('http://localhost:3000/admin/assinantes?nome=assinante_teste')
+        .withHeaders("Authorization", "Bearer " + token)
+        .expectJsonLike([
+            {
+                "idAssinante": "idAssinante_teste",
+                "nome": "assinante_teste"
+            }
+        ])
+        .expectStatus(200);
 });

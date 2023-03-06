@@ -17,7 +17,19 @@ it('CU-G 02 - deve redefinir Senha de acesso', async () => {
         .expectStatus(200);
 });
 
-it('CU-G 02 - Admin não deve redefinir senha de acesso', async () => {
+it('CU-G 02 - Não deve redefinir senha de acesso quando não tem cadastro', async () => {
+
+    await spec()
+        .post('http://localhost:3000/esqueciMinhaSenha')
+        .withJson({
+            "email": "1111@email.com",
+        })
+        .expectJson({ erro: "Usuário não encontrado" })
+        .expectStatus(404);
+});
+
+
+ it('CU-G 02 - Admin não deve redefinir senha de acesso', async () => {
 
     await spec()
         .post('http://localhost:3000/esqueciMinhaSenha')

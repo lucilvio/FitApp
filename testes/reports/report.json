@@ -1,0 +1,4270 @@
+{
+  "tests": [],
+  "steps": [],
+  "specs": [
+    {
+      "id": "vubxt",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 39
+      },
+      "recorded": {}
+    },
+    {
+      "id": "s6s72",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "b3ffc",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "hs5yq",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "chy5s",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 26
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3ixcs",
+      "request": {
+        "url": "http://localhost:3000/esqueciMinhaSenha",
+        "method": "POST",
+        "path": "/esqueciMinhaSenha"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6ld4n",
+      "request": {
+        "url": "http://localhost:3000/esqueciMinhaSenha",
+        "method": "POST",
+        "path": "/esqueciMinhaSenha"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "2a7il",
+      "request": {
+        "url": "http://localhost:3000/esqueciMinhaSenha",
+        "method": "POST",
+        "path": "/esqueciMinhaSenha"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ctjrc",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0dwk6",
+      "request": {
+        "url": "http://localhost:3000/usuarios/senha",
+        "method": "PATCH",
+        "path": "/usuarios/senha"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "xda6a",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ueoq6",
+      "request": {
+        "url": "http://localhost:3000/usuarios/senha",
+        "method": "PATCH",
+        "path": "/usuarios/senha"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "05rbu",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "okx3t",
+      "request": {
+        "url": "http://localhost:3000/usuarios/imagem",
+        "method": "POST",
+        "path": "/usuarios/imagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "30eby",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "dyadj",
+      "request": {
+        "url": "http://localhost:3000/usuarios/imagem",
+        "method": "POST",
+        "path": "/usuarios/imagem"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "jkl3g",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gsh7i",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "qgmqq",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rjnyy",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fnzz0",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 39
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rvaz8",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "un8hi",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "j0ehx",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "68fky",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "w0id4",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 44
+      },
+      "recorded": {}
+    },
+    {
+      "id": "a0nih",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 27
+      },
+      "recorded": {}
+    },
+    {
+      "id": "mgaqk",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "p0zph",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "lfso3",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8x61a",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/5301b742-1457-4036-a748-861725a3cabd",
+        "method": "PATCH",
+        "path": "/admin/planos/5301b742-1457-4036-a748-861725a3cabd"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "z191v",
+      "request": {
+        "url": "http://localhost:3000/planos",
+        "method": "GET",
+        "path": "/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7v9pu",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 31
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7tums",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "glgpf",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "u0bgn",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/2b479193-aa53-40a6-b066-6d0d0e62e643",
+        "method": "PATCH",
+        "path": "/admin/nutricionistas/2b479193-aa53-40a6-b066-6d0d0e62e643"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 24
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gcj58",
+      "request": {
+        "url": "http://localhost:3000/nutricionistas",
+        "method": "GET",
+        "path": "/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6swww",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nb08r",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "z0yvh",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "w2ibb",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/54146613-639a-47fc-a55e-b566b46dc715",
+        "method": "PATCH",
+        "path": "/admin/personalTrainers/54146613-639a-47fc-a55e-b566b46dc715"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 34
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3n5si",
+      "request": {
+        "url": "http://localhost:3000/personalTrainers",
+        "method": "GET",
+        "path": "/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pk3jz",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "g6hwt",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "eaoh1",
+      "request": {
+        "url": "http://localhost:3000/planos/3c398a6a-b51f-4035-a0b4-fb7ca3d59fa2",
+        "method": "GET",
+        "path": "/planos/3c398a6a-b51f-4035-a0b4-fb7ca3d59fa2"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "v9a80",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "kd5yq",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "w40fw",
+      "request": {
+        "url": "http://localhost:3000/nutricionistas/64bbe593-994b-4022-af33-7331e2322d09",
+        "method": "GET",
+        "path": "/nutricionistas/64bbe593-994b-4022-af33-7331e2322d09"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "new68",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pkv0f",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 16
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ossm5",
+      "request": {
+        "url": "http://localhost:3000/personalTrainers/9a7c4fa7-90ea-4d6f-b5d0-9f0f4f503e8c",
+        "method": "GET",
+        "path": "/personalTrainers/9a7c4fa7-90ea-4d6f-b5d0-9f0f4f503e8c"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7lft4",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8ifs2",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 16
+      },
+      "recorded": {}
+    },
+    {
+      "id": "eea2v",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "a711i",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 5
+      },
+      "recorded": {}
+    },
+    {
+      "id": "wpnyd",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ptz0l",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5jqnn",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 25
+      },
+      "recorded": {}
+    },
+    {
+      "id": "i58so",
+      "request": {
+        "url": "http://localhost:3000/mensagens/571ae63d-a487-450c-adaa-62d3d684ad2d",
+        "method": "GET",
+        "path": "/mensagens/571ae63d-a487-450c-adaa-62d3d684ad2d"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "vqc31",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "vyhte",
+      "request": {
+        "url": "http://localhost:3000/mensagens/571ae63d-a487-450c-adaa-62d3d684ad2d",
+        "method": "GET",
+        "path": "/mensagens/571ae63d-a487-450c-adaa-62d3d684ad2d"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "mbru7",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "euzq8",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 28
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rhc2z",
+      "request": {
+        "url": "http://localhost:3000/mensagens/e1f972d5-93f6-4c1f-af8e-213327b6b55b",
+        "method": "GET",
+        "path": "/mensagens/e1f972d5-93f6-4c1f-af8e-213327b6b55b"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ltnn1",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "zy9k2",
+      "request": {
+        "url": "http://localhost:3000/mensagens/idmensagem123",
+        "method": "GET",
+        "path": "/mensagens/idmensagem123"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "mss5b",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "u4ryk",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 28
+      },
+      "recorded": {}
+    },
+    {
+      "id": "bl4oy",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6e78f",
+      "request": {
+        "url": "http://localhost:3000/mensagens/fc5b1df1-59d1-4c1a-853c-f6a2d44d27d1",
+        "method": "POST",
+        "path": "/mensagens/fc5b1df1-59d1-4c1a-853c-f6a2d44d27d1"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 22
+      },
+      "recorded": {}
+    },
+    {
+      "id": "avuom",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "penzy",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 23
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ox86c",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "tr4eg",
+      "request": {
+        "url": "http://localhost:3000/mensagens/idMensagem123",
+        "method": "POST",
+        "path": "/mensagens/idMensagem123"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "27exk",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "hqddu",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 43
+      },
+      "recorded": {}
+    },
+    {
+      "id": "64n9s",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pd004",
+      "request": {
+        "url": "http://localhost:3000/mensagens/073bd0c3-6873-4fac-9b2a-993076054fa6",
+        "method": "PATCH",
+        "path": "/mensagens/073bd0c3-6873-4fac-9b2a-993076054fa6"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "777z8",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "87f4k",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 24
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nby9w",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6d8r1",
+      "request": {
+        "url": "http://localhost:3000/mensagem/recebidas",
+        "method": "GET",
+        "path": "/mensagem/recebidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nyqci",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "bkf32",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 27
+      },
+      "recorded": {}
+    },
+    {
+      "id": "qpi4w",
+      "request": {
+        "url": "http://localhost:3000/mensagem/enviadas",
+        "method": "GET",
+        "path": "/mensagem/enviadas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0rhnk",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "r31qj",
+      "request": {
+        "url": "http://localhost:3000/mensagem",
+        "method": "POST",
+        "path": "/mensagem"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 25
+      },
+      "recorded": {}
+    },
+    {
+      "id": "yzzl0",
+      "request": {
+        "url": "http://localhost:3000/mensagens/eab2f4af-ed74-4c04-8b16-894de98014ab",
+        "method": "PATCH",
+        "path": "/mensagens/eab2f4af-ed74-4c04-8b16-894de98014ab"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "t2nnp",
+      "request": {
+        "url": "http://localhost:3000/mensagem/excluidas",
+        "method": "GET",
+        "path": "/mensagem/excluidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "b0q1e",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8e6mu",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "2vv3a",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "GET",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5ojzt",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "cskgw",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "85rv9",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "yaluk",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6zcvl",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 22
+      },
+      "recorded": {}
+    },
+    {
+      "id": "4r7hf",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8nb0a",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 22
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8xny7",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "c1clb",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "dz3is",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "egu8l",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "jy8gr",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "4xz8p",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "1edcc",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fj55k",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "070u5",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "GET",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "kls19",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ksa36",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "sgz7l",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "GET",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6kk8o",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5n1aj",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nkysv",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "GET",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "a11ao",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "dod8l",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0ltz5",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rn4tj",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "bzg5d",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 35
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pp11y",
+      "request": {
+        "url": "http://localhost:3000/admin/assinantes",
+        "method": "GET",
+        "path": "/admin/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "d4w8z",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3fwcp",
+      "request": {
+        "url": "http://localhost:3000/admin/assinantes?nome=assinante_teste",
+        "method": "GET",
+        "path": "/admin/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "22qy4",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "48g9g",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "cj71s",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 21
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rtb8q",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6s6j9",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 28
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0ujnf",
+      "request": {
+        "url": "http://localhost:3000/admin/assinantes/7526ca39-601d-4468-b784-c99ab3d37651",
+        "method": "GET",
+        "path": "/admin/assinantes/7526ca39-601d-4468-b784-c99ab3d37651"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "4rjz8",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "m3n4z",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "m8hsj",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 22
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ds1dr",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 24
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5ptkm",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 40
+      },
+      "recorded": {}
+    },
+    {
+      "id": "1rsyb",
+      "request": {
+        "url": "http://localhost:3000/admin/assinantes/idAssinante123",
+        "method": "GET",
+        "path": "/admin/assinantes/idAssinante123"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "apoxu",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ljeje",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 21
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ccd5n",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/735648ca-5f47-4d25-ab0a-5c640ab628a5",
+        "method": "GET",
+        "path": "/admin/planos/735648ca-5f47-4d25-ab0a-5c640ab628a5"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5nuwy",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pkatd",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "cmnr5",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/61896929-5f41-4196-bc25-b08678c10b63",
+        "method": "GET",
+        "path": "/admin/planos/61896929-5f41-4196-bc25-b08678c10b63"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0kg8o",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "o7zu0",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 25
+      },
+      "recorded": {}
+    },
+    {
+      "id": "51yd9",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/5cb96d4a-173f-41b5-8bac-b19e69865069",
+        "method": "GET",
+        "path": "/admin/nutricionistas/5cb96d4a-173f-41b5-8bac-b19e69865069"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ddjou",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3eiac",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "wii8v",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/c8cf7c84-e230-4a79-882a-e1d409f09e55",
+        "method": "GET",
+        "path": "/admin/nutricionistas/c8cf7c84-e230-4a79-882a-e1d409f09e55"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "94r1w",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "xuy01",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "zdgo4",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/5ed06880-483b-454a-ab13-458bba194bf3",
+        "method": "GET",
+        "path": "/admin/personalTrainers/5ed06880-483b-454a-ab13-458bba194bf3"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "74hdc",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gs8cz",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "mzexf",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/9f95d767-21e6-42f3-a9cd-3b7aad6539eb",
+        "method": "GET",
+        "path": "/admin/personalTrainers/9f95d767-21e6-42f3-a9cd-3b7aad6539eb"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "h1ohr",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "653kz",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "vcgom",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/3cd9ffbc-4102-492e-acd9-e48185a1b28e",
+        "method": "GET",
+        "path": "/admin/planos/3cd9ffbc-4102-492e-acd9-e48185a1b28e"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "86t6h",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/3cd9ffbc-4102-492e-acd9-e48185a1b28e",
+        "method": "PATCH",
+        "path": "/admin/planos/3cd9ffbc-4102-492e-acd9-e48185a1b28e"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "1p2i1",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/3cd9ffbc-4102-492e-acd9-e48185a1b28e",
+        "method": "GET",
+        "path": "/admin/planos/3cd9ffbc-4102-492e-acd9-e48185a1b28e"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pf3gb",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "z7j71",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 400,
+        "responseTime": 4
+      },
+      "recorded": {}
+    },
+    {
+      "id": "2jg5c",
+      "request": {
+        "url": "http://localhost:3000/admin/planos/0ee9feed-1e1a-43a5-9376-9d46230779c0",
+        "method": "PATCH",
+        "path": "/admin/planos/0ee9feed-1e1a-43a5-9376-9d46230779c0"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3dgu5",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9mpuu",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "whxen",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/7de4f5ed-df6f-40b6-b435-b33b10cf6527",
+        "method": "GET",
+        "path": "/admin/nutricionistas/7de4f5ed-df6f-40b6-b435-b33b10cf6527"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0bq52",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/7de4f5ed-df6f-40b6-b435-b33b10cf6527",
+        "method": "PATCH",
+        "path": "/admin/nutricionistas/7de4f5ed-df6f-40b6-b435-b33b10cf6527"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 23
+      },
+      "recorded": {}
+    },
+    {
+      "id": "cf2vu",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/7de4f5ed-df6f-40b6-b435-b33b10cf6527",
+        "method": "GET",
+        "path": "/admin/nutricionistas/7de4f5ed-df6f-40b6-b435-b33b10cf6527"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "x2awf",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5n1iw",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 33
+      },
+      "recorded": {}
+    },
+    {
+      "id": "2nu7u",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas/161d71c8-1b61-44d1-97d7-e5bafb5f0930",
+        "method": "PATCH",
+        "path": "/admin/nutricionistas/161d71c8-1b61-44d1-97d7-e5bafb5f0930"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "lqjks",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "eke7w",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "cyvbk",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/2b0df5a0-56f1-4350-9eb0-2b82ed7e5fd4",
+        "method": "GET",
+        "path": "/admin/personalTrainers/2b0df5a0-56f1-4350-9eb0-2b82ed7e5fd4"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3a6ys",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/2b0df5a0-56f1-4350-9eb0-2b82ed7e5fd4",
+        "method": "PATCH",
+        "path": "/admin/personalTrainers/2b0df5a0-56f1-4350-9eb0-2b82ed7e5fd4"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 24
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7d3s7",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/2b0df5a0-56f1-4350-9eb0-2b82ed7e5fd4",
+        "method": "GET",
+        "path": "/admin/personalTrainers/2b0df5a0-56f1-4350-9eb0-2b82ed7e5fd4"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "y9zox",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "z07oq",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 25
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fru8b",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers/af05f731-ad96-451d-8351-af5e3c64d09e",
+        "method": "PATCH",
+        "path": "/admin/personalTrainers/af05f731-ad96-451d-8351-af5e3c64d09e"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fnco1",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "bfunh",
+      "request": {
+        "url": "http://localhost:3000/admin/planos",
+        "method": "POST",
+        "path": "/admin/planos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "to4uw",
+      "request": {
+        "url": "http://localhost:3000/admin/nutricionistas",
+        "method": "POST",
+        "path": "/admin/nutricionistas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7sf68",
+      "request": {
+        "url": "http://localhost:3000/admin/personalTrainers",
+        "method": "POST",
+        "path": "/admin/personalTrainers"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "vvcni",
+      "request": {
+        "url": "http://localhost:3000/assinantes",
+        "method": "POST",
+        "path": "/assinantes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 52
+      },
+      "recorded": {}
+    },
+    {
+      "id": "skjva",
+      "request": {
+        "url": "http://localhost:3000/admin/assinantes/232869c0-a226-4fc6-90d1-8921060c55a2",
+        "method": "GET",
+        "path": "/admin/assinantes/232869c0-a226-4fc6-90d1-8921060c55a2"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 24
+      },
+      "recorded": {}
+    },
+    {
+      "id": "g9hfh",
+      "request": {
+        "url": "http://localhost:3000/admin/assinantes/232869c0-a226-4fc6-90d1-8921060c55a2",
+        "method": "PATCH",
+        "path": "/admin/assinantes/232869c0-a226-4fc6-90d1-8921060c55a2"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3psdo",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3n5sl",
+      "request": {
+        "url": "http://localhost:3000/assinante/dashboard",
+        "method": "GET",
+        "path": "/assinante/dashboard"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "oh3ng",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ytpo8",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil",
+        "method": "GET",
+        "path": "/assinante/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9lxra",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "645di",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil",
+        "method": "PATCH",
+        "path": "/assinante/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "u1ds8",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil",
+        "method": "GET",
+        "path": "/assinante/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "vcsbl",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "eu60o",
+      "request": {
+        "url": "http://localhost:3000/assinante/assinaturas/idAssinatura_teste",
+        "method": "GET",
+        "path": "/assinante/assinaturas/idAssinatura_teste"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "krdf1",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ocie4",
+      "request": {
+        "url": "http://localhost:3000/assinante/assinaturas/id_incorreto",
+        "method": "GET",
+        "path": "/assinante/assinaturas/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "2arnt",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8okqs",
+      "request": {
+        "url": "http://localhost:3000/assinante/assinaturas/idAssinatura_teste",
+        "method": "PATCH",
+        "path": "/assinante/assinaturas/idAssinatura_teste"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 30
+      },
+      "recorded": {}
+    },
+    {
+      "id": "a7x09",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "l5trr",
+      "request": {
+        "url": "http://localhost:3000/assinante/assinaturas/id_incorreto",
+        "method": "PATCH",
+        "path": "/assinante/assinaturas/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "koyw7",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pyztn",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil/nutricionistas/idNutri_teste",
+        "method": "GET",
+        "path": "/assinante/perfil/nutricionistas/idNutri_teste"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "geo42",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "2wxhj",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil/nutricionistas/id_incorreto",
+        "method": "GET",
+        "path": "/assinante/perfil/nutricionistas/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8cxax",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9hsph",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil/personalTrainers/idPersonal_teste",
+        "method": "GET",
+        "path": "/assinante/perfil/personalTrainers/idPersonal_teste"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "xkn2f",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "frnc4",
+      "request": {
+        "url": "http://localhost:3000/assinante/perfil/personalTrainers/id_incorreto",
+        "method": "GET",
+        "path": "/assinante/perfil/personalTrainers/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "d2qf8",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "u8m2u",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "POST",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 28
+      },
+      "recorded": {}
+    },
+    {
+      "id": "1wsxv",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "GET",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "689q7",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ddexe",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "GET",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "sjhvg",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "POST",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "q1q5q",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "GET",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "va04g",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "tnio5",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "POST",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "37wn1",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas/5039e7e4-bd58-4fea-b280-5cf0d26b956e",
+        "method": "DELETE",
+        "path": "/assinante/medidas/5039e7e4-bd58-4fea-b280-5cf0d26b956e"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "uyhka",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "m6ydb",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 22
+      },
+      "recorded": {}
+    },
+    {
+      "id": "4upon",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "lrpg7",
+      "request": {
+        "url": "http://localhost:3000/assinante/dietas",
+        "method": "GET",
+        "path": "/assinante/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gxkjz",
+      "request": {
+        "url": "http://localhost:3000/assinante/dietas/?nome=dieta_teste_e4a21fcb-43e7-4354-9ff5-7dae8a2492df",
+        "method": "GET",
+        "path": "/assinante/dietas/"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "q2dgi",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "41hk8",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 22
+      },
+      "recorded": {}
+    },
+    {
+      "id": "g5nu7",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "i73ar",
+      "request": {
+        "url": "http://localhost:3000/assinante/dietas/7906b858-0148-49ea-8201-3ae871c9b42e",
+        "method": "GET",
+        "path": "/assinante/dietas/7906b858-0148-49ea-8201-3ae871c9b42e"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "x9kiy",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gwigp",
+      "request": {
+        "url": "http://localhost:3000/assinante/dietas/id_incorreto",
+        "method": "GET",
+        "path": "/assinante/dietas/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rjk9v",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "zpant",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 30
+      },
+      "recorded": {}
+    },
+    {
+      "id": "s10wi",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "479nj",
+      "request": {
+        "url": "http://localhost:3000/assinante/treinos",
+        "method": "GET",
+        "path": "/assinante/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "jos8p",
+      "request": {
+        "url": "http://localhost:3000/assinante/treinos/?nome=treino_teste5696a0f1-53a0-44b5-9d25-491bf2987ca5",
+        "method": "GET",
+        "path": "/assinante/treinos/"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "h9hm8",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5bl20",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 19
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nu39o",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "qdvrp",
+      "request": {
+        "url": "http://localhost:3000/assinante/treino/dc03de00-7d67-493f-b601-cb1f9115497f",
+        "method": "GET",
+        "path": "/assinante/treino/dc03de00-7d67-493f-b601-cb1f9115497f"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7ogfj",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "d614o",
+      "request": {
+        "url": "http://localhost:3000/assinante/treino/id_incorreto",
+        "method": "GET",
+        "path": "/assinante/treino/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "iv45o",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fuhhf",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/perfil",
+        "method": "GET",
+        "path": "/nutricionista/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "t2y5e",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "jwi8d",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/perfil",
+        "method": "PATCH",
+        "path": "/nutricionista/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0klqz",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/perfil",
+        "method": "GET",
+        "path": "/nutricionista/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5ptks",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "33vn6",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/sobreMim",
+        "method": "PATCH",
+        "path": "/nutricionista/sobreMim"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "7ldgt",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/perfil",
+        "method": "GET",
+        "path": "/nutricionista/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ug10a",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "r77uz",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes",
+        "method": "GET",
+        "path": "/nutricionista/pacientes"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "qt0g4",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/?nome=assinante_teste",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 28
+      },
+      "recorded": {}
+    },
+    {
+      "id": "yie85",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "r833x",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes",
+        "method": "GET",
+        "path": "/nutricionista/pacientes"
+      },
+      "response": {
+        "statusCode": 401,
+        "responseTime": 5
+      },
+      "recorded": {}
+    },
+    {
+      "id": "0m7qb",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "u3f6a",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/idAssinante_teste"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 12
+      },
+      "recorded": {}
+    },
+    {
+      "id": "flqgg",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "600n9",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/id_incorreto",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "cnury",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 5
+      },
+      "recorded": {}
+    },
+    {
+      "id": "t2e3i",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "POST",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "sxdix",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ef6cz",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/medidas",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/idAssinante_teste/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 15
+      },
+      "recorded": {}
+    },
+    {
+      "id": "6u2vt",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8hjsw",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/id_incorreto/medidas",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/id_incorreto/medidas"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pguj4",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "f2x6s",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "bwq0l",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/283ce25f-747a-4110-a68d-f0c396819256",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas/283ce25f-747a-4110-a68d-f0c396819256"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "o7khb",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9c59w",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/id_incorreto/dietas"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "zu29q",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ml9ne",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "kjtt6",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/ac5800d1-71c4-41d0-a51f-fd696d232dee",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas/ac5800d1-71c4-41d0-a51f-fd696d232dee"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nmil5",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "p5a1s",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5d1j8",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas/8ca056bb-f1ad-42b9-9bf1-b43484c34d9d",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/id_incorreto/dietas/8ca056bb-f1ad-42b9-9bf1-b43484c34d9d"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 5
+      },
+      "recorded": {}
+    },
+    {
+      "id": "yztw0",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "jk8y3",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 11
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9ujyi",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "wh8cc",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 32
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ifaid",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/38a9ea30-f4cc-4bd1-87e1-7c806c6454c9",
+        "method": "PATCH",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas/38a9ea30-f4cc-4bd1-87e1-7c806c6454c9"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 20
+      },
+      "recorded": {}
+    },
+    {
+      "id": "jytfp",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/38a9ea30-f4cc-4bd1-87e1-7c806c6454c9",
+        "method": "GET",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas/38a9ea30-f4cc-4bd1-87e1-7c806c6454c9"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "g2mk3",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "5fbyw",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas",
+        "method": "POST",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 16
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3vuvh",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas/299ce0e0-d3d0-4c94-bf92-9a79cf10fb18",
+        "method": "PATCH",
+        "path": "/nutricionista/pacientes/id_incorreto/dietas/299ce0e0-d3d0-4c94-bf92-9a79cf10fb18"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fanxz",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "upuk6",
+      "request": {
+        "url": "http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto",
+        "method": "PATCH",
+        "path": "/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "xup1n",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rr4pg",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/perfil",
+        "method": "GET",
+        "path": "/personalTrainer/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3fczc",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ec9c6",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/perfil",
+        "method": "PATCH",
+        "path": "/personalTrainer/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 13
+      },
+      "recorded": {}
+    },
+    {
+      "id": "3jlms",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/perfil",
+        "method": "GET",
+        "path": "/personalTrainer/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "65akx",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 6
+      },
+      "recorded": {}
+    },
+    {
+      "id": "wy3xj",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/sobreMim",
+        "method": "PATCH",
+        "path": "/personalTrainer/sobreMim"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "fm37c",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/perfil",
+        "method": "GET",
+        "path": "/personalTrainer/perfil"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "25s70",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "28ujn",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos",
+        "method": "GET",
+        "path": "/personalTrainer/alunos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 26
+      },
+      "recorded": {}
+    },
+    {
+      "id": "45gua",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos",
+        "method": "GET",
+        "path": "/personalTrainer/alunos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 30
+      },
+      "recorded": {}
+    },
+    {
+      "id": "qsmyz",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "lqocp",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos",
+        "method": "GET",
+        "path": "/personalTrainer/alunos"
+      },
+      "response": {
+        "statusCode": 401,
+        "responseTime": 2
+      },
+      "recorded": {}
+    },
+    {
+      "id": "sxm8q",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "hmt2j",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/idAssinante_teste"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 14
+      },
+      "recorded": {}
+    },
+    {
+      "id": "ga8y3",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "py2lw",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/id_incorreto",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "l9vlr",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "romrs",
+      "request": {
+        "url": "http://localhost:3000/assinante/medidas",
+        "method": "POST",
+        "path": "/assinante/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 16
+      },
+      "recorded": {}
+    },
+    {
+      "id": "hgsjy",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "kvoez",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/medidas",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/idAssinante_teste/medidas"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "hysm5",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "nskr4",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/id_incorreto/medidas",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/id_incorreto/medidas"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9rlm9",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 7
+      },
+      "recorded": {}
+    },
+    {
+      "id": "i9i86",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 21
+      },
+      "recorded": {}
+    },
+    {
+      "id": "lni6p",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/8db4099b-4c1c-4c00-9014-8b1d9e91a272",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos/8db4099b-4c1c-4c00-9014-8b1d9e91a272"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "f8k5j",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "82glj",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/id_incorreto/treinos"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8lpvt",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "r9frj",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 28
+      },
+      "recorded": {}
+    },
+    {
+      "id": "vltbz",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/cbee919a-397f-4f72-9925-39bcd4c958fe",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos/cbee919a-397f-4f72-9925-39bcd4c958fe"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gko08",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "iyzzk",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 21
+      },
+      "recorded": {}
+    },
+    {
+      "id": "sqslu",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos/4e866942-b888-47dc-8c87-3d53022405f4",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/id_incorreto/treinos/4e866942-b888-47dc-8c87-3d53022405f4"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "k7boi",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 8
+      },
+      "recorded": {}
+    },
+    {
+      "id": "tyl94",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 16
+      },
+      "recorded": {}
+    },
+    {
+      "id": "p2rez",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "9nlz7",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 18
+      },
+      "recorded": {}
+    },
+    {
+      "id": "pkdmp",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/acecdac7-e66d-4278-ae1b-2e72c4aab54f",
+        "method": "PATCH",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos/acecdac7-e66d-4278-ae1b-2e72c4aab54f"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 25
+      },
+      "recorded": {}
+    },
+    {
+      "id": "81q6u",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/acecdac7-e66d-4278-ae1b-2e72c4aab54f",
+        "method": "GET",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos/acecdac7-e66d-4278-ae1b-2e72c4aab54f"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 17
+      },
+      "recorded": {}
+    },
+    {
+      "id": "rhg0y",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "gh99h",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos",
+        "method": "POST",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 21
+      },
+      "recorded": {}
+    },
+    {
+      "id": "8pgdp",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos/58c59db4-4cfa-4d30-a717-9a8d10bd9862",
+        "method": "PATCH",
+        "path": "/personalTrainer/alunos/id_incorreto/treinos/58c59db4-4cfa-4d30-a717-9a8d10bd9862"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 9
+      },
+      "recorded": {}
+    },
+    {
+      "id": "kmemk",
+      "request": {
+        "url": "http://localhost:3000/login",
+        "method": "POST",
+        "path": "/login"
+      },
+      "response": {
+        "statusCode": 200,
+        "responseTime": 10
+      },
+      "recorded": {}
+    },
+    {
+      "id": "sdse2",
+      "request": {
+        "url": "http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto",
+        "method": "PATCH",
+        "path": "/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto"
+      },
+      "response": {
+        "statusCode": 404,
+        "responseTime": 17
+      },
+      "recorded": {}
+    }
+  ]
+}

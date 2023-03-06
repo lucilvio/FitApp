@@ -30,11 +30,11 @@ async function alterarImagem(req, res) {
     // #swagger.tags = ['Usuário']
     // #swagger.description = 'endpoint para alterar a imagem.'
     // #swagger.security = [] 
-
+    
     const tipoDaImagem = req.files.imagem.name.split('.').pop();
 
     Usuario.validarAlteracaoDaImagem(req.files, tipoDaImagem);
-    
+
     const nomeDaImagem = `${req.usuario.nome}-${req.usuario.idUsuario}.${tipoDaImagem}`;
     
 

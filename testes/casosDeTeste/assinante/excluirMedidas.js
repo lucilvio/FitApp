@@ -13,4 +13,5 @@ it('CU-AS 16 - O Assinante deve excluir medidas', async () => {
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectStatus(200);
 
+
 });

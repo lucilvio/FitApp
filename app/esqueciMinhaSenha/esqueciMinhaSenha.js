@@ -22,6 +22,7 @@ async function gerarNovaSenha(evento) {
 
     try {
         await servicos.gerarNovaSenha(email);
+        mensagens.mostrarMensagemDeSucesso("Senha redefinida sucesso! Verifique seu e-mail.", true);
         window.location.href = "../login/entrar.html";
 
     } catch (error) {

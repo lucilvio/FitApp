@@ -9,10 +9,14 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
+let modal;
+let idMedidas;
+
 async function aoCarregarPagina() {
     await paginaMestra.carregar("medidas/medidas-conteudo.html", "Medidas");
     await buscarMedidas();
-    document.querySelector("#btn-salvarMedidas").onclick = inserirMedidas;
+    document.querySelector("#btn-salvar-medidas").onclick = inserirMedidas;
+    document.querySelector("#btn-confirmar-excluir-medidas").onclick = excluirMedidas;
     mensagens.exibirMensagemAoCarregarAPagina();
 
 }
@@ -45,7 +49,7 @@ async function buscarMedidas() {
                         <td>${medida.pescoco} cm</td>
                         <td>${medida.cintura} cm</td>
                         <td>${medida.quadril} cm</td>
-                        <td><i class="bi bi-trash3 btn-excluirMedidas" data-idmedida=${medida.idMedidas}></i></td>
+                        <td><i class="bi bi-trash3 btn-excluir-medidas" data-idmedida=${medida.idMedidas}></i></td>
                     </tr>`;
             });
         }
@@ -58,9 +62,9 @@ async function buscarMedidas() {
 }
 
 function adicionarEventoExcluir() {
-    const listaBtnExcluir = document.querySelectorAll(".btn-excluirMedidas");
+    const listaBtnExcluir = document.querySelectorAll(".btn-excluir-medidas");
     listaBtnExcluir.forEach(element => {
-        element.onclick = excluirMedidas;
+        element.onclick = confirmarExcluirMedidas;
     });
 }
 
@@ -87,9 +91,21 @@ async function inserirMedidas(evento) {
     }
 }
 
-async function excluirMedidas(evento) {
-    const idMedidas = evento.target.dataset.idmedida;
+async function confirmarExcluirMedidas(evento) {
+    idMedidas = evento.target.dataset.idmedida;
+    
+    if (!modal) {
+        modal = new bootstrap.Modal('#modal-excluir-medidas');
+    }
+    modal.show();
+}
+
+async function excluirMedidas() {
+   
     const token = seguranca.pegarToken();
+
+    modal.hide();
+
     try {
         await servicos.excluirMedidas(token, idMedidas);
         mensagens.mostrarMensagemDeSucesso("Medidas excluídas com sucesso!", true);

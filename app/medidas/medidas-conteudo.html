@@ -29,6 +29,13 @@
     </div>
 </div>
 
+<div class="row py-3">
+    <div class="col text-end">
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#inserirMedidas"
+            style="background-color: #FED233;"><i class="bi bi-plus"></i>Medidas</button>
+    </div>
+</div>
+
 <div class="row">
     <div class="col">
         <div class="card shadow">
@@ -56,14 +63,9 @@
     </div>
 </div>
 
-<div class="row py-3">
-    <div class="col text-end">
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#inserirMedidas"
-            style="background-color: #FED233;"><i class="bi bi-plus"></i>Medidas</button>
-    </div>
-</div>
 
-<div class="modal fade" id="inserirMedidas">
+
+<div class="modal fade" id="inserir-medidas">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,12 +103,29 @@
                     </div>
 
                     <div class="text-end pt-3">
-                        <button type="submit" id="btn-salvarMedidas" class="btn btn-light"
+                        <button type="submit" id="btn-salvar-medidas" class="btn btn-light"
                             style="background-color: #FED233;">Salvar</button>
                     </div>
                 </form>
 
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-excluir-medidas" tabindex="-1" aria-labelledby="modal-excluir-medidas-Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-excluir-medidas-Label">Alterar Senha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir medidas?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-excluir-medidas" type="button" class="btn btn-light" style="background-color: #FED233;">Sim</button>
             </div>
         </div>
     </div>
