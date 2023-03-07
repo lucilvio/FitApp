@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const plano = require('../../funcoes/plano');
 const crypto = require('crypto');
@@ -8,7 +9,7 @@ it('CU-A 19 - deve cadastrar Plano', async () => {
     const nomePlano = `gratuito_${crypto.randomUUID()}`;
 
     await spec()
-        .post('http://localhost:3000/admin/planos')
+        .post(`${configuracoes.urlDaApi}/admin/planos`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nomePlano,
@@ -19,7 +20,7 @@ it('CU-A 19 - deve cadastrar Plano', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/admin/planos`)
+        .get(`${configuracoes.urlDaApi}/admin/planos`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {
@@ -35,7 +36,7 @@ it('CU-A 19 - Não deve cadastrar Plano com  mesmo nome', async () => {
     const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias");
 
     await spec()
-        .post('http://localhost:3000/admin/planos')
+        .post(`${configuracoes.urlDaApi}/admin/planos`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nomePlano,

@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const personalTrainer = require('../../funcoes/personalTrainer');
 
@@ -25,7 +26,7 @@ it('CU-AS 14 - O Assinante deve ver detalhes do Treino', async () => {
     const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/treino/${idTreino}`)
+        .get(`${configuracoes.urlDaApi}/assinante/treino/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJsonLike({
             "idTreino": idTreino
@@ -41,7 +42,7 @@ it('CU-AS 11 - O Assinante não vê detalhes do Treino quando o Id do Treino nã
     const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/treino/id_incorreto`)
+        .get(`${configuracoes.urlDaApi}/assinante/treino/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJson({erro: "Treino não encontrado"})
         .expectStatus(404);

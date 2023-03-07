@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
@@ -7,7 +8,7 @@ it('CU-A 09 - deve cadastrar Nutricionista', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     await spec()
-        .post('http://localhost:3000/admin/nutricionistas')
+        .post(`${configuracoes.urlDaApi}/admin/nutricionistas`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",
@@ -24,7 +25,7 @@ it('CU-A 09 - não deve cadastrar Nutricionista se o email já foi cadastrado', 
     const idNutri = await nutricionista.cadastrarNutri(token, 'Ana', email, '777777777', 'CRN 555');
 
     await spec()
-        .post('http://localhost:3000/admin/nutricionistas')
+        .post(`${configuracoes.urlDaApi}/admin/nutricionistas`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",

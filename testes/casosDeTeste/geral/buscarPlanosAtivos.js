@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const planos = require('../../funcoes/plano')
 const usuario = require('../../funcoes/usuario');
@@ -11,7 +12,7 @@ it('o sistema apresenta os Planos ativos', async () => {
 
    
     await spec()
-        .patch(`http://localhost:3000/admin/planos/${idPlano1}`)
+        .patch(`${configuracoes.urlDaApi}/admin/planos/${idPlano1}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": `Anual_${crypto.randomUUID()}`,
@@ -23,7 +24,7 @@ it('o sistema apresenta os Planos ativos', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/planos`)
+        .get(`${configuracoes.urlDaApi}/planos`)
         .expectJsonLike([
             {
                 idPlano: idPlano2

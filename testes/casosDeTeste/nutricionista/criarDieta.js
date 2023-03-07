@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
@@ -27,7 +28,7 @@ it('CU-N 08 - deve criar dieta', async () => {
 
 
         await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {
@@ -44,7 +45,7 @@ it('CU-N 08 - não cria dieta para paciente não encontrado', async () => {
     const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
     await spec()
-        .post(`http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas`)
+        .post(`${configuracoes.urlDaApi}/nutricionista/pacientes/id_incorreto/dietas`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "dietaNome": "Dieta 2",

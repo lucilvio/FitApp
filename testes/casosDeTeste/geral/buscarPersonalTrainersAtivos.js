@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const personalTrainers = require('../../funcoes/personalTrainer');
 const usuario = require('../../funcoes/usuario');
@@ -12,7 +13,7 @@ it('o sistema apresenta os Personal Trainers ativos', async () => {
 
 
     await spec()
-        .patch(`http://localhost:3000/admin/personalTrainers/${idPersonalBloqueado}`)
+        .patch(`${configuracoes.urlDaApi}/admin/personalTrainers/${idPersonalBloqueado}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "personal_bloqueado",
@@ -24,7 +25,7 @@ it('o sistema apresenta os Personal Trainers ativos', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/personalTrainers`)
+        .get(`${configuracoes.urlDaApi}/personalTrainers`)
         .expectJsonLike([
             {
                idPersonal: idPersonalAtivo

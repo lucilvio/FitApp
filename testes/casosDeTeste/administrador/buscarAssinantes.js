@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
 const personal = require('../../funcoes/personalTrainer');
@@ -18,7 +19,7 @@ it('CU-A 01 - deve listar assinantes', async () => {
     const idAssinante = await assinante.cadastrarAssinante("Guilherme", `Guilherme_${crypto.randomUUID()}@fitapp.com`, idPlano, idNutri, idPersonal);
 
     await spec()
-        .get('http://localhost:3000/admin/assinantes')
+        .get(`${configuracoes.urlDaApi}/admin/assinantes`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {
@@ -34,7 +35,7 @@ it('CU-A 01 - deve listar assinantes por filtro', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
     await spec()
-        .get('http://localhost:3000/admin/assinantes?nome=assinante_teste')
+        .get(`${configuracoes.urlDaApi}/admin/assinantes?nome=assinante_teste`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike([
             {

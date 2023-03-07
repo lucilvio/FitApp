@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const personalTrainer = require('../../funcoes/personalTrainer');
 const crypto = require('crypto');
@@ -27,7 +28,7 @@ it('CU-P 09 - deve ver os detalhes do Treino', async () => {
     );
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
+        .get(`${configuracoes.urlDaApi}/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {
@@ -62,7 +63,7 @@ it('CU-P 09 - não encontra treino quando o id do paciente não existe', async (
     );
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos/${idTreino}`)
+        .get(`${configuracoes.urlDaApi}/personalTrainer/alunos/id_incorreto/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJson({ erro: "Aluno não encontrado" })
         .expectStatus(404);
@@ -74,7 +75,7 @@ it('CU-P 09 - não encontra treino quando o id do Treino não existe', async () 
     const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto`)
+        .get(`${configuracoes.urlDaApi}/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJson({ erro: "Treino não encontrado" })
         .expectStatus(404);

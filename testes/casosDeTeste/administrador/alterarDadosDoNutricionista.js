@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
@@ -10,7 +11,7 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, email, "99999999", "crm123");
 
     await spec()
-        .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
+        .get(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
@@ -20,7 +21,7 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
         .expectStatus(200);
 
     await spec()
-        .patch(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
+        .patch(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",
@@ -32,7 +33,7 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
+        .get(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
@@ -49,7 +50,7 @@ it('CU-A 08 - não deve alterar os dados quando não encontrar o Nutricionista',
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
     await spec()
-        .patch(`http://localhost:3000/admin/nutricionistas/${crypto.randomUUID()}`)
+        .patch(`${configuracoes.urlDaApi}/admin/nutricionistas/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "Ana",

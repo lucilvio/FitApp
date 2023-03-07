@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const mensagem = require('../../funcoes/mensagem');
 
@@ -10,7 +11,7 @@ it('Deve ver as mensagens recebidas', async () => {
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
     await spec()
-        .get(`http://localhost:3000/mensagem/recebidas`)
+        .get(`${configuracoes.urlDaApi}/mensagem/recebidas`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike([{idMensagem: idMensagem}])
         .expectStatus(200);

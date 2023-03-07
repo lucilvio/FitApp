@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
@@ -26,7 +27,7 @@ it('CU-N 09 - deve ver os detalhes da dieta', async () => {
         ]);
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {
@@ -62,7 +63,7 @@ it('CU-N 09 - não encontra Dieta quando o id do paciente não existe', async ()
         ]);
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas/${idDieta}`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/pacientes/id_incorreto/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJson({ erro: "Paciente não encontrado" })
         .expectStatus(404);
@@ -74,7 +75,7 @@ it('CU-N 09 - não encontra Dieta quando o id da dieta não existe', async () =>
     const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJson({ erro: "Dieta não encontrada" })
         .expectStatus(404);

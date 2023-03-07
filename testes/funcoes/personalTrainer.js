@@ -1,8 +1,9 @@
 const { spec } = require('pactum');
+const configuracoes = require('../configuracoes');
 
 async function cadastrarPersonal(token, nome, email, telefone, registroProfissional) {
     return await spec()
-        .post('http://localhost:3000/admin/personalTrainers')
+        .post(`${configuracoes.urlDaApi}/admin/personalTrainers`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,
@@ -19,7 +20,7 @@ async function cadastrarPersonal(token, nome, email, telefone, registroProfissio
 
 async function criarTreino(tokenPersonal, idAssinante, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
     return await spec()
-    .post(`http://localhost:3000/personalTrainer/alunos/${idAssinante}/treinos`)
+    .post(`${configuracoes.urlDaApi}/personalTrainer/alunos/${idAssinante}/treinos`)
     .withHeaders("Authorization", "Bearer " + tokenPersonal)
     .withJson({
         "nomeTreino": nomeTreino,

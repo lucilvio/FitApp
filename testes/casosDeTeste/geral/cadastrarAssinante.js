@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
 const personal = require('../../funcoes/personalTrainer');
@@ -17,7 +18,7 @@ it('CU-G 06 - deve cadastrar Assinante', async () => {
     
 
     await spec()
-        .post('http://localhost:3000/assinantes')
+        .post(`${configuracoes.urlDaApi}/assinantes`)
         .withJson({
             "nome": "Guilherme",
             "email": `Guilherme_${crypto.randomUUID()}@fitapp.com`,
@@ -41,7 +42,7 @@ it('CU-G 06 - Não deve cadastrar Assinante com mesmo e-mail', async () => {
     const idAssinante = await assinante.cadastrarAssinante("Guilherme", email, idPlano, idNutri, idPersonal);
     
     await spec()
-        .post('http://localhost:3000/assinantes')
+        .post(`${configuracoes.urlDaApi}/assinantes`)
         .withJson({
             "nome": "Guilherme",
             "email": email,

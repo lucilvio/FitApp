@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const mensagem = require('../../funcoes/mensagem');
 
@@ -9,12 +10,12 @@ it('Deve buscar as mensagens excluidas', async () => {
 
 
     await spec()
-        .patch(`http://localhost:3000/mensagens/${idMensagem}`)
+        .patch(`${configuracoes.urlDaApi}/mensagens/${idMensagem}`)
         .withHeaders("Authorization", "Bearer " + tokenAdmin)
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/mensagem/excluidas`)
+        .get(`${configuracoes.urlDaApi}/mensagem/excluidas`)
         .withHeaders("Authorization", "Bearer " + tokenAdmin)
         .expectJsonLike([{ idMensagem: idMensagem }])
         .expectStatus(200);

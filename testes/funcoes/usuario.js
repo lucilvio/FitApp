@@ -1,8 +1,9 @@
 const { spec } = require('pactum');
+const configuracoes = require('../configuracoes');
 
 async function gerarToken(login, senha) {
     return await spec()
-        .post('http://localhost:3000/login')
+        .post(`${configuracoes.urlDaApi}/login`)
         .withJson({
             "email": login,
             "senha": senha

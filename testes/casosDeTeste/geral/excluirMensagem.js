@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const mensagem = require('../../funcoes/mensagem');
 
@@ -10,7 +11,7 @@ it('Deve excluir mensagem', async () => {
     const tokenNutri = await usuario.gerarToken('nutri@fitapp.com', 'nutri123');
 
     await spec()
-        .patch(`http://localhost:3000/mensagens/${idMensagem}`)
+        .patch(`${configuracoes.urlDaApi}/mensagens/${idMensagem}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectStatus(200);
 });

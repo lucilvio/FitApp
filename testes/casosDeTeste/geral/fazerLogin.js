@@ -1,9 +1,10 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 
 
 it('CU-G 01 - deve fazer login', async () => {
     await spec()
-        .post('http://localhost:3000/login')
+        .post(`${configuracoes.urlDaApi}/login`)
         .withJson({
             "email": "admin@fitapp.com",
             "senha": "admin123"
@@ -13,7 +14,7 @@ it('CU-G 01 - deve fazer login', async () => {
 
 it('CU-G 01 - Não deve fazer login quando usuario ou senha incorretos', async () => {
     await spec()
-        .post('http://localhost:3000/login')
+        .post(`${configuracoes.urlDaApi}/login`)
         .withJson({
             "email": "admin@fitapp.com",
             "senha": "admin"
@@ -24,7 +25,7 @@ it('CU-G 01 - Não deve fazer login quando usuario ou senha incorretos', async (
 
 it('CU-G 01 - Não deve fazer login quando usuario estiver bloqueado', async () => {
     await spec()
-        .post('http://localhost:3000/login')
+        .post(`${configuracoes.urlDaApi}/login`)
         .withJson({
             "email": "assinantebloqueado_teste@fitapp.com",
             "senha": "assinante123"

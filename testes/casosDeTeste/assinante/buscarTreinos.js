@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const personalTrainer = require('../../funcoes/personalTrainer');
 const crypto = require('crypto');
@@ -28,7 +29,7 @@ it('CU-AS 12 - O Assinante deve ver historico de Treinos', async () => {
     const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/treinos`)
+        .get(`${configuracoes.urlDaApi}/assinante/treinos`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJsonLike([{
             "idTreino": idTreino
@@ -36,7 +37,7 @@ it('CU-AS 12 - O Assinante deve ver historico de Treinos', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/assinante/treinos/?nome=${nomeTreino}`)
+        .get(`${configuracoes.urlDaApi}/assinante/treinos/?nome=${nomeTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJsonLike([{
             "idTreino": idTreino

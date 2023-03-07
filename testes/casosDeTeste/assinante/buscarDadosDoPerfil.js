@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 
 it('CU-AS 01 - O Assinante deve ver os dados do Perfil', async () => {
@@ -6,7 +7,7 @@ it('CU-AS 01 - O Assinante deve ver os dados do Perfil', async () => {
     const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/perfil`)
+        .get(`${configuracoes.urlDaApi}/assinante/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJsonLike(
             {

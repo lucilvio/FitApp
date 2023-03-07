@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const nutricionista = require('../../funcoes/nutricionista');
 const usuario = require('../../funcoes/usuario');
 const crypto = require('crypto');
@@ -28,7 +29,7 @@ it('CU-N 10 - deve alterar dados da dieta', async () => {
     const novoNomeDieta = `dieta_teste_${crypto.randomUUID()}`;
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
+        .patch(`${configuracoes.urlDaApi}/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "nomeDieta": novoNomeDieta,
@@ -49,7 +50,7 @@ it('CU-N 10 - deve alterar dados da dieta', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/pacientes/idAssinante_teste/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {
@@ -86,7 +87,7 @@ it('CU-N 10 - não altera dieta para quando não encontra o paciente', async () 
 
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/pacientes/id_incorreto/dietas/${idDieta}`)
+        .patch(`${configuracoes.urlDaApi}/nutricionista/pacientes/id_incorreto/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "nomeDieta": "Dieta 4",
@@ -114,7 +115,7 @@ it('CU-N 10 - não altera dieta quando não encontra a dieta', async () => {
     const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto`)
+        .patch(`${configuracoes.urlDaApi}/nutricionista/pacientes/idAssinante_teste/dietas/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "nomeDieta": "Dieta 4",

@@ -1,8 +1,9 @@
 const { spec } = require('pactum');
+const configuracoes = require('../configuracoes');
 
 async function enviarMensagem(token, destinatario, assunto, texto) {
     return await spec()
-    .post('http://localhost:3000/mensagem')
+    .post(`${configuracoes.urlDaApi}/mensagem`)
     .withHeaders("Authorization", "Bearer " + token)
     .withJson({
         "destinatario": destinatario,

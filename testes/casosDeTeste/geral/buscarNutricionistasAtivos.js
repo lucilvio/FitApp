@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
 const usuario = require('../../funcoes/usuario');
@@ -11,7 +12,7 @@ it('o sistema apresenta os Nutricionistas ativos', async () => {
     const idNutriAtivo = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, `nutri_teste_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
 
     await spec()
-        .patch(`http://localhost:3000/admin/nutricionistas/${idNutriBloqueado}`)
+        .patch(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutriBloqueado}`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": "nutri_bloqueado",
@@ -23,7 +24,7 @@ it('o sistema apresenta os Nutricionistas ativos', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/nutricionistas`)
+        .get(`${configuracoes.urlDaApi}/nutricionistas`)
         .expectJsonLike([
             {
                 idNutri: idNutriAtivo

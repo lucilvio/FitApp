@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const personalTrainer = require('../../funcoes/personalTrainer');
 const crypto = require('crypto');
@@ -27,7 +28,7 @@ it('CU-P 08 - deve criar treino', async () => {
     );
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
+        .get(`${configuracoes.urlDaApi}/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {
@@ -44,7 +45,7 @@ it('CU-P 08 - não cria treino para aluno não encontrado', async () => {
     const tokenPersonal = await usuario.gerarToken('personal_teste@fitapp.com', 'personal123');
 
     await spec()
-        .post(`http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos`)
+        .post(`${configuracoes.urlDaApi}/personalTrainer/alunos/id_incorreto/treinos`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nomeTreino": "Treino 1",

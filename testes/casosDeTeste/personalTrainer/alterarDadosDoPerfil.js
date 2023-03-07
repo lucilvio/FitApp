@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const crypto = require('crypto');
 
@@ -9,7 +10,7 @@ it('CU-P 02 - O Personal deve alterar os dados do perfil', async () => {
     const telefone = `${crypto.randomUUID()}`;
 
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/perfil`)
+        .patch(`${configuracoes.urlDaApi}/personalTrainer/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nome": "personal_teste",
@@ -18,7 +19,7 @@ it('CU-P 02 - O Personal deve alterar os dados do perfil', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/perfil`)
+        .get(`${configuracoes.urlDaApi}/personalTrainer/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {

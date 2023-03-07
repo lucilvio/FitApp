@@ -1,11 +1,12 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 
 it('CU-AS 06 - O Assinante deve alterar o plano da Assinatura', async () => {
      const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .patch(`http://localhost:3000/assinante/assinaturas/idAssinatura_teste`)
+        .patch(`${configuracoes.urlDaApi}/assinante/assinaturas/idAssinatura_teste`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .withJson({
             "idPlano": "idAnual_teste"
@@ -18,7 +19,7 @@ it('CU-AS 06 - O Assinante não altera o plano da Assinatura quando o Id da Assi
      const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .patch(`http://localhost:3000/assinante/assinaturas/id_incorreto`)
+        .patch(`${configuracoes.urlDaApi}/assinante/assinaturas/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .withJson({
             "idPlano": "idAnual_teste"

@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 
 it('CU-N 01 - o Nutricionista deve ver os dados do Perfil', async () => {
@@ -6,7 +7,7 @@ it('CU-N 01 - o Nutricionista deve ver os dados do Perfil', async () => {
     const tokenNutri = await usuario.gerarToken('nutri_teste@fitapp.com', 'nutri123');
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/perfil`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {

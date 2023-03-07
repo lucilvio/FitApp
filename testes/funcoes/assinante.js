@@ -1,8 +1,9 @@
 const { spec } = require('pactum');
+const configuracoes = require('../configuracoes');
 
 async function cadastrarAssinante(nome, email, idPlano, idNutri, idPersonal) {
     return await spec()
-        .post('http://localhost:3000/assinantes')
+        .post(`${configuracoes.urlDaApi}/assinantes`)
         .withJson({
             "nome": nome,
             "email": email,
@@ -15,7 +16,7 @@ async function cadastrarAssinante(nome, email, idPlano, idNutri, idPersonal) {
 
 async function inserirMedidas(tokenAssinante, peso, pescoco, cintura, quadril) {
     return await spec()
-        .post(`http://localhost:3000/assinante/medidas`)
+        .post(`${configuracoes.urlDaApi}/assinante/medidas`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .withJson({
             "peso": peso,

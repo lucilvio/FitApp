@@ -1,9 +1,10 @@
 const { spec } = require('pactum');
+const configuracoes = require('../configuracoes');
 
 
 async function cadastrarPlano(token, nome, valor, duracao, descricao) {
     return await spec()
-        .post('http://localhost:3000/admin/planos')
+        .post(`${configuracoes.urlDaApi}/admin/planos`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,

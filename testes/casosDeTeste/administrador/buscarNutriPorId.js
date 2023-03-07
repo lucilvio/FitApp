@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 const crypto = require('crypto');
@@ -10,7 +11,7 @@ it('CU-A 07 - deve ver os dados do Nutricionista', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/admin/nutricionistas/${idNutri}`)
+        .get(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
@@ -28,7 +29,7 @@ it('CU-A 07 - não encontra Nutricionista quando o Id não existe', async () => 
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/admin/nutricionistas/${crypto.randomUUID()}`)
+        .get(`${configuracoes.urlDaApi}/admin/nutricionistas/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson({ erro: "Nutricionista não encontrado" })
         .expectStatus(404);

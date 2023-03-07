@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const nutricionista = require('../../funcoes/nutricionista');
 
@@ -23,7 +24,7 @@ it('CU-AS 11 - O Assinante deve ver detalhes da dieta', async () => {
     const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/dietas/${idDieta}`)
+        .get(`${configuracoes.urlDaApi}/assinante/dietas/${idDieta}`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJsonLike({
             "idDieta": idDieta
@@ -39,7 +40,7 @@ it('CU-AS 11 - O Assinante não vê detalhes da dieta quando o Id da dieta não 
     const tokenAssinante = await usuario.gerarToken('assinante_teste@fitapp.com', 'assinante123');
 
     await spec()
-        .get(`http://localhost:3000/assinante/dietas/id_incorreto`)
+        .get(`${configuracoes.urlDaApi}/assinante/dietas/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenAssinante)
         .expectJson({ erro: "Dieta não encontrada" })
         .expectStatus(404);

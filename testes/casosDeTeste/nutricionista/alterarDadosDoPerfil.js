@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const crypto = require('crypto');
 
@@ -8,7 +9,7 @@ it('CU-N 02 - O Nutricionista deve alterar os dados do perfil', async () => {
     const telefone = `${crypto.randomUUID()}`;
 
     await spec()
-        .patch(`http://localhost:3000/nutricionista/perfil`)
+        .patch(`${configuracoes.urlDaApi}/nutricionista/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .withJson({
             "nome": "nutricionista_teste",
@@ -18,7 +19,7 @@ it('CU-N 02 - O Nutricionista deve alterar os dados do perfil', async () => {
 
 
     await spec()
-        .get(`http://localhost:3000/nutricionista/perfil`)
+        .get(`${configuracoes.urlDaApi}/nutricionista/perfil`)
         .withHeaders("Authorization", "Bearer " + tokenNutri)
         .expectJsonLike(
             {

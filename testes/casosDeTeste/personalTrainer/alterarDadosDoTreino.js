@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const personalTrainer = require('../../funcoes/personalTrainer');
 const usuario = require('../../funcoes/usuario');
 const crypto = require('crypto');
@@ -30,7 +31,7 @@ it('CU-P 10 - deve alterar dados do Treino', async () => {
 
     
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
+        .patch(`${configuracoes.urlDaApi}/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nomeTreino": novoTreinoNome,
@@ -51,7 +52,7 @@ it('CU-P 10 - deve alterar dados do Treino', async () => {
         .expectStatus(200);
 
     await spec()
-        .get(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
+        .get(`${configuracoes.urlDaApi}/personalTrainer/alunos/idAssinante_teste/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .expectJsonLike(
             {
@@ -88,7 +89,7 @@ it('CU-P 10 - não altera Treino para quando não encontra o Aluno', async () =>
     );
 
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/alunos/id_incorreto/treinos/${idTreino}`)
+        .patch(`${configuracoes.urlDaApi}/personalTrainer/alunos/id_incorreto/treinos/${idTreino}`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nomeTreino": "Treino 4",
@@ -117,7 +118,7 @@ it('CU-P 10 - não altera Treino quando não encontra o Treino', async () => {
 
     
     await spec()
-        .patch(`http://localhost:3000/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto`)
+        .patch(`${configuracoes.urlDaApi}/personalTrainer/alunos/idAssinante_teste/treinos/id_incorreto`)
         .withHeaders("Authorization", "Bearer " + tokenPersonal)
         .withJson({
             "nomeTreino": "Treino 4",

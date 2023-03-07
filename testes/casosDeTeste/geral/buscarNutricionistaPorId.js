@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
 const usuario = require('../../funcoes/usuario');
@@ -10,7 +11,7 @@ it('o sistema apresenta os dados do Nutricionista ', async () => {
 
     
     await spec()
-        .get(`http://localhost:3000/nutricionistas/${idNutri}`)
+        .get(`${configuracoes.urlDaApi}/nutricionistas/${idNutri}`)
         .expectJsonLike(
             {
                idNutri: idNutri

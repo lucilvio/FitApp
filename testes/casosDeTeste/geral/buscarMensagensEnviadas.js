@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const mensagem = require('../../funcoes/mensagem');
 
@@ -8,7 +9,7 @@ it('Deve ver as mensagens enviadas', async () => {
     const idMensagem = await mensagem.enviarMensagem(tokenAdmin, "nutri@fitapp.com", "Boas Vindas", "Olá, Estamos felizes por tê-lo conosco!");
 
     await spec()
-        .get(`http://localhost:3000/mensagem/enviadas`)
+        .get(`${configuracoes.urlDaApi}/mensagem/enviadas`)
         .withHeaders("Authorization", "Bearer " + tokenAdmin)
         .expectJsonLike([{idMensagem: idMensagem}])
         .expectStatus(200);

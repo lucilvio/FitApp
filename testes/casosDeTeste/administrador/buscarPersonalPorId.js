@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const usuario = require('../../funcoes/usuario');
 const personal = require('../../funcoes/personalTrainer');
 const crypto = require('crypto');
@@ -10,7 +11,7 @@ it('CU-A 12 - deve ver os dados do personal', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "bruno", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/admin/personalTrainers/${idPersonal}`)
+        .get(`${configuracoes.urlDaApi}/admin/personalTrainers/${idPersonal}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
@@ -28,7 +29,7 @@ it('CU-A 12 - não encontra Personal quando o Id não existe', async () => {
     const idPersonal = await personal.cadastrarPersonal(token, "bruno", email, "99999999", "BFUDbHJKd");
 
     await spec()
-        .get(`http://localhost:3000/admin/personalTrainers/${crypto.randomUUID()}`)
+        .get(`${configuracoes.urlDaApi}/admin/personalTrainers/${crypto.randomUUID()}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson({ erro: "Personal Trainer não encontrado" })
         .expectStatus(404);

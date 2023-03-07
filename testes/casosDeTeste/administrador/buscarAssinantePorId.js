@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
 const personal = require('../../funcoes/personalTrainer');
@@ -18,7 +19,7 @@ it('CU-A 03 - o Admin deve buscar os dados do Assinante por Id', async () => {
     const idAssinante = await assinante.cadastrarAssinante("Guilherme", `gui_${crypto.randomUUID()}@fitapp.com`, idPlano, idNutri, idPersonal);
 
     await spec()
-        .get(`http://localhost:3000/admin/assinantes/${idAssinante}`)
+        .get(`${configuracoes.urlDaApi}/admin/assinantes/${idAssinante}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
@@ -41,7 +42,7 @@ it('CU-A 03 - não encontra Assinante quando o Id não existe', async () => {
     const idAssinante = await assinante.cadastrarAssinante("Guilherme", `gui_${crypto.randomUUID()}@fitapp.com`, idPlano, idNutri, idPersonal);
 
     await spec()
-        .get(`http://localhost:3000/admin/assinantes/idAssinante123`)
+        .get(`${configuracoes.urlDaApi}/admin/assinantes/idAssinante123`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJson({ erro: "Assinante não encontrado" })
         .expectStatus(404);

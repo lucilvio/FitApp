@@ -1,4 +1,5 @@
 const { spec } = require('pactum');
+const configuracoes = require('../../configuracoes');
 const crypto = require('crypto');
 const nutricionista = require('../../funcoes/nutricionista');
 const usuario = require('../../funcoes/usuario');
@@ -10,7 +11,7 @@ it('Deve enviar Mensagem', async () => {
     const idNutri = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, emailNutri, "99999999", "crn000");
 
     await spec()
-        .post('http://localhost:3000/mensagem')
+        .post(`${configuracoes.urlDaApi}/mensagem`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "destinatario": emailNutri,
@@ -24,7 +25,7 @@ it('Não envia Mensagem quando o Destinatario não existe', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     await spec()
-        .post('http://localhost:3000/mensagem')
+        .post(`${configuracoes.urlDaApi}/mensagem`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "destinatario": "nutricionista@fitApp.com",
