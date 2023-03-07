@@ -1,7 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function fazerLogin(email, senha) {
-    const url = `http://localhost:3000/login`;
+    const url = `${configuracoes.urlDaApi}/login`;
 
     const request = new Request(url, {
         method: 'POST',

@@ -3,6 +3,7 @@ import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
+import * as configuracoes from "../configuracoes.js";
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
@@ -25,7 +26,7 @@ async function aoCarregarPagina() {
 async function buscarDadosDoPerfil() {
     try {
         if (seguranca.pegarImagemDoUsuario()) {
-            document.querySelector("#imagem-perfil").setAttribute("src", "http://localhost:3000/" + seguranca.pegarImagemDoUsuario());
+            document.querySelector("#imagem-perfil").setAttribute("src", `${configuracoes.urlDaApi}/` + seguranca.pegarImagemDoUsuario());
         }
 
         const token = seguranca.pegarToken();

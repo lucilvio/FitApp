@@ -1,7 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function gerarNovaSenha(email) {
-    const url = `http://localhost:3000/esqueciMinhaSenha`;
+    const url = `${configuracoes.urlDaApi}/esqueciMinhaSenha`;
 
     const request = new Request(url, {
         method: 'POST',

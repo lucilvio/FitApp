@@ -1,7 +1,8 @@
-import * as util from "../util/tratamentoDeRespostaApi.js"
+import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function buscarDados(token, idAssinante) {
-    const url = `http://localhost:3000/admin/assinantes/${idAssinante}`;
+    const url = `${configuracoes.urlDaApi}/admin/assinantes/${idAssinante}`;
 
     const resposta = await fetch(url, {
         headers: {
@@ -13,7 +14,7 @@ export async function buscarDados(token, idAssinante) {
 }
 
 export async function alterarStatusDoAssinante(token, idAssinante, novoStatus) {
-    const url = `http://localhost:3000/admin/assinantes/${idAssinante}`;
+    const url = `${configuracoes.urlDaApi}/admin/assinantes/${idAssinante}`;
 
     const request = new Request(url, {
         method: 'PATCH',        

@@ -1,7 +1,8 @@
-import * as util from "../util/tratamentoDeRespostaApi.js"
+import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function buscarDados(token) {
-    const url = `http://localhost:3000/assinante/medidas`;
+    const url = `${configuracoes.urlDaApi}/assinante/medidas`;
 
     const resposta = await fetch(url, {
         headers: {

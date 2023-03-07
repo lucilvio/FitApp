@@ -1,7 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function buscarDados(token) {
-    const url = `http://localhost:3000/assinante/medidas`;
+    const url = `${configuracoes.urlDaApi}/assinante/medidas`;
 
     const resposta = await fetch(url, {
         headers: {
@@ -13,7 +14,7 @@ export async function buscarDados(token) {
 }
 
 export async function salvarMedidas(token, peso, pescoco, cintura, quadril) {
-    const url = `http://localhost:3000/assinante/medidas`;
+    const url = `${configuracoes.urlDaApi}/assinante/medidas`;
 
     const request = new Request(url, {
         method: 'POST',        
@@ -37,7 +38,7 @@ export async function salvarMedidas(token, peso, pescoco, cintura, quadril) {
 }
 
 export async function excluirMedidas(token, idMedidas) {
-    const url = `http://localhost:3000/assinante/medidas/${idMedidas}`;
+    const url = `${configuracoes.urlDaApi}/assinante/medidas/${idMedidas}`;
 
     const request = new Request(url, {
         method: 'DELETE',        

@@ -1,7 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js"
+import * as configuracoes from "../configuracoes.js";
 
 export async function criarConta(nome, email, plano, nutricionista, personalTrainer) {
-    const url = `http://localhost:3000/assinantes`;
+    const url = `${configuracoes.urlDaApi}/assinantes`;
 
     const request = new Request(url, {
         method: 'POST',

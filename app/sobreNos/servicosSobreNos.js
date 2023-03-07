@@ -1,5 +1,7 @@
+import * as configuracoes from "../configuracoes.js";
+
 async function buscarNutricionistasAtivos() {
-    const url = `http://localhost:3000/nutricionistas`;
+    const url = `${configuracoes.urlDaApi}/nutricionistas`;
 
     const resposta = await fetch(url);
     
@@ -10,7 +12,7 @@ async function buscarNutricionistasAtivos() {
 }
 
 async function buscarPersonalTrainersAtivos() {
-    const url = `http://localhost:3000/personalTrainers`;
+    const url = `${configuracoes.urlDaApi}/personalTrainers`;
 
     const resposta = await fetch(url);
     

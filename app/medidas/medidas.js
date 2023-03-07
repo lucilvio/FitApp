@@ -31,6 +31,11 @@ async function buscarMedidas() {
         document.querySelector("#cintura").innerHTML = resposta.medidasAtuais.cintura;
         document.querySelector("#quadril").innerHTML = resposta.medidasAtuais.quadril;
 
+        document.querySelector("#form-peso").value = resposta.medidasAtuais.peso;
+        document.querySelector("#form-pescoco").value= resposta.medidasAtuais.pescoco
+        document.querySelector("#form-cintura").value= resposta.medidasAtuais.cintura
+        document.querySelector("#form-quadril").value= resposta.medidasAtuais.quadril
+
         if (resposta.historicoDeMedidas.length == 0) {
             document.querySelector("#historico-medidas").innerHTML =
                 `<tr>

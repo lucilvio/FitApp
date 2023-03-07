@@ -140,7 +140,7 @@ async function buscarMedidas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar medidas.'
 
-    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.usuario.idUsuario);
+    let medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.usuario.idUsuario);
 
     if (medidasOrdenadasPorData <= 0) {
         res.status(404).send({ erro: "Medidas não encontrada" });
@@ -155,7 +155,8 @@ async function buscarMedidas(req, res) {
             pescoco: 0,
             cintura: 0,
             quadril: 0
-        }
+        };
+        medidasOrdenadasPorData = new Array();
     } else {
         medidasAtuais = medidasOrdenadasPorData[0]
     }

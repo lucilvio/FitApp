@@ -1,4 +1,5 @@
 import * as seguranca from "../seguranca/seguranca.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function carregar(caminhoPaginaInterna, titulo) {
     //faz fetch da pagina mestra, tranforma a resposta em texto e guarda na const 
@@ -22,7 +23,7 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = usuario.nome;
 
     if (seguranca.pegarImagemDoUsuario()) {
-        paginaMestraHtml.querySelector("#cabecalho-imagem-perfil").src = "http://localhost:3000/" + usuario.imagem;
+    paginaMestraHtml.querySelector("#cabecalho-imagem-perfil").src = `${configuracoes.urlDaApi}/` + usuario.imagem;
     }
 
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra

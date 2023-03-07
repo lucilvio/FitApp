@@ -1,7 +1,8 @@
-import * as util from "../util/tratamentoDeRespostaApi.js"
+import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function buscarDados(token) {
-    const url = `http://localhost:3000/assinante/perfil`;
+    const url = `${configuracoes.urlDaApi}/assinante/perfil`;
 
     const resposta = await fetch(url, {
         headers: {
@@ -13,7 +14,7 @@ export async function buscarDados(token) {
 }
 
 export async function salvarDados(token, nome, dataNascimento, sexo, altura) {
-    const url = `http://localhost:3000/assinante/perfil`;
+    const url = `${configuracoes.urlDaApi}/assinante/perfil`;
 
     const request = new Request(url, {
         method: 'PATCH',
@@ -37,7 +38,7 @@ export async function salvarDados(token, nome, dataNascimento, sexo, altura) {
 }
 
 export async function salvarImagem(token, imagem) {
-    const url = `http://localhost:3000/usuarios/imagem`;
+    const url = `${configuracoes.urlDaApi}/usuarios/imagem`;
 
     const formData = new FormData();
     formData.append("imagem", imagem, imagem.name);
@@ -54,7 +55,7 @@ export async function salvarImagem(token, imagem) {
 }
 
 export async function alterarSenha(token, senhaAtual, novaSenha) {
-    const url = `http://localhost:3000/usuarios/senha`;
+    const url = `${configuracoes.urlDaApi}/usuarios/senha`;
 
     const request = new Request(url, {
         method: 'PATCH',

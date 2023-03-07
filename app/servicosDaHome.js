@@ -1,7 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
+import * as configuracoes from "../configuracoes.js";
 
 export async function buscarPlanosAtivos() {
-    const url = `http://localhost:3000/planos`;
+    const url = `${configuracoes.urlDaApi}/planos`;
 
     const resposta = await fetch(url);
 
